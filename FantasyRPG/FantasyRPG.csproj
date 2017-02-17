@@ -73,6 +73,7 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Medieval Environment\Terrain Resource\Shaders\TerrainRand.cs" />
@@ -86,6 +87,29 @@
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrainAddPass.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\shader info.txt" />
     <None Include="Assets\Medieval Environment\readme.txt" />
+=======
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinAnimation.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Werewolf\WerewolfeAnimation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\3.Resources\1.Monster\Monster\shaders\bumpSpecmap.shader" />
+    <None Include="Assets\3.Resources\1.Monster\Monster\shaders\caveShader.shader" />
+    <None Include="Assets\3.Resources\1.Monster\Monster\shaders\metalA.shader" />
+    <None Include="Assets\3.Resources\1.Monster\Monster\shaders\monsterShader.shader" />
+    <None Include="Assets\3.Resources\1.Monster\Monster\shaders\vertexAnim.shader" />
+    <None Include="Assets\3.Resources\1.Monster\Monster2\Shaders\bumpspecmap.shader" />
+    <None Include="Assets\3.Resources\1.Monster\Monster2\Shaders\specillumShader.shader" />
+    <None Include="Assets\3.Resources\1.Monster\Werewolf\animations.txt" />
+    <None Include="Assets\3.Resources\1.Monster\Werewolf\readme.txt" />
+>>>>>>> 030884856910e00c6aa972b60be1ffa9e34a6784
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
