@@ -32,10 +32,14 @@ public class Monster3Move : MonoBehaviour {
             case Monster3Animation.M3_STATE.M3_WALK:
                 Vector3 VecGoblin = (Vector3.forward * walkSpeed * Time.deltaTime) + Monster3_body.transform.position;
                 Monster3_body.MovePosition(VecGoblin);
+
+                Monster3_body.transform.LookAt(VecGoblin);
                 break;
             case Monster3Animation.M3_STATE.M3_RUN:
                 Vector3 VecGoblin2 = (Vector3.forward * walkSpeed * 1.5f * Time.deltaTime) + Monster3_body.transform.position;
                 Monster3_body.MovePosition(VecGoblin2);
+
+                Monster3_body.transform.LookAt(VecGoblin2);
                 break;
         }
     }

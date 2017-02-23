@@ -32,10 +32,16 @@ public class Monster2Move : MonoBehaviour {
             case Monster2Animation.M2_STATE.M2_WALK:
                 Vector3 VecGoblin = (Vector3.forward * walkSpeed * Time.deltaTime) + Monster2_body.transform.position;
                 Monster2_body.MovePosition(VecGoblin);
+
+                Monster2_body.transform.LookAt(VecGoblin);
+
                 break;
             case Monster2Animation.M2_STATE.M2_RUN:
                 Vector3 VecGoblin2 = (Vector3.forward * walkSpeed * 1.5f * Time.deltaTime) + Monster2_body.transform.position;
                 Monster2_body.MovePosition(VecGoblin2);
+
+                Monster2_body.transform.LookAt(VecGoblin2);
+
                 break;
         }
     }

@@ -30,8 +30,10 @@ public class GoblinAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        ChangeMotion();
-	}
+        //ChangeMotion();
+        Animation_Play3();
+
+    }
     private void ChangeMotion()
     {
         if(Input.GetKeyDown(KeyCode.S))
@@ -52,23 +54,23 @@ public class GoblinAnimation : MonoBehaviour {
                 Goblin.CrossFade("idle", 0.3f);
                 break;
             case G_STATE.S_ATT1:
-                Goblin.wrapMode = WrapMode.Loop;
+                Goblin.wrapMode = WrapMode.Once;
                 Goblin.CrossFade("attack1", 0.3f);
                 break;
             case G_STATE.S_ATT2:
-                Goblin.wrapMode = WrapMode.Loop;
+                Goblin.wrapMode = WrapMode.Once;
                 Goblin.CrossFade("attack2", 0.3f);
                 break;
             case G_STATE.S_ATT3:
-                Goblin.wrapMode = WrapMode.Loop;
+                Goblin.wrapMode = WrapMode.Once;
                 Goblin.CrossFade("attack3", 0.3f);
                 break;
             case G_STATE.S_BLOCK:
-                Goblin.wrapMode = WrapMode.Loop;
+                Goblin.wrapMode = WrapMode.Once;
                 Goblin.CrossFade("block", 0.3f);
                 break;
             case G_STATE.S_BLOCK_HIT:
-                Goblin.wrapMode = WrapMode.Loop;
+                Goblin.wrapMode = WrapMode.Once;
                 Goblin.CrossFade("block_hit", 0.3f);
                 break;
             case G_STATE.S_COMBAT_IDLE:
@@ -76,11 +78,11 @@ public class GoblinAnimation : MonoBehaviour {
                 Goblin.CrossFade("combat_idle", 0.3f); ;
                 break;
             case G_STATE.S_DEATH:
-                Goblin.wrapMode = WrapMode.Loop;
+                Goblin.wrapMode = WrapMode.Once;
                 Goblin.CrossFade("death", 0.3f); ;
                 break;
             case G_STATE.S_REMOVE_WEAPON:
-                Goblin.wrapMode = WrapMode.Loop;
+                Goblin.wrapMode = WrapMode.Once;
                 Goblin.CrossFade("remove_weapons", 0.3f); ;
                 break;
             case G_STATE.S_RUN:

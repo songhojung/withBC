@@ -28,12 +28,16 @@ public class SpiderMove : MonoBehaviour {
         switch(spiderAni.NowState)
         {
             case SpiderAnimation.S_STATE.S_WALK:
-                Vector3 VecSpider = (Vector3.forward * WalkSpeed * Time.deltaTime) + Spider.transform.position;
+                Vector3 VecSpider = (Spider.transform.forward * WalkSpeed * Time.deltaTime) + Spider.transform.position;
                 Spider.MovePosition(VecSpider);
+
+                //Spider.transform.LookAt(VecSpider);
                 break;
             case SpiderAnimation.S_STATE.S_RUN:
-                Vector3 VecSpider2 = (Vector3.forward * WalkSpeed* 2.0f * Time.deltaTime) + Spider.transform.position;
+                Vector3 VecSpider2 = (Spider.transform.forward * WalkSpeed* 2.0f * Time.deltaTime) + Spider.transform.position;
                 Spider.MovePosition(VecSpider2);
+
+                //Spider.transform.LookAt(VecSpider2);
                 break;
         }
     }

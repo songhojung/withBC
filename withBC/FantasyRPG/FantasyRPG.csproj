@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,9 +66,6 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -88,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinAnimation.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinDetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinSpawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Monster2\Monster2Animation.cs" />
@@ -98,14 +93,17 @@
     <Compile Include="Assets\4.Scripts\1.Monster\Monster3\Monster3Spawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\MonsterSpawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Spider\SpiderAnimation.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Spider\SpiderDetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Spider\SpiderMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Spider\SpiderSpawn.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Werewolf\WerewolfDetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Werewolf\WerewolfeAnimation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Werewolf\WerewolfeMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Werewolf\WerewolfeSpawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieAnimation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieSpawn.cs" />
+    <Compile Include="Assets\Medieval Environment\Terrain Resource\Shaders\TerrainRand.cs" />
     <Compile Include="Assets\TankPatrolState.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +116,12 @@
     <None Include="Assets\3.Resources\1.Monster\Monster2\Shaders\specillumShader.shader" />
     <None Include="Assets\3.Resources\1.Monster\Werewolf\animations.txt" />
     <None Include="Assets\3.Resources\1.Monster\Werewolf\readme.txt" />
+    <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM2.shader" />
+    <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM3.shader" />
+    <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrain.shader" />
+    <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrainAddPass.shader" />
+    <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\shader info.txt" />
+    <None Include="Assets\Medieval Environment\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

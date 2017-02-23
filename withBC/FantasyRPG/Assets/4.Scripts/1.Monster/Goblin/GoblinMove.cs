@@ -29,12 +29,16 @@ public class GoblinMove : MonoBehaviour {
         switch (GoblinAni.NowState)
         {
             case GoblinAnimation.G_STATE.S_WALK:
-                Vector3 VecGoblin = (Vector3.forward * walkSpeed * Time.deltaTime) + G_body.transform.position;
+                Vector3 VecGoblin = (G_body.transform.forward * walkSpeed * Time.deltaTime) + G_body.transform.position;
                 G_body.MovePosition(VecGoblin);
+
+                //G_body.transform.LookAt(VecGoblin);
                 break;
             case GoblinAnimation.G_STATE.S_RUN:
-                Vector3 VecGoblin2 = (Vector3.forward * walkSpeed*1.5f * Time.deltaTime) + G_body.transform.position;
+                Vector3 VecGoblin2 = (G_body.transform.forward * walkSpeed*1.5f * Time.deltaTime) + G_body.transform.position;
                 G_body.MovePosition(VecGoblin2);
+
+                //G_body.transform.LookAt(VecGoblin2);
                 break;
         }
     }

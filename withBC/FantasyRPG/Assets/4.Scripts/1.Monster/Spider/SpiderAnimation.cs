@@ -22,8 +22,8 @@ public class SpiderAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        ChangeState();
-        //PlayAnimation();
+        //ChangeState();
+        PlayAnimation();
 	}
 
     void ChangeState()
@@ -44,19 +44,19 @@ public class SpiderAnimation : MonoBehaviour {
         switch(NowState)
         {
             case S_STATE.S_ATT:
-                Spider.wrapMode = WrapMode.Loop;
+                Spider.wrapMode = WrapMode.Once;
                 Spider.CrossFade("Attack", 0.3f);
                 break;
             case S_STATE.S_ATT_L:
-                Spider.wrapMode = WrapMode.Loop;
+                Spider.wrapMode = WrapMode.Once;
                 Spider.CrossFade("Attack_Left", 0.3f);
                 break;
             case S_STATE.S_ATT_R:
-                Spider.wrapMode = WrapMode.Loop;
+                Spider.wrapMode = WrapMode.Once;
                 Spider.CrossFade("Attack_Right", 0.3f);
                 break;
             case S_STATE.S_DEATH:
-                Spider.wrapMode = WrapMode.Loop;
+                Spider.wrapMode = WrapMode.Once;
                 Spider.CrossFade("Death", 0.3f);
                 break;
             case S_STATE.S_IDLE:

@@ -29,6 +29,8 @@ public class ZombieMove : MonoBehaviour {
             case ZombieAnimation.Z_STATE.Z_WALK:
                 Vector3 VecZombie = (Vector3.forward * walkSpeed * Time.deltaTime) + Z_body.transform.position;
                 Z_body.MovePosition(VecZombie);
+
+                Z_body.transform.LookAt(VecZombie);
                 break;
         }
     }
