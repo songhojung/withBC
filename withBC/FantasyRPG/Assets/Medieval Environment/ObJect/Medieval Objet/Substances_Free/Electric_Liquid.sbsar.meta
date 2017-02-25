@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6cfaff658177a4e40878063cd8893ed6
 timeCreated: 1487905762
 licenseType: Free
+=======
+guid: e43f440ca7a19f24aaa0ce4833f696ff
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 SubstanceImporter:
   serializedVersion: 5
   materialInstances:
@@ -9,18 +13,101 @@ SubstanceImporter:
     name: Electric_Liquid
     prototypeName: Electric_Liquid
     shaderName: 
+<<<<<<< HEAD
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
     shaderKeywords: 
     renderQueue: -1
     lightmapFlags: 5
     inputs: []
+=======
+    shader: {instanceID: 0}
+    shaderKeywords: 
+    renderQueue: -1
+    lightmapFlags: 5
+    inputs:
+    - name: $outputsize
+      value:
+        scalar[0]: 9
+        scalar[1]: 9
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: $randomseed
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Flow
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Glow_Intensity
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Glow_Size
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Liquid_Color
+      value:
+        scalar[0]: 0.34
+        scalar[1]: 0.5
+        scalar[2]: 0.74
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Hue_Shift
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Saturation
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Luminosity
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Contrast
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
       scale: {x: 1, y: 1}
       generateMipmaps: 1
+<<<<<<< HEAD
       generateAllOutputs: 0
       animationUpdateRate: 0
+=======
+      generateAllOutputs: 1
+      animationUpdateRate: 42
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialProperties:
       serializedVersion: 2
       texEnvs: []
@@ -32,11 +119,15 @@ SubstanceImporter:
       filterMode: 1
       aniso: 1
       wrapMode: 0
+<<<<<<< HEAD
     textureAssignments:
     - shaderProp:
         name: _EmissionMap
       material: {instanceID: 0}
       baseUID: 749476946
+=======
+    textureAssignments: []
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 

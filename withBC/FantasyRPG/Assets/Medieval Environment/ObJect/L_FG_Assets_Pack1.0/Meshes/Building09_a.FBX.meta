@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 751bc9fa9df2bf84c89c3b21c63fcb9e
 timeCreated: 1487905798
 licenseType: Free
+=======
+guid: 9db7468fd7c9ab94e95c717ad421e9f8
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -10,9 +14,16 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Building09_a
+<<<<<<< HEAD
   materials:
     importMaterials: 1
     materialName: 0
+=======
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -34,8 +45,13 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
+<<<<<<< HEAD
     globalScale: 1
     meshCompression: 0
+=======
+    globalScale: 0.01
+    meshCompression: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
@@ -48,12 +64,21 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+<<<<<<< HEAD
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
+=======
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 2
+  importAnimation: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -70,11 +95,19 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
+<<<<<<< HEAD
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
+=======
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   userData: 
   assetBundleName: 
   assetBundleVariant: 

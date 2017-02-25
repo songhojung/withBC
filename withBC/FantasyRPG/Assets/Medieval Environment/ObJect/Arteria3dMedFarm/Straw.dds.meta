@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: edfb97755fbbe9b4a89eee583cd8aa81
 timeCreated: 1487904460
 licenseType: Free
+=======
+guid: 85f583b5654cedd4c9cad509c5d8d580
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 DDSImporter:
   isReadable: 0
   userData: 

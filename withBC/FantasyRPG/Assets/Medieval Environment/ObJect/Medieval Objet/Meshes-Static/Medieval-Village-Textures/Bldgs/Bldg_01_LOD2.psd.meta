@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: edbf89b9c5ab71746bb6b044c1c459ca
 timeCreated: 1487905676
 licenseType: Free
+=======
+guid: 343cb93ac1e954696a41d4df4c704667
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
@@ -24,8 +28,13 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
+<<<<<<< HEAD
   textureFormat: 1
   maxTextureSize: 2048
+=======
+  textureFormat: -1
+  maxTextureSize: 1024
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   textureSettings:
     filterMode: -1
     aniso: -1
@@ -51,13 +60,36 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
+<<<<<<< HEAD
     maxTextureSize: 2048
+=======
+    maxTextureSize: 1024
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+<<<<<<< HEAD
+=======
+  - buildTarget: iPhone
+    maxTextureSize: 256
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+  - buildTarget: Standalone
+    maxTextureSize: 512
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: -1
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   spriteSheet:
     serializedVersion: 2
     sprites: []

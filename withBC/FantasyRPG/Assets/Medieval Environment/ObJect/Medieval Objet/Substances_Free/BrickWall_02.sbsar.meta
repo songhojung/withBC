@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 40ba88a5bc8df824c861992ea3b11a7b
 timeCreated: 1487905756
 licenseType: Free
+=======
+guid: 3b1d094d8729eaa4284735068bc6effd
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 SubstanceImporter:
   serializedVersion: 5
   materialInstances:
@@ -9,6 +13,7 @@ SubstanceImporter:
     name: BrickWall_02
     prototypeName: BrickWall_02
     shaderName: 
+<<<<<<< HEAD
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
     shaderKeywords: 
     renderQueue: -1
@@ -21,6 +26,125 @@ SubstanceImporter:
       generateMipmaps: 1
       generateAllOutputs: 0
       animationUpdateRate: 0
+=======
+    shader: {instanceID: 0}
+    shaderKeywords: 
+    renderQueue: -1
+    lightmapFlags: 5
+    inputs:
+    - name: $normalformat
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: $outputsize
+      value:
+        scalar[0]: 9
+        scalar[1]: 9
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: $randomseed
+      value:
+        scalar[0]: 6088
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Age
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Bricks_X
+      value:
+        scalar[0]: 9
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Bricks_Y
+      value:
+        scalar[0]: 26
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Depth
+      value:
+        scalar[0]: 0.38132295
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Relief_Balance
+      value:
+        scalar[0]: 32
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Normal
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Emboss
+      value:
+        scalar[0]: 5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Angle
+      value:
+        scalar[0]: 0.125
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Hue_Shift
+      value:
+        scalar[0]: 0.007782098
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Saturation
+      value:
+        scalar[0]: 0.36770427
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Luminosity
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Contrast
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    materialInformation:
+      serializedVersion: 5
+      offset: {x: 0, y: 0}
+      scale: {x: 0.2, y: 0.18}
+      generateMipmaps: 1
+      generateAllOutputs: 1
+      animationUpdateRate: 42
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialProperties:
       serializedVersion: 2
       texEnvs: []
@@ -28,7 +152,16 @@ SubstanceImporter:
       colors: []
     textureParameters:
     - name: BrickWall_02_Diffuse
+<<<<<<< HEAD
       alphaSource: 6
+=======
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: BrickWall_02_Specular
+      alphaSource: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
       filterMode: 1
       aniso: 1
       wrapMode: 0
@@ -37,11 +170,25 @@ SubstanceImporter:
       filterMode: 1
       aniso: 1
       wrapMode: 0
+<<<<<<< HEAD
+=======
+    - name: BrickWall_02_Bump
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: BrickWall_02_Displacement
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     - name: BrickWall_02_Height
       alphaSource: 0
       filterMode: 1
       aniso: 1
       wrapMode: 0
+<<<<<<< HEAD
     textureAssignments:
     - shaderProp:
         name: _BumpMap
@@ -55,6 +202,9 @@ SubstanceImporter:
         name: _ParallaxMap
       material: {instanceID: 0}
       baseUID: 1675657159
+=======
+    textureAssignments: []
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
@@ -62,6 +212,15 @@ SubstanceImporter:
       textureHeight: 512
       textureFormat: 0
       loadingBehavior: 1
+<<<<<<< HEAD
+=======
+    - serializedVersion: 2
+      buildTarget: iPhone
+      textureWidth: 256
+      textureHeight: 256
+      textureFormat: 0
+      loadingBehavior: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   deletedPrototypes: []
   userData: 
   assetBundleName: 

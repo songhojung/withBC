@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 40467ab23181fa948a2141eaa7384f0d
 timeCreated: 1487905789
 licenseType: Free
+=======
+guid: 32a44a9c07325c04bb9572b8cea06243
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -10,9 +14,15 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: polySurface3267
+<<<<<<< HEAD
     9500000: //RootNode
   materials:
     importMaterials: 1
+=======
+    11100000: //RootNode
+  materials:
+    importMaterials: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialName: 0
     materialSearch: 1
   animations:
@@ -49,11 +59,19 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+<<<<<<< HEAD
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+=======
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 180
+    normalImportMode: 0
+    tangentImportMode: 4
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -71,11 +89,19 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
+<<<<<<< HEAD
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
+=======
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   userData: 
   assetBundleName: 
   assetBundleVariant: 

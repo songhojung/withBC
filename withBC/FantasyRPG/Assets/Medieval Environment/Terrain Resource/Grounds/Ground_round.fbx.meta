@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d5afd944d2e944946b3a0c9ea3399b57
 timeCreated: 1487905817
 licenseType: Free
@@ -13,6 +14,19 @@ ModelImporter:
   materials:
     importMaterials: 1
     materialName: 0
+=======
+guid: 24add2ed3815c6a4b9ea2585a5fe3387
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    4300000: pPlane1
+    4300002: nurbsToPoly1
+    4300004: pCylinder1
+    4300006: waterPlaneMesh
+  materials:
+    importMaterials: 0
+    materialName: 3
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -45,6 +59,7 @@ ModelImporter:
     keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
+<<<<<<< HEAD
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
@@ -53,6 +68,16 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+=======
+    secondaryUVAreaDistortion: 15
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -72,7 +97,11 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+<<<<<<< HEAD
   animationType: 0
+=======
+  animationType: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

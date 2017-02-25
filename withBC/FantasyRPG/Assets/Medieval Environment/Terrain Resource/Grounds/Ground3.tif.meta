@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 5ef704f8cd76c4545b417c4ca0190a0b
 timeCreated: 1487905176
 licenseType: Free
+=======
+guid: 5f2d67f7c10e10e4b990bec768729896
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
@@ -24,8 +28,13 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
+<<<<<<< HEAD
   textureFormat: 1
   maxTextureSize: 2048
+=======
+  textureFormat: -1
+  maxTextureSize: 1024
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   textureSettings:
     filterMode: -1
     aniso: -1
@@ -51,7 +60,11 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
+<<<<<<< HEAD
     maxTextureSize: 2048
+=======
+    maxTextureSize: 1024
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50

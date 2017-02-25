@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: bb7999b3f76d5bf40a0fc730dbcd50b8
 timeCreated: 1487905811
 licenseType: Free
@@ -37,6 +38,12 @@ ModelImporter:
     3300008: Awning_Attachment_Right
     3300010: 'Awning_Attachment_Right '
     3300012: Awning_Cloth_Physics
+=======
+guid: 1a34927fa96fc405e8421c0f3e9c1c4b
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     4300000: Awning_Cloth_Physics
     4300002: 'Awning_Attachment_Right '
     4300004: 'Awning_Attachment_Center '
@@ -44,10 +51,16 @@ ModelImporter:
     4300008: Awning_Attachment_Right
     4300010: Awning_Attachment_Center
     4300012: 'Awning_Attachment_Left '
+<<<<<<< HEAD
     9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
+=======
+  materials:
+    importMaterials: 1
+    materialName: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -69,7 +82,11 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
+<<<<<<< HEAD
     globalScale: 1
+=======
+    globalScale: 0.01
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -83,11 +100,19 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+<<<<<<< HEAD
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+=======
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 180
+    normalImportMode: 1
+    tangentImportMode: 4
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -107,7 +132,11 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+<<<<<<< HEAD
   animationType: 2
+=======
+  animationType: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

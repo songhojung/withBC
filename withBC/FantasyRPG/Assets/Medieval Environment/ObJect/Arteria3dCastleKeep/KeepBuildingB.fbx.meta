@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8c5bceb697143f346871c4c321dee5dc
 timeCreated: 1487905801
 licenseType: Free
+=======
+guid: d977099cd8f32af44ad9f1dc866d919a
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -17,6 +21,10 @@ ModelImporter:
     3300002: KeepBuildingB
     4300000: KeepBuildingB
     4300002: BuildingBsupports
+<<<<<<< HEAD
+=======
+    9500000: //RootNode
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   materials:
     importMaterials: 1
     materialName: 0
@@ -41,7 +49,11 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
+<<<<<<< HEAD
     globalScale: 1
+=======
+    globalScale: 0.1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -55,11 +67,19 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+<<<<<<< HEAD
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
+=======
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 4
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
@@ -77,11 +97,19 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
+<<<<<<< HEAD
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
+=======
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   userData: 
   assetBundleName: 
   assetBundleVariant: 

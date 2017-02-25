@@ -1,24 +1,185 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: aeda62dc0cddfc94ebd416cd97293afb
 timeCreated: 1487905770
 licenseType: Free
+=======
+guid: 367e5b5841f63fa48a02e2e5c102b385
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 SubstanceImporter:
   serializedVersion: 5
   materialInstances:
   - serializedVersion: 16
     name: concrete_049
     prototypeName: concrete_049
+<<<<<<< HEAD
     shaderName: 
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
     shaderKeywords: 
     renderQueue: -1
     lightmapFlags: 5
     inputs: []
+=======
+    shaderName: Bumped Specular
+    shader: {instanceID: 0}
+    shaderKeywords: 
+    renderQueue: -1
+    lightmapFlags: 5
+    inputs:
+    - name: $normalformat
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: $outputsize
+      value:
+        scalar[0]: 9
+        scalar[1]: 9
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: $randomseed
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Cracks
+      value:
+        scalar[0]: 0.4941634
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Dirtiness
+      value:
+        scalar[0]: 0.3774319
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: First_Layer_Color
+      value:
+        scalar[0]: 0.6377245
+        scalar[1]: 0.55645555
+        scalar[2]: 0.4546426
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Light_Angle
+      value:
+        scalar[0]: 0.3467899
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Metal_Frame_Color
+      value:
+        scalar[0]: 0.1176
+        scalar[1]: 0.0784
+        scalar[2]: 0.0196
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Peeling
+      value:
+        scalar[0]: 0.09727626
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Rust
+      value:
+        scalar[0]: 0.03501945
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Rust_Color
+      value:
+        scalar[0]: 0.38922155
+        scalar[1]: 0.20142426
+        scalar[2]: 0.06442533
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Second_Layer_Color
+      value:
+        scalar[0]: 0.3922
+        scalar[1]: 0.3412
+        scalar[2]: 0.2667
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Top_Frame
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Depth
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Relief_Balance
+      value:
+        scalar[0]: 32
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Normal
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Emboss
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Hue_Shift
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Saturation
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Luminosity
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Contrast
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
       scale: {x: 1, y: 1}
       generateMipmaps: 1
+<<<<<<< HEAD
       generateAllOutputs: 0
       animationUpdateRate: 0
     materialProperties:
@@ -29,6 +190,44 @@ SubstanceImporter:
     textureParameters:
     - name: concrete_049_Diffuse
       alphaSource: 6
+=======
+      generateAllOutputs: 1
+      animationUpdateRate: 42
+    materialProperties:
+      serializedVersion: 2
+      texEnvs:
+      - first:
+          name: _BumpMap
+        second:
+          texture: {fileID: -19069188, guid: 367e5b5841f63fa48a02e2e5c102b385, type: 3}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      - first:
+          name: _MainTex
+        second:
+          texture: {fileID: -1637198692, guid: 367e5b5841f63fa48a02e2e5c102b385, type: 3}
+          scale: {x: 1, y: 1}
+          offset: {x: 0, y: 0}
+      floats:
+      - first:
+          name: _Shininess
+        second: 0.62068003
+      colors:
+      - first:
+          name: _Color
+        second: {r: 0.79041916, g: 0.74860495, b: 0.7118395, a: 1}
+      - first:
+          name: _SpecColor
+        second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    textureParameters:
+    - name: concrete_049_Diffuse
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: concrete_049_Specular
+      alphaSource: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
       filterMode: 1
       aniso: 1
       wrapMode: 0
@@ -37,11 +236,25 @@ SubstanceImporter:
       filterMode: 1
       aniso: 1
       wrapMode: 0
+<<<<<<< HEAD
+=======
+    - name: concrete_049_Bump
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: concrete_049_Displacement
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     - name: concrete_049_Height
       alphaSource: 0
       filterMode: 1
       aniso: 1
       wrapMode: 0
+<<<<<<< HEAD
     textureAssignments:
     - shaderProp:
         name: _BumpMap
@@ -55,6 +268,9 @@ SubstanceImporter:
         name: _ParallaxMap
       material: {instanceID: 0}
       baseUID: 490822618
+=======
+    textureAssignments: []
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
@@ -62,6 +278,21 @@ SubstanceImporter:
       textureHeight: 512
       textureFormat: 0
       loadingBehavior: 1
+<<<<<<< HEAD
+=======
+    - serializedVersion: 2
+      buildTarget: iPhone
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0
+      loadingBehavior: 1
+    - serializedVersion: 2
+      buildTarget: Standalone
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0
+      loadingBehavior: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   deletedPrototypes: []
   userData: 
   assetBundleName: 

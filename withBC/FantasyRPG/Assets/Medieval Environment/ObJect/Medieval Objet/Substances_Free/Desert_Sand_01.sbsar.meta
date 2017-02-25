@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b2ce42b212db05c47bcb228996f7a9c5
 timeCreated: 1487905770
 licenseType: Free
+=======
+guid: 4bd5672752bbd624aa4c0b96f184a51d
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 SubstanceImporter:
   serializedVersion: 5
   materialInstances:
@@ -9,18 +13,157 @@ SubstanceImporter:
     name: Desert_Sand_01
     prototypeName: Desert_Sand_01
     shaderName: 
+<<<<<<< HEAD
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
     shaderKeywords: 
     renderQueue: -1
     lightmapFlags: 5
     inputs: []
+=======
+    shader: {instanceID: 0}
+    shaderKeywords: 
+    renderQueue: -1
+    lightmapFlags: 5
+    inputs:
+    - name: $normalformat
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: $outputsize
+      value:
+        scalar[0]: 9
+        scalar[1]: 9
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: $randomseed
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Flow
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Sand_Color
+      value:
+        scalar[0]: 0.84
+        scalar[1]: 0.67
+        scalar[2]: 0.49
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Waves_Lenght
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Waves_Warp
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Waves_Width
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Zoom
+      value:
+        scalar[0]: 1
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Depth
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Relief_Balance
+      value:
+        scalar[0]: 32
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Normal
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Emboss
+      value:
+        scalar[0]: 5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Angle
+      value:
+        scalar[0]: 0.125
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Hue_Shift
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Saturation
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Luminosity
+      value:
+        scalar[0]: 0.5
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+    - name: Contrast
+      value:
+        scalar[0]: 0
+        scalar[1]: 0
+        scalar[2]: 0
+        scalar[3]: 0
+        texture: {instanceID: 0}
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
       scale: {x: 1, y: 1}
       generateMipmaps: 1
+<<<<<<< HEAD
       generateAllOutputs: 0
       animationUpdateRate: 0
+=======
+      generateAllOutputs: 1
+      animationUpdateRate: 42
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     materialProperties:
       serializedVersion: 2
       texEnvs: []
@@ -28,7 +171,16 @@ SubstanceImporter:
       colors: []
     textureParameters:
     - name: Desert_Sand_01_Diffuse
+<<<<<<< HEAD
       alphaSource: 6
+=======
+      alphaSource: 5
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: Desert_Sand_01_Specular
+      alphaSource: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
       filterMode: 1
       aniso: 1
       wrapMode: 0
@@ -37,11 +189,25 @@ SubstanceImporter:
       filterMode: 1
       aniso: 1
       wrapMode: 0
+<<<<<<< HEAD
+=======
+    - name: Desert_Sand_01_Bump
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+    - name: Desert_Sand_01_Displacement
+      alphaSource: 0
+      filterMode: 1
+      aniso: 1
+      wrapMode: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     - name: Desert_Sand_01_Height
       alphaSource: 0
       filterMode: 1
       aniso: 1
       wrapMode: 0
+<<<<<<< HEAD
     textureAssignments:
     - shaderProp:
         name: _BumpMap
@@ -55,6 +221,9 @@ SubstanceImporter:
         name: _ParallaxMap
       material: {instanceID: 0}
       baseUID: 1095994253
+=======
+    textureAssignments: []
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
@@ -62,6 +231,15 @@ SubstanceImporter:
       textureHeight: 512
       textureFormat: 0
       loadingBehavior: 1
+<<<<<<< HEAD
+=======
+    - serializedVersion: 2
+      buildTarget: Standalone
+      textureWidth: 512
+      textureHeight: 512
+      textureFormat: 0
+      loadingBehavior: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
   deletedPrototypes: []
   userData: 
   assetBundleName: 

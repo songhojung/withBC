@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a9d4f372d6eddfb4480e676e36bf023a
 timeCreated: 1487905767
 licenseType: Free
+=======
+guid: 1f04f19e4e3300042bfbd2c53a7772e2
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 NativeFormatImporter:
   userData: 
   assetBundleName: 

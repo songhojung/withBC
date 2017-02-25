@@ -1,12 +1,20 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 4b92b28308671284bb1223a5f76320c1
 timeCreated: 1487905084
 licenseType: Free
+=======
+guid: b3a2f731942e5eb42b386d7738caf80f
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4
   mipmaps:
+<<<<<<< HEAD
     mipMapMode: 0
+=======
+    mipMapMode: 1
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
@@ -24,10 +32,17 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
+<<<<<<< HEAD
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
+=======
+  textureFormat: 4
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 2
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     aniso: -1
     mipBias: -1
     wrapMode: -1
@@ -51,9 +66,15 @@ TextureImporter:
   textureFormatSet: 0
   platformSettings:
   - buildTarget: DefaultTexturePlatform
+<<<<<<< HEAD
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
+=======
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 0
+>>>>>>> 57f056b524c2f0a7ccbf3015ce979d7a404916b9
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
