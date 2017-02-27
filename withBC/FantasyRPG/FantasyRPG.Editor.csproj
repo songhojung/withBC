@@ -144,7 +144,6 @@
     <None Include="Assets\3.Resources\1.Monster\Monster2\Shaders\specillumShader.shader" />
     <None Include="Assets\3.Resources\1.Monster\Werewolf\animations.txt" />
     <None Include="Assets\3.Resources\1.Monster\Werewolf\readme.txt" />
-    <None Include="Assets\3.Resources\2.Charicter\Archer\dwarfs\Shader 1\Compressed MaskedShader2sided 5-4 cut out.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM2.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM3.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrain.shader" />
