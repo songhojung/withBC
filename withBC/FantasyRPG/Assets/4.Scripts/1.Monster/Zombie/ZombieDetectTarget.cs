@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class GoblinDetectTarget : MonoBehaviour {
+public class ZombieDetectTarget : MonoBehaviour {
 
     public GameObject target;
-    private GoblinAnimation GoblinAni;
+    private ZombieAnimation ZombieAnimation;
 
-    private GoblinMove Move;
+    private ZombieMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
-    private float RayDistance = 15.0f;
+    private float RayDistance = 14.0f;
     private bool isDie = false;
 
     // Use this for initialization
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<GoblinMove>();
-        GoblinAni = GetComponent<GoblinAnimation>();
+        Move = GetComponent<ZombieMove>();
+        ZombieAnimation = GetComponent<ZombieAnimation>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -29,36 +28,36 @@ public class GoblinDetectTarget : MonoBehaviour {
     //    while (!isDie)
     //    {
     //        RayCast();
-    //        if (Ray.collider != null && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_ROAR)
+    //        if (Ray.collider != null && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_ATTACK20)
     //        {
     //            if (Ray.collider.tag == "Player")
     //            {
-    //                if (WolfAnimation.NowState == ZombieAnimation.W_STATE.S_WALK || WolfAnimation.NowState == ZombieAnimation.W_STATE.S_RUN)
+    //                if (ZombieAnimation.NowState == ZombieAnimation.Z_STATE.Z_WALK || ZombieAnimation.NowState == ZombieAnimation.Z_STATE.Z_RUN)
     //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_ROAR;
+    //                    ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_ATTACK20;
     //                }
     //            }
     //            else
     //            {
     //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_RUN)
+    //                if (agent.velocity.magnitude > 0.0f && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_RUN)
     //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_RUN;
+    //                    ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_RUN;
     //                }
     //            }
     //        }
     //        else
     //        {
-    //            if (!WolfAnimation.Werewolf.IsPlaying("Roar"))
+    //            if (!ZombieAnimation.WereZombie.IsPlaying("Roar"))
     //            {
     //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_RUN)
+    //                if (agent.velocity.magnitude > 0.0f && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_RUN)
     //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_RUN;
+    //                    ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_RUN;
     //                }
     //            }
     //        }
-    //        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
+    //        //Move.Zombie.transform.LookAt(transform.position + transform.forward);
     //        //transform.LookAt(transform.position + transform.forward);
     //        Move.transform.LookAt(transform.position + transform.forward);
 
@@ -70,50 +69,42 @@ public class GoblinDetectTarget : MonoBehaviour {
         RayCast();
         if (target)
         {
-            if (Ray.collider != null && GoblinAni.NowState != GoblinAnimation.G_STATE.S_ATT1)
+            if (Ray.collider != null)
             {
                 if (Ray.collider.tag == "Player")
                 {
-                    if (GoblinAni.NowState == GoblinAnimation.G_STATE.S_WALK || GoblinAni.NowState == GoblinAnimation.G_STATE.S_RUN)
+                    if (ZombieAnimation.NowState == ZombieAnimation.Z_STATE.Z_WALK)
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_ATT1;
+                        ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_ATTACK;
                     }
                 }
                 else
                 {
                     agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                    if (agent.velocity.magnitude > 0.0f && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_WALK)
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
                     }
                 }
             }
             else
             {
-                if (GoblinAni.Goblin["attack1"].normalizedTime >= 0.95f)
+                if (ZombieAnimation.Zombie.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 {
                     agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                    if (agent.velocity.magnitude > 0.0f)
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
                     }
                 }
-                if (GoblinAni.NowState != GoblinAnimation.G_STATE.S_ATT1)
+                if (ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_WALK)
                 {
                     agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                    if (agent.velocity.magnitude > 0.0f)
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
                     }
                 }
-                //if (!GoblinAni.Goblin.IsPlaying("attack3"))
-                //{
-                //    agent.destination = target.transform.position;
-                //    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
-                //    {
-                //        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
-                //    }
-                //}
             }
         }
         else
@@ -127,7 +118,7 @@ public class GoblinDetectTarget : MonoBehaviour {
                 }
             }
         }
-        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
+        //Move.Zombie.transform.LookAt(transform.position + transform.forward);
         Move.transform.LookAt(transform.position + transform.forward);
         transform.LookAt(transform.position + transform.forward);
 

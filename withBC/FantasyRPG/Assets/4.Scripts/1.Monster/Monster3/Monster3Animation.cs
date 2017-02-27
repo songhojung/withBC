@@ -18,7 +18,7 @@ public class Monster3Animation : MonoBehaviour {
     public M3_WAY      NowWay;
     public int         AttackNum;
     public int         _health;
-    Animator    Mt3;
+    public Animator    Mt3;
     // Use this for initialization
     void Start () {
         Mt3 = GetComponent<Animator>();

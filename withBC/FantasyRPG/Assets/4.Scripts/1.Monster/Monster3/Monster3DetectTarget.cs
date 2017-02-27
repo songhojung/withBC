@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class GoblinDetectTarget : MonoBehaviour {
+public class Monster3DetectTarget : MonoBehaviour {
 
     public GameObject target;
-    private GoblinAnimation GoblinAni;
+    private Monster3Animation M3Animation;
 
-    private GoblinMove Move;
+    private Monster3Move Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
-    private float RayDistance = 15.0f;
+    private float RayDistance = 14.0f;
     private bool isDie = false;
 
     // Use this for initialization
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<GoblinMove>();
-        GoblinAni = GetComponent<GoblinAnimation>();
+        Move = GetComponent<Monster3Move>();
+        M3Animation = GetComponent<Monster3Animation>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -29,32 +28,32 @@ public class GoblinDetectTarget : MonoBehaviour {
     //    while (!isDie)
     //    {
     //        RayCast();
-    //        if (Ray.collider != null && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_ROAR)
+    //        if (Ray.collider != null && M3Animation.NowState != Monster3Animation.M3_STATE.M3_ATTACK20)
     //        {
     //            if (Ray.collider.tag == "Player")
     //            {
-    //                if (WolfAnimation.NowState == ZombieAnimation.W_STATE.S_WALK || WolfAnimation.NowState == ZombieAnimation.W_STATE.S_RUN)
+    //                if (M3Animation.NowState == Monster3Animation.M3_STATE.M3_WALK || M3Animation.NowState == Monster3Animation.M3_STATE.M3_RUN)
     //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_ROAR;
+    //                    M3Animation.NowState = Monster3Animation.M3_STATE.M3_ATTACK20;
     //                }
     //            }
     //            else
     //            {
     //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_RUN)
+    //                if (agent.velocity.magnitude > 0.0f && M3Animation.NowState != Monster3Animation.M3_STATE.M3_RUN)
     //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_RUN;
+    //                    M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
     //                }
     //            }
     //        }
     //        else
     //        {
-    //            if (!WolfAnimation.Werewolf.IsPlaying("Roar"))
+    //            if (!M3Animation.Werewolf.IsPlaying("Roar"))
     //            {
     //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_RUN)
+    //                if (agent.velocity.magnitude > 0.0f && M3Animation.NowState != Monster3Animation.M3_STATE.M3_RUN)
     //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_RUN;
+    //                    M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
     //                }
     //            }
     //        }
@@ -70,50 +69,50 @@ public class GoblinDetectTarget : MonoBehaviour {
         RayCast();
         if (target)
         {
-            if (Ray.collider != null && GoblinAni.NowState != GoblinAnimation.G_STATE.S_ATT1)
+            if (Ray.collider != null)
             {
-                if (Ray.collider.tag == "Player")
+                if (M3Animation.NowState != Monster3Animation.M3_STATE.M3_ATTACK)
                 {
-                    if (GoblinAni.NowState == GoblinAnimation.G_STATE.S_WALK || GoblinAni.NowState == GoblinAnimation.G_STATE.S_RUN)
+                    if (Ray.collider.tag == "Player")
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_ATT1;
+                        if (M3Animation.NowState == Monster3Animation.M3_STATE.M3_WALK || M3Animation.NowState == Monster3Animation.M3_STATE.M3_RUN)
+                        {
+                            M3Animation.NowState = Monster3Animation.M3_STATE.M3_ATTACK;
+                        }
+                    }
+                    else
+                    {
+                        agent.destination = target.transform.position;
+                        if (agent.velocity.magnitude > 0.0f && M3Animation.NowState != Monster3Animation.M3_STATE.M3_RUN)
+                        {
+                            M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+                        }
                     }
                 }
                 else
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                    if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        agent.destination = target.transform.position;
+                        M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                     }
                 }
             }
             else
             {
-                if (GoblinAni.Goblin["attack1"].normalizedTime >= 0.95f)
+                if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 {
                     agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
-                    {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
-                    }
+                    M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                 }
-                if (GoblinAni.NowState != GoblinAnimation.G_STATE.S_ATT1)
+                if (M3Animation.NowState != Monster3Animation.M3_STATE.M3_ATTACK)
                 {
                     agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                    if (agent.velocity.magnitude > 0.0f && M3Animation.NowState != Monster3Animation.M3_STATE.M3_RUN)
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                     }
                 }
-                //if (!GoblinAni.Goblin.IsPlaying("attack3"))
-                //{
-                //    agent.destination = target.transform.position;
-                //    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
-                //    {
-                //        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
-                //    }
-                //}
             }
         }
         else

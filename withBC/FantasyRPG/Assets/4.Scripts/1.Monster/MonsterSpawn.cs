@@ -13,6 +13,7 @@ public class MonsterSpawn : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        nowEnemyCount = EnemyCount;
         //Monster = GetComponent<GameObject>();
     }
 

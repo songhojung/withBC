@@ -69,33 +69,41 @@ public class WerewolfDetectTarget : MonoBehaviour {
         RayCast();
         if (target)
         {
-            if (Ray.collider != null && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_ATT20)
+            if (Ray.collider != null)
             {
-                if (Ray.collider.tag == "Player")
+                if (WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_ATT20)
                 {
-                    if (WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_WALK || WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_RUN)
+                    if (Ray.collider.tag == "Player")
                     {
-                        WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_ATT20;
+                        if (WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_WALK || WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_RUN)
+                        {
+                            WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_ATT20;
+                        }
+                    }
+                    else
+                    {
+                        agent.destination = target.transform.position;
+                        if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
+                        {
+                            WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
+                        }
                     }
                 }
                 else
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
+                    if (WolfAnimation.Werewolf["Attack20"].normalizedTime >= 0.95f)
                     {
+                        agent.destination = target.transform.position;
                         WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
                     }
                 }
             }
             else
             {
-                if (WolfAnimation.Werewolf["Attack20"].normalizedTime >= 0.9f)
+                if (WolfAnimation.Werewolf["Attack20"].normalizedTime >= 0.95f)
                 {
                     agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
-                    {
-                        WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
-                    }
+                    WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
                 }
                 if (WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_ATT20)
                 {
@@ -105,14 +113,6 @@ public class WerewolfDetectTarget : MonoBehaviour {
                         WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
                     }
                 }
-                //if (!WolfAnimation.Werewolf.IsPlaying("Roar"))
-                //{
-                //    agent.destination = target.transform.position;
-                //    if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
-                //    {
-                //        WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
-                //    }
-                //}
             }
         }
         else

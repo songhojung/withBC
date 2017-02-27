@@ -90,7 +90,7 @@ public class SpiderDetectTarget : MonoBehaviour {
             else
             {
                 //if (!SpiderAni.Spider.IsPlaying("Attack"))
-                if (SpiderAni.Spider["Attack"].normalizedTime >= 0.9f)
+                if (SpiderAni.Spider["Attack"].normalizedTime >= 0.95f)
                 {
                     agent.destination = target.transform.position;
                     if (agent.velocity.magnitude > 0.0f && SpiderAni.NowState != SpiderAnimation.S_STATE.S_RUN)

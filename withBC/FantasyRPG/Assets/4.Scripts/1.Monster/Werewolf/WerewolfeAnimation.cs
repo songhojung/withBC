@@ -24,13 +24,11 @@ public class WerewolfeAnimation : MonoBehaviour {
 
     private float h = 0;
     private float v = 0;
-    private int ClipNum = 0;
     public W_STATE NowState = W_STATE.S_STAND;
     // Use this for initialization
     void Start()
     {
         Werewolf = this.gameObject.GetComponentInChildren<Animation>();
-        ClipNum = Werewolf.GetClipCount();
         //Debug.Log("클립갯수:" + ClipNum.ToString());
 
         //pcControll = this.gameObject.GetComponent<CharacterController>();

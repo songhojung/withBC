@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -70,14 +67,17 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -86,9 +86,11 @@
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinSpawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Monster2\Monster2Animation.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Monster2\Monster2DetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Monster2\Monster2Move.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Monster2\Monster2Spawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Monster3\Monster3Animation.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Monster3\Monster3DetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Monster3\Monster3Move.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Monster3\Monster3Spawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\MonsterSpawn.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Assets\4.Scripts\1.Monster\Werewolf\WerewolfeMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Werewolf\WerewolfeSpawn.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieAnimation.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieDetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieSpawn.cs" />
     <Compile Include="Assets\5.FreeNet\CGame Main.cs" />
