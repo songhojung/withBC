@@ -95,9 +95,12 @@ public class SpiderDetectTarget : MonoBehaviour {
                 }
                 else
                 {
-                    if (SpiderAni.Spider["Attack"].normalizedTime >= 0.95f)
+                    if (Ray.collider.tag != "Player")
                     {
-                        SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+                        if (SpiderAni.Spider["Attack"].normalizedTime >= 0.95f)
+                        {
+                            SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+                        }
                     }
                 }
             }

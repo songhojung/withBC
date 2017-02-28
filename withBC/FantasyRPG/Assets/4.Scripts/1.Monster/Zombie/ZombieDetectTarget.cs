@@ -54,7 +54,7 @@ public class ZombieDetectTarget : MonoBehaviour {
             {
                 if (ZombieAnimation.Zombie.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 {
-                        ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
+                    ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
                 }
                 if (ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_WALK)
                 {
@@ -137,7 +137,8 @@ public class ZombieDetectTarget : MonoBehaviour {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
         ObjPos.y += 1.0f;
-        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Monster"));
+        int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
+            (1 << LayerMask.NameToLayer("PatrollPoint")));
         //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }

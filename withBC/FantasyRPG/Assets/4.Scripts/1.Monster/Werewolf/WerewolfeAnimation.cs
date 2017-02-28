@@ -20,18 +20,13 @@ public class WerewolfeAnimation : MonoBehaviour {
 
     public float runSpeed = 6.0f;
 
-    Vector3 velocity;
-
-    private float h = 0;
-    private float v = 0;
     public W_STATE NowState = W_STATE.S_STAND;
+
+    public int _health = 10;
     // Use this for initialization
     void Start()
     {
-        Werewolf = this.gameObject.GetComponentInChildren<Animation>();
-        //Debug.Log("클립갯수:" + ClipNum.ToString());
-
-        //pcControll = this.gameObject.GetComponent<CharacterController>();
+        Werewolf = this.GetComponent<Animation>();
     }
 
     // Update is called once per frame

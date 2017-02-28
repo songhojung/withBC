@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -67,20 +70,35 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Assets\3.Resources\2.Charicter\AllStarCharacterLibrary\Scripts\CamTarget.cs" />
     <Compile Include="Assets\3.Resources\2.Charicter\AllStarCharacterLibrary\Scripts\CharacterDemoController.cs" />
     <Compile Include="Assets\3.Resources\2.Charicter\AllStarCharacterLibrary\Scripts\MouseOrbit.cs" />
     <Compile Include="Assets\3.Resources\2.Charicter\AllStarCharacterLibrary\Scripts\Outfitter.cs" />
     <Compile Include="Assets\3.Resources\2.Charicter\AllStarCharacterLibrary\Scripts\RootMotionOff.cs" />
     <Compile Include="Assets\3.Resources\2.Charicter\AllStarCharacterLibrary\Scripts\SkinnedMeshCombiner.cs" />
+=======
+    <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonAnimation.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonDetectTarget.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonMove.cs" />
+>>>>>>> c7f3ce9527d7753f157dbc0c882723ed48575279
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinAnimation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinDetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinMove.cs" />
