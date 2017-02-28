@@ -126,6 +126,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\3.Resources\2.Charicter\AllStarCharacterLibrary\Scripts\Editor\TurnOffRenderers.cs" />
     <Compile Include="Assets\Medieval Environment\Terrain Resource\Shaders\Editor\TerrainRandEditor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,11 +139,8 @@
     <None Include="Assets\3.Resources\1.Monster\Monster2\Shaders\specillumShader.shader" />
     <None Include="Assets\3.Resources\1.Monster\Werewolf\animations.txt" />
     <None Include="Assets\3.Resources\1.Monster\Werewolf\readme.txt" />
-<<<<<<< HEAD
-=======
     <None Include="Assets\3.Resources\2.Charicter\Archer\Knife\Shader 1\Compressed MaskedShader2sided 5-4 cut out.shader" />
     <None Include="Assets\3.Resources\3.Effect\1.Decal\bloodHD\readme.txt" />
->>>>>>> ace151a5d8f3a701a4c76cf7b28f672b0f4daf6f
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM2.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM3.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrain.shader" />

@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 080129cdfa447a64ca9f00274fa85009
+timeCreated: 1488284639
+licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -7469,36 +7471,6 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: helmet
-      parentName: Warrior 1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Main_Armour
-      parentName: Warrior 1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: s
-      parentName: Warrior 1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: shield1
-      parentName: Warrior 1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Skirt
-      parentName: Warrior 1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: viking7
-      parentName: Warrior 1(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: Bip01
       parentName: Warrior 1(Clone)
       position: {x: -0.018834751, y: 4.883515, z: -0.17995383}
@@ -7514,6 +7486,36 @@ ModelImporter:
       position: {x: -0.3575466, y: 0.03560544, z: 0.00000040500004}
       rotation: {x: 0, y: -0, z: -0.00039699994, w: 0.99999994}
       scale: {x: 1.0000004, y: 1.0000004, z: 1}
+    - name: Bip01_L_Thigh
+      parentName: Bip01_Spine
+      position: {x: 0.35757375, y: -0.035322256, z: 0.6225473}
+      rotation: {x: -0.026398629, y: 0.99960583, z: -0.00024425212, w: 0.009552273}
+      scale: {x: 0.9999993, y: 0.9999988, z: 0.99999976}
+    - name: Bip01_L_Calf
+      parentName: Bip01_L_Thigh
+      position: {x: -2.178839, y: 0.000221355, z: -0.078478694}
+      rotation: {x: 0, y: 0, z: 0.08948245, w: 0.9959884}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1}
+    - name: Bip01_L_Foot
+      parentName: Bip01_L_Calf
+      position: {x: -2.075859, y: -0.00007942501, z: -0.047087055}
+      rotation: {x: 0.00054912583, y: 0.009552491, z: -0.06350985, w: 0.99793535}
+      scale: {x: 1.0000006, y: 1.0000011, z: 0.9999997}
+    - name: Bip01_R_Thigh
+      parentName: Bip01_Spine
+      position: {x: 0.3575744, y: -0.035318475, z: -0.71675265}
+      rotation: {x: -0.026398363, y: 0.99960583, z: 0.00024425465, w: -0.009552273}
+      scale: {x: 1.0000004, y: 1, z: 0.9999995}
+    - name: Bip01_R_Calf
+      parentName: Bip01_R_Thigh
+      position: {x: -2.1796403, y: 0.0001557, z: 0.047087055}
+      rotation: {x: 0, y: 0, z: 0.089482, w: 0.9959884}
+      scale: {x: 0.99999905, y: 1, z: 1}
+    - name: Bip01_R_Foot
+      parentName: Bip01_R_Calf
+      position: {x: -2.0766642, y: -0.000018990002, z: 0.015695596}
+      rotation: {x: -0.0005491417, y: -0.009552242, z: -0.06354004, w: 0.99793345}
+      scale: {x: 1.0000004, y: 1.0000002, z: 0.99999994}
     - name: Bip01_Spine1
       parentName: Bip01_Spine
       position: {x: -0.4864379, y: -0.00044109, z: 0}
@@ -7566,45 +7568,45 @@ ModelImporter:
       scale: {x: 1.0463501, y: 1.0000986, z: 0.95874053}
     - name: Bip01_R_Forearm
       parentName: Bip01_R_UpperArm
-      position: {x: -1.566601, y: -0.0088493405, z: -0.0053558555}
-      rotation: {x: 0.0037020058, y: -0.019355012, z: -0.024689248, w: 0.999501}
+      position: {x: -1.5666517, y: -0.008818255, z: -0.0052795736}
+      rotation: {x: 0.008701173, y: 0.006706449, z: -0.06565606, w: 0.9977818}
       scale: {x: 1.0000018, y: 0.9999988, z: 1}
     - name: Bip01_R_Hand
       parentName: Bip01_R_Forearm
-      position: {x: -1.4419664, y: -0.20588815, z: -0.01331613}
-      rotation: {x: 0.73880905, y: -0.013131182, z: -0.011593831, w: 0.67368716}
+      position: {x: -1.4420758, y: -0.20586358, z: -0.013211446}
+      rotation: {x: 0.7305725, y: -0.01263498, z: -0.0072028544, w: 0.68268025}
       scale: {x: 1.0002229, y: 1.3667406, z: 0.7328037}
-    - name: Bip01_L_Thigh
-      parentName: Bip01_Spine
-      position: {x: 0.35757375, y: -0.035322256, z: 0.6225473}
-      rotation: {x: -0.026398629, y: 0.99960583, z: -0.00024425212, w: 0.009552273}
-      scale: {x: 0.9999993, y: 0.9999988, z: 0.99999976}
-    - name: Bip01_L_Calf
-      parentName: Bip01_L_Thigh
-      position: {x: -2.178839, y: 0.000221355, z: -0.078478694}
-      rotation: {x: 0, y: 0, z: 0.08948245, w: 0.9959884}
-      scale: {x: 1.0000002, y: 1.0000002, z: 1}
-    - name: Bip01_L_Foot
-      parentName: Bip01_L_Calf
-      position: {x: -2.075859, y: -0.00007942501, z: -0.047087055}
-      rotation: {x: 0.00054912583, y: 0.009552491, z: -0.06350985, w: 0.99793535}
-      scale: {x: 1.0000006, y: 1.0000011, z: 0.9999997}
-    - name: Bip01_R_Thigh
-      parentName: Bip01_Spine
-      position: {x: 0.3575744, y: -0.035318475, z: -0.71675265}
-      rotation: {x: -0.026398363, y: 0.99960583, z: 0.00024425465, w: -0.009552273}
-      scale: {x: 1.0000004, y: 1, z: 0.9999995}
-    - name: Bip01_R_Calf
-      parentName: Bip01_R_Thigh
-      position: {x: -2.1796403, y: 0.0001557, z: 0.047087055}
-      rotation: {x: 0, y: 0, z: 0.089482, w: 0.9959884}
-      scale: {x: 0.99999905, y: 1, z: 1}
-    - name: Bip01_R_Foot
-      parentName: Bip01_R_Calf
-      position: {x: -2.0766642, y: -0.000018990002, z: 0.015695596}
-      rotation: {x: -0.0005491417, y: -0.009552242, z: -0.06354004, w: 0.99793345}
-      scale: {x: 1.0000004, y: 1.0000002, z: 0.99999994}
-    armTwist: 0.5
+    - name: helmet
+      parentName: Warrior 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Main_Armour
+      parentName: Warrior 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: s
+      parentName: Warrior 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: shield1
+      parentName: Warrior 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Skirt
+      parentName: Warrior 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: viking7
+      parentName: Warrior 1(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.53
     foreArmTwist: 0.5
     upperLegTwist: 0.5
     legTwist: 0.5

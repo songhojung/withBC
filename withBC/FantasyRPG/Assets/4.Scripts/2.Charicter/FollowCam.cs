@@ -53,9 +53,10 @@ public class FollowCam : MonoBehaviour
 
         Vector3 axis = new Vector3(2.6f, 0, -6.70f);
         //cameraTr.Rotate((Vector3.up * Time.deltaTime * 20.0f * Input.GetAxis("Mouse X")));
-        cameraTr.RotateAround(Target.transform.position, Vector3.up, Time.deltaTime * 40.0f * Input.GetAxis("Mouse X"));
+        cameraTr.RotateAround(Target.transform.position, Vector2.up, Time.deltaTime * 40.0f * Input.GetAxis("Mouse X"));
+        //cameraTr.RotateAround(Target.transform.position, -cameraTr.right, Time.deltaTime * 40.0f * Input.GetAxis("Mouse Y"));
 
-        
+
 
         //cameraTr.RotateAround(Target.position, Vector3.up,30.0f);
         //cameraTr.localRotation = Quaternion.AngleAxis(45.0f, Vector3.right);
