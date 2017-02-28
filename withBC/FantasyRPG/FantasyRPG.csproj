@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -66,6 +69,9 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -123,6 +129,7 @@
     <None Include="Assets\3.Resources\1.Monster\Werewolf\animations.txt" />
     <None Include="Assets\3.Resources\1.Monster\Werewolf\readme.txt" />
     <None Include="Assets\3.Resources\2.Charicter\Archer\dwarfs\Shader 1\Compressed MaskedShader2sided 5-4 cut out.shader" />
+    <None Include="Assets\3.Resources\3.Effect\1.Decal\bloodHD\readme.txt" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM2.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM3.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrain.shader" />
