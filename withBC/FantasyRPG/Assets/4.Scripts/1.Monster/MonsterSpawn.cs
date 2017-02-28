@@ -5,10 +5,12 @@ using UnityEngine;
 public class MonsterSpawn : MonoBehaviour {
 
     public GameObject Monster;
-    public int EnemyCount = 3;
+    public int EnemyCount = 1;
 
     private int nowEnemyCount = 0;
     private float CreatDelayTime = 0;
+
+    public float CreatTIme = 5.0f;
 
     // Use this for initialization
     void Start()
@@ -23,7 +25,7 @@ public class MonsterSpawn : MonoBehaviour {
         CreatDelayTime += Time.deltaTime;
         if (EnemyCount > 0)
         {
-            if (CreatDelayTime > 0.5f)
+            if (CreatDelayTime > CreatTIme)
             {
                 CreatDelayTime = 0.0f;
                 EnemyCount--;

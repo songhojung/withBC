@@ -8,9 +8,12 @@ public class Monster3DetectTarget : MonoBehaviour {
     public GameObject target;
     private Monster3Animation M3Animation;
 
-    private Monster3Move Move;
+    private MonsterFindPatroll PatrollPt;
+
+    //private Monster3Move Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
+
     private float RayDistance = 14.0f;
     private bool isDie = false;
 
@@ -18,13 +21,15 @@ public class Monster3DetectTarget : MonoBehaviour {
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<Monster3Move>();
+       // Move = GetComponent<Monster3Move>();
         M3Animation = GetComponent<Monster3Animation>();
+        PatrollPt = GetComponent<MonsterFindPatroll>();
         //StartCoroutine(Checkeverything());
     }
 
     void Update()
     {
+        //M3Animation = GetComponent<Monster3Animation>();
         RayCast();
         if (target)
         {
@@ -63,7 +68,7 @@ public class Monster3DetectTarget : MonoBehaviour {
             }
             else
             {
-                if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack"))
                 {
                     //agent.destination = target.transform.position;
                     M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
@@ -78,25 +83,45 @@ public class Monster3DetectTarget : MonoBehaviour {
                 }
             }
 
-            if(M3Animation.NowState == Monster3Animation.M3_STATE.M3_RUN)
+            if(M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Run"))
             {
                 agent.destination = target.transform.position;
             }
-        }
-        else
-        {
+
+            if (target.gameObject.CompareTag("PatrollPoint"))
+            {
+                float distance = Vector3.Distance(this.transform.position, target.transform.position);
+                if (distance <= 5.0f)
+                {
+                    if (target.GetComponent<MakePatroll>().Child)
+                    {
+                        target = target.GetComponent<MakePatroll>().Child.gameObject;
+                    }
+                }
+
+            }
+
             if (Ray.collider != null)
             {
                 if (Ray.collider.tag == "Player")
                 {
-                    target = Ray.collider.gameObject;
-                    agent.destination = target.transform.position;
+                    if (!PatrollPt.findPlayer)
+                    {
+                        target = null;
+                        target = Ray.collider.gameObject;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+                    }
                 }
             }
         }
+        else
+        {
+            findAndMove();
+        }
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-        Move.transform.LookAt(transform.position + transform.forward);
-        transform.LookAt(transform.position + transform.forward);
 
     }
     // Update is called once per frame
@@ -111,6 +136,26 @@ public class Monster3DetectTarget : MonoBehaviour {
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
 
+    private void findAndMove()
+    {
+        if (Ray.collider != null)
+        {
+            if (Ray.collider.tag == "Player")
+            {
+                target = Ray.collider.gameObject;
+                agent.destination = target.transform.position;
+                PatrollPt.ActPatroll = false;
+                PatrollPt.findPlayer = true;
+                M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+            }
+        }
+        if (PatrollPt.ActPatroll)
+        {
+            target = PatrollPt.PatrollPoint;
+            agent.destination = target.transform.position;
+            M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+        }
+    }
 
     private void OnDrawGizmos()
     {

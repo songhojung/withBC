@@ -8,9 +8,12 @@ public class SpiderDetectTarget : MonoBehaviour {
     public GameObject target;
     private SpiderAnimation SpiderAni;
 
+    private MonsterFindPatroll PatrollPt;
+
     private SpiderMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
+
     private float RayDistance = 15.0f;
     private bool isDie = false;
 
@@ -20,6 +23,7 @@ public class SpiderDetectTarget : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         Move = GetComponent<SpiderMove>();
         SpiderAni = GetComponent<SpiderAnimation>();
+        PatrollPt = GetComponent<MonsterFindPatroll>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -69,19 +73,29 @@ public class SpiderDetectTarget : MonoBehaviour {
         RayCast();
         if (target)
         {
-            if (Ray.collider != null && SpiderAni.NowState != SpiderAnimation.S_STATE.S_ATT)
+            if (Ray.collider != null)
             {
-                if (Ray.collider.tag == "Player")
+                if (SpiderAni.NowState != SpiderAnimation.S_STATE.S_ATT)
                 {
-                    if (SpiderAni.NowState == SpiderAnimation.S_STATE.S_WALK || SpiderAni.NowState == SpiderAnimation.S_STATE.S_RUN)
+                    if (Ray.collider.tag == "Player")
                     {
-                        SpiderAni.NowState = SpiderAnimation.S_STATE.S_ATT;
+                        if (SpiderAni.NowState == SpiderAnimation.S_STATE.S_WALK || SpiderAni.NowState == SpiderAnimation.S_STATE.S_RUN)
+                        {
+                            SpiderAni.NowState = SpiderAnimation.S_STATE.S_ATT;
+                        }
+                    }
+                    else
+                    {
+                        //agent.destination = target.transform.position;
+                        if (agent.velocity.magnitude > 0.0f && SpiderAni.NowState != SpiderAnimation.S_STATE.S_RUN)
+                        {
+                            SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+                        }
                     }
                 }
                 else
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && SpiderAni.NowState != SpiderAnimation.S_STATE.S_RUN)
+                    if (SpiderAni.Spider["Attack"].normalizedTime >= 0.95f)
                     {
                         SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
                     }
@@ -92,32 +106,57 @@ public class SpiderDetectTarget : MonoBehaviour {
                 //if (!SpiderAni.Spider.IsPlaying("Attack"))
                 if (SpiderAni.Spider["Attack"].normalizedTime >= 0.95f)
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && SpiderAni.NowState != SpiderAnimation.S_STATE.S_RUN)
-                    {
-                        SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
-                    }
+                    SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
                 }
                 if(SpiderAni.NowState != SpiderAnimation.S_STATE.S_ATT)
                 {
-                    agent.destination = target.transform.position;
+                    //agent.destination = target.transform.position;
                     if (agent.velocity.magnitude > 0.0f && SpiderAni.NowState != SpiderAnimation.S_STATE.S_RUN)
                     {
                         SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
                     }
                 }
             }
-        }
-        else
-        {
+
+            if (SpiderAni.NowState == SpiderAnimation.S_STATE.S_RUN)
+            {
+                agent.destination = target.transform.position;
+            }
+
+
+            if (target.gameObject.CompareTag("PatrollPoint"))
+            {
+                float distance = Vector3.Distance(this.transform.position, target.transform.position);
+                if (distance <= 5.0f)
+                {
+                    if (target.GetComponent<MakePatroll>().Child)
+                    {
+                        target = target.GetComponent<MakePatroll>().Child.gameObject;
+                    }
+                }
+
+            }
+
             if (Ray.collider != null)
             {
                 if (Ray.collider.tag == "Player")
                 {
-                    target = Ray.collider.gameObject;
-                    agent.destination = target.transform.position;
+                    if (!PatrollPt.findPlayer)
+                    {
+                        target = null;
+                        target = Ray.collider.gameObject;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+                    }
                 }
             }
+
+        }
+        else
+        {
+            findAndMove();
         }
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
         Move.transform.LookAt(transform.position + transform.forward);
@@ -131,12 +170,32 @@ public class SpiderDetectTarget : MonoBehaviour {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
         ObjPos.y += 1.0f;
-        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Monster"));
-        //layerMask = ~layerMask;
+        int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
+                    (1 << LayerMask.NameToLayer("PatrollPoint")));        //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance,layerMask);
 
     }
 
+    private void findAndMove()
+    {
+        if (Ray.collider != null)
+        {
+            if (Ray.collider.tag == "Player")
+            {
+                target = Ray.collider.gameObject;
+                agent.destination = target.transform.position;
+                PatrollPt.ActPatroll = false;
+                PatrollPt.findPlayer = true;
+                SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+            }
+        }
+        if (PatrollPt.ActPatroll)
+        {
+            target = PatrollPt.PatrollPoint;
+            agent.destination = target.transform.position;
+            SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+        }
+    }
 
     private void OnDrawGizmos()
     {

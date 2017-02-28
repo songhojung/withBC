@@ -8,6 +8,8 @@ public class ZombieDetectTarget : MonoBehaviour {
     public GameObject target;
     private ZombieAnimation ZombieAnimation;
 
+    private MonsterFindPatroll PatrollPt;
+
     private ZombieMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
@@ -20,50 +22,11 @@ public class ZombieDetectTarget : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         Move = GetComponent<ZombieMove>();
         ZombieAnimation = GetComponent<ZombieAnimation>();
+        PatrollPt = GetComponent<MonsterFindPatroll>();
         //StartCoroutine(Checkeverything());
     }
 
-    //IEnumerator Checkeverything()
-    //{
-    //    while (!isDie)
-    //    {
-    //        RayCast();
-    //        if (Ray.collider != null && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_ATTACK20)
-    //        {
-    //            if (Ray.collider.tag == "Player")
-    //            {
-    //                if (ZombieAnimation.NowState == ZombieAnimation.Z_STATE.Z_WALK || ZombieAnimation.NowState == ZombieAnimation.Z_STATE.Z_RUN)
-    //                {
-    //                    ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_ATTACK20;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_RUN)
-    //                {
-    //                    ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_RUN;
-    //                }
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (!ZombieAnimation.WereZombie.IsPlaying("Roar"))
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_RUN)
-    //                {
-    //                    ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_RUN;
-    //                }
-    //            }
-    //        }
-    //        //Move.Zombie.transform.LookAt(transform.position + transform.forward);
-    //        //transform.LookAt(transform.position + transform.forward);
-    //        Move.transform.LookAt(transform.position + transform.forward);
-
-    //        yield return null;
-    //    }
-    //}
+    
     void Update()
     {
         RayCast();
@@ -80,8 +43,8 @@ public class ZombieDetectTarget : MonoBehaviour {
                 }
                 else
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_WALK)
+                    //agent.destination = target.transform.position;
+                    if (ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_WALK)
                     {
                         ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
                     }
@@ -91,32 +54,56 @@ public class ZombieDetectTarget : MonoBehaviour {
             {
                 if (ZombieAnimation.Zombie.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f)
-                    {
                         ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
-                    }
                 }
                 if (ZombieAnimation.NowState != ZombieAnimation.Z_STATE.Z_WALK)
                 {
-                    agent.destination = target.transform.position;
+                    //agent.destination = target.transform.position;
                     if (agent.velocity.magnitude > 0.0f)
                     {
                         ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
                     }
                 }
             }
-        }
-        else
-        {
+            if (ZombieAnimation.NowState == ZombieAnimation.Z_STATE.Z_WALK)
+            {
+                agent.destination = target.transform.position;
+            }
+
+
+            if (target.gameObject.CompareTag("PatrollPoint"))
+            {
+                float distance = Vector3.Distance(this.transform.position, target.transform.position);
+                if (distance <= 5.0f)
+                {
+                    if (target.GetComponent<MakePatroll>().Child)
+                    {
+                        target = target.GetComponent<MakePatroll>().Child.gameObject;
+                    }
+                }
+
+            }
+
             if (Ray.collider != null)
             {
                 if (Ray.collider.tag == "Player")
                 {
-                    target = Ray.collider.gameObject;
-                    agent.destination = target.transform.position;
+                    if (!PatrollPt.findPlayer)
+                    {
+                        target = null;
+                        target = Ray.collider.gameObject;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
+                    }
                 }
             }
+
+        }
+        else
+        {
+            findAndMove();
         }
         //Move.Zombie.transform.LookAt(transform.position + transform.forward);
         Move.transform.LookAt(transform.position + transform.forward);
@@ -125,6 +112,26 @@ public class ZombieDetectTarget : MonoBehaviour {
     }
     // Update is called once per frame
 
+    private void findAndMove()
+    {
+        if (Ray.collider != null)
+        {
+            if (Ray.collider.tag == "Player")
+            {
+                target = Ray.collider.gameObject;
+                agent.destination = target.transform.position;
+                PatrollPt.ActPatroll = false;
+                PatrollPt.findPlayer = true;
+                ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
+            }
+        }
+        if (PatrollPt.ActPatroll)
+        {
+            target = PatrollPt.PatrollPoint;
+            agent.destination = target.transform.position;
+            ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
+        }
+    }
     private void RayCast()
     {
         Vector3 ObjPos = transform.position;

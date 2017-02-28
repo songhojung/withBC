@@ -9,9 +9,12 @@ public class Monster2DetectTarget : MonoBehaviour {
     public GameObject target;
     private Monster2Animation M2Animation;
 
+    private MonsterFindPatroll PatrollPt;
+
     private Monster2Move Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
+
     private float RayDistance = 14.0f;
     private bool isDie = false;
 
@@ -21,50 +24,9 @@ public class Monster2DetectTarget : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         Move = GetComponent<Monster2Move>();
         M2Animation = GetComponent<Monster2Animation>();
+        PatrollPt = GetComponent<MonsterFindPatroll>();
         //StartCoroutine(Checkeverything());
     }
-
-    //IEnumerator Checkeverything()
-    //{
-    //    while (!isDie)
-    //    {
-    //        RayCast();
-    //        if (Ray.collider != null && M2Animation.NowState != Monster2Animation.M2_STATE.M2_ATTACK20)
-    //        {
-    //            if (Ray.collider.tag == "Player")
-    //            {
-    //                if (M2Animation.NowState == Monster2Animation.M2_STATE.M2_WALK || M2Animation.NowState == Monster2Animation.M2_STATE.M2_RUN)
-    //                {
-    //                    M2Animation.NowState = Monster2Animation.M2_STATE.M2_ATTACK20;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && M2Animation.NowState != Monster2Animation.M2_STATE.M2_RUN)
-    //                {
-    //                    M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
-    //                }
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (!M2Animation.Werewolf.IsPlaying("Roar"))
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && M2Animation.NowState != Monster2Animation.M2_STATE.M2_RUN)
-    //                {
-    //                    M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
-    //                }
-    //            }
-    //        }
-    //        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-    //        //transform.LookAt(transform.position + transform.forward);
-    //        Move.transform.LookAt(transform.position + transform.forward);
-
-    //        yield return null;
-    //    }
-    //}
     void Update()
     {
         RayCast();
@@ -83,7 +45,7 @@ public class Monster2DetectTarget : MonoBehaviour {
                     }
                     else
                     {
-                        agent.destination = target.transform.position;
+                        //agent.destination = target.transform.position;
                         if (agent.velocity.magnitude > 0.0f && M2Animation.NowState != Monster2Animation.M2_STATE.M2_RUN)
                         {
                             M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
@@ -92,16 +54,20 @@ public class Monster2DetectTarget : MonoBehaviour {
                 }
                 else
                 {
-                    if (M2Animation.Mt2.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                    if (Ray.collider.tag != "Player")
                     {
-                        agent.destination = target.transform.position;
                         M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
                     }
+                    //if (M2Animation.Mt2.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+                    //{
+                    //    agent.destination = target.transform.position;
+                    //    M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
+                    //}
                 }
             }
             else
             {
-                if (M2Animation.NowState != Monster2Animation.M2_STATE.M2_ATTACK)
+                if (M2Animation.Mt2.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack"))
                 {
                     //agent.destination = target.transform.position;
                     M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
@@ -109,29 +75,53 @@ public class Monster2DetectTarget : MonoBehaviour {
                 if (M2Animation.NowState != Monster2Animation.M2_STATE.M2_ATTACK)
                 {
                     //agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && M2Animation.NowState != Monster2Animation.M2_STATE.M2_RUN)
+                    if (M2Animation.NowState != Monster2Animation.M2_STATE.M2_RUN)
                     {
                         M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
                     }
                 }
             }
+            if (M2Animation.Mt2.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Run"))
+            {
+                agent.destination = target.transform.position;
+            }
 
+            if (target.gameObject.CompareTag("PatrollPoint"))
+            {
+                float distance = Vector3.Distance(this.transform.position, target.transform.position);
+                if (distance <= 5.0f)
+                {
+                    if (target.GetComponent<MakePatroll>().Child)
+                    {
+                        target = target.GetComponent<MakePatroll>().Child.gameObject;
+                    }
+                }
 
-        }
-        else
-        {
+            }
+
             if (Ray.collider != null)
             {
-                if (Ray.collider.tag == "Player")
+                if (!PatrollPt.findPlayer)
                 {
-                    target = Ray.collider.gameObject;
-                    agent.destination = target.transform.position;
+                    if (Ray.collider.tag == "Player")
+                    {
+                        target = null;
+                        target = Ray.collider.gameObject;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
+                    }
                 }
             }
         }
+        else
+        {
+            findAndMove();
+        }
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-        Move.transform.LookAt(transform.position + transform.forward);
-        transform.LookAt(transform.position + transform.forward);
+        //Move.transform.LookAt(transform.position + transform.forward);
+        //transform.LookAt(transform.position + transform.forward);
 
     }
     // Update is called once per frame
@@ -141,12 +131,32 @@ public class Monster2DetectTarget : MonoBehaviour {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
         ObjPos.y += 1.0f;
-        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Monster"));
+        int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
+            (1 << LayerMask.NameToLayer("PatrollPoint")));
         //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
 
-
+    private void findAndMove()
+    {
+        if (Ray.collider != null)
+        {
+            if (Ray.collider.tag == "Player")
+            {
+                target = Ray.collider.gameObject;
+                agent.destination = target.transform.position;
+                PatrollPt.ActPatroll = false;
+                PatrollPt.findPlayer = true;
+                M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
+            }
+        }
+        if (PatrollPt.ActPatroll)
+        {
+            target = PatrollPt.PatrollPoint;
+            agent.destination = target.transform.position;
+            M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
+        }
+    }
     private void OnDrawGizmos()
     {
         Vector3 ObjPos = transform.position;

@@ -9,9 +9,12 @@ public class GoblinDetectTarget : MonoBehaviour {
     public GameObject target;
     private GoblinAnimation GoblinAni;
 
+    private MonsterFindPatroll PatrollPt;
+
     private GoblinMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
+
     private float RayDistance = 15.0f;
     private bool isDie = false;
 
@@ -21,68 +24,38 @@ public class GoblinDetectTarget : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         Move = GetComponent<GoblinMove>();
         GoblinAni = GetComponent<GoblinAnimation>();
+        PatrollPt = GetComponent<MonsterFindPatroll>();
         //StartCoroutine(Checkeverything());
     }
 
-    //IEnumerator Checkeverything()
-    //{
-    //    while (!isDie)
-    //    {
-    //        RayCast();
-    //        if (Ray.collider != null && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_ROAR)
-    //        {
-    //            if (Ray.collider.tag == "Player")
-    //            {
-    //                if (WolfAnimation.NowState == ZombieAnimation.W_STATE.S_WALK || WolfAnimation.NowState == ZombieAnimation.W_STATE.S_RUN)
-    //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_ROAR;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_RUN)
-    //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_RUN;
-    //                }
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (!WolfAnimation.Werewolf.IsPlaying("Roar"))
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != ZombieAnimation.W_STATE.S_RUN)
-    //                {
-    //                    WolfAnimation.NowState = ZombieAnimation.W_STATE.S_RUN;
-    //                }
-    //            }
-    //        }
-    //        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-    //        //transform.LookAt(transform.position + transform.forward);
-    //        Move.transform.LookAt(transform.position + transform.forward);
-
-    //        yield return null;
-    //    }
-    //}
     void Update()
     {
         RayCast();
         if (target)
         {
-            if (Ray.collider != null && GoblinAni.NowState != GoblinAnimation.G_STATE.S_ATT1)
+            if (Ray.collider != null)
             {
-                if (Ray.collider.tag == "Player")
+                if (GoblinAni.NowState != GoblinAnimation.G_STATE.S_ATT1)
                 {
-                    if (GoblinAni.NowState == GoblinAnimation.G_STATE.S_WALK || GoblinAni.NowState == GoblinAnimation.G_STATE.S_RUN)
+                    if (Ray.collider.tag == "Player")
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_ATT1;
+                        if (GoblinAni.NowState == GoblinAnimation.G_STATE.S_WALK || GoblinAni.NowState == GoblinAnimation.G_STATE.S_RUN)
+                        {
+                            GoblinAni.NowState = GoblinAnimation.G_STATE.S_ATT1;
+                        }
+                    }
+                    else
+                    {
+                        //agent.destination = target.transform.position;
+                        if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                        {
+                            GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        }
                     }
                 }
                 else
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                    if (GoblinAni.Goblin["attack1"].normalizedTime >= 0.95f)
                     {
                         GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
                     }
@@ -92,40 +65,55 @@ public class GoblinDetectTarget : MonoBehaviour {
             {
                 if (GoblinAni.Goblin["attack1"].normalizedTime >= 0.95f)
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
-                    {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
-                    }
+                    GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
                 }
                 if (GoblinAni.NowState != GoblinAnimation.G_STATE.S_ATT1)
                 {
-                    agent.destination = target.transform.position;
-                    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
+                    //agent.destination = target.transform.position;
+                    if (GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
                     {
                         GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
                     }
                 }
-                //if (!GoblinAni.Goblin.IsPlaying("attack3"))
-                //{
-                //    agent.destination = target.transform.position;
-                //    if (agent.velocity.magnitude > 0.0f && GoblinAni.NowState != GoblinAnimation.G_STATE.S_RUN)
-                //    {
-                //        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
-                //    }
-                //}
+            }
+            if (GoblinAni.NowState == GoblinAnimation.G_STATE.S_RUN)
+            {
+                agent.destination = target.transform.position;
+            }
+
+
+            if (target.gameObject.CompareTag("PatrollPoint"))
+            {
+                float distance = Vector3.Distance(this.transform.position, target.transform.position);
+                if (distance <= 5.0f)
+                {
+                    if (target.GetComponent<MakePatroll>().Child)
+                    {
+                        target = target.GetComponent<MakePatroll>().Child.gameObject;
+                    }
+                }
+
+            }
+
+            if (Ray.collider != null)
+            {
+                if (!PatrollPt.findPlayer)
+                {
+                    if (Ray.collider.tag == "Player")
+                    {
+                        target = null;
+                        target = Ray.collider.gameObject;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                    }
+                }
             }
         }
         else
         {
-            if (Ray.collider != null)
-            {
-                if (Ray.collider.tag == "Player")
-                {
-                    target = Ray.collider.gameObject;
-                    agent.destination = target.transform.position;
-                }
-            }
+            findAndMove();
         }
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
         Move.transform.LookAt(transform.position + transform.forward);
@@ -139,12 +127,31 @@ public class GoblinDetectTarget : MonoBehaviour {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
         ObjPos.y += 1.0f;
-        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Monster"));
-        //layerMask = ~layerMask;
+        int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
+                    (1 << LayerMask.NameToLayer("PatrollPoint")));        //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
 
-
+    private void findAndMove()
+    {
+        if (Ray.collider != null)
+        {
+            if (Ray.collider.tag == "Player")
+            {
+                target = Ray.collider.gameObject;
+                agent.destination = target.transform.position;
+                PatrollPt.ActPatroll = false;
+                PatrollPt.findPlayer = true;
+                GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+            }
+        }
+        if (PatrollPt.ActPatroll)
+        {
+            target = PatrollPt.PatrollPoint;
+            agent.destination = target.transform.position;
+            GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+        }
+    }
     private void OnDrawGizmos()
     {
         Vector3 ObjPos = transform.position;
