@@ -1,0 +1,354 @@
+fileFormatVersion: 2
+guid: b5096b3c8387f314ca154b9745ab6d3c
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: BaseArms
+    100002: BaseArms 1
+    100004: BaseHands
+    100006: BaseHands 1
+    100008: Bip01
+    100010: Bip01_Head
+    100012: Bip01_L_Calf
+    100014: Bip01_L_Clavicle
+    100016: Bip01_L_Finger0
+    100018: Bip01_L_Finger01
+    100020: Bip01_L_Finger02
+    100022: Bip01_L_Finger1
+    100024: Bip01_L_Finger11
+    100026: Bip01_L_Finger12
+    100028: Bip01_L_Foot
+    100030: Bip01_L_Forearm
+    100032: Bip01_L_Hand
+    100034: Bip01_L_Thigh
+    100036: Bip01_L_UpperArm
+    100038: Bip01_Neck
+    100040: Bip01_Pelvis
+    100042: Bip01_R_Calf
+    100044: Bip01_R_Clavicle
+    100046: Bip01_R_Finger0
+    100048: Bip01_R_Finger01
+    100050: Bip01_R_Finger02
+    100052: Bip01_R_Finger1
+    100054: Bip01_R_Finger11
+    100056: Bip01_R_Finger12
+    100058: Bip01_R_Foot
+    100060: Bip01_R_Forearm
+    100062: Bip01_R_Hand
+    100064: Bip01_R_Thigh
+    100066: Bip01_R_UpperArm
+    100068: Bip01_Rhand_WeaponOpp
+    100070: Bip01_Spine
+    100072: Bip01_Spine1
+    100074: Bip01_Spine2
+    100076: Head
+    100078: LeftEye
+    100080: LeftEyeLidLOWER
+    100082: LeftEyeLidUPPER
+    100084: Lowerteeth
+    100086: Lowerteeth 1
+    100088: Mouth
+    100090: NordraicBoots
+    100092: NordraicBoots 1
+    100094: NordraicBootsTRS
+    100096: NordraicBootsTRS 1
+    100098: NordraicHead
+    100100: NordraicHelmet
+    100102: NordraicHelmet 1
+    100104: NordraicLegs
+    100106: NordraicLegs 1
+    100108: NordraicTorso
+    100110: NordraicTorso 1
+    100112: NordraicWristArmour
+    100114: NordraicWristArmour 1
+    100116: RightEye
+    100118: RightEyeLidLOWER
+    100120: RightEyeLidUPPER
+    100122: SwordC
+    100124: SwordC 1
+    100126: Teeth
+    100128: Teeth 1
+    100130: ThiefHood
+    100132: //RootNode
+    100134: helmet
+    100136: s
+    100138: shield1
+    100140: viking7
+    100142: Main_Armour
+    100144: helmet 1
+    100146: Main_Armour 1
+    100148: s 1
+    100150: shield1 1
+    100152: Skirt
+    100154: viking7 1
+    400000: BaseArms
+    400002: BaseArms 1
+    400004: BaseHands
+    400006: BaseHands 1
+    400008: Bip01
+    400010: Bip01_Head
+    400012: Bip01_L_Calf
+    400014: Bip01_L_Clavicle
+    400016: Bip01_L_Finger0
+    400018: Bip01_L_Finger01
+    400020: Bip01_L_Finger02
+    400022: Bip01_L_Finger1
+    400024: Bip01_L_Finger11
+    400026: Bip01_L_Finger12
+    400028: Bip01_L_Foot
+    400030: Bip01_L_Forearm
+    400032: Bip01_L_Hand
+    400034: Bip01_L_Thigh
+    400036: Bip01_L_UpperArm
+    400038: Bip01_Neck
+    400040: Bip01_Pelvis
+    400042: Bip01_R_Calf
+    400044: Bip01_R_Clavicle
+    400046: Bip01_R_Finger0
+    400048: Bip01_R_Finger01
+    400050: Bip01_R_Finger02
+    400052: Bip01_R_Finger1
+    400054: Bip01_R_Finger11
+    400056: Bip01_R_Finger12
+    400058: Bip01_R_Foot
+    400060: Bip01_R_Forearm
+    400062: Bip01_R_Hand
+    400064: Bip01_R_Thigh
+    400066: Bip01_R_UpperArm
+    400068: Bip01_Rhand_WeaponOpp
+    400070: Bip01_Spine
+    400072: Bip01_Spine1
+    400074: Bip01_Spine2
+    400076: Head
+    400078: LeftEye
+    400080: LeftEyeLidLOWER
+    400082: LeftEyeLidUPPER
+    400084: Lowerteeth
+    400086: Lowerteeth 1
+    400088: Mouth
+    400090: NordraicBoots
+    400092: NordraicBoots 1
+    400094: NordraicBootsTRS
+    400096: NordraicBootsTRS 1
+    400098: NordraicHead
+    400100: NordraicHelmet
+    400102: NordraicHelmet 1
+    400104: NordraicLegs
+    400106: NordraicLegs 1
+    400108: NordraicTorso
+    400110: NordraicTorso 1
+    400112: NordraicWristArmour
+    400114: NordraicWristArmour 1
+    400116: RightEye
+    400118: RightEyeLidLOWER
+    400120: RightEyeLidUPPER
+    400122: SwordC
+    400124: SwordC 1
+    400126: Teeth
+    400128: Teeth 1
+    400130: ThiefHood
+    400132: //RootNode
+    400134: helmet
+    400136: s
+    400138: shield1
+    400140: viking7
+    400142: Main_Armour
+    400144: helmet 1
+    400146: Main_Armour 1
+    400148: s 1
+    400150: shield1 1
+    400152: Skirt
+    400154: viking7 1
+    4300000: BaseArms
+    4300002: BaseHands
+    4300004: NordraicHead
+    4300006: Lowerteeth
+    4300008: NordraicBoots
+    4300010: NordraicBootsTRS
+    4300012: NordraicHelmet
+    4300014: NordraicLegs
+    4300016: NordraicTorso
+    4300018: NordraicWristArmour
+    4300020: Teeth
+    4300022: SwordC
+    4300024: helmet
+    4300026: viking7
+    4300028: shield1
+    4300030: s
+    4300032: Main_Armour
+    4300034: Skirt
+    7400000: EyeBlink
+    7400002: GENHitFromBack
+    7400004: GENHitFromFront
+    7400006: GENHitFromLeft
+    7400008: GENHitFromRight
+    7400010: GENjump
+    7400012: GENJumpRunning
+    7400014: GENRun
+    7400016: GENSneaking
+    7400018: GENWalk
+    7400020: NPCDissapointed
+    7400022: NPCDyingA
+    7400024: NPCDyingB
+    7400026: NPCStandFromSitting
+    7400028: NPCTalking
+    7400030: SwordBlockHighLeft
+    7400032: SwordCombatReady
+    7400034: SwordDodgeBackwards
+    7400036: SwordDodgeLeft
+    7400038: SwordDodgeRighht
+    7400040: SwordDuckBelow
+    7400042: SwordDying
+    7400044: SwordGetup
+    7400046: SwordHighSwordStraightDown
+    7400048: SwordparryLowFront
+    7400050: SwordParryLowLeft
+    7400052: SwordParryLowRighjt
+    7400054: SwordParryMidFront
+    7400056: SwordParryMidLeft
+    7400058: SwordParryMidRight
+    7400060: SwordShieldBlockHighFront
+    7400062: SwordShieldBlockHIghRight
+    7400064: SwordShieldBlockLeft
+    7400066: SwordShieldBlockLowFront
+    7400068: SwordShieldBlockLowRight
+    7400070: SwordShieldBlockMidFront
+    7400072: SwordShieldBlockMidLeft
+    7400074: SwordShieldBlockMidRight
+    7400076: SwordSwingHighRight
+    7400078: SwordSwingHightLeft
+    7400080: SwordSwingLowLeft
+    7400082: SwordSwingLowRight
+    7400084: SwordSwingMidLeft
+    7400086: SwordSwingMidRight
+    7400088: SwordThrustHigh
+    7400090: SwordThrustLow
+    7400092: SwordThrustMid
+    7400094: SwordWalk
+    7400096: Take_001
+    7400098: Tpose
+    7400100: NPCPointingA
+    7400102: NPCLookingAround
+    7400104: NPCShrugs
+    7400106: NPCUseObject
+    7400108: POSED
+    7400110: Horseman_Death
+    7400112: Horseman_Dismounting
+    7400114: Horseman_Explanation
+    7400116: Horseman_Getting_Hit
+    7400118: Horseman_Idle
+    7400120: Horseman_Jumping_on_Horse
+    7400122: Horseman_Left_blow
+    7400124: Horseman_Left_UP_blow
+    7400126: Horseman_looking_around
+    7400128: Horseman_Riding_Galloping_Horse
+    7400130: Horseman_Riding_Troting_Horse
+    7400132: Horseman_Right_blow
+    7400134: Horseman_Right_UP_blow
+    7400136: Horseman_Say_No
+    7400138: Horseman_Talking
+    7400140: Horsman_death_with_Horse
+    7400142: GENjump1
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: BaseArms 1
+    13700002: BaseHands
+    13700004: Lowerteeth 1
+    13700006: NordraicBoots 1
+    13700008: NordraicBootsTRS 1
+    13700010: NordraicHead
+    13700012: NordraicHelmet 1
+    13700014: NordraicLegs 1
+    13700016: NordraicTorso 1
+    13700018: NordraicWristArmour 1
+    13700020: SwordC 1
+    13700022: Teeth 1
+    13700024: BaseArms
+    13700026: Lowerteeth
+    13700028: NordraicBoots
+    13700030: NordraicBootsTRS
+    13700032: NordraicHelmet
+    13700034: NordraicLegs
+    13700036: NordraicTorso
+    13700038: NordraicWristArmour
+    13700040: SwordC
+    13700042: Teeth
+    13700044: helmet
+    13700046: s
+    13700048: shield1
+    13700050: viking7
+    13700052: Main_Armour
+    13700054: helmet 1
+    13700056: Main_Armour 1
+    13700058: s 1
+    13700060: shield1 1
+    13700062: Skirt
+    13700064: viking7 1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 0
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 2
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.045
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 61
+    normalImportMode: 1
+    tangentImportMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
