@@ -55,9 +55,12 @@ public class GoblinDetectTarget : MonoBehaviour {
                 }
                 else
                 {
-                    if (GoblinAni.Goblin["attack1"].normalizedTime >= 0.95f)
+                    if (Ray.collider.tag != "Player")
                     {
-                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        if (GoblinAni.Goblin["attack1"].normalizedTime >= 0.95f)
+                        {
+                            GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        }
                     }
                 }
             }

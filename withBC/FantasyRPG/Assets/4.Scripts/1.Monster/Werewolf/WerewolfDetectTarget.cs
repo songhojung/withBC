@@ -54,10 +54,13 @@ public class WerewolfDetectTarget : MonoBehaviour {
                 }
                 else
                 {
-                    if (WolfAnimation.Werewolf["Attack20"].normalizedTime >= 0.95f)
+                    if (Ray.collider.tag != "Player")
                     {
-                        //agent.destination = target.transform.position;
-                        WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
+                        if (WolfAnimation.Werewolf["Attack20"].normalizedTime >= 0.95f)
+                        {
+                            //agent.destination = target.transform.position;
+                            WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
+                        }
                     }
                 }
             }

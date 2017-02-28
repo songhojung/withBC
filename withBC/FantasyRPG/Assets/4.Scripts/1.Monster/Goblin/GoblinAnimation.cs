@@ -18,6 +18,8 @@ public class GoblinAnimation : MonoBehaviour {
     public float runSpeed = 6.0f;
 
     public G_STATE NowState = G_STATE.S_ATT1;
+
+    public int _health;
 	// Use this for initialization
 	void Start () {
         NowState = G_STATE.S_IDLE;

@@ -7,8 +7,12 @@ public class MakePatroll : MonoBehaviour {
     public MakePatroll Parent = null;
     public MakePatroll Child = null;
     public SphereCollider find_monster;
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+
+    //0은 땅 1은 하늘
+    public int Rand_Fly = 0;
+
+    void Start () {
         find_monster = GetComponent<SphereCollider>();
         if(Parent)
         {

@@ -59,11 +59,6 @@ public class Monster3DetectTarget : MonoBehaviour {
                     {
                         M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                     }
-                    //if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-                    //{
-                    //    //agent.destination = target.transform.position;
-                    //    M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
-                    //}
                 }
             }
             else
@@ -131,7 +126,8 @@ public class Monster3DetectTarget : MonoBehaviour {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
         ObjPos.y += 1.0f;
-        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Monster"));
+        int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
+            (1 << LayerMask.NameToLayer("PatrollPoint")));
         //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }

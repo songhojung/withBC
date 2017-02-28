@@ -12,7 +12,8 @@ public class SpiderAnimation : MonoBehaviour {
 
     public Animation Spider;
     public S_STATE NowState;
-    
+
+    public int _health = 10;
 	// Use this for initialization
 	void Start () {
         NowState = S_STATE.S_IDLE;
