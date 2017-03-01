@@ -29,7 +29,17 @@ public class ZombieDetectTarget : MonoBehaviour {
     
     void Update()
     {
-        RayCast();
+        if (!isDie)
+        {
+            RayCast();
+            RandDetect();
+        }
+        
+
+    }
+    // Update is called once per frame
+    private void RandDetect()
+    {
         if (target)
         {
             if (Ray.collider != null)
@@ -108,10 +118,7 @@ public class ZombieDetectTarget : MonoBehaviour {
         //Move.Zombie.transform.LookAt(transform.position + transform.forward);
         Move.transform.LookAt(transform.position + transform.forward);
         transform.LookAt(transform.position + transform.forward);
-
     }
-    // Update is called once per frame
-
     private void findAndMove()
     {
         if (Ray.collider != null)
@@ -127,6 +134,7 @@ public class ZombieDetectTarget : MonoBehaviour {
         }
         if (PatrollPt.ActPatroll)
         {
+
             target = PatrollPt.PatrollPoint;
             agent.destination = target.transform.position;
             ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;

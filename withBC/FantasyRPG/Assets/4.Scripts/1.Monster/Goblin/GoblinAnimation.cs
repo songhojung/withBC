@@ -96,32 +96,6 @@ public class GoblinAnimation : MonoBehaviour {
                 Goblin.CrossFade("walk", 0.3f); ;
                 break;
         }
-        //h = Input.GetAxis("Horizontal");
-        //v = Input.GetAxis("Vertical");
-
-        //velocity = new Vector3(h, 0f, v);
-        //Vector3 SlerpVec = Vector3.zero;
-
-        //if(h!= 0 || v!=0)
-        //{
-
-        //}
-        //else if(Input.GetMouseButtonDown(0))
-        //{
-        //    Goblin.wrapMode = WrapMode.Once;
-        //    Goblin.CrossFade(PlayerAni[(int)G_STATE.S_ATT1].name, 0.3f);
-        //    NowState = G_STATE.S_ATT1;
-        //}
-        //else if(!Goblin.IsPlaying(PlayerAni[(int)G_STATE.S_ATT1].name)
-        //    &&NowState == G_STATE.S_ATT1)
-        //{
-        //    Goblin.wrapMode = WrapMode.Loop;
-        //    Goblin.CrossFade(PlayerAni[(int)G_STATE.S_IDLE].name, 0.3f);
-        //}
-        //SlerpVec = Vector3.Slerp(transform.forward, velocity, 0.1f);
-        //transform.LookAt(transform.position + SlerpVec);
-
-        ////pcControll.Move(velocity * runSpeed * Time.deltaTime);
     }
 
 

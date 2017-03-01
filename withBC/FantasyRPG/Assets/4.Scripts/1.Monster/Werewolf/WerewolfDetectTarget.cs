@@ -29,7 +29,17 @@ public class WerewolfDetectTarget : MonoBehaviour {
 
     void Update()
     {
-        RayCast();
+        if (!isDie)
+        {
+            RayCast();
+            RandDetect();
+        }
+        
+    }
+    // Update is called once per frame
+   
+    private void RandDetect()
+    {
         if (target)
         {
             if (Ray.collider != null)
@@ -80,23 +90,23 @@ public class WerewolfDetectTarget : MonoBehaviour {
                     }
                 }
             }
-            if(WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_RUN)
+            if (WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_RUN)
             {
                 agent.destination = target.transform.position;
             }
 
 
-            if(target.gameObject.CompareTag("PatrollPoint"))
+            if (target.gameObject.CompareTag("PatrollPoint"))
             {
                 float distance = Vector3.Distance(this.transform.position, target.transform.position);
-                if(distance <= 5.0f)
+                if (distance <= 5.0f)
                 {
                     if (target.GetComponent<MakePatroll>().Child)
                     {
                         target = target.GetComponent<MakePatroll>().Child.gameObject;
                     }
                 }
-                
+
             }
 
             if (Ray.collider != null)
@@ -124,8 +134,6 @@ public class WerewolfDetectTarget : MonoBehaviour {
         transform.LookAt(transform.position + transform.forward);
 
     }
-    // Update is called once per frame
-   
     private void RayCast()
     {
         Vector3 ObjPos = transform.position;
@@ -152,6 +160,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
         }
         if (PatrollPt.ActPatroll)
         {
+
             target = PatrollPt.PatrollPoint;
             agent.destination = target.transform.position;
             WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;

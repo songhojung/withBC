@@ -51,7 +51,18 @@ public class MakePatroll : MonoBehaviour {
                 {
                     if (!PatrollPt.findPlayer)
                     {
-                        PatrollPt.Point = this;
+                        switch(Rand_Fly)
+                        {
+                            //땅
+                            case 0:
+                                PatrollPt.Point = this;
+                                break;
+                            //하늘
+                            case 1:
+                                if(PatrollPt.Dragon)
+                                    PatrollPt.Point = this;
+                                break;
+                        }
                     }
                 }
             }

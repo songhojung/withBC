@@ -70,7 +70,18 @@ public class SpiderDetectTarget : MonoBehaviour {
     //}
     void Update()
     {
-        RayCast();
+        if (!isDie)
+        {
+            RayCast();
+            RandDetect();
+        }
+        
+
+    }
+    // Update is called once per frame
+
+    private void RandDetect()
+    {
         if (target)
         {
             if (Ray.collider != null)
@@ -111,7 +122,7 @@ public class SpiderDetectTarget : MonoBehaviour {
                 {
                     SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
                 }
-                if(SpiderAni.NowState != SpiderAnimation.S_STATE.S_ATT)
+                if (SpiderAni.NowState != SpiderAnimation.S_STATE.S_ATT)
                 {
                     //agent.destination = target.transform.position;
                     if (agent.velocity.magnitude > 0.0f && SpiderAni.NowState != SpiderAnimation.S_STATE.S_RUN)
@@ -164,10 +175,7 @@ public class SpiderDetectTarget : MonoBehaviour {
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
         Move.transform.LookAt(transform.position + transform.forward);
         transform.LookAt(transform.position + transform.forward);
-
     }
-    // Update is called once per frame
-
     private void RayCast()
     {
         Vector3 ObjPos = transform.position;
@@ -194,6 +202,7 @@ public class SpiderDetectTarget : MonoBehaviour {
         }
         if (PatrollPt.ActPatroll)
         {
+
             target = PatrollPt.PatrollPoint;
             agent.destination = target.transform.position;
             SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
