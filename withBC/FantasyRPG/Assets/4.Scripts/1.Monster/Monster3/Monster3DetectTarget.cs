@@ -29,8 +29,18 @@ public class Monster3DetectTarget : MonoBehaviour {
 
     void Update()
     {
-        //M3Animation = GetComponent<Monster3Animation>();
-        RayCast();
+        if (!isDie)
+        {
+            RayCast();
+            RandDetect();
+        }
+        
+        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
+
+    }
+    // Update is called once per frame
+    private void RandDetect()
+    {
         if (target)
         {
             if (Ray.collider != null)
@@ -78,7 +88,7 @@ public class Monster3DetectTarget : MonoBehaviour {
                 }
             }
 
-            if(M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Run"))
+            if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Run"))
             {
                 agent.destination = target.transform.position;
             }
@@ -116,11 +126,7 @@ public class Monster3DetectTarget : MonoBehaviour {
         {
             findAndMove();
         }
-        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-
     }
-    // Update is called once per frame
-
     private void RayCast()
     {
         Vector3 ObjPos = transform.position;

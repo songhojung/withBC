@@ -30,7 +30,17 @@ public class GoblinDetectTarget : MonoBehaviour {
 
     void Update()
     {
-        RayCast();
+        if (!isDie)
+        {
+            RayCast();
+            RandDetect();
+        }
+        
+    }
+    // Update is called once per frame
+
+    private void RandDetect()
+    {
         if (target)
         {
             if (Ray.collider != null)
@@ -123,8 +133,6 @@ public class GoblinDetectTarget : MonoBehaviour {
         transform.LookAt(transform.position + transform.forward);
 
     }
-    // Update is called once per frame
-
     private void RayCast()
     {
         Vector3 ObjPos = transform.position;

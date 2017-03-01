@@ -8,7 +8,7 @@ public class MonsterFindPatroll : MonoBehaviour {
     public bool findPlayer = false;
     public bool ActPatroll = false;
     public GameObject PatrollPoint = null;
-
+    public bool Dragon = false;
     //0은 땅 1은 하늘
     public int Rand_Fly = 0;
 

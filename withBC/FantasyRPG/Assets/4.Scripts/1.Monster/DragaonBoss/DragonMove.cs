@@ -18,16 +18,22 @@ public class DragonMove : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (DragonAni.NowState == DragonAnimation.D_STATE.D_WALK ||
-            DragonAni.NowState == DragonAnimation.D_STATE.D_RUN)
+        switch(DragonAni.NowFlyRand)
         {
-            RandMove();
-        }
-
-        if (DragonAni.NowState == DragonAnimation.D_STATE.D_FLY ||
-            DragonAni.NowState == DragonAnimation.D_STATE.D_FLY_FAST)
-        {
-            FlyMove();
+            case DragonAnimation.D_FLYRAND.NOWRAND:
+                if(Dragon_body.isKinematic)
+                    Dragon_body.isKinematic = false;
+                if(!Dragon_body.useGravity)
+                    Dragon_body.useGravity = true;
+                RandMove();
+                break;
+            case DragonAnimation.D_FLYRAND.NOWFLY:
+                if (!Dragon_body.isKinematic)
+                    Dragon_body.isKinematic = true;
+                if (Dragon_body.useGravity)
+                    Dragon_body.useGravity = false;
+                FlyMove();
+                break;
         }
     }
 
@@ -39,7 +45,7 @@ public class DragonMove : MonoBehaviour {
                 Vector3 VecGoblin = (Dragon_body.transform.forward * walkSpeed * Time.deltaTime) + Dragon_body.transform.position;
                 Dragon_body.MovePosition(VecGoblin);
 
-                Dragon_body.transform.LookAt(VecGoblin);
+                //Dragon_body.transform.LookAt(VecGoblin);
                 break;
             case DragonAnimation.D_STATE.D_RUN:
                 Vector3 VecGoblin2 = (Dragon_body.transform.forward * walkSpeed * 1.5f * Time.deltaTime) + Dragon_body.transform.position;
@@ -52,13 +58,17 @@ public class DragonMove : MonoBehaviour {
 
     void FlyMove()
     {
+        //if(DragonAni.NowFlyRand != DragonAnimation.D_FLYRAND.NOWFLY)
+        //{
+        //    DragonAni.NowFlyRand = DragonAnimation.D_FLYRAND.NOWFLY;
+        //}
         switch (DragonAni.NowState)
         {
             case DragonAnimation.D_STATE.D_FLY:
                 Vector3 VecGoblin = (Dragon_body.transform.forward * walkSpeed * Time.deltaTime) + Dragon_body.transform.position;
                 Dragon_body.MovePosition(VecGoblin);
 
-                Dragon_body.transform.LookAt(VecGoblin);
+                //Dragon_body.transform.LookAt(VecGoblin);
                 break;
             case DragonAnimation.D_STATE.D_FLY_FAST:
                 Vector3 VecGoblin2 = (Dragon_body.transform.forward * walkSpeed * 1.5f * Time.deltaTime) + Dragon_body.transform.position;
