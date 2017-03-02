@@ -25,6 +25,16 @@ public class PlayerCtrl : MonoBehaviour {
     public bool IsRightMouseDown = false;
     [System.NonSerialized]
     public bool IsJump = false;
+    [System.NonSerialized]
+    public bool IsNumKey_1 = false;
+    [System.NonSerialized]
+    public bool IsNumKey_2 = false;
+    [System.NonSerialized]
+    public bool IsKey_E = false;
+    [System.NonSerialized]
+    public bool IsKey_Q = false;
+    [System.NonSerialized]
+    public bool IsKey_Shift = false;
 
     public GameObject camera;
 
@@ -57,8 +67,13 @@ public class PlayerCtrl : MonoBehaviour {
         IsLeftMouseStay = Input.GetMouseButton(0);
         IsRightMouseDown = Input.GetMouseButtonDown(1);
         IsJump = Input.GetKeyDown(KeyCode.Space);
+        IsNumKey_1 = Input.GetKeyDown(KeyCode.Alpha1);
+        IsNumKey_2 = Input.GetKeyDown(KeyCode.Alpha2);
+        IsKey_E = Input.GetKeyDown(KeyCode.E);
+        IsKey_Q = Input.GetKeyDown(KeyCode.Q);
+        IsKey_Shift = Input.GetKeyDown(KeyCode.LeftShift);
 
-        
+
         Vector3 vecRotate = Vector3.zero;
         vecRotate = new Vector3(0, camera.transform.eulerAngles.y, 0);
 

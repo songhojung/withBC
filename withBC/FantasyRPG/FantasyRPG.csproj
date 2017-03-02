@@ -118,6 +118,8 @@
     <Compile Include="Assets\4.Scripts\2.Charicter\ChangeWeapon.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\FollowCam.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\PlayerCtrl.cs" />
+    <Compile Include="Assets\4.Scripts\2.Charicter\PlayerState.cs" />
+    <Compile Include="Assets\4.Scripts\2.Charicter\SwichingWeaPon.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\ThrowFire.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\ThrowObjectCtrl.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\WarriorAnimationCtrl.cs" />
