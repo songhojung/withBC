@@ -10,7 +10,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     readonly string Run = "Run";
     readonly string DrawDagger = "Draw Dagger";
     readonly string DrawStaff = "Draw Staff";
-    readonly string Jump = "Jumping";
+    readonly string Jump = "Jumping"; //Jumping
     readonly string Die = "Die 1";
     readonly string Hit1 = "Receibe Damage";
     readonly string Hit2 = "Receibe Great Damage";
@@ -18,18 +18,22 @@ public class WizardAnimationCtrl : MonoBehaviour {
     readonly string DaggerAttack2 = "Dagger Strike 3";
     readonly string DaggerAttack3 = "Dagger Strike 4";
     readonly string StaffAttack = "Staff Swing";
-    readonly string StaffSpell1 = "Staff Spell Foward";
+    readonly string StaffSpell1 = "Staff Spell Forward";
     readonly string StaffSpell2 = "Staff Spell Circle";
     readonly string StaffSpell3 = "Staff Spell Ground";
-
+    readonly string Land = "Crouch Idle"; //Jumping
+    
     public enum WizardState
     {
         NONE, DAGGERIDLE, STAFFIDLE, RUN, DRAWDAGGER, DRAWSTAFF, JUMP, DIE,
         HIT_1, HIT_2, DAGGERATTACT_1, DAGGERATTACT_2, DAGGERATTACT_3,
-        STAFFATTACK,STAFFSPELL_1, STAFFSPELL_2, STAFFSPELL_3
+        STAFFATTACK,STAFFSPELL_1, STAFFSPELL_2, STAFFSPELL_3,LAND
     };
     
     public Animation WizardAnimation;
+    public PlayerCtrl pPlayerCtrl;
+
+    private SwichingWeaPon.SwitchWeaponEvent switchDel;
 
     [System.NonSerialized]
     public WizardState wizardState = WizardState.STAFFIDLE;
@@ -44,15 +48,24 @@ public class WizardAnimationCtrl : MonoBehaviour {
     private bool IsLeftMouseUp = false;
     private bool IsLeftMouseStay = false;
     private bool IsRightMouseDown = false;
+    private bool IsUseAnotherWeaPon = false;
+    private bool IsNumKey_1 = false;
+    private bool IsNumKey_2 = false;
+    private bool IsKey_E = false;
+    private bool IsKey_Q = false;
+    private bool IsKey_Shift = false;
+    private int  ComboCount = 0;
 
     private Vector3 direction = Vector3.zero;
     //AnimationState anistate;
     //AnimationBlendMode
-
+   
     void Start()
     {
         StartCoroutine(CheckArcherState());
         StartCoroutine(WizardAction());
+        switchDel = new SwichingWeaPon.SwitchWeaponEvent(SwichingWeaPon.SwithcingWeapon);
+       
     }
 
     IEnumerator CheckArcherState()
@@ -60,51 +73,108 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
         while (!IsDie)
         {
-            PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
+           
             direction = pPlayerCtrl.direction;
             IsJump = pPlayerCtrl.IsJump;
             IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
             IsLeftMouseUp = pPlayerCtrl.IsLeftMouseUp;
             IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
             IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
+            IsNumKey_1 = pPlayerCtrl.IsNumKey_1;
+            IsNumKey_2 = pPlayerCtrl.IsNumKey_2;
+            IsKey_E = pPlayerCtrl.IsKey_E;
+            IsKey_Q = pPlayerCtrl.IsKey_Q;
+            IsKey_Shift = pPlayerCtrl.IsKey_Shift;
 
-           
 
-            if (direction.magnitude >= 0.1f)
+            if (!WizardAnimation.IsPlaying(Jump) && FinishAnimation(DrawStaff,0.7f) &&
+                FinishAnimation(DrawDagger, 0.7f) && FinishAnimation(StaffAttack,0.7f)&&
+                FinishAnimation(StaffSpell1, 0.7f)&&FinishAnimation(StaffSpell2, 0.7f) && 
+                FinishAnimation(StaffSpell3, 0.7f))
             {
-               
+                if (direction.magnitude >= 0.1f)
+                {
+                    wizardState = WizardState.RUN;
+                }
+                else if (direction.magnitude <= 0.0f)
+                {
+                    if (IsUseAnotherWeaPon)
+                        wizardState = WizardState.DAGGERIDLE;
+                    else
+                        wizardState = WizardState.STAFFIDLE;
+                }
             }
-            else if (direction.magnitude <= 0.0f)
-            {
-                
-            }
-
       
             if (IsJump)
             {
+                if(wizardState == WizardState.JUMP)
+                {
+                    wizardState = WizardState.LAND;
+                }
+                else
+                wizardState = WizardState.JUMP;
             }
 
             if (IsLeftMouseDown)
             {
-               
+                if (!IsUseAnotherWeaPon)
+                    wizardState = WizardState.STAFFSPELL_1;
             }
             else if (IsLeftMouseUp)
             {
+               
+            }
+            else if(IsNumKey_1)
+            {
+               // Debug.Log("1키");
+                wizardState = WizardState.DRAWDAGGER;
+                if(IsUseAnotherWeaPon)
+                    StartCoroutine(SwitchWeaponCoroutine(0.4f)); // 무기도 바꾸기
+                IsUseAnotherWeaPon = false;
                 
             }
-            
+            else if (IsNumKey_2)
+            {
+                // Debug.Log("1키");
+                wizardState = WizardState.DRAWSTAFF;
+                if (!IsUseAnotherWeaPon)
+                    StartCoroutine(SwitchWeaponCoroutine(0.4f));
+                IsUseAnotherWeaPon = true;
+            }
+            else if(IsKey_E)
+            {
+                if (!IsUseAnotherWeaPon)
+                    wizardState = WizardState.STAFFATTACK;
+            }
+            else if (IsKey_Q)
+            {
+                if (!IsUseAnotherWeaPon)
+                    wizardState = WizardState.STAFFSPELL_2;
+            }
+            else if (IsKey_Shift)
+            {
+                if (!IsUseAnotherWeaPon)
+                    wizardState = WizardState.STAFFSPELL_3;
+            }
+
             //오른쪽 공격
             if (IsRightMouseDown)
             {
-               
+               if(IsUseAnotherWeaPon)
+                {
+                    wizardState = WizardState.DAGGERATTACT_1;
+                    ComboCount++;
+                }
             }
 
-          
+ 
 
-            //Debug.Log(archerState);
+            //Debug.Log(wizardState);
             yield return null;
         }
     }
+
+    
 
     IEnumerator WizardAction()
     {
@@ -114,13 +184,63 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
             switch (wizardState)
             {
+                case WizardState.RUN:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(Run, 0.3f);
+                    break;
+
                 case WizardState.STAFFIDLE:
                     WizardAnimation.wrapMode = WrapMode.Loop;
                     WizardAnimation.CrossFade(StaffIdle, 0.3f);
                     break;
 
+                case WizardState.DAGGERIDLE:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(DaggerIdle, 0.3f);
+                    break;
 
-                
+                case WizardState.JUMP:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(Jump, 0.3f);
+                    break;
+
+                case WizardState.LAND:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(Land, 0.3f);
+                    break;
+
+                case WizardState.DRAWSTAFF:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(DrawStaff, 0.3f);
+                    break;
+
+                case WizardState.DRAWDAGGER:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(DrawDagger, 0.3f);
+                    break;
+
+                case WizardState.STAFFATTACK:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(StaffAttack, 0.3f);
+                    break;
+
+                case WizardState.STAFFSPELL_1:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(StaffSpell1, 0.3f);
+                    break;
+
+                case WizardState.STAFFSPELL_2:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(StaffSpell2, 0.3f);
+                    break;
+
+                case WizardState.STAFFSPELL_3:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(StaffSpell3, 0.3f);
+                    break;
+
+
+
 
                 default:
                     break;
@@ -130,6 +250,36 @@ public class WizardAnimationCtrl : MonoBehaviour {
         }
     }
 
+    IEnumerator SwitchWeaponCoroutine(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        switchDel();
+    }
+
+    bool FinishAnimation(string aniName, float NormalizedTime)
+    {
+        // 해당이름의 애니메이션이 정해진 노말타임이상이면 애니메이션 완료햇으므로 트루리턴
+        bool isFinish = false;
+        
+        if (WizardAnimation[aniName].normalizedTime >= NormalizedTime)
+        {
+            //Debug.Log("완료");
+            return isFinish = true;
+        }
+        else if (!WizardAnimation.IsPlaying(aniName))
+        {
+            //Debug.Log("플레이중 아님");
+            return isFinish = true;
+        }
+
+        return isFinish;
+    }
+
+    void AttackCombo()
+    {
+       
+    }
+    
 
 
 }
