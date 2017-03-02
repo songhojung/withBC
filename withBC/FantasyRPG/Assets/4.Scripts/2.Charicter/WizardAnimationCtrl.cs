@@ -33,6 +33,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     public Animation WizardAnimation;
     public PlayerCtrl pPlayerCtrl;
 
+    // 무기바꾸기 델리게이트 선언
     private SwichingWeaPon.SwitchWeaponEvent switchDel;
 
     [System.NonSerialized]
@@ -64,6 +65,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     {
         StartCoroutine(CheckArcherState());
         StartCoroutine(WizardAction());
+        //무기바꾸기 콜백함수
         switchDel = new SwichingWeaPon.SwitchWeaponEvent(SwichingWeaPon.SwithcingWeapon);
        
     }
@@ -160,10 +162,21 @@ public class WizardAnimationCtrl : MonoBehaviour {
             //오른쪽 공격
             if (IsRightMouseDown)
             {
-               if(IsUseAnotherWeaPon)
+                if (IsUseAnotherWeaPon)
                 {
-                    wizardState = WizardState.DAGGERATTACT_1;
-                    ComboCount++;
+                    if (ComboCount == 2)
+                    {
+                        wizardState = WizardState.DAGGERATTACT_2;
+                    }
+                    else if (ComboCount == 3)
+                    {
+                        wizardState = WizardState.DAGGERATTACT_3;
+                    }
+                    else
+                    {
+                        wizardState = WizardState.DAGGERATTACT_1;
+                        ComboCount = 1;
+                    }
                 }
             }
 
@@ -277,7 +290,14 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
     void AttackCombo()
     {
-       
+        if (WizardAnimation[DaggerAttack1].normalizedTime >= 0.7f)
+        {
+            ComboCount=2;
+        }
+        else if (WizardAnimation[DaggerAttack2].normalizedTime >= 0.7f)
+        {
+            ComboCount=3;
+        }
     }
     
 
