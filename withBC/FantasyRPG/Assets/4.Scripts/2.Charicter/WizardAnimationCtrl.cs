@@ -56,6 +56,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     private bool IsKey_Q = false;
     private bool IsKey_Shift = false;
     private int  ComboCount = 0;
+    private float NowComboTime = 0.0f;
 
     private Vector3 direction = Vector3.zero;
     //AnimationState anistate;
@@ -88,11 +89,15 @@ public class WizardAnimationCtrl : MonoBehaviour {
             IsKey_Q = pPlayerCtrl.IsKey_Q;
             IsKey_Shift = pPlayerCtrl.IsKey_Shift;
 
+            AttackCombo();
 
             if (!WizardAnimation.IsPlaying(Jump) && FinishAnimation(DrawStaff,0.7f) &&
                 FinishAnimation(DrawDagger, 0.7f) && FinishAnimation(StaffAttack,0.7f)&&
-                FinishAnimation(StaffSpell1, 0.7f)&&FinishAnimation(StaffSpell2, 0.7f) && 
-                FinishAnimation(StaffSpell3, 0.7f))
+                FinishAnimation(StaffSpell1, 0.7f)&& FinishAnimation(StaffSpell2, 0.7f) && 
+                FinishAnimation(StaffSpell3, 0.7f) && FinishAnimation(DaggerAttack1, 0.7f) &&
+                FinishAnimation(DaggerAttack2, 0.7f) && FinishAnimation(DaggerAttack3, 0.7f) &&
+                FinishAnimation(Hit1, 0.7f) && FinishAnimation(Hit2, 0.7f) &&
+                FinishAnimation(Die, 0.7f))
             {
                 if (direction.magnitude >= 0.1f)
                 {
@@ -164,23 +169,48 @@ public class WizardAnimationCtrl : MonoBehaviour {
             {
                 if (IsUseAnotherWeaPon)
                 {
-                    if (ComboCount == 2)
+                    if (ComboCount == 2 && NowComboTime < 1.0f)
                     {
+                        
                         wizardState = WizardState.DAGGERATTACT_2;
+                        Debug.Log(wizardState);
+                        NowComboTime = 0.0f;
                     }
-                    else if (ComboCount == 3)
+                    else if (ComboCount == 3 && NowComboTime < 1.0f)
                     {
+                        
                         wizardState = WizardState.DAGGERATTACT_3;
+                        Debug.Log(wizardState);
+                        NowComboTime = 0.0f;
                     }
                     else
                     {
-                        wizardState = WizardState.DAGGERATTACT_1;
-                        ComboCount = 1;
+                        if (ComboCount == 1)
+                        {
+                            ComboCount = 2;
+                            Debug.Log("다시 1번");
+                            NowComboTime = 0.0f;
+                        }
+                        else
+                        {
+                            wizardState = WizardState.DAGGERATTACT_1;
+                            Debug.Log(wizardState);
+                            ComboCount = 1;
+                            NowComboTime = 0.0f;
+                        }
                     }
                 }
             }
 
- 
+            
+
+            NowComboTime += Time.deltaTime;
+            if (NowComboTime > 1.2f)
+            {
+                NowComboTime = 0.0f;
+                ComboCount = 0;
+            }
+
 
             //Debug.Log(wizardState);
             yield return null;
@@ -252,8 +282,35 @@ public class WizardAnimationCtrl : MonoBehaviour {
                     WizardAnimation.CrossFade(StaffSpell3, 0.3f);
                     break;
 
+                case WizardState.DAGGERATTACT_1:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(DaggerAttack1, 0.3f);
+                    break;
 
+                case WizardState.DAGGERATTACT_2:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(DaggerAttack2, 0.3f);
+                    break;
 
+                case WizardState.DAGGERATTACT_3:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(DaggerAttack3, 0.3f);
+                    break;
+
+                case WizardState.HIT_1:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(Hit1, 0.3f);
+                    break;
+
+                case WizardState.HIT_2:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(Hit2, 0.3f);
+                    break;
+
+                case WizardState.DIE:
+                    WizardAnimation.wrapMode = WrapMode.Loop;
+                    WizardAnimation.CrossFade(Die, 0.3f);
+                    break;
 
                 default:
                     break;
@@ -297,6 +354,10 @@ public class WizardAnimationCtrl : MonoBehaviour {
         else if (WizardAnimation[DaggerAttack2].normalizedTime >= 0.7f)
         {
             ComboCount=3;
+        }
+        else if (WizardAnimation[DaggerAttack3].normalizedTime >= 0.7f)
+        {
+            ComboCount = 0;
         }
     }
     

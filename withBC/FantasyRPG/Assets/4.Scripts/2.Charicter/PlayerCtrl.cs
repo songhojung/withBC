@@ -93,7 +93,9 @@ public class PlayerCtrl : MonoBehaviour {
 
         if (Job == PlayerJob.ARCHER && IsLeftMouseStay) // 마우수 왼쪽누를떄 캐릭터 회전가능 ... 조준용
         {
-           rigidbody.MoveRotation(TurnRotation);
+            rigidbody.MoveRotation(TurnRotation);
+            
+            
         }
         else // 아닐떄는 키보드로만 캐릭터 회전
         {
