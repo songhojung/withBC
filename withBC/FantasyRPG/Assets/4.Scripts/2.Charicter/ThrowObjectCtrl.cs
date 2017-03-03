@@ -9,6 +9,7 @@ public class ThrowObjectCtrl : MonoBehaviour {
     private Transform tr;
     public float moveSpeed = 20.0f;
 
+
     // Use this for initialization
     void Start()
     {
@@ -20,10 +21,7 @@ public class ThrowObjectCtrl : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       
-
-        Vector3 moveVec = (-Vector3.up * moveSpeed * Time.deltaTime);
-
-        tr.Translate(moveVec);
+        Vector3 moveVec = (tr.forward* moveSpeed * Time.deltaTime);
+        tr.position = tr.position+moveVec;
     }
 }
