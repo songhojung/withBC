@@ -52,15 +52,6 @@ public class PlayerCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-        //Debug.Log("h : " + h + ", v: " + v);
-       
-        direction = new Vector3(h, 0.0f, v);
-        Vector3 playerTr = Vector3.zero;
-        playerTr = rigidbody.transform.TransformDirection(direction); // *중요 -로컬좌표를 월드좌표로 변환해줌
-
-
 
         IsLeftMouseDown = Input.GetMouseButtonDown(0);
         IsLeftMouseUp = Input.GetMouseButtonUp(0);
@@ -74,20 +65,27 @@ public class PlayerCtrl : MonoBehaviour {
         IsKey_Shift = Input.GetKeyDown(KeyCode.LeftShift);
 
 
+        h = Input.GetAxis("Horizontal");//w,s
+        v = Input.GetAxis("Vertical");// a,d
+        //Debug.Log("h : " + h + ", v: " + v);
+       
+        direction = new Vector3(h, 0.0f, v);
+
+        Vector3 playerTr = Vector3.zero;
+        playerTr = rigidbody.transform.TransformDirection(direction); // *중요 -로컬좌표를 월드좌표로 변환해줌
         Vector3 vecRotate = Vector3.zero;
         vecRotate = new Vector3(0, camera.transform.eulerAngles.y, 0);
-
         Quaternion TurnRotation = Quaternion.Euler(vecRotate);
 
-        Vector3 forward = Vector3.Slerp(rigidbody.transform.forward,
-                   playerTr
-                   , rotateSpeed * Time.deltaTime);
-        
+        //Vector3 forward = Vector3.Slerp(rigidbody.transform.forward,
+        //           playerTr
+        //           , rotateSpeed * Time.deltaTime);
+
         //rotate.eulerAngles = h * Vector3.up * rotateSpeed;
 
-        //Vector3 forward = Vector3.Slerp(rigidbody.transform.forward,
-        //        direction
-        //        , rotateSpeed * Time.deltaTime);
+        Vector3 forward = Vector3.Slerp(rigidbody.transform.forward,
+                direction
+                , rotateSpeed * Time.deltaTime);
         //rigidbody.transform.LookAt(rigidbody.transform.position + forward);
 
 
@@ -99,7 +97,8 @@ public class PlayerCtrl : MonoBehaviour {
         }
         else // 아닐떄는 키보드로만 캐릭터 회전
         {
-            rigidbody.transform.LookAt(rigidbody.transform.position + forward);
+            //rigidbody.transform.LookAt(rigidbody.transform.position + forward);
+            rigidbody.transform.Rotate(Vector3.up);
         }
 
         rigidbody.MovePosition(rigidbody.transform.position + (playerTr * moveSpeed * Time.deltaTime));
