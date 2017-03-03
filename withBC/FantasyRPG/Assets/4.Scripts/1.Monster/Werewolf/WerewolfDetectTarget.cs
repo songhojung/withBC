@@ -17,6 +17,9 @@ public class WerewolfDetectTarget : MonoBehaviour {
     private float RayDistance = 14.0f;
     private bool isDie = false;
 
+    private GameObject PrefMove = null;
+
+    private MonsterDetectCollider DetectColl;
     // Use this for initialization
     void Start()
     {
@@ -24,6 +27,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
         Move = GetComponent<WerewolfeMove>();
         WolfAnimation = GetComponent<WerewolfeAnimation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -109,21 +113,53 @@ public class WerewolfDetectTarget : MonoBehaviour {
 
             }
 
-            if (Ray.collider != null)
+            if(target.gameObject.CompareTag("Player"))
             {
-                if (!PatrollPt.findPlayer)
+                if(DetectColl.FindPatrollNow)
                 {
-                    if (Ray.collider.tag == "Player")
+                    target = PrefMove;
+                    PatrollPt.Point = target.GetComponent<MakePatroll>();
+                    DetectColl.FindPatrollNow = false;
+                }
+            }
+
+            if (DetectColl.FindPlayer)
+            {
+                if ((DetectColl.DetectZone() <= 45) && 
+                    (DetectColl.DetectZone() >= -45))
+                {
+                    if (!PatrollPt.findPlayer)
                     {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
                         target = null;
-                        target = Ray.collider.gameObject;
+                        target = DetectColl.target;
                         agent.destination = target.transform.position;
                         PatrollPt.ActPatroll = false;
                         PatrollPt.findPlayer = true;
                         WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
+                        //}
                     }
                 }
             }
+
+            
+            //if (Ray.collider != null)
+            //{
+            //    if (!PatrollPt.findPlayer)
+            //    {
+            //        if (Ray.collider.tag == "Player")
+            //        {
+            //            target = null;
+            //            target = Ray.collider.gameObject;
+            //            agent.destination = target.transform.position;
+            //            PatrollPt.ActPatroll = false;
+            //            PatrollPt.findPlayer = true;
+            //            WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
+            //        }
+            //    }
+            //}
         }
         else
         {
