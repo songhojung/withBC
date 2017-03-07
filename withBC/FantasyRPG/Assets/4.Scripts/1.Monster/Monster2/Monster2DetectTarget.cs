@@ -11,20 +11,25 @@ public class Monster2DetectTarget : MonoBehaviour {
 
     private MonsterFindPatroll PatrollPt;
 
-    private Monster2Move Move;
+   //private Monster2Move Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
 
     private float RayDistance = 14.0f;
     private bool isDie = false;
 
+    private GameObject PrefMove = null;
+
+    private MonsterDetectCollider DetectColl;
+
     // Use this for initialization
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<Monster2Move>();
+        //Move = GetComponent<Monster2Move>();
         M2Animation = GetComponent<Monster2Animation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
         //StartCoroutine(Checkeverything());
     }
     void Update()
@@ -110,18 +115,33 @@ public class Monster2DetectTarget : MonoBehaviour {
 
             }
 
-            if (Ray.collider != null)
+            if (target.gameObject.CompareTag("Player"))
             {
-                if (!PatrollPt.findPlayer)
+                if (DetectColl.FindPatrollNow)
                 {
-                    if (Ray.collider.tag == "Player")
+                    target = PrefMove;
+                    PatrollPt.Point = target.GetComponent<MakePatroll>();
+                    DetectColl.FindPatrollNow = false;
+                }
+            }
+
+            if (DetectColl.FindPlayer)
+            {
+                if ((DetectColl.DetectZone() <= 45) ||
+                    (DetectColl.DetectZone() >= 315))
+                {
+                    if (!PatrollPt.findPlayer)
                     {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
                         target = null;
-                        target = Ray.collider.gameObject;
+                        target = DetectColl.target;
                         agent.destination = target.transform.position;
                         PatrollPt.ActPatroll = false;
                         PatrollPt.findPlayer = true;
                         M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
+                        //}
                     }
                 }
             }

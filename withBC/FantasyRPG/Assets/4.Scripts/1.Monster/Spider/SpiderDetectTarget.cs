@@ -5,25 +5,35 @@ using UnityEngine.AI;
 
 public class SpiderDetectTarget : MonoBehaviour {
 
+    //타깃
     public GameObject target;
     private SpiderAnimation SpiderAni;
 
+    //패트롤포인트찾기
     private MonsterFindPatroll PatrollPt;
 
-    private SpiderMove Move;
+    //private SpiderMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
 
+    //레이캐스트거리
     private float RayDistance = 15.0f;
+
+    //죽었는지 살았는지
     private bool isDie = false;
 
+    //유저 추적하다가 유저가 사라지면 다시 제자리로 돌아갈위치
+    private GameObject PrefMove = null;
+
+    private MonsterDetectCollider DetectColl;
     // Use this for initialization
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<SpiderMove>();
+        //Move = GetComponent<SpiderMove>();
         SpiderAni = GetComponent<SpiderAnimation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -151,18 +161,33 @@ public class SpiderDetectTarget : MonoBehaviour {
 
             }
 
-            if (Ray.collider != null)
+            if (target.gameObject.CompareTag("Player"))
             {
-                if (Ray.collider.tag == "Player")
+                if (DetectColl.FindPatrollNow)
+                {
+                    target = PrefMove;
+                    PatrollPt.Point = target.GetComponent<MakePatroll>();
+                    DetectColl.FindPatrollNow = false;
+                }
+            }
+
+            if (DetectColl.FindPlayer)
+            {
+                if ((DetectColl.DetectZone() <= 45) ||
+                    (DetectColl.DetectZone() >= 315))
                 {
                     if (!PatrollPt.findPlayer)
                     {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
                         target = null;
-                        target = Ray.collider.gameObject;
+                        target = DetectColl.target;
                         agent.destination = target.transform.position;
                         PatrollPt.ActPatroll = false;
                         PatrollPt.findPlayer = true;
                         SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+                        //}
                     }
                 }
             }
@@ -173,8 +198,8 @@ public class SpiderDetectTarget : MonoBehaviour {
             findAndMove();
         }
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-        Move.transform.LookAt(transform.position + transform.forward);
-        transform.LookAt(transform.position + transform.forward);
+        //Move.transform.LookAt(transform.position + transform.forward);
+        //transform.LookAt(transform.position + transform.forward);
     }
     private void RayCast()
     {

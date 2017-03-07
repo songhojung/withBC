@@ -5,24 +5,33 @@ using UnityEngine.AI;
 
 public class ZombieDetectTarget : MonoBehaviour {
 
+    //타깃
     public GameObject target;
     private ZombieAnimation ZombieAnimation;
 
+    //패트롤포인트찾기
     private MonsterFindPatroll PatrollPt;
 
-    private ZombieMove Move;
+    //private ZombieMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
+
+    //레이캐스트거리
     private float RayDistance = 14.0f;
     private bool isDie = false;
+
+    //유저 추적시스템
+    private GameObject PrefMove = null;
+    private MonsterDetectCollider DetectColl;
 
     // Use this for initialization
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<ZombieMove>();
+        //Move = GetComponent<ZombieMove>();
         ZombieAnimation = GetComponent<ZombieAnimation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -94,18 +103,33 @@ public class ZombieDetectTarget : MonoBehaviour {
 
             }
 
-            if (Ray.collider != null)
+            if (target.gameObject.CompareTag("Player"))
             {
-                if (Ray.collider.tag == "Player")
+                if (DetectColl.FindPatrollNow)
+                {
+                    target = PrefMove;
+                    PatrollPt.Point = target.GetComponent<MakePatroll>();
+                    DetectColl.FindPatrollNow = false;
+                }
+            }
+
+            if (DetectColl.FindPlayer)
+            {
+                if ((DetectColl.DetectZone() <= 45) ||
+                    (DetectColl.DetectZone() >= 315))
                 {
                     if (!PatrollPt.findPlayer)
                     {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
                         target = null;
-                        target = Ray.collider.gameObject;
+                        target = DetectColl.target;
                         agent.destination = target.transform.position;
                         PatrollPt.ActPatroll = false;
                         PatrollPt.findPlayer = true;
                         ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
+                        //}
                     }
                 }
             }
@@ -116,8 +140,8 @@ public class ZombieDetectTarget : MonoBehaviour {
             findAndMove();
         }
         //Move.Zombie.transform.LookAt(transform.position + transform.forward);
-        Move.transform.LookAt(transform.position + transform.forward);
-        transform.LookAt(transform.position + transform.forward);
+        //Move.transform.LookAt(transform.position + transform.forward);
+        //transform.LookAt(transform.position + transform.forward);
     }
     private void findAndMove()
     {
