@@ -111,6 +111,7 @@
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Zombie\ZombieSpawn.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\ArcherAnimationCtrl.cs" />
+    <Compile Include="Assets\4.Scripts\2.Charicter\ChangePositionCam.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\ChangeWeapon.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\FollowCam.cs" />
     <Compile Include="Assets\4.Scripts\2.Charicter\PlayerCtrl.cs" />

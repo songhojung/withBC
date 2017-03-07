@@ -36,7 +36,7 @@ public class PlayerCtrl : MonoBehaviour {
     [System.NonSerialized]
     public bool IsKey_Shift = false;
 
-    public GameObject camera;
+    public GameObject cameraLookAt;
 
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 5.0f;
@@ -70,11 +70,12 @@ public class PlayerCtrl : MonoBehaviour {
         //Debug.Log("h : " + h + ", v: " + v);
        
         direction = new Vector3(h, 0.0f, v);
-
+        Vector3 moveDir = (cameraLookAt.transform.forward * v) + (cameraLookAt.transform.right * h);
         Vector3 playerTr = Vector3.zero;
         playerTr = rigidbody.transform.TransformDirection(direction); // *중요 -로컬좌표를 월드좌표로 변환해줌
+
         Vector3 vecRotate = Vector3.zero;
-        vecRotate = new Vector3(0, camera.transform.eulerAngles.y, 0);
+        vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
         Quaternion TurnRotation = Quaternion.Euler(vecRotate);
 
         //Vector3 forward = Vector3.Slerp(rigidbody.transform.forward,
@@ -84,24 +85,35 @@ public class PlayerCtrl : MonoBehaviour {
         //rotate.eulerAngles = h * Vector3.up * rotateSpeed;
 
         Vector3 forward = Vector3.Slerp(rigidbody.transform.forward,
+                moveDir
+                , rotateSpeed * Time.deltaTime);
+
+        Vector3 Lookforward = Vector3.Slerp(rigidbody.transform.forward,
                 direction
                 , rotateSpeed * Time.deltaTime);
+
         //rigidbody.transform.LookAt(rigidbody.transform.position + forward);
 
 
         if (Job == PlayerJob.ARCHER && IsLeftMouseStay) // 마우수 왼쪽누를떄 캐릭터 회전가능 ... 조준용
         {
             rigidbody.MoveRotation(TurnRotation);
-            
-            
         }
         else // 아닐떄는 키보드로만 캐릭터 회전
         {
-            //rigidbody.transform.LookAt(rigidbody.transform.position + forward);
-            rigidbody.transform.Rotate(Vector3.up);
-        }
+           
+            
+            //rigidbody.transform.LookAt(rigidbody.transform.position + camera.transform.forward);
 
-        rigidbody.MovePosition(rigidbody.transform.position + (playerTr * moveSpeed * Time.deltaTime));
-       
+            
+        }
+        //캐릭터 봐라보는방향 변경
+        rigidbody.transform.LookAt(rigidbody.transform.position + forward);
+        //마우스로 캐릭터회전
+        //rigidbody.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * Input.GetAxis("Mouse X") * 20);
+        // tr.forward 방향기준으로 이동
+        rigidbody.MovePosition(rigidbody.transform.position + (moveDir * moveSpeed * Time.deltaTime));
+
+
     }
 }
