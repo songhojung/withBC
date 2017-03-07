@@ -10,7 +10,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
 
     private MonsterFindPatroll PatrollPt;
 
-    private WerewolfeMove Move;
+    //private WerewolfeMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
 
@@ -24,7 +24,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<WerewolfeMove>();
+        //Move = GetComponent<WerewolfeMove>();
         WolfAnimation = GetComponent<WerewolfeAnimation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
         DetectColl = GetComponent<MonsterDetectCollider>();
@@ -125,8 +125,8 @@ public class WerewolfDetectTarget : MonoBehaviour {
 
             if (DetectColl.FindPlayer)
             {
-                if ((DetectColl.DetectZone() <= 45) && 
-                    (DetectColl.DetectZone() >= -45))
+                if ((DetectColl.DetectZone() <= 45) || 
+                    (DetectColl.DetectZone() >= 315))
                 {
                     if (!PatrollPt.findPlayer)
                     {
@@ -166,8 +166,8 @@ public class WerewolfDetectTarget : MonoBehaviour {
             findAndMove();
         }
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-        Move.transform.LookAt(transform.position + transform.forward);
-        transform.LookAt(transform.position + transform.forward);
+        //Move.transform.LookAt(transform.position + transform.forward);
+        //transform.LookAt(transform.position + transform.forward);
 
     }
     private void RayCast()

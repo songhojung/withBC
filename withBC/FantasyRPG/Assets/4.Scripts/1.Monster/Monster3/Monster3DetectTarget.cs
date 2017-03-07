@@ -17,6 +17,9 @@ public class Monster3DetectTarget : MonoBehaviour {
     private float RayDistance = 14.0f;
     private bool isDie = false;
 
+    private GameObject PrefMove = null;
+
+    private MonsterDetectCollider DetectColl;
     // Use this for initialization
     void Start()
     {
@@ -24,6 +27,7 @@ public class Monster3DetectTarget : MonoBehaviour {
        // Move = GetComponent<Monster3Move>();
         M3Animation = GetComponent<Monster3Animation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -106,18 +110,33 @@ public class Monster3DetectTarget : MonoBehaviour {
 
             }
 
-            if (Ray.collider != null)
+            if (target.gameObject.CompareTag("Player"))
             {
-                if (Ray.collider.tag == "Player")
+                if (DetectColl.FindPatrollNow)
+                {
+                    target = PrefMove;
+                    PatrollPt.Point = target.GetComponent<MakePatroll>();
+                    DetectColl.FindPatrollNow = false;
+                }
+            }
+
+            if (DetectColl.FindPlayer)
+            {
+                if ((DetectColl.DetectZone() <= 45) ||
+                    (DetectColl.DetectZone() >= 315))
                 {
                     if (!PatrollPt.findPlayer)
                     {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
                         target = null;
-                        target = Ray.collider.gameObject;
+                        target = DetectColl.target;
                         agent.destination = target.transform.position;
                         PatrollPt.ActPatroll = false;
                         PatrollPt.findPlayer = true;
                         M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+                        //}
                     }
                 }
             }

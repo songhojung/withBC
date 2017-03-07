@@ -6,25 +6,39 @@ using UnityEngine.AI;
 
 public class GoblinDetectTarget : MonoBehaviour {
 
+    //타깃
     public GameObject target;
+
     private GoblinAnimation GoblinAni;
 
+    //패트롤포인트 찾기
     private MonsterFindPatroll PatrollPt;
 
-    private GoblinMove Move;
+    //private GoblinMove Move;
     private NavMeshAgent agent;
     private RaycastHit Ray;
 
+    //레이케스트 레이저 거리
     private float RayDistance = 15.0f;
+
+    //죽었는지 살았는지
     private bool isDie = false;
+
+    //유저 따라가다가 사라지면 다시 지정위치로 돌아갈 위치
+    private GameObject PrefMove = null;
+
+    //유저가 일정범위 내로 들어올경우 확인해서 각도가
+    //일정 각도 이내일경우 추적을 시작하게함
+    private MonsterDetectCollider DetectColl;
 
     // Use this for initialization
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        Move = GetComponent<GoblinMove>();
+        //Move = GetComponent<GoblinMove>();
         GoblinAni = GetComponent<GoblinAnimation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -108,18 +122,33 @@ public class GoblinDetectTarget : MonoBehaviour {
 
             }
 
-            if (Ray.collider != null)
+            if (target.gameObject.CompareTag("Player"))
             {
-                if (!PatrollPt.findPlayer)
+                if (DetectColl.FindPatrollNow)
                 {
-                    if (Ray.collider.tag == "Player")
+                    target = PrefMove;
+                    PatrollPt.Point = target.GetComponent<MakePatroll>();
+                    DetectColl.FindPatrollNow = false;
+                }
+            }
+
+            if (DetectColl.FindPlayer)
+            {
+                if ((DetectColl.DetectZone() <= 45) ||
+                    (DetectColl.DetectZone() >= 315))
+                {
+                    if (!PatrollPt.findPlayer)
                     {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
                         target = null;
-                        target = Ray.collider.gameObject;
+                        target = DetectColl.target;
                         agent.destination = target.transform.position;
                         PatrollPt.ActPatroll = false;
                         PatrollPt.findPlayer = true;
                         GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        //}
                     }
                 }
             }
@@ -129,8 +158,8 @@ public class GoblinDetectTarget : MonoBehaviour {
             findAndMove();
         }
         //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-        Move.transform.LookAt(transform.position + transform.forward);
-        transform.LookAt(transform.position + transform.forward);
+        //Move.transform.LookAt(transform.position + transform.forward);
+        //transform.LookAt(transform.position + transform.forward);
 
     }
     private void RayCast()
