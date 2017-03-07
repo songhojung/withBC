@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class ChangePositionCam : MonoBehaviour
 {
+    private Transform tr;
+    private Transform Player;
     private Ray ray;
     private RaycastHit rayHit;
-    private float distance = 10.0f;
-    private float DistanceForOrig = 0.0f;
+    private float distance ;
+    private float OrigRayDistance;
     private float passedDistance = 0.0f;
-    private float OrigDistance;
-    private float OrigHeight;
-    private Transform tr;
-    private FollowCam camParent;
-    private Transform Player;
-    private Vector3 prevCamPos = Vector3.zero;
-    private Vector3 LastCamPos = Vector3.zero;
+    private float diffDistance = 0.0f;
     private bool IsHiting = false;
+    private bool readyforMove = false;
 	// Use this for initialization
 	void Start ()
     {
         ray = new Ray();
         tr = GetComponent<Transform>();
-        camParent = tr.parent.gameObject.GetComponent<FollowCam>();
-        OrigDistance = camParent.distance;
-        OrigHeight = camParent.height;
+
+        StartCoroutine(SaveOrigRayDistance());
+        
+
 
     }
 	
@@ -42,7 +40,7 @@ public class ChangePositionCam : MonoBehaviour
         ray.origin = tr.position;
         ray.direction = tr.forward;
         Physics.Raycast(ray, out rayHit, this.distance);
-
+        
         if (this.rayHit.collider != null)
         {
 
@@ -58,18 +56,24 @@ public class ChangePositionCam : MonoBehaviour
         }
         SetRayDistance();
     }
-    
+
+   
+
     // 오브젝트랑 부딪힐떄 카메라 높이,거리값 감소시킴
     void moveCam()
     {
         //camParent = tr.parent.gameObject.GetComponent<FollowCam>();
         //camParent.distance -= 0.5f*Time.deltaTime;
         //camParent.height -= 0.1f * Time.deltaTime;
+        if (readyforMove)
+        {
+            float movement = Mathf.Lerp(0, rayHit.distance, 5 * Time.deltaTime);
+            tr.position = tr.position + (tr.forward * movement);
 
-        float movement = Mathf.Lerp(0, rayHit.distance, 5 * Time.deltaTime);
-        tr.position = tr.position + (tr.forward *movement);
-        LastCamPos = rayHit.point;
-        IsHiting = true;
+            IsHiting = true;
+            passedDistance = 0.0f;
+            diffDistance = 0.0f;
+        }
     }
 
     // 레이에 오브젝트 충돌없으면 월래 카메라 높이,거리값으로 돌림
@@ -80,16 +84,28 @@ public class ChangePositionCam : MonoBehaviour
         //camParent.distance += 0.5f * Time.deltaTime;
         //if(OrigHeight != camParent.height)
         //camParent.height += 0.1f * Time.deltaTime;
-        if (distance <= 19.23f)
-        {
-            float movement = Mathf.Lerp(0, 5, 5 * Time.deltaTime);
-            tr.position = tr.position + (-tr.forward * movement);
-            
-        }
-        else
-        {
-            IsHiting = false;
-        }
+
+
+           // 충돌됬고 ,초기레이거리값이 존재하고 ,초기 레이거리값이 현재거리값보다 크냐
+           if (IsHiting && OrigRayDistance > 0  && distance <= OrigRayDistance) 
+           {
+               if (diffDistance <= 0) // 거리값차이가 초기화 안됫냐
+               {
+                   diffDistance = OrigRayDistance - distance; // diffdistance초기화
+               }
+               diffDistance -= passedDistance;
+               float movement = Mathf.Lerp(0, diffDistance, 5 * Time.deltaTime);
+               passedDistance = movement;
+               tr.position = tr.position + (-tr.forward * movement);
+               if (passedDistance < 0.000001f) // 
+               {
+                   IsHiting = false;
+                   passedDistance = 0.0f;
+                   diffDistance = 0.0f;
+               }
+
+           }
+
 
     }
     
@@ -100,15 +116,15 @@ public class ChangePositionCam : MonoBehaviour
         distance = Vector3.Distance(tr.position, Player.position);
     }
 
-    void SaveInitCamPos()
+    IEnumerator SaveOrigRayDistance()
     {
-        if (prevCamPos == Vector3.zero)
-        {
-            
-            prevCamPos = tr.position; //충돌직후 카메라위치 저장.
-        }
-    }
+        yield return new WaitForSeconds(1.4f);
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+        distance = Vector3.Distance(tr.position, Player.position);
+        OrigRayDistance = distance;
+        readyforMove = true;
 
+    }
 
     private void OnDrawGizmos()
     {
