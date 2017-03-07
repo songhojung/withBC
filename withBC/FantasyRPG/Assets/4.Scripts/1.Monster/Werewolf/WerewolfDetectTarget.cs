@@ -14,12 +14,14 @@ public class WerewolfDetectTarget : MonoBehaviour {
     private NavMeshAgent agent;
     private RaycastHit Ray;
 
-    private float RayDistance = 14.0f;
+    public float RayDistance = 5.0f;
     private bool isDie = false;
 
     private GameObject PrefMove = null;
 
     private MonsterDetectCollider DetectColl;
+
+    private MonsterInformation Information;
     // Use this for initialization
     void Start()
     {
@@ -28,6 +30,8 @@ public class WerewolfDetectTarget : MonoBehaviour {
         WolfAnimation = GetComponent<WerewolfeAnimation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
         DetectColl = GetComponent<MonsterDetectCollider>();
+
+        Information = GetComponent<MonsterInformation>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -38,7 +42,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
             RayCast();
             RandDetect();
         }
-        
+        Information.isDie = isDie;
     }
     // Update is called once per frame
    
@@ -127,6 +131,22 @@ public class WerewolfDetectTarget : MonoBehaviour {
             {
                 if ((DetectColl.DetectZone() <= 45) || 
                     (DetectColl.DetectZone() >= 315))
+                {
+                    if (!PatrollPt.findPlayer)
+                    {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
+                        target = null;
+                        target = DetectColl.target;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
+                        //}
+                    }
+                }
+                else if(Vector3.Distance(DetectColl.target.transform.position,transform.position) <= 10.0f)
                 {
                     if (!PatrollPt.findPlayer)
                     {

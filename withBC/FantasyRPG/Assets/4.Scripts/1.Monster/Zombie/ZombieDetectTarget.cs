@@ -17,7 +17,7 @@ public class ZombieDetectTarget : MonoBehaviour {
     private RaycastHit Ray;
 
     //레이캐스트거리
-    private float RayDistance = 14.0f;
+    public float RayDistance = 5.0f;
     private bool isDie = false;
 
     //유저 추적시스템
@@ -117,6 +117,22 @@ public class ZombieDetectTarget : MonoBehaviour {
             {
                 if ((DetectColl.DetectZone() <= 45) ||
                     (DetectColl.DetectZone() >= 315))
+                {
+                    if (!PatrollPt.findPlayer)
+                    {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
+                        target = null;
+                        target = DetectColl.target;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        ZombieAnimation.NowState = ZombieAnimation.Z_STATE.Z_WALK;
+                        //}
+                    }
+                }
+                else if (Vector3.Distance(DetectColl.target.transform.position, transform.position) <= 10.0f)
                 {
                     if (!PatrollPt.findPlayer)
                     {

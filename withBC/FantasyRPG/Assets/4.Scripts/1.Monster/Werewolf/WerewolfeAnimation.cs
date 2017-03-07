@@ -23,10 +23,13 @@ public class WerewolfeAnimation : MonoBehaviour {
     public W_STATE NowState = W_STATE.S_STAND;
 
     public int _health = 10;
+
+    private MonsterInformation Information;
     // Use this for initialization
     void Start()
     {
         Werewolf = this.GetComponent<Animation>();
+        Information = GetComponent<MonsterInformation>();
     }
 
     // Update is called once per frame
@@ -34,6 +37,29 @@ public class WerewolfeAnimation : MonoBehaviour {
     {
         //ChangeMotion();
         Animation_Play3();
+        
+    }
+
+    private void InformationCheck()
+    {
+        if(Information)
+        {
+            Information.hp = _health;
+            if(NowState == W_STATE.S_ATT1 || NowState == W_STATE.S_ATT2 ||
+                NowState == W_STATE.S_ATT3 || NowState == W_STATE.S_ATT20 ||
+                NowState == W_STATE.S_ATT_STAND)
+            {
+                Information.MonsterState = MonsterInformation.STATE.ATTACK;
+            }
+            else if(NowState == W_STATE.S_BEATEN)
+            {
+                Information.MonsterState = MonsterInformation.STATE.HIT;
+            }
+            else
+            {
+                Information.MonsterState = MonsterInformation.STATE.STAY;
+            }
+        }
     }
     private void ChangeMotion()
     {
