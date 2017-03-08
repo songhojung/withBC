@@ -11,12 +11,8 @@ public class ZoomCam : MonoBehaviour {
     private float distance = 20.0f;
     private float origDistance = 0.0f;
     private float origHeight = 0.0f;
-    private float camera_dist = 0.0f;
-    private Vector3 dir;
-    private bool isHit = false;
-    private Vector3 prevCamPos = Vector3.zero;
+
     public FollowCam followCam;
-    Vector3 ray_target;
     // Use this for initialization
     void Start ()
     {
@@ -26,9 +22,6 @@ public class ZoomCam : MonoBehaviour {
         origDistance = followCam.distance;
         origHeight = followCam.height;
         CameraTr = GameObject.FindGameObjectWithTag("MainCamera").transform;
-
-        camera_dist = Mathf.Sqrt(origDistance * origDistance + origHeight * origHeight);
-        dir = new Vector3(0, origHeight, origDistance).normalized;
     }
 	
 	// Update is called once per frame
@@ -38,8 +31,7 @@ public class ZoomCam : MonoBehaviour {
         
         ray.origin = tr.position + new Vector3(0, 5.0f, 0);
         ray.direction = CameraTr.position - ray.origin;
-        //ray.direction = (tr.up * origHeight) + (tr.forward * origDistance);
-         ray_target = CameraTr.position - ray.origin;
+
 
 
 
@@ -54,7 +46,6 @@ public class ZoomCam : MonoBehaviour {
 
 
         Physics.Raycast(ray, out rayHit, distance);
-        //Physics.Raycast(tr.position + new Vector3(0, 5.0f, 0), ray_target, out rayHit, distance);
 
         if (this.rayHit.collider != null)
         {
@@ -103,7 +94,7 @@ public class ZoomCam : MonoBehaviour {
         //}
         CameraTr.localPosition = Vector3.zero;
         //CameraTr.Translate(dir * camera_dist);
-        CameraTr.Translate(-dir);
+        //CameraTr.Translate(-dir);
 
         //Debug.Log("충돌아니다");
     }

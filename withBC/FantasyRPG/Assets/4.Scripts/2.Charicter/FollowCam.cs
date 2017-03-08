@@ -48,17 +48,29 @@ public class FollowCam : MonoBehaviour
 
             }
         }
-       
+
         // lookat 으로 캐릭터 볼떄
         //cameraTr.position = Vector3.Lerp(cameraTr.position,
         //    Target.transform.position - (Target.transform.forward * distance) + (Target.transform.up * (height+zoomHeight))
         //   , Time.deltaTime * trace);
 
+        cameraTr.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 10.0f, Space.World);
+        cameraTr.Rotate(Vector3.left * Input.GetAxis("Mouse Y") * 10.0f, Space.Self);
+        //if (cameraTr.rotation.eulerAngles.y >= 110.0f)
+        //    cameraTr.Rotate(new Vector3(cameraTr.rotation.eulerAngles.x, 110.0f, cameraTr.rotation.eulerAngles.z));
+        Debug.Log(cameraTr.rotation.eulerAngles.y);
+        cameraTr.position = Target.transform.position - (cameraTr.forward * distance) + (cameraTr.up * (height));
 
         // rotateAround로 캐릭터를 볼떄
-        cameraTr.position = Vector3.Lerp(cameraTr.position,
-           Target.transform.position - (cameraTr.forward * distance) + (cameraTr.up * (height + zoomHeight))
-          , Time.deltaTime * trace);
+
+        //cameraTr.position = Vector3.Lerp(cameraTr.position,
+        //   Target.transform.position - (cameraTr.forward * distance) + (cameraTr.up * (height + zoomHeight))
+        //  , Time.deltaTime * trace);
+
+        //cameraTr.RotateAround(Target.transform.position, Vector2.up, Time.deltaTime * 40.0f * Input.GetAxis("Mouse X"));
+        //cameraTr.RotateAround(Target.transform.position - (Target.transform.forward * distance)*2
+        //    , -cameraTr.right, Time.deltaTime * 40.0f * Input.GetAxis("Mouse Y"));
+
 
         //cameraTr.LookAt(Target.transform.position + (Target.transform.up * 5) );
 
@@ -70,9 +82,6 @@ public class FollowCam : MonoBehaviour
         //   trace * Time.deltaTime);
 
 
-        cameraTr.RotateAround(Target.transform.position, Vector2.up, Time.deltaTime * 40.0f * Input.GetAxis("Mouse X"));
-        //cameraTr.RotateAround(Target.transform.position, -cameraTr.right, Time.deltaTime * 40.0f * Input.GetAxis("Mouse Y"));
-
 
 
 
@@ -81,6 +90,7 @@ public class FollowCam : MonoBehaviour
         //cameraTr.localRotation = Quaternion.AngleAxis(45.0f, Vector3.right);
         //cameraTr.localRotation = Quaternion.Euler(45.0f, 1.0f * Time.deltaTime * 20.0f * Input.GetAxis("Mouse X"),0.0f);
         // cameraTr.rotation = Quaternion.Euler(45.0f, Time.deltaTime * 20.0f * Input.GetAxis("Mouse X"), 0);
+
 
     }
 }
