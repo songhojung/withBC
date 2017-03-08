@@ -22,7 +22,7 @@ public class DragonAnimation : MonoBehaviour {
     {
         NOWRAND,NOWFLY
     };
-    public D_STATE NowState;
+    public D_STATE NowState = D_STATE.D_STAY;
 
     public D_FLYRAND NowFlyRand;
 
@@ -35,24 +35,61 @@ public class DragonAnimation : MonoBehaviour {
 
     public Animation Dragon;
 
+
+    private MonsterInformation Information;
+
+    public int damage;
+
     // Use this for initialization
     void Start () {
         Dragon = GetComponent<Animation>();
-        NowState = D_STATE.D_STAY;
         NowFlyRand = D_FLYRAND.NOWRAND;
 
-        Dragon.wrapMode = WrapMode.Loop;
-        Dragon.CrossFade("stand", 0.3f);
-
+        Information = GetComponent<MonsterInformation>();
         AttackNum = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        ChangeState();
+        //ChangeState();
         Animation_Play3();
-
+        InformationCheck();
     }
+
+    private void InformationCheck()
+    {
+        if (Information)
+        {
+            Information.hp = _health;
+
+            Information.damage = damage;
+
+            if (NowState == D_STATE.D_FLY_ATT || NowState == D_STATE.D_ATT2 ||
+                NowState == D_STATE.D_ATT1 || NowState == D_STATE.D_FIRE ||
+                NowState == D_STATE.D_FLY_FIRE)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.ATTACK)
+                    Information.MonsterState = MonsterInformation.STATE.ATTACK;
+                if (!Information.isAttack)
+                {
+                    Information.isAttack = true;
+                    Information.isOnceAttack = true;
+                }
+            }
+            else if (NowState == D_STATE.D_HIT1 || NowState == D_STATE.D_HIT2 ||
+                    NowState == D_STATE.D_FLY_HIT)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.HIT)
+                    Information.MonsterState = MonsterInformation.STATE.HIT;
+            }
+            else
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                    Information.MonsterState = MonsterInformation.STATE.STAY;
+            }
+        }
+    }
+
     void ChangeState()
     {
         if (Input.GetKeyDown(KeyCode.D))

@@ -52,10 +52,21 @@ public class MonsterInformation : MonoBehaviour {
             case STATE.ATTACK:
                 break;
             case STATE.HIT:
+                if (isOnceAttack)
+                    isOnceAttack = false;
+                if (isAttack)
+                {
+                    isAttack = false;
+                }
                 break;
             case STATE.STAY:
+                if (isOnceAttack)
+                    isOnceAttack = false;
+                if (isAttack)
+                {
+                    isAttack = false;
+                }
                 break;
         }
-    
 	}
 }

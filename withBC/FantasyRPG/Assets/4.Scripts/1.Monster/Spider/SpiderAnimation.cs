@@ -11,21 +11,60 @@ public class SpiderAnimation : MonoBehaviour {
     };
 
     public Animation Spider;
-    public S_STATE NowState;
+    public S_STATE NowState = S_STATE.S_IDLE;
 
     public int _health = 10;
-	// Use this for initialization
-	void Start () {
-        NowState = S_STATE.S_IDLE;
-        Spider.wrapMode = WrapMode.Loop;
-        Spider.CrossFade("Idle", 0.3f);
+
+    private MonsterInformation Information;
+
+    public bool isHit = false;
+
+    public int damage;
+    // Use this for initialization
+    void Start () {
+        Spider = GetComponent<Animation>();
+
+        Information = GetComponent<MonsterInformation>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         //ChangeState();
         PlayAnimation();
+        InformationCheck();
 	}
+
+    private void InformationCheck()
+    {
+        if (Information)
+        {
+            Information.hp = _health;
+
+            Information.damage = damage;
+
+            if (NowState == S_STATE.S_ATT || NowState == S_STATE.S_ATT_L ||
+                NowState == S_STATE.S_ATT_R)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.ATTACK)
+                    Information.MonsterState = MonsterInformation.STATE.ATTACK;
+                if (!Information.isAttack)
+                {
+                    Information.isAttack = true;
+                    Information.isOnceAttack = true;
+                }
+            }
+            else if (isHit)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.HIT)
+                    Information.MonsterState = MonsterInformation.STATE.HIT;
+            }
+            else
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                    Information.MonsterState = MonsterInformation.STATE.STAY;
+            }
+        }
+    }
 
     void ChangeState()
     {
