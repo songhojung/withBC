@@ -55,7 +55,7 @@ public class FollowCam : MonoBehaviour
         //   , Time.deltaTime * trace);
 
         cameraTr.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 10.0f, Space.World);
-        cameraTr.Rotate(Vector3.left * Input.GetAxis("Mouse Y") * 10.0f, Space.Self);
+        cameraTr.Rotate(Vector3.left    * Input.GetAxis("Mouse Y") * 10.0f, Space.Self);
         if (cameraTr.rotation.x >= 0.65f )
             cameraTr.rotation = new Quaternion(0.65f,cameraTr.rotation.y, cameraTr.rotation.z, cameraTr.rotation.w);
         else if(cameraTr.rotation.x <= -0.33f)

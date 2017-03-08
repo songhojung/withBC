@@ -12,15 +12,17 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     [System.NonSerialized]
     public WarriorComboState warriorComboState = WarriorComboState.NONE;
 
+    private CharacterInformation.MODE Mode;
+
     private Animator WarriorAnimator;
-    private bool isDie = false;
-    private bool isRun = false;
-    private bool isCombo1 = false;
-    private bool isCombo2 = false;
-    private Vector3 Direction = Vector3.zero;
-    private bool IsLeftMouseDown = false;
-    private bool IsRightMouseDown = false;
-    private bool IsJump = false;
+    public bool isDie = false;
+    public bool isRun = false;
+    public bool isCombo1 = false;
+    public bool isCombo2 = false;
+    public Vector3 Direction = Vector3.zero;
+    public bool IsLeftMouseDown = false;
+    public bool IsRightMouseDown = false;
+    public bool IsJump = false;
     private float NowComboTime = 0.0f;
     private float[] AttackClipLength; 
 
@@ -28,7 +30,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     void Start()
     {
         WarriorAnimator = GetComponent<Animator>();
-       
+        Mode = GetComponent<CharacterInformation>()._mode;
 
         StartCoroutine(CheckWarriorState());
         StartCoroutine(WarriorAction());
@@ -60,11 +62,14 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     {
         while (!isDie)
         {
-            PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
-            Direction = pPlayerCtrl.direction;
-            IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
-            IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
-            IsJump = pPlayerCtrl.IsJump;
+            if (Mode == CharacterInformation.MODE.PLAYER)
+            {
+                PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
+                Direction = pPlayerCtrl.direction;
+                IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
+                IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
+                IsJump = pPlayerCtrl.IsJump;
+            }
 
             if (IsJump)
             {

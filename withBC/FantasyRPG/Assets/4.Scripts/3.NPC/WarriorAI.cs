@@ -2,15 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorAI : MonoBehaviour {
+public class WarriorAI : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private WarriorAnimationCtrl warriorAniCtrl;
+
+  
+
+    // Use this for initialization
+    void Start()
+    {
+        warriorAniCtrl = GetComponent<WarriorAnimationCtrl>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+      
+        if (other.gameObject.CompareTag("Monster"))
+        {
+           
+            warriorAniCtrl.IsLeftMouseDown = true;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Monster"))
+        {
+
+            warriorAniCtrl.IsLeftMouseDown = false;
+        }
+       
+    }
 }

@@ -30,6 +30,8 @@ public class ArcherAnimationCtrl : MonoBehaviour {
     public GameObject ArrowObject;
     public  bool IsReadyForShoot = false;
 
+    private CharacterInformation.MODE Mode;
+
     private bool IsDie = false;
     private bool IsJump = false;
     private bool IsLeftMouseDown = false;
@@ -51,6 +53,8 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         ArcherAnimation[GetArrow].speed = 2.5f;
         ArrowObject.active = false;
 
+        Mode = GetComponent<CharacterInformation>()._mode;
+
 
     }
 
@@ -59,13 +63,16 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
         while (!IsDie)
         {
-            PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
-            direction = pPlayerCtrl.direction;
-            IsJump = pPlayerCtrl.IsJump;
-            IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
-            IsLeftMouseUp = pPlayerCtrl.IsLeftMouseUp;
-            IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
-            IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
+            if (Mode == CharacterInformation.MODE.PLAYER)
+            {
+                PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
+                direction = pPlayerCtrl.direction;
+                IsJump = pPlayerCtrl.IsJump;
+                IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
+                IsLeftMouseUp = pPlayerCtrl.IsLeftMouseUp;
+                IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
+                IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
+            }
 
             if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
                 && !ArcherAnimation.IsPlaying(GetArrow)&& !ArcherAnimation.IsPlaying(Aim)

@@ -41,6 +41,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     [System.NonSerialized]
     public WizardState BeforeState = WizardState.NONE;
 
+    private CharacterInformation.MODE Mode;
 
 
     private bool IsDie = false;
@@ -68,7 +69,8 @@ public class WizardAnimationCtrl : MonoBehaviour {
         StartCoroutine(WizardAction());
         //무기바꾸기 콜백함수
         switchDel = new SwichingWeaPon.SwitchWeaponEvent(SwichingWeaPon.SwithcingWeapon);
-       
+        Mode = GetComponent<CharacterInformation>()._mode;
+
     }
 
     IEnumerator CheckArcherState()
@@ -76,19 +78,20 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
         while (!IsDie)
         {
-           
-            direction = pPlayerCtrl.direction;
-            IsJump = pPlayerCtrl.IsJump;
-            IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
-            IsLeftMouseUp = pPlayerCtrl.IsLeftMouseUp;
-            IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
-            IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
-            IsNumKey_1 = pPlayerCtrl.IsNumKey_1;
-            IsNumKey_2 = pPlayerCtrl.IsNumKey_2;
-            IsKey_E = pPlayerCtrl.IsKey_E;
-            IsKey_Q = pPlayerCtrl.IsKey_Q;
-            IsKey_Shift = pPlayerCtrl.IsKey_Shift;
-
+            if (Mode == CharacterInformation.MODE.PLAYER)
+            {
+                direction = pPlayerCtrl.direction;
+                IsJump = pPlayerCtrl.IsJump;
+                IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
+                IsLeftMouseUp = pPlayerCtrl.IsLeftMouseUp;
+                IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
+                IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
+                IsNumKey_1 = pPlayerCtrl.IsNumKey_1;
+                IsNumKey_2 = pPlayerCtrl.IsNumKey_2;
+                IsKey_E = pPlayerCtrl.IsKey_E;
+                IsKey_Q = pPlayerCtrl.IsKey_Q;
+                IsKey_Shift = pPlayerCtrl.IsKey_Shift;
+            }
             AttackCombo();
 
             if (!WizardAnimation.IsPlaying(Jump) && FinishAnimation(DrawStaff,0.7f) &&
