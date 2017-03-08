@@ -11,20 +11,25 @@ public class CharacterInformation : MonoBehaviour {
         ATTACK, STAY, HIT
     };
 
-    public bool isDie;
-    public bool isHit;
-    public bool isAttack;
+    public bool isDie = false;
+    public bool isHit = false;
+    public bool isAttack = false;
 
-    public STATE MonsterState;
+    public STATE MonsterState = STATE.STAY;
 
-    public bool isOnceAttack;
+    public bool isOnceAttack = false;
 
     public int damage;
 
+    public enum MODE
+    {
+        NPC, PLAYER
+    };
 
+    public MODE _mode;
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
