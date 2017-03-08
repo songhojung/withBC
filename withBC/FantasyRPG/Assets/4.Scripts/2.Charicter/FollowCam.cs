@@ -56,10 +56,12 @@ public class FollowCam : MonoBehaviour
 
         cameraTr.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 10.0f, Space.World);
         cameraTr.Rotate(Vector3.left * Input.GetAxis("Mouse Y") * 10.0f, Space.Self);
-        if (cameraTr.rotation.eulerAngles.x >= 70.0f)
-            cameraTr.Rotate(new Vector3(70.0f, cameraTr.rotation.eulerAngles.y, cameraTr.rotation.eulerAngles.z));
-        Debug.Log(cameraTr.rotation.eulerAngles.y);
-        cameraTr.position = Target.transform.position - (cameraTr.forward * distance) + (cameraTr.up * (height));
+        if (cameraTr.rotation.x >= 0.65f )
+            cameraTr.rotation = new Quaternion(0.65f,cameraTr.rotation.y, cameraTr.rotation.z, cameraTr.rotation.w);
+        else if(cameraTr.rotation.x <= -0.33f)
+            cameraTr.rotation = new Quaternion(-0.33f, cameraTr.rotation.y, cameraTr.rotation.z, cameraTr.rotation.w);
+        Debug.Log(cameraTr.rotation.x);
+        cameraTr.position = Target.transform.position - (cameraTr.forward * distance) + (cameraTr.up * (height*(1-Mathf.Abs( cameraTr.rotation.x))));
 
         // rotateAround로 캐릭터를 볼떄
 
