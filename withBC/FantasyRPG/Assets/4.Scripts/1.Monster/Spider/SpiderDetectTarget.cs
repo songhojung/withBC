@@ -17,7 +17,7 @@ public class SpiderDetectTarget : MonoBehaviour {
     private RaycastHit Ray;
 
     //레이캐스트거리
-    private float RayDistance = 15.0f;
+    public float RayDistance = 5.0f;
 
     //죽었는지 살았는지
     private bool isDie = false;
@@ -175,6 +175,22 @@ public class SpiderDetectTarget : MonoBehaviour {
             {
                 if ((DetectColl.DetectZone() <= 45) ||
                     (DetectColl.DetectZone() >= 315))
+                {
+                    if (!PatrollPt.findPlayer)
+                    {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
+                        target = null;
+                        target = DetectColl.target;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+                        //}
+                    }
+                }
+                else if (Vector3.Distance(DetectColl.target.transform.position, transform.position) <= 10.0f)
                 {
                     if (!PatrollPt.findPlayer)
                     {

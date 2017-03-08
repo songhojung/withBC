@@ -17,14 +17,18 @@ public class GoblinAnimation : MonoBehaviour {
 
     public float runSpeed = 6.0f;
 
-    public G_STATE NowState = G_STATE.S_ATT1;
+    public G_STATE NowState = G_STATE.S_IDLE;
 
-    public int _health;
-	// Use this for initialization
-	void Start () {
-        NowState = G_STATE.S_IDLE;
-        Goblin.wrapMode = WrapMode.Loop;
-        Goblin.CrossFade("idle", 0.3f);
+    public int _health = 10;
+
+    private MonsterInformation Information;
+
+    public int damage;
+    // Use this for initialization
+    void Start () {
+        Goblin = this.GetComponent<Animation>();
+
+        Information = GetComponent<MonsterInformation>();
         //Debug.Log("클립갯수:" + ClipNum.ToString());
 
         //pcControll = this.gameObject.GetComponent<CharacterController>();
@@ -34,8 +38,42 @@ public class GoblinAnimation : MonoBehaviour {
 	void Update () {
         //ChangeMotion();
         Animation_Play3();
-
+        InformationCheck();
     }
+
+    private void InformationCheck()
+    {
+        if (Information)
+        {
+            Information.hp = _health;
+
+            Information.damage = damage;
+
+            if (NowState == G_STATE.S_ATT1 || NowState == G_STATE.S_ATT2 ||
+                NowState == G_STATE.S_ATT3)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.ATTACK)
+                    Information.MonsterState = MonsterInformation.STATE.ATTACK;
+                if (!Information.isAttack)
+                {
+                    Information.isAttack = true;
+                    Information.isOnceAttack = true;
+                }
+            }
+            else if (NowState == G_STATE.S_BLOCK_HIT)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.HIT)
+                    Information.MonsterState = MonsterInformation.STATE.HIT;
+            }
+            else
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                    Information.MonsterState = MonsterInformation.STATE.STAY;
+            }
+        }
+    }
+
+
     private void ChangeMotion()
     {
         if(Input.GetKeyDown(KeyCode.S))

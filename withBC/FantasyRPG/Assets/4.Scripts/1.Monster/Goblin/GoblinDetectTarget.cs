@@ -19,7 +19,7 @@ public class GoblinDetectTarget : MonoBehaviour {
     private RaycastHit Ray;
 
     //레이케스트 레이저 거리
-    private float RayDistance = 15.0f;
+    public float RayDistance = 5.0f;
 
     //죽었는지 살았는지
     private bool isDie = false;
@@ -136,6 +136,22 @@ public class GoblinDetectTarget : MonoBehaviour {
             {
                 if ((DetectColl.DetectZone() <= 45) ||
                     (DetectColl.DetectZone() >= 315))
+                {
+                    if (!PatrollPt.findPlayer)
+                    {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
+                        target = null;
+                        target = DetectColl.target;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+                        //}
+                    }
+                }
+                else if (Vector3.Distance(DetectColl.target.transform.position, transform.position) <= 10.0f)
                 {
                     if (!PatrollPt.findPlayer)
                     {

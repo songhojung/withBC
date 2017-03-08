@@ -19,24 +19,64 @@ public class Monster3Animation : MonoBehaviour {
     public int         AttackNum;
     public int         _health;
     public Animator    Mt3;
+
+
+    public int damage = 10;
+    private MonsterInformation Information;
     // Use this for initialization
     void Start () {
         Mt3 = GetComponent<Animator>();
         NowState = M3_STATE.M3_STAY;
-        _health = Mt3.GetInteger("Health");
+        Information = GetComponent<MonsterInformation>();
+        //_health = Mt3.GetInteger("Health");
+
+        Mt3.SetInteger("Health", _health);
         NowWay = (M3_WAY)Mt3.GetInteger("Way");
         AttackNum = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Mt3.SetInteger("State", (int)NowState);
-        ChangeAnimation();
+        //ChangeAnimation();
+        InformationCheck();
         AttackCheck();
         CheckWay();
         //HitbyChar();
     }
+    private void InformationCheck()
+    {
+        if (Mt3.GetInteger("State") != (int)NowState)
+            Mt3.SetInteger("State", (int)NowState);
+        if (Mt3.GetInteger("Health") != _health)
+            Mt3.SetInteger("Health", _health);
+        if (Information)
+        {
+            Information.hp = _health;
 
+            Information.damage = damage;
+
+            if (NowState == M3_STATE.M3_ATTACK)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.ATTACK)
+                    Information.MonsterState = MonsterInformation.STATE.ATTACK;
+                if (!Information.isAttack)
+                {
+                    Information.isAttack = true;
+                    Information.isOnceAttack = true;
+                }
+            }
+            else if (NowState == M3_STATE.M3_HIT)
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.HIT)
+                    Information.MonsterState = MonsterInformation.STATE.HIT;
+            }
+            else
+            {
+                if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                    Information.MonsterState = MonsterInformation.STATE.STAY;
+            }
+        }
+    }
     void AttackCheck()
     {
         if(NowState == M3_STATE.M3_ATTACK)

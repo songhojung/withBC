@@ -15,7 +15,7 @@ public class Monster2DetectTarget : MonoBehaviour {
     private NavMeshAgent agent;
     private RaycastHit Ray;
 
-    private float RayDistance = 14.0f;
+    public float RayDistance = 5.0f;
     private bool isDie = false;
 
     private GameObject PrefMove = null;
@@ -129,6 +129,22 @@ public class Monster2DetectTarget : MonoBehaviour {
             {
                 if ((DetectColl.DetectZone() <= 45) ||
                     (DetectColl.DetectZone() >= 315))
+                {
+                    if (!PatrollPt.findPlayer)
+                    {
+                        //if (Ray.collider.tag == "Player")
+                        //{
+                        PrefMove = target;
+                        target = null;
+                        target = DetectColl.target;
+                        agent.destination = target.transform.position;
+                        PatrollPt.ActPatroll = false;
+                        PatrollPt.findPlayer = true;
+                        M2Animation.NowState = Monster2Animation.M2_STATE.M2_RUN;
+                        //}
+                    }
+                }
+                else if (Vector3.Distance(DetectColl.target.transform.position, transform.position) <= 10.0f)
                 {
                     if (!PatrollPt.findPlayer)
                     {

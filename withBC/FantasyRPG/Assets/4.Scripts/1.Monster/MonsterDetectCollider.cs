@@ -23,7 +23,7 @@ public class MonsterDetectCollider : MonoBehaviour {
             if (FindPlayer)
             {
                 float distance = Vector3.Distance(transform.position, target.transform.position);
-                if (distance > MyCollider.radius * 3)
+                if (distance > MyCollider.radius * 2.5f)
                 {
                     FindPlayer = false;
                     MonsterFindPt.findPlayer = false;
