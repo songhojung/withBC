@@ -8,6 +8,9 @@ public class MoveNPC : MonoBehaviour {
     public enum PlayerJob { NONE, WARRIOR, ARCHER, WIZARD};
     public PlayerJob Job = PlayerJob.NONE;
 
+    public enum PlayerState { Idle, Run};
+    public PlayerState NowState = PlayerState.Idle;
+
     private Rigidbody rigibody;
 
     private float h = 0.0f;
@@ -40,7 +43,6 @@ public class MoveNPC : MonoBehaviour {
 
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 5.0f;
-
     
     // Use this for initialization
     void Start () {
@@ -48,7 +50,24 @@ public class MoveNPC : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
-		
+	void FixedUpdate ()
+    {
+        MoveAi();
+        
 	}
+
+    private void MoveAi()
+    {
+        switch(NowState)
+        {
+            case PlayerState.Idle:
+                direction = Vector3.zero;
+                break;
+            case PlayerState.Run:
+                Vector3 direct = rigibody.transform.forward;
+                rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
+                direction = direct;
+                break;
+        }
+    }
 }
