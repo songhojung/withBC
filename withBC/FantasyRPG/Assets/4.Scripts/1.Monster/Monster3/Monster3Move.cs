@@ -16,7 +16,7 @@ public class Monster3Move : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Monster3Ani.NowState == Monster3Animation.M3_STATE.M3_WALK ||
             Monster3Ani.NowState == Monster3Animation.M3_STATE.M3_RUN)

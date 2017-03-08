@@ -15,7 +15,7 @@ public class SpiderMove : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		
         if(spiderAni.NowState == SpiderAnimation.S_STATE.S_WALK || spiderAni.NowState == SpiderAnimation.S_STATE.S_RUN)
         {

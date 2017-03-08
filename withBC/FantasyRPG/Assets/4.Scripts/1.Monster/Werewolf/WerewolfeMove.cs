@@ -14,7 +14,7 @@ public class WerewolfeMove : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if(WolfAni.NowState == WerewolfeAnimation.W_STATE.S_WALK ||
             WolfAni.NowState == WerewolfeAnimation.W_STATE.S_RUN)
         {

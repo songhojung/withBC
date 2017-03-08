@@ -15,7 +15,7 @@ public class GoblinMove : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (GoblinAni.NowState == GoblinAnimation.G_STATE.S_WALK ||
             GoblinAni.NowState == GoblinAnimation.G_STATE.S_RUN)
