@@ -62,115 +62,236 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     {
         while (!isDie)
         {
-            if (Mode == CharacterInformation.MODE.PLAYER)
-            {
-                PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
-                Direction = pPlayerCtrl.direction;
-                IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
-                IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
-                IsJump = pPlayerCtrl.IsJump;
-            }
-
-            if (IsJump)
-            {
-                Debug.Log("점프");
-                warriorState = WarriorState.JUMP;
-            }
-
-            else if (Direction.sqrMagnitude > 0.01f)
-            {
-                Debug.Log("런");
-                warriorState = WarriorState.RUN;
-            }
-            else if (Direction.sqrMagnitude <= 0)
-            {
-                warriorState = WarriorState.IDLE;
-            }
-
-
-            if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0"))
-            {
-                if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-                {
-                    warriorComboState = WarriorComboState.NONE;
-
-                }
-            }
-            else if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
-            {
-
-                if (!isCombo2 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
-                {
-                    Debug.Log("어택2공격끝");
-                    warriorComboState = WarriorComboState.NONE;
-                }
-            }
-            else if (isCombo1 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0") ||
-                isCombo2 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
-            {
-                warriorComboState = WarriorComboState.NONE;
-            }
-
-            if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Block"))
-            {
-                    warriorComboState = WarriorComboState.NONE;
-            }
-            //else if(WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Block"))
-            //{
-            //    warriorComboState = WarriorComboState.NONE;
-            //}
-
-            //    if (WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Attack1 0"))
-            //{
-            //    if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1.0f)
-            //    {
-            //        warriorComboState = WarriorComboState.NONE;
-                    
-            //    }
-            //}
-
-
-            if (IsLeftMouseDown) 
-            {
-                if (!isCombo1 &&warriorComboState == WarriorComboState.COMBO1 && NowComboTime < 0.9f)
-                {
-                   
-                    warriorComboState = WarriorComboState.COMBO2;
-                    Debug.Log("투콤시간" + NowComboTime);
-                    NowComboTime = 0.0f;
-                    
-                }
-                else if(!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
-                {
-                    warriorComboState = WarriorComboState.COMBO3;
-                    Debug.Log("삼콤보시간" + NowComboTime);
-                    NowComboTime = 0.0f;
-                }
-                else
-                {
-                    Debug.Log("첫째공격");
-                    warriorComboState = WarriorComboState.COMBO1;
-                    isCombo1 = false;
-                    isCombo2 = false;
-                    Debug.Log(NowComboTime);
-                    NowComboTime = 0.0f;
-                }
-
-            }
-            else if(IsRightMouseDown)
-            {
-                warriorComboState = WarriorComboState.SHIELDBLOCK;
-                NowComboTime = 0.0f;
-            }
             
-
-            NowComboTime += Time.deltaTime;
-            if (NowComboTime > 2.0f) NowComboTime = 0.0f;
-            //Debug.Log(isCombo1);
+            switch(Mode)
+            {
+                case CharacterInformation.MODE.PLAYER:
+                    PlayerMode();
+                    break;
+                case CharacterInformation.MODE.NPC:
+                    AIMode();
+                    break;
+            }
             yield return null;
         }
     }
 
+    private void PlayerMode()
+    {
+        if (Mode == CharacterInformation.MODE.PLAYER)
+        {
+            PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
+            Direction = pPlayerCtrl.direction;
+            IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
+            IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
+            IsJump = pPlayerCtrl.IsJump;
+        }
+
+        if (IsJump)
+        {
+            Debug.Log("점프");
+            warriorState = WarriorState.JUMP;
+        }
+
+        else if (Direction.sqrMagnitude > 0.01f)
+        {
+            Debug.Log("런");
+            warriorState = WarriorState.RUN;
+        }
+        else if (Direction.sqrMagnitude <= 0)
+        {
+            warriorState = WarriorState.IDLE;
+        }
+
+
+        if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0"))
+        {
+            if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                warriorComboState = WarriorComboState.NONE;
+
+            }
+        }
+        else if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
+        {
+
+            if (!isCombo2 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
+            {
+                Debug.Log("어택2공격끝");
+                warriorComboState = WarriorComboState.NONE;
+            }
+        }
+        else if (isCombo1 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0") ||
+            isCombo2 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
+        {
+            warriorComboState = WarriorComboState.NONE;
+        }
+
+        if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Block"))
+        {
+            warriorComboState = WarriorComboState.NONE;
+        }
+        //else if(WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Block"))
+        //{
+        //    warriorComboState = WarriorComboState.NONE;
+        //}
+
+        //    if (WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Attack1 0"))
+        //{
+        //    if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1.0f)
+        //    {
+        //        warriorComboState = WarriorComboState.NONE;
+
+        //    }
+        //}
+
+
+        if (IsLeftMouseDown)
+        {
+            if (!isCombo1 && warriorComboState == WarriorComboState.COMBO1 && NowComboTime < 0.9f)
+            {
+
+                warriorComboState = WarriorComboState.COMBO2;
+                Debug.Log("투콤시간" + NowComboTime);
+                NowComboTime = 0.0f;
+
+            }
+            else if (!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
+            {
+                warriorComboState = WarriorComboState.COMBO3;
+                Debug.Log("삼콤보시간" + NowComboTime);
+                NowComboTime = 0.0f;
+            }
+            else
+            {
+                Debug.Log("첫째공격");
+                warriorComboState = WarriorComboState.COMBO1;
+                isCombo1 = false;
+                isCombo2 = false;
+                Debug.Log(NowComboTime);
+                NowComboTime = 0.0f;
+            }
+
+        }
+        else if (IsRightMouseDown)
+        {
+            warriorComboState = WarriorComboState.SHIELDBLOCK;
+            NowComboTime = 0.0f;
+        }
+
+
+        NowComboTime += Time.deltaTime;
+        if (NowComboTime > 2.0f) NowComboTime = 0.0f;
+        //Debug.Log(isCombo1);
+    }
+
+
+    private void AIMode()
+    { 
+        if (Mode == CharacterInformation.MODE.NPC)
+        {
+            MoveNPC Move_Npc = GetComponent<MoveNPC>();
+            Direction = Move_Npc.direction;
+            IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
+            IsRightMouseDown = Move_Npc.IsRightMouseDown;
+        }
+        if (IsJump)
+        {
+            Debug.Log("점프");
+            warriorState = WarriorState.JUMP;
+        }
+
+        else if (Direction.sqrMagnitude > 0.01f)
+        {
+            Debug.Log("런");
+            warriorState = WarriorState.RUN;
+        }
+        else if (Direction.sqrMagnitude <= 0)
+        {
+            warriorState = WarriorState.IDLE;
+        }
+
+
+        if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0"))
+        {
+            if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+            {
+                warriorComboState = WarriorComboState.NONE;
+
+            }
+        }
+        else if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
+        {
+
+            if (!isCombo2 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
+            {
+                Debug.Log("어택2공격끝");
+                warriorComboState = WarriorComboState.NONE;
+            }
+        }
+        else if (isCombo1 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0") ||
+            isCombo2 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
+        {
+            warriorComboState = WarriorComboState.NONE;
+        }
+
+        if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Block"))
+        {
+            warriorComboState = WarriorComboState.NONE;
+        }
+        //else if(WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Block"))
+        //{
+        //    warriorComboState = WarriorComboState.NONE;
+        //}
+
+        //    if (WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Attack1 0"))
+        //{
+        //    if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1.0f)
+        //    {
+        //        warriorComboState = WarriorComboState.NONE;
+
+        //    }
+        //}
+
+
+        if (IsLeftMouseDown)
+        {
+            if (!isCombo1 && warriorComboState == WarriorComboState.COMBO1 && NowComboTime < 0.9f)
+            {
+
+                warriorComboState = WarriorComboState.COMBO2;
+                Debug.Log("투콤시간" + NowComboTime);
+                NowComboTime = 0.0f;
+
+            }
+            else if (!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
+            {
+                warriorComboState = WarriorComboState.COMBO3;
+                Debug.Log("삼콤보시간" + NowComboTime);
+                NowComboTime = 0.0f;
+            }
+            else
+            {
+                Debug.Log("첫째공격");
+                warriorComboState = WarriorComboState.COMBO1;
+                isCombo1 = false;
+                isCombo2 = false;
+                Debug.Log(NowComboTime);
+                NowComboTime = 0.0f;
+            }
+
+        }
+        else if (IsRightMouseDown)
+        {
+            warriorComboState = WarriorComboState.SHIELDBLOCK;
+            NowComboTime = 0.0f;
+        }
+
+
+        NowComboTime += Time.deltaTime;
+        if (NowComboTime > 2.0f) NowComboTime = 0.0f;
+        //Debug.Log(isCombo1);
+    }
     //상태 변경에 따른 에니메이션 변경
     IEnumerator WarriorAction()
     {
