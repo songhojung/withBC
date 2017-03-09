@@ -138,6 +138,9 @@
     <Compile Include="Assets\5.FreeNet\CNetwork Manager.cs" />
     <Compile Include="Assets\Medieval Environment\Terrain Resource\Shaders\TerrainRand.cs" />
     <Compile Include="Assets\TankPatrolState.cs" />
+    <Compile Include="Assets\_Scenes\TestScene\CamRotate.cs" />
+    <Compile Include="Assets\_Scenes\TestScene\CarDamage2.cs" />
+    <Compile Include="Assets\_Scenes\TestScene\resetCar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3.Resources\1.Monster\Monster\shaders\bumpSpecmap.shader" />
@@ -151,6 +154,9 @@
     <None Include="Assets\3.Resources\1.Monster\Werewolf\readme.txt" />
     <None Include="Assets\3.Resources\2.Charicter\Archer\Knife\Shader 1\Compressed MaskedShader2sided 5-4 cut out.shader" />
     <None Include="Assets\3.Resources\3.Effect\1.Decal\bloodHD\readme.txt" />
+    <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\AddSmooth_Layer.shader" />
+    <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\Add_Layer.shader" />
+    <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\Particle Alpha Blend_IgnoreFog.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM2.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM3.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrain.shader" />
