@@ -25,7 +25,7 @@ public class NpcPatroll : MonoBehaviour {
             {
                 NpcThis.TargetPoint = this.gameObject;
             }
-  //      }
+        }
 
 	}
 
