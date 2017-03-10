@@ -22,10 +22,16 @@ public class MonsterCollision : MonoBehaviour {
         if(collider.gameObject.CompareTag("Weapon"))
         {
             Debug.Log("고블린 히트됨");
+            Quaternion rotate = new Quaternion(collider.gameObject.transform.forward.x, -collider.gameObject.transform.forward.y, 0, collider.gameObject.transform.rotation.w);
+            Vector3 EffectPos = collider.gameObject.transform.position;
+                //Debug.Log(collider.gameObject.transform.eulerAngles);
+            GameObject effect = (GameObject)Instantiate(Resources.Load("DecalBloodSplatEffect",typeof(GameObject)),
+               EffectPos, rotate);
 
-            //Transform particleObj = (Transform)Instantiate(Resources.Load(
-            //       "Tank_tutorial/Prefabs/TankExplosion",
-            //       typeof(Transform)), pos, Quaternion.identity);
+           
+            Destroy(effect, 0.5f);
+            
+            
         }
     }
 }
