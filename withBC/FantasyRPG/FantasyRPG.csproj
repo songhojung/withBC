@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -69,9 +66,6 @@
     </Reference>
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
@@ -157,6 +151,7 @@
     <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\AddSmooth_Layer.shader" />
     <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\Add_Layer.shader" />
     <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\Particle Alpha Blend_IgnoreFog.shader" />
+    <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\fireExplosion Material\Shaders\SurfaceShader_VC.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM2.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM3.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrain.shader" />
