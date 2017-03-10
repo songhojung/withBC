@@ -6,21 +6,34 @@ public class NpcPatroll : MonoBehaviour {
 
     public MoveNPC.PlayerJob PointJob;
 
-    private MoveNPC NpcThis;
+    public MoveNPC NpcThis = null;
 
-    public GameObject TargetNpc;
+    public GameObject TargetNpc = null;
 
 
 	// Use this for initialization
 	void Start () {
-        NpcThis = GetComponent<MoveNPC>();
+        //NpcThis = GetComponent<MoveNPC>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//if(!NpcThis.isMonster)
-  //      {
-            
+
+		if(NpcThis)
+        {
+            if(!NpcThis.isMonster)
+            {
+                NpcThis.TargetPoint = this.gameObject;
+            }
   //      }
+
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<MoveNPC>().Job == PointJob)
+        {
+            NpcThis = other.GetComponent<MoveNPC>();
+        }
+    }
 }

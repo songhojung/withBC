@@ -73,6 +73,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonAnimation.cs" />
@@ -120,6 +126,7 @@
     <Compile Include="Assets\4.Scripts\3.NPC\DetectMonster.cs" />
     <Compile Include="Assets\4.Scripts\3.NPC\MoveNPC.cs" />
     <Compile Include="Assets\4.Scripts\3.NPC\NpcPatroll.cs" />
+    <Compile Include="Assets\4.Scripts\3.NPC\SpawnNPC.cs" />
     <Compile Include="Assets\4.Scripts\3.NPC\WarriorAI.cs" />
     <Compile Include="Assets\4.Scripts\3.NPC\WizardAI.cs" />
     <Compile Include="Assets\4.Scripts\4.Camera\FollowCam.cs" />
