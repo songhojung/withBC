@@ -158,6 +158,7 @@
     <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\AddSmooth_Layer.shader" />
     <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\Add_Layer.shader" />
     <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\Fire1\Shaders\Particle Alpha Blend_IgnoreFog.shader" />
+    <None Include="Assets\3.Resources\3.Effect\2.Effect\1.material\fireExplosion Material\Shaders\SurfaceShader_VC.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM2.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\Blend SM3.shader" />
     <None Include="Assets\Medieval Environment\Terrain Resource\Shaders\TriPlanarTerrain\Shaders\triPlanarTerrain.shader" />
