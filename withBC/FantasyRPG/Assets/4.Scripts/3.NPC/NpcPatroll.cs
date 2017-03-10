@@ -30,9 +30,12 @@ public class NpcPatroll : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<MoveNPC>().Job == PointJob)
+        if (other.GetComponent<MoveNPC>())
         {
-            NpcThis = other.GetComponent<MoveNPC>();
+            if (other.GetComponent<MoveNPC>().Job == PointJob)
+            {
+                NpcThis = other.GetComponent<MoveNPC>();
+            }
         }
     }
 }

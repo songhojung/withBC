@@ -139,9 +139,6 @@
     <Compile Include="Assets\5.FreeNet\CNetwork Manager.cs" />
     <Compile Include="Assets\Medieval Environment\Terrain Resource\Shaders\TerrainRand.cs" />
     <Compile Include="Assets\TankPatrolState.cs" />
-    <Compile Include="Assets\_Scenes\TestScene\CamRotate.cs" />
-    <Compile Include="Assets\_Scenes\TestScene\CarDamage2.cs" />
-    <Compile Include="Assets\_Scenes\TestScene\resetCar.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3.Resources\1.Monster\Monster\shaders\bumpSpecmap.shader" />
