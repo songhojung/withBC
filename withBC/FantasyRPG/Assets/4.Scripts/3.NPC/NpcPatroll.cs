@@ -18,9 +18,9 @@ public class NpcPatroll : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!NpcThis.isMonster)
-        {
+		//if(!NpcThis.isMonster)
+  //      {
             
-        }
+  //      }
 	}
 }
