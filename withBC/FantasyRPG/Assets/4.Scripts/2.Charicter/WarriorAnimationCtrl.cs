@@ -168,7 +168,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 warriorComboState = WarriorComboState.COMBO1;
                 isCombo1 = false;
                 isCombo2 = false;
-                Debug.Log(NowComboTime);
                 NowComboTime = 0.0f;
             }
 

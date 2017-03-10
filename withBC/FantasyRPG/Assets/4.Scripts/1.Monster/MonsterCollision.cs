@@ -13,7 +13,7 @@ public class MonsterCollision : MonoBehaviour {
     // Update is called once per frame
 
     private void OnCollisionEnter(Collision collision)
-    {
+    {   
 
     }
 
@@ -22,6 +22,10 @@ public class MonsterCollision : MonoBehaviour {
         if(collider.gameObject.CompareTag("Weapon"))
         {
             Debug.Log("고블린 히트됨");
+
+            //Transform particleObj = (Transform)Instantiate(Resources.Load(
+            //       "Tank_tutorial/Prefabs/TankExplosion",
+            //       typeof(Transform)), pos, Quaternion.identity);
         }
     }
 }
