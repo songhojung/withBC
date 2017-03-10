@@ -90,15 +90,51 @@ public class MoveNPC : MonoBehaviour {
     {
         if (!isMonster)
         {
-            if (!TargetPoint)
+            if (TargetPoint)
             {
-                TargetNav.destination = TargetPoint.transform.position;
+                //TargetNav.destination = TargetPoint.transform.position;
 
-                Vector3 direct = rigibody.transform.forward;
-                rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
-                direction = direct;
+                if(TargetNav.enabled)
+                {
+                    TargetNav.destination = TargetPoint.transform.position;
+                    Vector3 direct = rigibody.transform.forward;
+                    rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
+                    direction = direct;
+                }
+                
+                
             }
 
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<NpcPatroll>())
+        {
+            if (other.GetComponent<NpcPatroll>().PointJob == Job)
+            {
+                if (TargetNav)
+                {
+                    if (TargetNav.enabled)
+                        TargetNav.enabled = false;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<NpcPatroll>())
+        {
+            if (other.GetComponent<NpcPatroll>().PointJob == Job)
+            {
+                if (TargetNav)
+                {
+                    if (!TargetNav.enabled)
+                        TargetNav.enabled = true;
+                }
+            }
         }
     }
 
