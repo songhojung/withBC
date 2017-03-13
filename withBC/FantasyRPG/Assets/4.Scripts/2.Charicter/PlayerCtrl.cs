@@ -6,7 +6,7 @@ public class PlayerCtrl : MonoBehaviour {
 
     // Use this for initialization
     public enum PlayerJob { NONE,WARRIOR,ARCHER,WIZARD};
-    public PlayerJob Job = PlayerJob.NONE;
+    private CharacterInformation.PlayerJob Job;
 
     private Rigidbody rigidbody;
    
@@ -46,7 +46,7 @@ public class PlayerCtrl : MonoBehaviour {
     {
         rigidbody = GetComponent<Rigidbody>();
 
-      
+        Job = GetComponent<CharacterInformation>().Job;
 
     }
 	
@@ -69,7 +69,7 @@ public class PlayerCtrl : MonoBehaviour {
         h = Input.GetAxis("Horizontal");//a,d
         v = Input.GetAxis("Vertical");// w,s
 
-        direction = new Vector3(h, 0.0f, v);
+        direction  = new Vector3(h, 0.0f, v);
 
         
         Vector3 cameraFoward = new Vector3(cameraLookAt.transform.forward.x, 0.0f, cameraLookAt.transform.forward.z).normalized;
@@ -86,7 +86,7 @@ public class PlayerCtrl : MonoBehaviour {
                 moveDir , rotateSpeed * Time.deltaTime);
 
 
-        if (Job == PlayerJob.ARCHER && IsLeftMouseStay) // 마우수 왼쪽누를떄 캐릭터 회전가능 ... 조준용
+        if (Job == CharacterInformation.PlayerJob.ARCHER && IsLeftMouseStay) // 마우수 왼쪽누를떄 캐릭터 회전가능 ... 조준용
         {
             rigidbody.MoveRotation(TurnRotation);
         }

@@ -6,6 +6,7 @@ public class FollowCam : MonoBehaviour
 {
     public GameObject Target;
     private Transform cameraTr;
+    private CharacterInformation.PlayerJob Job;
 
     public float distance = 5.0f;
     public float height = 5.0f;
@@ -18,11 +19,13 @@ public class FollowCam : MonoBehaviour
     private float Height_fix = 15.0f;
     private Vector3 rotate = Vector3.zero;
     public Quaternion CameraXRot;
-    Quaternion b;
+
     // Use this for initialization
     void Start ()
     {
         cameraTr = GetComponent<Transform>();
+        Job = Target.GetComponent<CharacterInformation>().Job;
+        Debug.Log(Job);
         //rotate = new Vector3(cameraAngle, 0.0f, 0);
         // cameraTr.Rotate(rotate);
     }
@@ -31,9 +34,9 @@ public class FollowCam : MonoBehaviour
     void LateUpdate()
     {
         PlayerCtrl pPlayerCtrl = Target.GetComponent<PlayerCtrl>();
-        PlayerCtrl.PlayerJob Job = pPlayerCtrl.Job;
+        
 
-        if (Job == PlayerCtrl.PlayerJob.ARCHER)
+        if (Job == CharacterInformation.PlayerJob.ARCHER)
         {
             if (pPlayerCtrl.IsLeftMouseStay)
             {

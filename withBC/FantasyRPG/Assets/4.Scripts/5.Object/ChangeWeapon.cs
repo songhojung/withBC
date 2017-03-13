@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class ChangeWeapon : MonoBehaviour
 {
-    PlayerCtrl playerCtrl;
+ 
     // Use this for initialization
     Dictionary<string, GameObject> WeaponResource = new Dictionary<string, GameObject>();
     void Start ()
     {
-        playerCtrl = GetComponent<PlayerCtrl>();
-        PlayerCtrl.PlayerJob Job = playerCtrl.Job;
+
 
         //Transform particleObj = (Transform)Instantiate(
         //    Resources.Load("Tank_tutorial/Prefabs/TankExplosion",

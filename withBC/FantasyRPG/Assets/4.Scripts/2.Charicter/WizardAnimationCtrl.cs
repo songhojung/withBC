@@ -70,6 +70,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
         //무기바꾸기 콜백함수
         switchDel = new SwichingWeaPon.SwitchWeaponEvent(SwichingWeaPon.SwithcingWeapon);
         Mode = GetComponent<CharacterInformation>()._mode;
+        
 
     }
 
@@ -215,7 +216,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
             }
 
 
-            //Debug.Log(wizardState);
+           // Debug.Log(wizardState);
             yield return null;
         }
     }

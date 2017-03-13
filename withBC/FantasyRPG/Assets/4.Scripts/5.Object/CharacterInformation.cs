@@ -26,6 +26,10 @@ public class CharacterInformation : MonoBehaviour {
         NPC, PLAYER
     };
 
+    public enum PlayerJob { NONE, WARRIOR, ARCHER, WIZARD };
+
+
+    public PlayerJob Job = PlayerJob.NONE;
     public MODE _mode;
 	// Use this for initialization
 	void Start () {
