@@ -37,7 +37,7 @@ public class PlayerCtrl : MonoBehaviour {
     public bool IsKey_Shift = false;
 
     public GameObject cameraLookAt;
-    private FollowCam followCam;
+
 
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 5.0f;
@@ -53,7 +53,7 @@ public class PlayerCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        followCam = cameraLookAt.gameObject.GetComponent<FollowCam>();
+
         IsLeftMouseDown = Input.GetMouseButtonDown(0);
         IsLeftMouseUp = Input.GetMouseButtonUp(0);
         IsLeftMouseStay = Input.GetMouseButton(0);
@@ -77,7 +77,7 @@ public class PlayerCtrl : MonoBehaviour {
 
 
         Vector3 vecRotate = Vector3.zero;
-        vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
+        vecRotate = new Vector3(cameraLookAt.transform.eulerAngles.x, cameraLookAt.transform.eulerAngles.y, 0);
         Quaternion TurnRotation = Quaternion.Euler(vecRotate);
 
 
@@ -90,17 +90,22 @@ public class PlayerCtrl : MonoBehaviour {
         {
             rigidbody.MoveRotation(TurnRotation);
         }
+        else if(Job == CharacterInformation.PlayerJob.ARCHER && IsLeftMouseUp)
+        {
+            //vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
+            //TurnRotation = Quaternion.Euler(vecRotate);
+            //rigidbody.MoveRotation(TurnRotation);
+        }
         else // 아닐떄는 키보드로만 캐릭터 회전
         {
-           
-            
-            //rigidbody.transform.LookAt(rigidbody.transform.position + camera.transform.forward);
 
-            
+            //rigidbody.transform.LookAt(rigidbody.transform.position + camera.transform.forward);
+            rigidbody.transform.LookAt(rigidbody.transform.position + forward); 
+
         }
 
         //캐릭터 봐라보는방향 변경
-        rigidbody.transform.LookAt(rigidbody.transform.position + forward);
+    
         
         //마우스로 캐릭터회전
         //rigidbody.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime * Input.GetAxis("Mouse X") * 20);
