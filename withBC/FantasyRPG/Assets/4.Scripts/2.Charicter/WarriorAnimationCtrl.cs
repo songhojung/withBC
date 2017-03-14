@@ -24,18 +24,31 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     public bool IsRightMouseDown = false;
     public bool IsJump = false;
     private float NowComboTime = 0.0f;
-    private float[] AttackClipLength; 
+    private float[] AttackClipLength;
 
+    private PlayerCtrl pPlayerCtrl;
+    private MoveNPC Move_Npc;
     // Use this for initialization
     void Start()
     {
         WarriorAnimator = GetComponent<Animator>();
         Mode = GetComponent<CharacterInformation>()._mode;
-
+        switch (Mode)
+        {
+            case CharacterInformation.MODE.PLAYER:
+                pPlayerCtrl = GetComponent<PlayerCtrl>();
+                Move_Npc = null;
+                break;
+            case CharacterInformation.MODE.NPC:
+                pPlayerCtrl = null;
+                Move_Npc = GetComponent<MoveNPC>();
+                break;
+        }
         StartCoroutine(CheckWarriorState());
         StartCoroutine(WarriorAction());
         StartCoroutine(WarriorComboAttack());
-       
+        //pPlayerCtrl = GetComponent<PlayerCtrl>();
+        
         
     }
 
@@ -80,7 +93,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     {
         if (Mode == CharacterInformation.MODE.PLAYER)
         {
-            PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
             Direction = pPlayerCtrl.direction;
             IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
             IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
@@ -189,7 +201,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     { 
         if (Mode == CharacterInformation.MODE.NPC)
         {
-            MoveNPC Move_Npc = GetComponent<MoveNPC>();
+            
             Direction = Move_Npc.direction;
             IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
             IsRightMouseDown = Move_Npc.IsRightMouseDown;
