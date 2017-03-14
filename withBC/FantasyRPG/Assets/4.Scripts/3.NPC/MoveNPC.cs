@@ -99,7 +99,7 @@ public class MoveNPC : MonoBehaviour {
                     if(Vector3.Distance(TargetNav.destination,TargetPoint.transform.position) >= 10)
                         TargetNav.destination = TargetPoint.transform.position;
                     Vector3 direct = rigibody.transform.forward;
-                    rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
+                    //rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
                     direction = direct;
                 }
                 
