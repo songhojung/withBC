@@ -44,17 +44,14 @@ public class ArcherAnimationCtrl : MonoBehaviour {
     private Vector3 direction = Vector3.zero;
 
     private PlayerCtrl pPlayerCtrl;
+    private MoveNPC Move_Npc;
+
     //AnimationState anistate;
     //AnimationBlendMode
 
     void Start ()
     {
         pPlayerCtrl = GetComponent<PlayerCtrl>();
-        StartCoroutine(CheckArcherState());
-        StartCoroutine(ArcherAction());
-        ArcherAnimation[Jump].speed = 1.4f;
-        ArcherAnimation[GetArrow].speed = 2.5f;
-        ArrowObject.active = false;
 
         Mode = GetComponent<CharacterInformation>()._mode;
 
@@ -62,13 +59,21 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         {
             case CharacterInformation.MODE.PLAYER:
                 pPlayerCtrl = GetComponent<PlayerCtrl>();
+                Move_Npc = null;
                 break;
-
             case CharacterInformation.MODE.NPC:
                 pPlayerCtrl = null;
+                Move_Npc = GetComponent<MoveNPC>();
                 break;
-
         }
+
+        StartCoroutine(CheckArcherState());
+        StartCoroutine(ArcherAction());
+        ArcherAnimation[Jump].speed = 1.4f;
+        ArcherAnimation[GetArrow].speed = 2.5f;
+        ArrowObject.active = false;
+
+        
 
 
     }
@@ -78,104 +83,216 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
         while (!IsDie)
         {
-            if (Mode == CharacterInformation.MODE.PLAYER)
+            switch(Mode)
             {
-                
-                direction = pPlayerCtrl.direction;
-                IsJump = pPlayerCtrl.IsJump;
-                IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
-                IsLeftMouseUp = pPlayerCtrl.IsLeftMouseUp;
-                IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
-                IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
-            }
-
-            if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
-                && !ArcherAnimation.IsPlaying(GetArrow)&& !ArcherAnimation.IsPlaying(Aim)
-                && !ArcherAnimation.IsPlaying(Attack1) && !ArcherAnimation.IsPlaying(Attack2))
-            {
-                
-                if (direction.magnitude >= 0.1f)
-                {
-                    archerState = ArcherState.RUN;
-                }
-                else if(IsCombat)
-                {
-                    archerState = ArcherState.BOWIDLE;
-                }
-                else if (direction.magnitude <= 0.0f)
-                {
-                    archerState = ArcherState.SWORDIDLE;
-                }
-                
-            }
-            
-            if (IsJump)
-            {
-                archerState = ArcherState.JUMP;
-            }
-
-            if (IsLeftMouseDown)
-            {
-                archerState = ArcherState.GETARROW;
-                ArrowObject.active = true;
-
-
-            }
-            else if(IsLeftMouseUp)
-            {
-                if (IsReadyForShoot)
-                {
-                    archerState = ArcherState.BOWSHOOT;
-                    IsReadyForShoot = false;
-                    ArrowObject.active = false;
-                }
-            }
-
-            if (IsLeftMouseStay)
-            {
-                if (archerState == ArcherState.GETARROW)
-                {
-                    if (ArcherAnimation.IsPlaying(GetArrow))
-                    {
-                        if (ArcherAnimation[GetArrow].normalizedTime >= 0.80f)
-                        {
-                            Debug.Log("활당기기준비완료");
-                            archerState = ArcherState.AIM;
-                        }
-                    }
-                }
-                else if (archerState == ArcherState.AIM)
-                {
-                    Debug.Log("활당기는중");
-                    archerState = ArcherState.AIM;
-                    if (ArcherAnimation.IsPlaying(Aim))
-                    {
-                        Debug.Log("쏘기준비완료");
-                        IsReadyForShoot = true;
-                        IsCombat = true;
-                    }
-                }
-            }
-
-            //오른쪽 공격
-            if(IsRightMouseDown)
-            {
-                archerState = ArcherState.ATTACK1;
-            }
-            
-            //공격자세 온!
-            if (IsCombat)
-            {
-                ReadyCombatTime += Time.deltaTime;
-                if (ReadyCombatTime >= 4.0f)
-                {
-                    ReadyCombatTime = 0.0f;
-                    IsCombat = false;
-                }
+                case CharacterInformation.MODE.PLAYER:
+                    PlayerMode();
+                    break;
+                case CharacterInformation.MODE.NPC:
+                    AIMode();
+                    break;
             }
 
             //Debug.Log(archerState);
             yield return null;
+        }
+    }
+
+    private void PlayerMode()
+    {
+        if (Mode == CharacterInformation.MODE.PLAYER)
+        {
+
+            direction = pPlayerCtrl.direction;
+            IsJump = pPlayerCtrl.IsJump;
+            IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
+            IsLeftMouseUp = pPlayerCtrl.IsLeftMouseUp;
+            IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
+            IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
+        }
+
+        if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
+            && !ArcherAnimation.IsPlaying(GetArrow) && !ArcherAnimation.IsPlaying(Aim)
+            && !ArcherAnimation.IsPlaying(Attack1) && !ArcherAnimation.IsPlaying(Attack2))
+        {
+
+            if (direction.magnitude >= 0.1f)
+            {
+                archerState = ArcherState.RUN;
+            }
+            else if (IsCombat)
+            {
+                archerState = ArcherState.BOWIDLE;
+            }
+            else if (direction.magnitude <= 0.0f)
+            {
+                archerState = ArcherState.SWORDIDLE;
+            }
+
+        }
+
+        if (IsJump)
+        {
+            archerState = ArcherState.JUMP;
+        }
+
+        if (IsLeftMouseDown)
+        {
+            archerState = ArcherState.GETARROW;
+            ArrowObject.active = true;
+
+
+        }
+        else if (IsLeftMouseUp)
+        {
+            if (IsReadyForShoot)
+            {
+                archerState = ArcherState.BOWSHOOT;
+                IsReadyForShoot = false;
+                ArrowObject.active = false;
+            }
+        }
+
+        if (IsLeftMouseStay)
+        {
+            if (archerState == ArcherState.GETARROW)
+            {
+                if (ArcherAnimation.IsPlaying(GetArrow))
+                {
+                    if (ArcherAnimation[GetArrow].normalizedTime >= 0.80f)
+                    {
+                        Debug.Log("활당기기준비완료");
+                        archerState = ArcherState.AIM;
+                    }
+                }
+            }
+            else if (archerState == ArcherState.AIM)
+            {
+                Debug.Log("활당기는중");
+                archerState = ArcherState.AIM;
+                if (ArcherAnimation.IsPlaying(Aim))
+                {
+                    Debug.Log("쏘기준비완료");
+                    IsReadyForShoot = true;
+                    IsCombat = true;
+                }
+            }
+        }
+
+        //오른쪽 공격
+        if (IsRightMouseDown)
+        {
+            archerState = ArcherState.ATTACK1;
+        }
+
+        //공격자세 온!
+        if (IsCombat)
+        {
+            ReadyCombatTime += Time.deltaTime;
+            if (ReadyCombatTime >= 4.0f)
+            {
+                ReadyCombatTime = 0.0f;
+                IsCombat = false;
+            }
+        }
+    }
+
+    private void AIMode()
+    {
+        if (Mode == CharacterInformation.MODE.NPC)
+        {
+
+            direction = Move_Npc.direction;
+            IsJump = Move_Npc.IsJump;
+            IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
+            IsLeftMouseUp = Move_Npc.IsLeftMouseUp;
+            IsLeftMouseStay = Move_Npc.IsLeftMouseStay;
+            IsRightMouseDown = Move_Npc.IsRightMouseDown;
+        }
+
+        if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
+            && !ArcherAnimation.IsPlaying(GetArrow) && !ArcherAnimation.IsPlaying(Aim)
+            && !ArcherAnimation.IsPlaying(Attack1) && !ArcherAnimation.IsPlaying(Attack2))
+        {
+
+            if (direction.magnitude >= 0.1f)
+            {
+                archerState = ArcherState.RUN;
+            }
+            else if (IsCombat)
+            {
+                archerState = ArcherState.BOWIDLE;
+            }
+            else if (direction.magnitude <= 0.0f)
+            {
+                archerState = ArcherState.SWORDIDLE;
+            }
+
+        }
+
+        if (IsJump)
+        {
+            archerState = ArcherState.JUMP;
+        }
+
+        if (IsLeftMouseDown)
+        {
+            archerState = ArcherState.GETARROW;
+            ArrowObject.active = true;
+
+
+        }
+        else if (IsLeftMouseUp)
+        {
+            if (IsReadyForShoot)
+            {
+                archerState = ArcherState.BOWSHOOT;
+                IsReadyForShoot = false;
+                ArrowObject.active = false;
+            }
+        }
+
+        if (IsLeftMouseStay)
+        {
+            if (archerState == ArcherState.GETARROW)
+            {
+                if (ArcherAnimation.IsPlaying(GetArrow))
+                {
+                    if (ArcherAnimation[GetArrow].normalizedTime >= 0.80f)
+                    {
+                        Debug.Log("활당기기준비완료");
+                        archerState = ArcherState.AIM;
+                    }
+                }
+            }
+            else if (archerState == ArcherState.AIM)
+            {
+                Debug.Log("활당기는중");
+                archerState = ArcherState.AIM;
+                if (ArcherAnimation.IsPlaying(Aim))
+                {
+                    Debug.Log("쏘기준비완료");
+                    IsReadyForShoot = true;
+                    IsCombat = true;
+                }
+            }
+        }
+
+        //오른쪽 공격
+        if (IsRightMouseDown)
+        {
+            archerState = ArcherState.ATTACK1;
+        }
+
+        //공격자세 온!
+        if (IsCombat)
+        {
+            ReadyCombatTime += Time.deltaTime;
+            if (ReadyCombatTime >= 4.0f)
+            {
+                ReadyCombatTime = 0.0f;
+                IsCombat = false;
+            }
         }
     }
 
