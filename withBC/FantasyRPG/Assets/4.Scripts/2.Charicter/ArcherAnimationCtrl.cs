@@ -51,8 +51,6 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
     void Start ()
     {
-        pPlayerCtrl = GetComponent<PlayerCtrl>();
-
         Mode = GetComponent<CharacterInformation>()._mode;
 
         switch (Mode)
