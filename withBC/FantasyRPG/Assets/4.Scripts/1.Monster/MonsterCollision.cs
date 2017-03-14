@@ -27,8 +27,8 @@ public class MonsterCollision : MonoBehaviour {
         // 피 이펙트
           
             Vector3 EffectPos = new Vector3(collider.transform.position.x, collider.transform.position.y+1, collider.transform.position.z);
-            GameObject Bloodeffect = (GameObject)Instantiate(Resources.Load("DecalBloodSplatEffect",typeof(GameObject)),
-               EffectPos, Quaternion.identity);
+            GameObject Bloodeffect = EffectManager.Instance.CreatAndGetEffect("DecalBloodSplatEffect", 
+                EffectPos, Quaternion.identity);
 
             Bloodeffect.transform.LookAt(this.gameObject.transform);
             Bloodeffect.transform.eulerAngles = new Vector3(Bloodeffect.transform.eulerAngles.x, Bloodeffect.transform.eulerAngles.y,
@@ -39,14 +39,15 @@ public class MonsterCollision : MonoBehaviour {
         // 피 데칼
             Vector3 decalPos = gameObject.transform.position + (Vector3.up * 0.05f);
             Quaternion decalRot = Quaternion.Euler(90, 0, Random.Range(0, 360));
-
-            GameObject BloodDecal = (GameObject)Instantiate(Resources.Load("Blood04",typeof(GameObject)), decalPos, decalRot);
-
+          
+            GameObject BloodDecal = EffectManager.Instance.CreatAndGetEffect("Blood04",
+                decalPos, decalRot);
             float scale = Random.Range(2.0f, 4.0f);
             BloodDecal.transform.localScale = BloodDecal.transform.localScale * scale;
 
             Destroy(BloodDecal, 2.5f);
 
         }
+       
     }
 }

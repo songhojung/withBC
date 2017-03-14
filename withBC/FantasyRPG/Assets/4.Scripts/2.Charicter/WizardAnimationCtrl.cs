@@ -31,7 +31,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     };
     
     public Animation WizardAnimation;
-    public PlayerCtrl pPlayerCtrl;
+    private PlayerCtrl pPlayerCtrl;
 
     // 무기바꾸기 델리게이트 선언
     private SwichingWeaPon.SwitchWeaponEvent switchDel;
@@ -65,11 +65,25 @@ public class WizardAnimationCtrl : MonoBehaviour {
    
     void Start()
     {
+        
         StartCoroutine(CheckArcherState());
         StartCoroutine(WizardAction());
         //무기바꾸기 콜백함수
         switchDel = new SwichingWeaPon.SwitchWeaponEvent(SwichingWeaPon.SwithcingWeapon);
         Mode = GetComponent<CharacterInformation>()._mode;
+
+        switch (Mode)
+        {
+            case CharacterInformation.MODE.PLAYER:
+                pPlayerCtrl = GetComponent<PlayerCtrl>();
+                break;
+
+            case CharacterInformation.MODE.NPC:
+                pPlayerCtrl = null;
+                break;
+
+        }
+
         
 
     }

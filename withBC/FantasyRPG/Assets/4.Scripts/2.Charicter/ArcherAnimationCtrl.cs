@@ -42,11 +42,14 @@ public class ArcherAnimationCtrl : MonoBehaviour {
     private bool IsCombat = false;
     private float ReadyCombatTime = 0.0f;
     private Vector3 direction = Vector3.zero;
+
+    private PlayerCtrl pPlayerCtrl;
     //AnimationState anistate;
     //AnimationBlendMode
 
-	void Start ()
+    void Start ()
     {
+        pPlayerCtrl = GetComponent<PlayerCtrl>();
         StartCoroutine(CheckArcherState());
         StartCoroutine(ArcherAction());
         ArcherAnimation[Jump].speed = 1.4f;
@@ -54,6 +57,18 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         ArrowObject.active = false;
 
         Mode = GetComponent<CharacterInformation>()._mode;
+
+        switch (Mode)
+        {
+            case CharacterInformation.MODE.PLAYER:
+                pPlayerCtrl = GetComponent<PlayerCtrl>();
+                break;
+
+            case CharacterInformation.MODE.NPC:
+                pPlayerCtrl = null;
+                break;
+
+        }
 
 
     }
@@ -65,7 +80,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         {
             if (Mode == CharacterInformation.MODE.PLAYER)
             {
-                PlayerCtrl pPlayerCtrl = GetComponent<PlayerCtrl>();
+                
                 direction = pPlayerCtrl.direction;
                 IsJump = pPlayerCtrl.IsJump;
                 IsLeftMouseDown = pPlayerCtrl.IsLeftMouseDown;
