@@ -14,8 +14,8 @@ public class MoveNPC : MonoBehaviour {
 
     private Rigidbody rigibody;
 
-    private float h = 0.0f;
-    private float v = 0.0f;
+    //private float h = 0.0f;
+    //private float v = 0.0f;
 
     [System.NonSerialized]
     public Vector3 direction = Vector3.zero;
@@ -55,18 +55,23 @@ public class MoveNPC : MonoBehaviour {
 
     public GameObject TargetPoint;
 
-    private NavMeshAgent TargetNav;
+    public NavMeshAgent TargetNav;
+
+    public GameObject[] TargetMonster;
+
+    public float AngularSpeed = 5.0f;
+
     // Use this for initialization
     void Start () {
         DetectMon = GetComponent<DetectMonster>();
         rigibody = GetComponent<Rigidbody>();
-        TargetNav = GetComponent<NavMeshAgent>();
+        //TargetNav = GetComponent<NavMeshAgent>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate ()
     {
-        isMonster = DetectMon.isMonster;
+        isMonster = DetectMon.FollowMonster;
 
         if(!isMove)
             direction = Vector3.zero;
@@ -83,6 +88,9 @@ public class MoveNPC : MonoBehaviour {
             case PlayerState.Follow:
                 FollowMove();
                 break;
+            case PlayerState.Detect:
+                DetectMove();
+                break;
         }
     }
 
@@ -96,7 +104,7 @@ public class MoveNPC : MonoBehaviour {
 
                 if(TargetNav.enabled)
                 {
-                    if(Vector3.Distance(TargetNav.destination,TargetPoint.transform.position) >= 10)
+                    if(Vector3.Distance(TargetNav.destination,TargetPoint.transform.position) >= 1.0f)
                         TargetNav.destination = TargetPoint.transform.position;
                     Vector3 direct = rigibody.transform.forward;
                     //rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
@@ -148,7 +156,24 @@ public class MoveNPC : MonoBehaviour {
 
     private void DetectMove()
     {
+        if (isMonster)
+        {
+            if (TargetNav)
+            {
+                if (TargetNav.enabled)
+                    TargetNav.enabled = true;
+            }
 
+            if (TargetMonster.Length>0)
+            {
+                TargetNav.destination = TargetMonster[0].transform.position;
+                //Vector3 direction = TargetMonster.transform.position - transform.position;
+                //Quaternion drot = Quaternion.LookRotation(direction);
+                //float timeSpeed = AngularSpeed * Time.deltaTime / Quaternion.Angle(transform.rotation, drot);
+                //Quaternion rot = Quaternion.Slerp(transform.rotation, drot, timeSpeed);
+                //transform.rotation = rot;
+            }
+        }
     }
 
     private void AttackMove()

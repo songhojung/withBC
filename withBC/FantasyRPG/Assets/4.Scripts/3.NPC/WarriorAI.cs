@@ -6,13 +6,15 @@ public class WarriorAI : MonoBehaviour
 {
 
     private WarriorAnimationCtrl warriorAniCtrl;
-
-  
+    //private DetectMonster _detectMonster;
+    //private MoveNPC _move;
 
     // Use this for initialization
     void Start()
     {
         warriorAniCtrl = GetComponent<WarriorAnimationCtrl>();
+        //_detectMonster = GetComponent<DetectMonster>();
+        //_move = GetComponent<MoveNPC>();
 
     }
 
