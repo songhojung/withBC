@@ -13,6 +13,7 @@ public class PlayerCtrl : MonoBehaviour {
     private float h = 0.0f;
     private float v = 0.0f;
     private bool IsShot = false;
+    private Vector3 PrevPosition = Vector3.zero;
 
     [System.NonSerialized]
     public Vector3 direction = Vector3.zero;
@@ -43,12 +44,14 @@ public class PlayerCtrl : MonoBehaviour {
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 5.0f;
 
+    private Transform BipTr;
+
     void Start ()
     {
         rigidbody = GetComponent<Rigidbody>();
 
         Job = GetComponent<CharacterInformation>().Job;
-
+        BipTr = GameObject.Find("Bip01").gameObject.GetComponent<Transform>();
     }
 	
 	// Update is called once per frame
@@ -91,8 +94,8 @@ public class PlayerCtrl : MonoBehaviour {
             vecRotate = new Vector3(cameraLookAt.transform.eulerAngles.x, cameraLookAt.transform.eulerAngles.y, 0);
             Quaternion TurnRotation = Quaternion.Euler(vecRotate);
 
-
             rigidbody.MoveRotation(TurnRotation);
+            
             IsShot = false;
         }
         else if(Job == CharacterInformation.PlayerJob.ARCHER && IsLeftMouseUp)
@@ -101,6 +104,7 @@ public class PlayerCtrl : MonoBehaviour {
             //vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
             //TurnRotation = Quaternion.Euler(vecRotate);
             //rigidbody.MoveRotation(TurnRotation);
+           
         }
         else // 아닐떄는 키보드로만 캐릭터 회전
         {
@@ -108,12 +112,9 @@ public class PlayerCtrl : MonoBehaviour {
             //rigidbody.transform.LookAt(rigidbody.transform.position + camera.transform.forward);
             if(IsShot)
             {
-                Vector3 vecRotate = Vector3.zero;
-                vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
-                Quaternion TurnRotation = Quaternion.Euler(vecRotate);
-                rigidbody.MoveRotation(TurnRotation);
-                IsShot = false;
+
             }
+            PrevPosition = rigidbody.transform.eulerAngles;
             rigidbody.transform.LookAt(rigidbody.transform.position + forward); 
 
         }
