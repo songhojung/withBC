@@ -38,9 +38,9 @@ public class DetectMonster : MonoBehaviour {
             if (Monster.Count <= 0)
             {
                 isMonster = false;
+                FollowMonster = false;
             }
             StartCoroutine(CheckNearest());
-
         }
 	}
 
@@ -112,8 +112,6 @@ public class DetectMonster : MonoBehaviour {
                 {
                     Monster[i] = null;
                     Monster.Remove(Monster[i]);
-                    isMonster = false;
-                    FollowMonster = false;
                 }
             }
             
