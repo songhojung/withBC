@@ -12,6 +12,7 @@ public class PlayerCtrl : MonoBehaviour {
    
     private float h = 0.0f;
     private float v = 0.0f;
+    private bool IsShot = false;
 
     [System.NonSerialized]
     public Vector3 direction = Vector3.zero;
@@ -76,9 +77,7 @@ public class PlayerCtrl : MonoBehaviour {
         Vector3 moveDir = (cameraFoward * v) + (cameraLookAt.transform.right * h);
 
 
-        Vector3 vecRotate = Vector3.zero;
-        vecRotate = new Vector3(cameraLookAt.transform.eulerAngles.x, cameraLookAt.transform.eulerAngles.y, 0);
-        Quaternion TurnRotation = Quaternion.Euler(vecRotate);
+      
 
 
 
@@ -88,10 +87,17 @@ public class PlayerCtrl : MonoBehaviour {
 
         if (Job == CharacterInformation.PlayerJob.ARCHER && IsLeftMouseStay) // 마우수 왼쪽누를떄 캐릭터 회전가능 ... 조준용
         {
+            Vector3 vecRotate = Vector3.zero;
+            vecRotate = new Vector3(cameraLookAt.transform.eulerAngles.x, cameraLookAt.transform.eulerAngles.y, 0);
+            Quaternion TurnRotation = Quaternion.Euler(vecRotate);
+
+
             rigidbody.MoveRotation(TurnRotation);
+            IsShot = false;
         }
         else if(Job == CharacterInformation.PlayerJob.ARCHER && IsLeftMouseUp)
         {
+            IsShot = true;
             //vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
             //TurnRotation = Quaternion.Euler(vecRotate);
             //rigidbody.MoveRotation(TurnRotation);
@@ -100,6 +106,14 @@ public class PlayerCtrl : MonoBehaviour {
         {
 
             //rigidbody.transform.LookAt(rigidbody.transform.position + camera.transform.forward);
+            if(IsShot)
+            {
+                Vector3 vecRotate = Vector3.zero;
+                vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
+                Quaternion TurnRotation = Quaternion.Euler(vecRotate);
+                rigidbody.MoveRotation(TurnRotation);
+                IsShot = false;
+            }
             rigidbody.transform.LookAt(rigidbody.transform.position + forward); 
 
         }
