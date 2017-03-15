@@ -44,12 +44,14 @@ public class PlayerCtrl : MonoBehaviour {
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 5.0f;
 
+    private Transform BipTr;
+
     void Start ()
     {
         rigidbody = GetComponent<Rigidbody>();
 
         Job = GetComponent<CharacterInformation>().Job;
-
+        BipTr = GameObject.Find("Bip01").gameObject.GetComponent<Transform>();
     }
 	
 	// Update is called once per frame
@@ -93,6 +95,7 @@ public class PlayerCtrl : MonoBehaviour {
             Quaternion TurnRotation = Quaternion.Euler(vecRotate);
 
             rigidbody.MoveRotation(TurnRotation);
+            
             IsShot = false;
         }
         else if(Job == CharacterInformation.PlayerJob.ARCHER && IsLeftMouseUp)
@@ -101,8 +104,7 @@ public class PlayerCtrl : MonoBehaviour {
             //vecRotate = new Vector3(0, cameraLookAt.transform.eulerAngles.y, 0);
             //TurnRotation = Quaternion.Euler(vecRotate);
             //rigidbody.MoveRotation(TurnRotation);
-            Quaternion TurnRotation = Quaternion.Euler(PrevPosition);
-            rigidbody.MoveRotation(TurnRotation);
+           
         }
         else // 아닐떄는 키보드로만 캐릭터 회전
         {
