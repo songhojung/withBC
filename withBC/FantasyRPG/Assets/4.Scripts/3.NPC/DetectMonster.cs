@@ -9,7 +9,9 @@ public class DetectMonster : MonoBehaviour {
 
     public bool FollowMonster = false;
 
-    public GameObject[] Monster;
+    //public GameObject[] Monster = null;
+    //public GameObject[] Monster;
+    public List<GameObject> Monster = new List<GameObject>();
     public GameObject NearestMonster;
     private MoveNPC _move;
 
@@ -26,17 +28,19 @@ public class DetectMonster : MonoBehaviour {
 	void Update () {
 		if(!isMonster)
         {
-            if(Monster.Length>0)
+            if(Monster.Count>0)
             {
                 isMonster = true;
             }
         }
         else
         {
-            if (Monster.Length <= 0)
+            if (Monster.Count <= 0)
             {
                 isMonster = false;
             }
+            StartCoroutine(CheckNearest());
+
         }
 	}
 
@@ -46,33 +50,25 @@ public class DetectMonster : MonoBehaviour {
         {
             if (other.CompareTag("Monster"))
             {
-                if (Monster.Length <= 0)
-                {
-                    Monster[0] = other.gameObject;
-                    isMonster = true;
-                    _move.TargetMonster[0] = Monster[0].gameObject;
-                }
-                else
-                {
-                    Monster[Monster.Length + 1] = other.gameObject;
-                    isMonster = true;
-                    _move.TargetMonster[Monster.Length+1] = Monster[0].gameObject;
-                }
+                
+                isMonster = true;
+                Monster.Add(other.gameObject);
+                //_move.TargetMonster.Add(other.gameObject);
             }
         }
         else
         {
             if (other.CompareTag("Monster"))
             {
-                if (Monster.Length <= 0)
+                if (Monster.Count <= 0)
                 {
-                    Monster[0] = other.gameObject;
-                    _move.TargetMonster[0] = Monster[0].gameObject;
+                    Monster.Add(other.gameObject);
+                    //_move.TargetMonster.Add(other.gameObject);
                 }
                 else
                 {
-                    Monster[Monster.Length + 1] = other.gameObject;
-                    _move.TargetMonster[Monster.Length + 1] = Monster[0].gameObject;
+                    Monster.Add(other.gameObject);
+                    //_move.TargetMonster.Add(other.gameObject);
                 }
             }
         }
@@ -86,7 +82,7 @@ public class DetectMonster : MonoBehaviour {
             {
                 if (other.CompareTag("Monster"))
                 {
-                    for (int i = 0; i < Monster.Length; i++)
+                    for (int i = 0; i < Monster.Count; i++)
                     {
                         if (other == Monster[i])
                         {
@@ -110,16 +106,17 @@ public class DetectMonster : MonoBehaviour {
     {
         if (isMonster)
         {
-            for (int i = 0; i < Monster.Length; i++)
+            for (int i = 0; i < Monster.Count; i++)
             {
                 if (other.gameObject == Monster[i])
                 {
-                    Monster = null;
+                    Monster[i] = null;
+                    Monster.Remove(Monster[i]);
                     isMonster = false;
-                    _move.TargetMonster = null;
                     FollowMonster = false;
                 }
             }
+            
         }
     }
 
@@ -132,15 +129,21 @@ public class DetectMonster : MonoBehaviour {
                     (1 << LayerMask.NameToLayer("PatrollPoint")));        //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
+    IEnumerator CheckNearest()
+    {
+        yield return new WaitForSeconds(3.0f);
+        CheckNearMonster();
+        UpdateMoveNpcMonster();
+    }
 
     private void CheckNearMonster()
     {
         if(isMonster)
         {
-            if(Monster.Length>0)
+            if(Monster.Count>0)
             {
                 NearestMonster = Monster[0];
-                for(int i=0; i<Monster.Length; i++)
+                for(int i=0; i<Monster.Count; i++)
                 {
                     float Now = Vector3.Distance(NearestMonster.transform.position,
                                                  this.transform.position);
@@ -151,6 +154,18 @@ public class DetectMonster : MonoBehaviour {
                         NearestMonster = Monster[i];
                     }
                 }
+            }
+        }
+    }
+
+    private void UpdateMoveNpcMonster()
+    {
+        if(isMonster)
+        {
+            if(_move)
+            {
+                _move.TargetMonster = Monster;
+                _move.NearestMonster = NearestMonster;
             }
         }
     }

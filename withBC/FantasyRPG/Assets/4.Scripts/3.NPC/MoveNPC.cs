@@ -57,7 +57,9 @@ public class MoveNPC : MonoBehaviour {
 
     public NavMeshAgent TargetNav;
 
-    public GameObject[] TargetMonster;
+    public List<GameObject> TargetMonster = new List<GameObject>();
+    public GameObject NearestMonster;
+    //public GameObject[] TargetMonster;
 
     public float AngularSpeed = 5.0f;
 
@@ -163,15 +165,13 @@ public class MoveNPC : MonoBehaviour {
                 if (TargetNav.enabled)
                     TargetNav.enabled = true;
             }
-
-            if (TargetMonster.Length>0)
+            if (TargetMonster.Count>0)
             {
-                TargetNav.destination = TargetMonster[0].transform.position;
-                //Vector3 direction = TargetMonster.transform.position - transform.position;
-                //Quaternion drot = Quaternion.LookRotation(direction);
-                //float timeSpeed = AngularSpeed * Time.deltaTime / Quaternion.Angle(transform.rotation, drot);
-                //Quaternion rot = Quaternion.Slerp(transform.rotation, drot, timeSpeed);
-                //transform.rotation = rot;
+                if (DetectMon.FollowMonster)
+                {
+                    if (NearestMonster)
+                        TargetNav.destination = NearestMonster.transform.position;
+                } 
             }
         }
     }
