@@ -83,6 +83,16 @@ public class MoveNPC : MonoBehaviour {
 
     private void MoveAi()
     {
+        if(isMonster)
+        {
+            if (NowState != PlayerState.Detect)
+                NowState = PlayerState.Detect;
+        }
+        else
+        {
+            if (NowState != PlayerState.Follow)
+                NowState = PlayerState.Follow;
+        }
         switch(NowState)
         {
             case PlayerState.Search:
@@ -162,8 +172,14 @@ public class MoveNPC : MonoBehaviour {
         {
             if (TargetNav)
             {
-                if (TargetNav.enabled)
+                if (!TargetNav.enabled)
                     TargetNav.enabled = true;
+                if(TargetNav.enabled)
+                {
+                    Vector3 direct = rigibody.transform.forward;
+                    //rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
+                    direction = direct;
+                }
             }
             if (TargetMonster.Count>0)
             {
@@ -173,6 +189,7 @@ public class MoveNPC : MonoBehaviour {
                         TargetNav.destination = NearestMonster.transform.position;
                 } 
             }
+
         }
     }
 

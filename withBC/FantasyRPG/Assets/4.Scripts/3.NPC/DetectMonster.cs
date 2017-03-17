@@ -82,21 +82,27 @@ public class DetectMonster : MonoBehaviour {
             {
                 if (other.CompareTag("Monster"))
                 {
-                    for (int i = 0; i < Monster.Count; i++)
+                    if(Monster.Count>0)
                     {
-                        if (other == Monster[i])
-                        {
-                            RayCast();
-                            if (Ray.collider != null)
-                            {
-                                if (Ray.collider.tag == "Monster")
-                                {
-                                    //Monster = Ray.collider.gameObject;
-                                    FollowMonster = true;
-                                }
-                            }
-                        }
+                        FollowMonster = true;
                     }
+                    //for (int i = 0; i < Monster.Count; i++)
+                    //{
+                    //    if (other == Monster[i])
+                    //    {
+                    //        //RayCast();
+                    //        //if (Ray.collider != null)
+                    //        {
+                    //            //if (Ray.collider.tag == "Monster")
+                    //            {
+                    //                //if (NearestMonster)
+                    //                {//Monster = Ray.collider.gameObject;
+                    //                    FollowMonster = true;
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
                 }
             }
         }
@@ -121,12 +127,41 @@ public class DetectMonster : MonoBehaviour {
     private void RayCast()
     {
         Vector3 ObjPos = transform.position;
-        Vector3 ObjForward = NearestMonster.transform.position - transform.position;
-        ObjPos.y += 10.0f;
+        Vector3 ObjForward = NearestMonster.transform.position;
+        ObjPos.y += 1.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")) |
-                    (1 << LayerMask.NameToLayer("PatrollPoint")));        //layerMask = ~layerMask;
+                    (1 << LayerMask.NameToLayer("PatrollPoint")) |
+                    (1 << LayerMask.NameToLayer("NPC")) |
+                    (1 << LayerMask.NameToLayer("Default")));        //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
+
+    private void OnDrawGizmos()
+    {
+        if (NearestMonster)
+        {
+            Vector3 ObjPos = transform.position;
+            Vector3 ObjForward = NearestMonster.transform.position;
+            ObjPos.y += 1.0f;
+
+            if (this.Ray.collider != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(this.Ray.point, 1.0f);
+
+                Gizmos.color = Color.black;
+                Gizmos.DrawLine(ObjPos,
+                   ObjPos + this.transform.forward * RayDistance);
+            }
+            else
+            {
+                Gizmos.color = Color.black;
+                Gizmos.DrawLine(ObjPos,
+                     ObjPos + this.transform.forward * RayDistance);
+            }
+        }
+    }
+
     IEnumerator CheckNearest()
     {
         yield return new WaitForSeconds(3.0f);
@@ -152,6 +187,12 @@ public class DetectMonster : MonoBehaviour {
                         NearestMonster = Monster[i];
                     }
                 }
+            }
+            else
+            {
+                FollowMonster = false;
+                NearestMonster = null;
+                isMonster = false;
             }
         }
     }

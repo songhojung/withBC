@@ -214,7 +214,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
         else if (Direction.sqrMagnitude > 0.01f)
         {
-            Debug.Log("런");
+            //Debug.Log("런");
             warriorState = WarriorState.RUN;
         }
         else if (Direction.sqrMagnitude <= 0)
