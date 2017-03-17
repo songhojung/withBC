@@ -13,6 +13,7 @@ public class DetectMonster : MonoBehaviour {
     //public GameObject[] Monster;
     public List<GameObject> Monster = new List<GameObject>();
     public GameObject NearestMonster;
+    public List<GameObject> ViewMonster = new List<GameObject>();
     private MoveNPC _move;
 
     public float RayDistance = 15.0f;
@@ -50,7 +51,6 @@ public class DetectMonster : MonoBehaviour {
         {
             if (other.CompareTag("Monster"))
             {
-                
                 isMonster = true;
                 Monster.Add(other.gameObject);
                 //_move.TargetMonster.Add(other.gameObject);
@@ -62,7 +62,14 @@ public class DetectMonster : MonoBehaviour {
             {
                 if (Monster.Count <= 0)
                 {
-                    Monster.Add(other.gameObject);
+                    int Check_Count = 0;
+                    for(int i=0; i<Monster.Count; i++)
+                    {
+                        if (Monster[i] == other.gameObject)
+                            Check_Count++;
+                    }
+                    if(Check_Count <=0)
+                        Monster.Add(other.gameObject);
                     //_move.TargetMonster.Add(other.gameObject);
                 }
                 else
@@ -78,31 +85,40 @@ public class DetectMonster : MonoBehaviour {
     {
         if(isMonster)
         {
-            if (!FollowMonster)
+            //if (!FollowMonster)
+            //{
+            //    FollowMonster = true;
+            //}
+            if (other.CompareTag("Monster"))
             {
-                if (other.CompareTag("Monster"))
+                if (Monster.Count > 0)
                 {
-                    if(Monster.Count>0)
+                    for (int i = 0; i < Monster.Count; i++)
                     {
-                        FollowMonster = true;
+                        RayCast(Monster[i]);
+                        if (Ray.collider != null)
+                        {
+                            int Check_count = 0;
+                            for (int j = 0; j < ViewMonster.Count; j++)
+                            {
+                                if (ViewMonster[j] == Monster[i])
+                                {
+                                    Check_count++;
+                                }
+                            }
+                            if (Check_count <= 0)
+                            {
+                                ViewMonster.Add(Monster[i]);
+                                UpdateMoveNpcMonster();
+                            }
+                            if (!FollowMonster)
+                            {
+                                UpdateMoveNpcMonster();
+                                FollowMonster = true;
+                            }
+                            break;
+                        }
                     }
-                    //for (int i = 0; i < Monster.Count; i++)
-                    //{
-                    //    if (other == Monster[i])
-                    //    {
-                    //        //RayCast();
-                    //        //if (Ray.collider != null)
-                    //        {
-                    //            //if (Ray.collider.tag == "Monster")
-                    //            {
-                    //                //if (NearestMonster)
-                    //                {//Monster = Ray.collider.gameObject;
-                    //                    FollowMonster = true;
-                    //                }
-                    //            }
-                    //        }
-                    //    }
-                    //}
                 }
             }
         }
@@ -119,45 +135,58 @@ public class DetectMonster : MonoBehaviour {
                     Monster[i] = null;
                     Monster.Remove(Monster[i]);
                 }
+
+               
+            }
+            for(int j=0; j<ViewMonster.Count; j++)
+            {
+                if (other.gameObject == ViewMonster[j])
+                {
+                    ViewMonster[j] = null;
+                    ViewMonster.Remove(ViewMonster[j]);
+                }
             }
             
         }
     }
 
-    private void RayCast()
+    private void RayCast(GameObject Target)
     {
         Vector3 ObjPos = transform.position;
-        Vector3 ObjForward = NearestMonster.transform.position;
+        Vector3 ObjForward = Target.transform.position - transform.position;
         ObjPos.y += 1.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")) |
-                    (1 << LayerMask.NameToLayer("PatrollPoint")) |
-                    (1 << LayerMask.NameToLayer("NPC")) |
-                    (1 << LayerMask.NameToLayer("Default")));        //layerMask = ~layerMask;
+            (1 << LayerMask.NameToLayer("PatrollPoint")) |
+            (1 << LayerMask.NameToLayer("NPC")) |
+            (1 << LayerMask.NameToLayer("Default")));          //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
 
     private void OnDrawGizmos()
     {
-        if (NearestMonster)
+        for (int i = 0; i < Monster.Count; i++)
         {
-            Vector3 ObjPos = transform.position;
-            Vector3 ObjForward = NearestMonster.transform.position;
-            ObjPos.y += 1.0f;
-
-            if (this.Ray.collider != null)
+            if (Monster[i])
             {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(this.Ray.point, 1.0f);
+                Vector3 ObjPos = transform.position;
+                Vector3 ObjForward = Monster[i].transform.position - transform.position;
+                ObjPos.y += 1.0f;
 
-                Gizmos.color = Color.black;
-                Gizmos.DrawLine(ObjPos,
-                   ObjPos + this.transform.forward * RayDistance);
-            }
-            else
-            {
-                Gizmos.color = Color.black;
-                Gizmos.DrawLine(ObjPos,
-                     ObjPos + this.transform.forward * RayDistance);
+                if (this.Ray.collider != null)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawWireSphere(this.Ray.point, 1.0f);
+
+                    Gizmos.color = Color.black;
+                    Gizmos.DrawLine(ObjPos,
+                       ObjPos + ObjForward * RayDistance);
+                }
+                else
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawLine(ObjPos,
+                         ObjPos + ObjForward * RayDistance);
+                }
             }
         }
     }
@@ -165,34 +194,37 @@ public class DetectMonster : MonoBehaviour {
     IEnumerator CheckNearest()
     {
         yield return new WaitForSeconds(3.0f);
-        CheckNearMonster();
         UpdateMoveNpcMonster();
+        CheckNearMonster();
     }
 
     private void CheckNearMonster()
     {
         if(isMonster)
         {
-            if(Monster.Count>0)
+            if(ViewMonster.Count>0)
             {
-                NearestMonster = Monster[0];
-                for(int i=0; i<Monster.Count; i++)
+                NearestMonster = ViewMonster[0];
+                for(int i=0; i< ViewMonster.Count; i++)
                 {
                     float Now = Vector3.Distance(NearestMonster.transform.position,
                                                  this.transform.position);
-                    float Next = Vector3.Distance(Monster[i].transform.position,
+                    float Next = Vector3.Distance(ViewMonster[i].transform.position,
                                                  this.transform.position);
                     if(Now>Next)
                     {
-                        NearestMonster = Monster[i];
+                        NearestMonster = ViewMonster[i];
+                        UpdateMoveNpcMonster();
                     }
                 }
+                if (!FollowMonster)
+                    FollowMonster = true;
             }
             else
             {
                 FollowMonster = false;
                 NearestMonster = null;
-                isMonster = false;
+                //isMonster = false;
             }
         }
     }
@@ -203,7 +235,8 @@ public class DetectMonster : MonoBehaviour {
         {
             if(_move)
             {
-                _move.TargetMonster = Monster;
+                _move.TargetMonster = ViewMonster;
+                //_move.TargetMonster = ViewMonster;
                 _move.NearestMonster = NearestMonster;
             }
         }

@@ -196,7 +196,8 @@ public class WerewolfDetectTarget : MonoBehaviour {
         Vector3 ObjForward = transform.forward;
         ObjPos.y += 1.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster"))|
-            (1 << LayerMask.NameToLayer("PatrollPoint")));
+            (1 << LayerMask.NameToLayer("PatrollPoint"))|
+             (1 << LayerMask.NameToLayer("Default")));
         //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
