@@ -26,6 +26,8 @@ public class SpiderDetectTarget : MonoBehaviour {
     private GameObject PrefMove = null;
 
     private MonsterDetectCollider DetectColl;
+
+    private MonsterInformation Information;
     // Use this for initialization
     void Start()
     {
@@ -34,58 +36,29 @@ public class SpiderDetectTarget : MonoBehaviour {
         SpiderAni = GetComponent<SpiderAnimation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
         DetectColl = GetComponent<MonsterDetectCollider>();
+
+        Information = GetComponent<MonsterInformation>();
         //StartCoroutine(Checkeverything());
     }
 
-    //IEnumerator Checkeverything()
-    //{
-    //    while (!isDie)
-    //    {
-    //        RayCast();
-    //        if (Ray.collider != null && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_ROAR)
-    //        {
-    //            if (Ray.collider.tag == "Player")
-    //            {
-    //                if (WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_WALK || WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_RUN)
-    //                {
-    //                    WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_ROAR;
-    //                }
-    //            }
-    //            else
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
-    //                {
-    //                    WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
-    //                }
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (!WolfAnimation.Werewolf.IsPlaying("Roar"))
-    //            {
-    //                agent.destination = target.transform.position;
-    //                if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
-    //                {
-    //                    WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
-    //                }
-    //            }
-    //        }
-    //        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-    //        //transform.LookAt(transform.position + transform.forward);
-    //        Move.transform.LookAt(transform.position + transform.forward);
-
-    //        yield return null;
-    //    }
-    //}
     void Update()
     {
         if (!isDie)
         {
+            if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+            {
+                if (agent.enabled)
+                    agent.enabled = false;
+            }
+            else
+            {
+                if (!agent.enabled)
+                    agent.enabled = true;
+            }
             RayCast();
             RandDetect();
         }
-        
+        Information.isDie = isDie;
 
     }
     // Update is called once per frame
@@ -144,7 +117,16 @@ public class SpiderDetectTarget : MonoBehaviour {
 
             if (SpiderAni.NowState == SpiderAnimation.S_STATE.S_RUN)
             {
-                agent.destination = target.transform.position;
+                if (agent.enabled)
+                {
+                    if (target)
+                    {
+                        if (Vector3.Distance(agent.destination, target.transform.position) >= 2.0f)
+                        {
+                            agent.destination = target.transform.position;
+                        }
+                    }
+                }
             }
 
 
@@ -189,6 +171,11 @@ public class SpiderDetectTarget : MonoBehaviour {
                         SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
                         //}
                     }
+                    else if (target != DetectColl.target)
+                    {
+                        target = null;
+                        target = DetectColl.target;
+                    }
                 }
                 else if (Vector3.Distance(DetectColl.target.transform.position, transform.position) <= 10.0f)
                 {
@@ -204,6 +191,11 @@ public class SpiderDetectTarget : MonoBehaviour {
                         PatrollPt.findPlayer = true;
                         SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
                         //}
+                    }
+                    else if (target != DetectColl.target)
+                    {
+                        target = null;
+                        target = DetectColl.target;
                     }
                 }
             }
@@ -222,8 +214,10 @@ public class SpiderDetectTarget : MonoBehaviour {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
         ObjPos.y += 1.0f;
+        ObjPos.y += 2.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
-                    (1 << LayerMask.NameToLayer("PatrollPoint")));        //layerMask = ~layerMask;
+            (1 << LayerMask.NameToLayer("PatrollPoint")) |
+             (1 << LayerMask.NameToLayer("Default")));       //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance,layerMask);
 
     }
@@ -254,7 +248,7 @@ public class SpiderDetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 1.0f;
+        ObjPos.y += 2.0f;
 
         if (this.Ray.collider != null)
         {

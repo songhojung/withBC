@@ -8,11 +8,19 @@ public class Monster3Move : MonoBehaviour {
     public Rigidbody Monster3_body;
 
     public float walkSpeed = 1.0f;
+
+
+    private Monster3DetectTarget DetectTarget;
+
+    private MonsterDetectCollider DetectColl;
     // Use this for initialization
     void Start()
     {
         Monster3Ani = GetComponent<Monster3Animation>();
         Monster3_body = GetComponent<Rigidbody>();
+
+        DetectTarget = GetComponent<Monster3DetectTarget>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
     }
 
     // Update is called once per frame
@@ -30,15 +38,22 @@ public class Monster3Move : MonoBehaviour {
         switch (Monster3Ani.NowState)
         {
             case Monster3Animation.M3_STATE.M3_WALK:
-                Vector3 VecGoblin = (Vector3.forward * walkSpeed * Time.deltaTime) + Monster3_body.transform.position;
-                Monster3_body.MovePosition(VecGoblin);
+                if (!(DetectColl.FindPlayer &&
+                    Vector3.Distance(DetectTarget.target.transform.position, this.transform.position) <= 5.0f))
+                {
+                    Vector3 VecGoblin = (Vector3.forward * walkSpeed * Time.deltaTime) + Monster3_body.transform.position;
+                    Monster3_body.MovePosition(VecGoblin);
+                }
 
-                Monster3_body.transform.LookAt(VecGoblin);
+                //Monster3_body.transform.LookAt(VecGoblin);
                 break;
             case Monster3Animation.M3_STATE.M3_RUN:
-                Vector3 VecGoblin2 = (Monster3_body.transform.forward * walkSpeed * 1.5f * Time.deltaTime) + Monster3_body.transform.position;
-                Monster3_body.MovePosition(VecGoblin2);
-
+                if (!(DetectColl.FindPlayer &&
+                    Vector3.Distance(DetectTarget.target.transform.position, this.transform.position) <= 5.0f))
+                {
+                    Vector3 VecGoblin2 = (Monster3_body.transform.forward * walkSpeed * 1.5f * Time.deltaTime) + Monster3_body.transform.position;
+                    Monster3_body.MovePosition(VecGoblin2);
+                }
                 //Monster3_body.transform.LookAt(VecGoblin2);
                 break;
         }

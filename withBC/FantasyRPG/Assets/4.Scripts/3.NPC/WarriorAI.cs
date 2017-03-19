@@ -36,17 +36,10 @@ public class WarriorAI : MonoBehaviour
                     if (Npc_Move.NowState != MoveNPC.PlayerState.Attack)
                         Npc_Move.NowState = MoveNPC.PlayerState.Attack;
                 }
-                //else if (warriorAniCtrl.IsLeftMouseDown)
-                //{
-                //    warriorAniCtrl.IsLeftMouseDown = false;
-                //    if (Npc_Move.NowState != MoveNPC.PlayerState.Detect)
-                //        Npc_Move.NowState = MoveNPC.PlayerState.Detect;
-                //}
-                //else
-                //{
-                //    if (Npc_Move.NowState != MoveNPC.PlayerState.Detect)
-                //        Npc_Move.NowState = MoveNPC.PlayerState.Detect;
-                //}
+                else if(Npc_Move.NowState != MoveNPC.PlayerState.Attack)
+                {
+                    Npc_Move.NowState = MoveNPC.PlayerState.Detect;
+                }
             }
             else
             {
@@ -89,24 +82,9 @@ public class WarriorAI : MonoBehaviour
                  ObjPos + ObjForward * RayDistance);
         }
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-
-    //    if (other.gameObject.CompareTag("Monster"))
-    //    {
-    //        warriorAniCtrl.IsLeftMouseDown = true;
-    //    }
-
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-
-    //    if (other.gameObject.CompareTag("Monster"))
-    //    {
-
-    //        warriorAniCtrl.IsLeftMouseDown = false;
-    //    }
-
-    //}
+    private void RemoveTo()
+    {
+        if (Npc_Move.NowState == MoveNPC.PlayerState.Attack)
+            Npc_Move.NowState = MoveNPC.PlayerState.Detect;
+    }
 }

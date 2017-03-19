@@ -20,6 +20,8 @@ public class Monster3DetectTarget : MonoBehaviour {
     private GameObject PrefMove = null;
 
     private MonsterDetectCollider DetectColl;
+
+    private MonsterInformation Information;
     // Use this for initialization
     void Start()
     {
@@ -28,6 +30,8 @@ public class Monster3DetectTarget : MonoBehaviour {
         M3Animation = GetComponent<Monster3Animation>();
         PatrollPt = GetComponent<MonsterFindPatroll>();
         DetectColl = GetComponent<MonsterDetectCollider>();
+
+        Information = GetComponent<MonsterInformation>();
         //StartCoroutine(Checkeverything());
     }
 
@@ -35,6 +39,16 @@ public class Monster3DetectTarget : MonoBehaviour {
     {
         if (!isDie)
         {
+            if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+            {
+                if (agent.enabled)
+                    agent.enabled = false;
+            }
+            else
+            {
+                if (!agent.enabled)
+                    agent.enabled = true;
+            }
             RayCast();
             RandDetect();
         }
@@ -85,7 +99,7 @@ public class Monster3DetectTarget : MonoBehaviour {
                 if (M3Animation.NowState != Monster3Animation.M3_STATE.M3_ATTACK)
                 {
                     //agent.destination = target.transform.position;
-                    if (M3Animation.NowState != Monster3Animation.M3_STATE.M3_RUN)
+                    if (agent.velocity.magnitude > 0.0f && M3Animation.NowState != Monster3Animation.M3_STATE.M3_RUN)
                     {
                         M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                     }
@@ -94,7 +108,16 @@ public class Monster3DetectTarget : MonoBehaviour {
 
             if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Run"))
             {
-                agent.destination = target.transform.position;
+                if (agent.enabled)
+                {
+                    if (target)
+                    {
+                        if (Vector3.Distance(agent.destination, target.transform.position) >= 2.0f)
+                        {
+                            agent.destination = target.transform.position;
+                        }
+                    }
+                }
             }
 
             if (target.gameObject.CompareTag("PatrollPoint"))
@@ -138,6 +161,11 @@ public class Monster3DetectTarget : MonoBehaviour {
                         M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                         //}
                     }
+                    else if (target != DetectColl.target)
+                    {
+                        target = null;
+                        target = DetectColl.target;
+                    }
                 }
                 else if (Vector3.Distance(DetectColl.target.transform.position, transform.position) <= 10.0f)
                 {
@@ -154,6 +182,11 @@ public class Monster3DetectTarget : MonoBehaviour {
                         M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                         //}
                     }
+                    else if (target != DetectColl.target)
+                    {
+                        target = null;
+                        target = DetectColl.target;
+                    }
                 }
             }
         }
@@ -166,9 +199,10 @@ public class Monster3DetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 1.0f;
+        ObjPos.y += 2.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
-            (1 << LayerMask.NameToLayer("PatrollPoint")));
+            (1 << LayerMask.NameToLayer("PatrollPoint")) |
+             (1 << LayerMask.NameToLayer("Default")));
         //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
@@ -198,7 +232,7 @@ public class Monster3DetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 1.0f;
+        ObjPos.y += 2.0f;
 
         if (this.Ray.collider != null)
         {

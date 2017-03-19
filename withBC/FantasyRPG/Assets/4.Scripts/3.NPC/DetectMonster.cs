@@ -16,7 +16,7 @@ public class DetectMonster : MonoBehaviour {
     public List<GameObject> ViewMonster = new List<GameObject>();
     private MoveNPC _move;
 
-    public float RayDistance = 15.0f;
+    public float RayDistance = 25.0f;
 
     private RaycastHit Ray;
 
@@ -98,6 +98,11 @@ public class DetectMonster : MonoBehaviour {
                         RayCast(Monster[i]);
                         if (Ray.collider != null)
                         {
+                            if(_move.NowState == MoveNPC.PlayerState.Follow)
+                            {
+                                _move.NowState = MoveNPC.PlayerState.Detect;
+                            }
+
                             int Check_count = 0;
                             for (int j = 0; j < ViewMonster.Count; j++)
                             {
@@ -154,7 +159,7 @@ public class DetectMonster : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = Target.transform.position - transform.position;
-        ObjPos.y += 1.0f;
+        ObjPos.y += 2.5f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
             (1 << LayerMask.NameToLayer("NPC")) |
@@ -170,7 +175,7 @@ public class DetectMonster : MonoBehaviour {
             {
                 Vector3 ObjPos = transform.position;
                 Vector3 ObjForward = Monster[i].transform.position - transform.position;
-                ObjPos.y += 1.0f;
+                ObjPos.y += 2.5f;
 
                 if (this.Ray.collider != null)
                 {
@@ -193,8 +198,19 @@ public class DetectMonster : MonoBehaviour {
 
     IEnumerator CheckNearest()
     {
-        yield return new WaitForSeconds(3.0f);
-        UpdateMoveNpcMonster();
+        yield return new WaitForSeconds(1.0f);
+        if (isMonster)
+        {
+            if (_move)
+            {
+                if(!_move.NearestMonster)
+                    UpdateMoveNpcMonster();
+                if (NearestMonster != _move.NearestMonster)
+                {
+                    UpdateMoveNpcMonster();
+                }
+            }
+        }
         CheckNearMonster();
     }
 
