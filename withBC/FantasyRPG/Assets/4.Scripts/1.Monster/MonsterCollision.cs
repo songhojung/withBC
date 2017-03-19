@@ -57,7 +57,7 @@ public class MonsterCollision : MonoBehaviour {
             if (objectType == ThrowObjectCtrl.ThrowObjectType.ARROW) // 아쳐 활 타격시 이펙트
             {
                 StartCoroutine(EffectManager.Instance.CreatEffect("BloodSplatEffect",
-                        collider.gameObject.transform.position, Quaternion.identity, 0.0f, 0.5f));
+                        this.gameObject.transform.position, Quaternion.identity, 0.0f, 0.5f));
 
                 collider.gameObject.GetComponent<ThrowObjectCtrl>().moveSpeed = 0.0f;
                 collider.gameObject.transform.parent = this.gameObject.transform;

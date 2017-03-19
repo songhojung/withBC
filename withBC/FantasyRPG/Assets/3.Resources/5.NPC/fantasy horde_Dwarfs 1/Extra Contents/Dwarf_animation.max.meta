@@ -1,0 +1,202 @@
+fileFormatVersion: 2
+guid: 08dff0bb865789842b8f6570db5185e3
+timeCreated: 1487808795
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: bon_gob_war_face
+    100002: bon_gob_war_jaw
+    100004: bon_gob_war_jaw_tip
+    100006: bon_gob_war_jaw_tip 1
+    100008: Dwarf
+    100010: //RootNode
+    100012: dwarf_axe_01
+    100014: dwarf_head_01
+    100016: dwarf_rgl_body
+    100018: dwarf_rifle
+    100020: DwarfHead
+    100022: DwarfLCalf
+    100024: DwarfLCollarbone
+    100026: DwarfLDigit11
+    100028: DwarfLDigit11 1
+    100030: DwarfLDigit12
+    100032: DwarfLDigit13
+    100034: DwarfLDigit21
+    100036: DwarfLDigit22
+    100038: DwarfLDigit23
+    100040: DwarfLDigit31
+    100042: DwarfLDigit32
+    100044: DwarfLDigit33
+    100046: DwarfLFoot
+    100048: DwarfLForearm
+    100050: DwarfLIKTarget
+    100052: DwarfLPalm
+    100054: DwarfLPlatform
+    100056: DwarfLThigh
+    100058: DwarfLUpperarm
+    100060: DwarfNeck
+    100062: DwarfPelvis
+    100064: DwarfRCalf
+    100066: DwarfRCollarbone
+    100068: DwarfRDigit11
+    100070: DwarfRDigit11 1
+    100072: DwarfRDigit12
+    100074: DwarfRDigit13
+    100076: DwarfRDigit21
+    100078: DwarfRDigit22
+    100080: DwarfRDigit23
+    100082: DwarfRDigit31
+    100084: DwarfRDigit32
+    100086: DwarfRDigit33
+    100088: DwarfRFoot
+    100090: DwarfRForearm
+    100092: DwarfRibcage
+    100094: DwarfRIKTarget
+    100096: DwarfRPalm
+    100098: DwarfRPlatform
+    100100: DwarfRThigh
+    100102: DwarfRUpperarm
+    100104: DwarfSpine1
+    100106: DwarfSpine2
+    100108: DwarfSpine3
+    100110: shield_01
+    400000: bon_gob_war_face
+    400002: bon_gob_war_jaw
+    400004: bon_gob_war_jaw_tip
+    400006: bon_gob_war_jaw_tip 1
+    400008: Dwarf
+    400010: //RootNode
+    400012: dwarf_axe_01
+    400014: dwarf_head_01
+    400016: dwarf_rgl_body
+    400018: dwarf_rifle
+    400020: DwarfHead
+    400022: DwarfLCalf
+    400024: DwarfLCollarbone
+    400026: DwarfLDigit11
+    400028: DwarfLDigit11 1
+    400030: DwarfLDigit12
+    400032: DwarfLDigit13
+    400034: DwarfLDigit21
+    400036: DwarfLDigit22
+    400038: DwarfLDigit23
+    400040: DwarfLDigit31
+    400042: DwarfLDigit32
+    400044: DwarfLDigit33
+    400046: DwarfLFoot
+    400048: DwarfLForearm
+    400050: DwarfLIKTarget
+    400052: DwarfLPalm
+    400054: DwarfLPlatform
+    400056: DwarfLThigh
+    400058: DwarfLUpperarm
+    400060: DwarfNeck
+    400062: DwarfPelvis
+    400064: DwarfRCalf
+    400066: DwarfRCollarbone
+    400068: DwarfRDigit11
+    400070: DwarfRDigit11 1
+    400072: DwarfRDigit12
+    400074: DwarfRDigit13
+    400076: DwarfRDigit21
+    400078: DwarfRDigit22
+    400080: DwarfRDigit23
+    400082: DwarfRDigit31
+    400084: DwarfRDigit32
+    400086: DwarfRDigit33
+    400088: DwarfRFoot
+    400090: DwarfRForearm
+    400092: DwarfRibcage
+    400094: DwarfRIKTarget
+    400096: DwarfRPalm
+    400098: DwarfRPlatform
+    400100: DwarfRThigh
+    400102: DwarfRUpperarm
+    400104: DwarfSpine1
+    400106: DwarfSpine2
+    400108: DwarfSpine3
+    400110: shield_01
+    2300000: dwarf_axe_01
+    2300002: dwarf_rifle
+    2300004: shield_01
+    3300000: dwarf_axe_01
+    3300002: dwarf_rifle
+    3300004: shield_01
+    4300000: shield_01
+    4300002: dwarf_axe_01
+    4300004: dwarf_rifle
+    4300006: dwarf_rgl_body
+    4300008: dwarf_head_01
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: dwarf_head_01
+    13700002: dwarf_rgl_body
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

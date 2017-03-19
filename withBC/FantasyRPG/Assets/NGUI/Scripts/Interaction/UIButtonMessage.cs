@@ -54,6 +54,7 @@ public class UIButtonMessage : MonoBehaviour
 	}
 
 	void OnClick () { if (enabled && trigger == Trigger.OnClick) Send(); }
+    
 
 	void OnDoubleClick () { if (enabled && trigger == Trigger.OnDoubleClick) Send(); }
 
