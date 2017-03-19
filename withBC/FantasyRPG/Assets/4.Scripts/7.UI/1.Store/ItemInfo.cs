@@ -49,19 +49,25 @@ public class ItemInfo : MonoBehaviour
 
     IEnumerator OnMouseDown()
     {
-        //Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
+        //Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position); // 오브젝트를 스크린좌표 로변환
         //Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(
-        //    new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z));
+        //    new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z)); // 오브젝트와 마우스 월드 차이=오브젝트 월드좌표 - 마우스의 월드 좌표
 
+        //while (Input.GetMouseButton(0))
+        //{
+        //    //현재 마우스의 스크린좌표
+        //    Vector3 curScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z);
+        //    // 객체 위치 = 스크린좌표에서 월드좌표 변환된 마우스 위치 + 오브젝트와 마우스 월드 차이
+        //    Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenSpace) + offset;
+        //    transform.position = curPosition;
+        //    yield return null;
+        //}
         while (Input.GetMouseButton(0))
         {
-            Vector3 MousePos = Camera.main.ScreenToWorldPoint(new Vector3(
-                Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-
-            Vector3 curPosition = new Vector3(MousePos.x, MousePos.y, transform.position.z);  
-            transform.localPosition = curPosition;
+            Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, scrSpace.z));
+            transform.localPosition = worldMousePos;
             yield return null;
         }
     }
-
 }
