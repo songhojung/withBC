@@ -21,9 +21,7 @@ public class MonsterCollision : MonoBehaviour {
     {
         if(collider.gameObject.CompareTag("Weapon"))
         {
-            
             Debug.Log("고블린 히트됨");
-
         // 피 이펙트
           
             Vector3 EffectPos = new Vector3(collider.transform.position.x, collider.transform.position.y+1, collider.transform.position.z);
