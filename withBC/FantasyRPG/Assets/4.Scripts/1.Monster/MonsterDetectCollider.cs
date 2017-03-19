@@ -115,5 +115,20 @@ public class MonsterDetectCollider : MonoBehaviour {
                 FindPatrollNow = false;
             }
         }
+        else
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                if(target != other.gameObject)
+                {
+                    float Now = Vector3.Distance(target.transform.position, this.transform.position);
+                    float You = Vector3.Distance(other.transform.position, this.transform.position);
+                    if(You<= Now)
+                    {
+                        target = other.gameObject;
+                    }
+                }
+            }
+        }
     }
 }

@@ -101,13 +101,13 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
         if (IsJump)
         {
-            Debug.Log("점프");
+            //Debug.Log("점프");
             warriorState = WarriorState.JUMP;
         }
 
         else if (Direction.sqrMagnitude > 0.01f)
         {
-            Debug.Log("런");
+            //Debug.Log("런");
             warriorState = WarriorState.RUN;
         }
         else if (Direction.sqrMagnitude <= 0)
@@ -129,7 +129,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
             if (!isCombo2 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
             {
-                Debug.Log("어택2공격끝");
+                //Debug.Log("어택2공격끝");
                 warriorComboState = WarriorComboState.NONE;
             }
         }
@@ -164,19 +164,19 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             {
 
                 warriorComboState = WarriorComboState.COMBO2;
-                Debug.Log("투콤시간" + NowComboTime);
+                //Debug.Log("투콤시간" + NowComboTime);
                 NowComboTime = 0.0f;
 
             }
             else if (!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
             {
                 warriorComboState = WarriorComboState.COMBO3;
-                Debug.Log("삼콤보시간" + NowComboTime);
+                //Debug.Log("삼콤보시간" + NowComboTime);
                 NowComboTime = 0.0f;
             }
             else
             {
-                Debug.Log("첫째공격");
+                //Debug.Log("첫째공격");
                 warriorComboState = WarriorComboState.COMBO1;
                 isCombo1 = false;
                 isCombo2 = false;
@@ -203,12 +203,12 @@ public class WarriorAnimationCtrl : MonoBehaviour {
         {
             
             Direction = Move_Npc.direction;
-            IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
-            IsRightMouseDown = Move_Npc.IsRightMouseDown;
+            //IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
+            //IsRightMouseDown = Move_Npc.IsRightMouseDown;
         }
         if (IsJump)
         {
-            Debug.Log("점프");
+            //Debug.Log("점프");
             warriorState = WarriorState.JUMP;
         }
 
@@ -271,23 +271,23 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             {
 
                 warriorComboState = WarriorComboState.COMBO2;
-                Debug.Log("투콤시간" + NowComboTime);
+                //Debug.Log("투콤시간" + NowComboTime);
                 NowComboTime = 0.0f;
 
             }
             else if (!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
             {
                 warriorComboState = WarriorComboState.COMBO3;
-                Debug.Log("삼콤보시간" + NowComboTime);
+                //Debug.Log("삼콤보시간" + NowComboTime);
                 NowComboTime = 0.0f;
             }
             else
             {
-                Debug.Log("첫째공격");
+                //Debug.Log("첫째공격");
                 warriorComboState = WarriorComboState.COMBO1;
                 isCombo1 = false;
                 isCombo2 = false;
-                Debug.Log(NowComboTime);
+               // Debug.Log(NowComboTime);
                 NowComboTime = 0.0f;
             }
 

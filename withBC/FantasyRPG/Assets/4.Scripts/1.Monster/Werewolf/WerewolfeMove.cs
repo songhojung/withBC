@@ -7,10 +7,16 @@ public class WerewolfeMove : MonoBehaviour {
     private WerewolfeAnimation WolfAni;
     public float WalkSpeed = 1.0f;
     private Rigidbody Wolf;
+
+    private WerewolfDetectTarget DetectTarget;
+
+    private MonsterDetectCollider DetectColl;
 	// Use this for initialization
 	void Start () {
         WolfAni = GetComponent<WerewolfeAnimation>();
         Wolf = GetComponent<Rigidbody>();
+        DetectTarget = GetComponent<WerewolfDetectTarget>();
+        DetectColl = GetComponent<MonsterDetectCollider>();
 	}
 	
 	// Update is called once per frame
@@ -37,8 +43,12 @@ public class WerewolfeMove : MonoBehaviour {
                 //Wolf.transform.LookAt(transform.forward);
                 break;
             case WerewolfeAnimation.W_STATE.S_RUN:
-                Vector3 VecSpider2 = (Wolf.transform.forward * WalkSpeed * 2.0f * Time.deltaTime) + Wolf.transform.position;
-                Wolf.MovePosition(VecSpider2);
+                if (!(DetectColl.FindPlayer &&
+                    Vector3.Distance(DetectTarget.target.transform.position, this.transform.position) <= 5.0f))
+                { 
+                    Vector3 VecSpider2 = (Wolf.transform.forward * WalkSpeed * 2.0f * Time.deltaTime) + Wolf.transform.position;
+                    Wolf.MovePosition(VecSpider2);
+                }
                 //Wolf.transform.LookAt(transform.forward);
                 break;
         }

@@ -34,9 +34,9 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
     private bool IsDie = false;
     private bool IsJump = false;
-    private bool IsLeftMouseDown = false;
-    private bool IsLeftMouseUp = false;
-    private bool IsLeftMouseStay = false;
+    public bool IsLeftMouseDown = false;
+    public bool IsLeftMouseUp = false;
+    public bool IsLeftMouseStay = false;
     private bool IsRightMouseDown = false;
    
     private bool IsCombat = false;
@@ -201,11 +201,11 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         {
 
             direction = Move_Npc.direction;
-            IsJump = Move_Npc.IsJump;
-            IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
-            IsLeftMouseUp = Move_Npc.IsLeftMouseUp;
-            IsLeftMouseStay = Move_Npc.IsLeftMouseStay;
-            IsRightMouseDown = Move_Npc.IsRightMouseDown;
+            //IsJump = Move_Npc.IsJump;
+            //IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
+            //IsLeftMouseUp = Move_Npc.IsLeftMouseUp;
+            //IsLeftMouseStay = Move_Npc.IsLeftMouseStay;
+            //IsRightMouseDown = Move_Npc.IsRightMouseDown;
         }
 
         if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
@@ -244,6 +244,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         {
             if (IsReadyForShoot)
             {
+                Debug.Log("쏜다");
                 archerState = ArcherState.BOWSHOOT;
                 IsReadyForShoot = false;
                 ArrowObject.active = false;
@@ -267,7 +268,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             {
                 Debug.Log("활당기는중");
                 archerState = ArcherState.AIM;
-                if (ArcherAnimation.IsPlaying(Aim))
+                if (ArcherAnimation[Aim].normalizedTime >= 0.50f)
                 {
                     Debug.Log("쏘기준비완료");
                     IsReadyForShoot = true;

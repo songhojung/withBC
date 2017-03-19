@@ -9,9 +9,10 @@ public class ThrowFire : MonoBehaviour {
     public Transform FirePos;
 
     private PlayerCtrl player;
-    private MoveNPC Npc;
+    private ArcherAnimationCtrl Npc;
     private Transform playerTr;
 
+    private MoveNPC Ai;
     // Use this for initialization
     void Start ()
     {
@@ -22,10 +23,12 @@ public class ThrowFire : MonoBehaviour {
             case CharacterInformation.MODE.PLAYER:
                 player = GetComponent<PlayerCtrl>();
                 Npc = null;
+                Ai = null;
                 break;
             case CharacterInformation.MODE.NPC:
                 player = null;
-                Npc = GetComponent<MoveNPC>();
+                Npc = GetComponent<ArcherAnimationCtrl>();
+                Ai = GetComponent<MoveNPC>();
                 break;
         }
         
@@ -90,7 +93,15 @@ public class ThrowFire : MonoBehaviour {
                 {
                     if (IsLeftMouseUp2)
                     {
-                        Instantiate(ThrownObj, FirePos.position, playerTr2.rotation);
+                        if (Npc.archerState == ArcherAnimationCtrl.ArcherState.BOWSHOOT)
+                        {
+                            Instantiate(ThrownObj, FirePos.position, playerTr2.rotation);
+                            Npc.IsLeftMouseUp = false;
+                            Npc.IsReadyForShoot = false;
+                            Npc.IsLeftMouseDown = false;
+                            Npc.IsLeftMouseStay = false;
+                            Ai.NowState = MoveNPC.PlayerState.Detect;
+                        }
                         // ThrownObj.transform.rotation = arrowrotate;
                     }
                 }

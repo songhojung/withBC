@@ -254,16 +254,16 @@ public class WizardAnimationCtrl : MonoBehaviour {
         if (Mode == CharacterInformation.MODE.NPC)
         {
             direction = Move_Npc.direction;
-            IsJump = Move_Npc.IsJump;
-            IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
-            IsLeftMouseUp = Move_Npc.IsLeftMouseUp;
-            IsLeftMouseStay = Move_Npc.IsLeftMouseStay;
-            IsRightMouseDown = Move_Npc.IsRightMouseDown;
-            IsNumKey_1 = Move_Npc.IsNumKey_1;
-            IsNumKey_2 = Move_Npc.IsNumKey_2;
-            IsKey_E = Move_Npc.IsKey_E;
-            IsKey_Q = Move_Npc.IsKey_Q;
-            IsKey_Shift = Move_Npc.IsKey_Shift;
+            //IsJump = Move_Npc.IsJump;
+            ////IsLeftMouseDown = Move_Npc.IsLeftMouseDown;
+            //IsLeftMouseUp = Move_Npc.IsLeftMouseUp;
+            //IsLeftMouseStay = Move_Npc.IsLeftMouseStay;
+            //IsRightMouseDown = Move_Npc.IsRightMouseDown;
+            //IsNumKey_1 = Move_Npc.IsNumKey_1;
+            //IsNumKey_2 = Move_Npc.IsNumKey_2;
+            //IsKey_E = Move_Npc.IsKey_E;
+            //IsKey_Q = Move_Npc.IsKey_Q;
+            //IsKey_Shift = Move_Npc.IsKey_Shift;
         }
         AttackCombo();
 

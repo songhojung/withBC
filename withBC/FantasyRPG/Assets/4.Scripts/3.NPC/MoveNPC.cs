@@ -59,6 +59,7 @@ public class MoveNPC : MonoBehaviour {
 
     public List<GameObject> TargetMonster = new List<GameObject>();
     public GameObject NearestMonster;
+
     //public GameObject[] TargetMonster;
 
     public float AngularSpeed = 5.0f;
@@ -83,16 +84,16 @@ public class MoveNPC : MonoBehaviour {
 
     private void MoveAi()
     {
-        if(isMonster)
-        {
-            if (NowState != PlayerState.Detect)
-                NowState = PlayerState.Detect;
-        }
-        else
-        {
-            if (NowState != PlayerState.Follow)
-                NowState = PlayerState.Follow;
-        }
+        //if(isMonster)
+        //{
+        //    if (NowState != PlayerState.Detect)
+        //        NowState = PlayerState.Detect;
+        //}
+        //else
+        //{
+        //    if (NowState != PlayerState.Follow)
+        //        NowState = PlayerState.Follow;
+        //}
         switch(NowState)
         {
             case PlayerState.Search:
@@ -103,9 +104,22 @@ public class MoveNPC : MonoBehaviour {
             case PlayerState.Detect:
                 DetectMove();
                 break;
+            case PlayerState.Attack:
+                AttackMove();
+                break;
         }
     }
-
+    private void AttackMove()
+    {
+        if(isMonster)
+        {
+            if(TargetNav)
+            {
+                if (TargetNav.enabled)
+                    TargetNav.enabled = false;
+            }
+        }
+    }
     private void FollowMove()
     {
         if (!isMonster)
@@ -122,10 +136,7 @@ public class MoveNPC : MonoBehaviour {
                     //rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
                     direction = direct;
                 }
-                
-                
             }
-
         }
     }
 
@@ -135,10 +146,13 @@ public class MoveNPC : MonoBehaviour {
         {
             if (other.GetComponent<NpcPatroll>().PointJob == Job)
             {
-                if (TargetNav)
+                if (NowState == PlayerState.Follow)
                 {
-                    if (TargetNav.enabled)
-                        TargetNav.enabled = false;
+                    if (TargetNav)
+                    {
+                        if (TargetNav.enabled)
+                            TargetNav.enabled = false;
+                    }
                 }
             }
         }
@@ -150,11 +164,14 @@ public class MoveNPC : MonoBehaviour {
         {
             if (other.GetComponent<NpcPatroll>().PointJob == Job)
             {
-                if (TargetNav)
+                if (NowState == PlayerState.Follow)
                 {
-                    if (!TargetNav.enabled)
+                    if (TargetNav)
                     {
-                        TargetNav.enabled = true;
+                        if (!TargetNav.enabled)
+                        {
+                            TargetNav.enabled = true;
+                        }
                     }
                 }
             }
@@ -191,10 +208,5 @@ public class MoveNPC : MonoBehaviour {
             }
 
         }
-    }
-
-    private void AttackMove()
-    {
-
     }
 }

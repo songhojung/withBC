@@ -39,6 +39,16 @@ public class WerewolfDetectTarget : MonoBehaviour {
     {
         if (!isDie)
         {
+            if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+            {
+                if(agent.enabled)
+                    agent.enabled = false;
+            }
+            else
+            {
+                if (!agent.enabled)
+                    agent.enabled = true;
+            }
             RayCast();
             RandDetect();
         }
@@ -92,7 +102,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
                 if (WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_ATT20)
                 {
                     //agent.destination = target.transform.position;
-                    if (WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
+                    if (agent.velocity.magnitude > 0.0f && WolfAnimation.NowState != WerewolfeAnimation.W_STATE.S_RUN)
                     {
                         WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
                     }
@@ -100,7 +110,16 @@ public class WerewolfDetectTarget : MonoBehaviour {
             }
             if (WolfAnimation.NowState == WerewolfeAnimation.W_STATE.S_RUN)
             {
-                agent.destination = target.transform.position;
+                if (agent.enabled)
+                {
+                    if (target)
+                    {
+                        if (Vector3.Distance(agent.destination, target.transform.position) >= 2.0f)
+                        {
+                            agent.destination = target.transform.position;
+                        }
+                    }
+                }
             }
 
 
@@ -145,6 +164,11 @@ public class WerewolfDetectTarget : MonoBehaviour {
                         WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
                         //}
                     }
+                    else if(target != DetectColl.target)
+                    {
+                        target = null;
+                        target = DetectColl.target;
+                    }
                 }
                 else if(Vector3.Distance(DetectColl.target.transform.position,transform.position) <= 10.0f)
                 {
@@ -160,6 +184,11 @@ public class WerewolfDetectTarget : MonoBehaviour {
                         PatrollPt.findPlayer = true;
                         WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
                         //}
+                    }
+                    else if (target != DetectColl.target)
+                    {
+                        target = null;
+                        target = DetectColl.target;
                     }
                 }
             }
@@ -194,9 +223,10 @@ public class WerewolfDetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 1.0f;
+        ObjPos.y += 2.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster"))|
-            (1 << LayerMask.NameToLayer("PatrollPoint")));
+            (1 << LayerMask.NameToLayer("PatrollPoint"))|
+             (1 << LayerMask.NameToLayer("Default")));
         //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
@@ -216,7 +246,6 @@ public class WerewolfDetectTarget : MonoBehaviour {
         }
         if (PatrollPt.ActPatroll)
         {
-
             target = PatrollPt.PatrollPoint;
             agent.destination = target.transform.position;
             WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
@@ -227,7 +256,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 1.0f;
+        ObjPos.y += 2.0f;
 
         if (this.Ray.collider != null)
         {
