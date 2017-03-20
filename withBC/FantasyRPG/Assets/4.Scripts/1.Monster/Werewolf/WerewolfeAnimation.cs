@@ -37,6 +37,11 @@ public class WerewolfeAnimation : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if(Information.hp <=0)
+        {
+            if (NowState != W_STATE.S_DEATH)
+                NowState = W_STATE.S_DEATH;
+        }
         //ChangeMotion();
         Animation_Play3();
         InformationCheck();
@@ -47,7 +52,7 @@ public class WerewolfeAnimation : MonoBehaviour {
     {
         if(Information)
         {
-            Information.hp = _health;
+            _health = Information.hp;
 
             Information.damage = damage;
 
@@ -62,16 +67,36 @@ public class WerewolfeAnimation : MonoBehaviour {
                     Information.isAttack = true;
                     Information.isOnceAttack = true;
                 }
+
+                if(Information.isHit)
+                {
+                    NowState = W_STATE.S_BEATEN;
+                }
             }
             else if(NowState == W_STATE.S_BEATEN)
             {
                 if (Information.MonsterState != MonsterInformation.STATE.HIT)
                     Information.MonsterState = MonsterInformation.STATE.HIT;
+                if (!Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                    NowState = W_STATE.S_STAND;
+                }
+            }
+            else if(NowState == W_STATE.S_DEATH)
+            {
+
             }
             else
             {
-                if (Information.MonsterState != MonsterInformation.STATE.STAY)
-                    Information.MonsterState = MonsterInformation.STATE.STAY;
+                if (!Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                }
+                else
+                    NowState = W_STATE.S_BEATEN;
             }
         }
     }
@@ -88,7 +113,7 @@ public class WerewolfeAnimation : MonoBehaviour {
     private void Animation_Play3()
     {
         //Werewolf.wrapMode = WrapMode.Loop;
-        //Werewolf.CrossFade(PlayerAni[(int)NowState].name, 0.3f);
+        if(!Information.isDie)
         {
             switch (NowState)
             {

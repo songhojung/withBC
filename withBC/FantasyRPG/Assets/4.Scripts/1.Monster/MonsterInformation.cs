@@ -9,6 +9,8 @@ public class MonsterInformation : MonoBehaviour {
 
     private MonsterFindPatroll MonsterFind;
 
+    private MonsterParentsCollider ColliderCheck;
+
     public int hp;
     
     public enum STATE
@@ -42,6 +44,7 @@ public class MonsterInformation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         MonsterFind = GetComponent<MonsterFindPatroll>();
+        ColliderCheck = GetComponent<MonsterParentsCollider>();
 	}
 	
 	// Update is called once per frame
@@ -68,5 +71,28 @@ public class MonsterInformation : MonoBehaviour {
                 }
                 break;
         }
+
+        CheckCollider();
 	}
+
+    private void CheckCollider()
+    {
+        if(ColliderCheck)
+        {
+            if(isDie != ColliderCheck.isDie)
+            {
+                isDie = ColliderCheck.isDie;
+            }
+
+            if(isHit != ColliderCheck.isHit)
+            {
+                isHit = ColliderCheck.isHit;
+            }
+
+            if(hp != ColliderCheck._hp)
+            {
+                hp = ColliderCheck._hp;
+            }
+        }
+    }
 }
