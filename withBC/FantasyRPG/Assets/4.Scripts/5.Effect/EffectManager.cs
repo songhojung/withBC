@@ -12,6 +12,7 @@ public class EffectManager : MonoBehaviour
         {
             if(sInstance == null)
             {
+                
                 GameObject newEffectManager = new GameObject("EffectManager");
                 sInstance = newEffectManager.GetComponent<EffectManager>();
             }

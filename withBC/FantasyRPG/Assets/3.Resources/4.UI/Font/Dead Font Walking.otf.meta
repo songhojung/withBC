@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 99bcb6d1c5f42a14ea6967c85451126a
+timeCreated: 1489975451
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Dead Font Walking
+  fontNames:
+  - Dead Font Walking
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

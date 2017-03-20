@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 9b35fd69f5c75b84295e63caa8f9f2e2
+timeCreated: 1489975451
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Red Undead
+  fontNames:
+  - Red Undead
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
