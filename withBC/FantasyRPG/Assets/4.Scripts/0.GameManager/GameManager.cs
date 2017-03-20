@@ -24,16 +24,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         sInstance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F4))
-        {
-            Debug.Log("aaaaaaa");
-        }
-    }
+   public enum SCENE { TitleScene, SelectScene, WaitScene, InGameScene};
+
+    public  SCENE NowScene = SCENE.TitleScene;
 
     // ===============  선언부 =====================//
 }

@@ -9,7 +9,10 @@ public class PlayerCtrl : MonoBehaviour {
     private CharacterInformation.PlayerJob Job;
 
     private Rigidbody rigidbody;
-   
+    private Ray ray;
+    private RaycastHit rayHit;
+
+    private float distance = 20.0f;
     private float h = 0.0f;
     private float v = 0.0f;
     private bool IsShot = false;
@@ -48,6 +51,11 @@ public class PlayerCtrl : MonoBehaviour {
 
     void Start ()
     {
+        //if (GameManager.Instance.NowScene == GameManager.SCENE.WaitScene)
+        {
+            ray = new Ray();
+        }
+
         rigidbody = GetComponent<Rigidbody>();
 
         Job = GetComponent<CharacterInformation>().Job;
@@ -57,6 +65,13 @@ public class PlayerCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+
+        //if (GameManager.Instance.NowScene == GameManager.SCENE.WaitScene)
+        {
+            ray.origin = transform.position + new Vector3(0, 4.0f, 0);
+            ray.direction = transform.forward /*new Vector3(0,-0.1f,0)*/;
+            Raycast();
+        }
 
         IsLeftMouseDown = Input.GetMouseButtonDown(0);
         IsLeftMouseUp = Input.GetMouseButtonUp(0);
@@ -128,5 +143,59 @@ public class PlayerCtrl : MonoBehaviour {
         rigidbody.MovePosition(rigidbody.transform.position + (moveDir * moveSpeed * Time.deltaTime));
 
 
+    }
+
+    void Raycast()
+    {
+
+
+        Physics.Raycast(ray, out rayHit, distance);
+
+        if (this.rayHit.collider != null)
+        {
+
+            if (rayHit.collider.gameObject.tag == "Store_NPC")
+            {
+
+            }
+            else if(rayHit.collider.gameObject.tag == "SelectMap")
+            {
+
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+
+                }
+            }
+        }
+     
+    }
+
+    private void OnDrawGizmos()
+    {
+       
+            if (this.rayHit.collider != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(this.rayHit.point, 1.0f);
+
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawLine(this.ray.origin,
+                   this.ray.direction * distance);
+
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(this.rayHit.point,
+                            this.rayHit.point + this.rayHit.normal);
+
+                //Gizmos.color = Color.cyan;
+                //Gizmos.DrawLine(ray.origin,
+                //    ray.origin + (-ray.direction * distance));
+
+            }
+            else
+            {
+                Gizmos.DrawLine(this.ray.origin,
+                     this.ray.direction * distance);
+            }
+        
     }
 }

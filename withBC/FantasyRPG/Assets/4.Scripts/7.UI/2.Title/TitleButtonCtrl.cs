@@ -11,7 +11,8 @@ public class TitleButtonCtrl : MonoBehaviour
     void PressStartButton()
     {
         SceneManager.LoadScene("InnerMap");
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Manager"));
+        GameManager.Instance.NowScene = GameManager.SCENE.TitleScene;
+        
     }
 
     void PressInfoButton()
