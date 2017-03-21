@@ -25,6 +25,7 @@ public class Monster3Animation : MonoBehaviour {
     private MonsterInformation Information;
     // Use this for initialization
     void Start () {
+        int a = 0;
         Mt3 = GetComponent<Animator>();
         NowState = M3_STATE.M3_STAY;
         Information = GetComponent<MonsterInformation>();
