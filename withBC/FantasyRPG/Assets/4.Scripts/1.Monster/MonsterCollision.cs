@@ -83,7 +83,17 @@ public class MonsterCollision : MonoBehaviour {
                              this.gameObject.transform.position, Quaternion.identity, 0.3f, 1.8f));
                 }
 
+            MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
+
+            if(MonsterParents)
+            {
+                if(!MonsterParents.isDie)
+                {
+                    MonsterParents.isHit = true;
+                    MonsterParents._hp -= 5;
+                }
             }
+        }
         //}
     }
 }

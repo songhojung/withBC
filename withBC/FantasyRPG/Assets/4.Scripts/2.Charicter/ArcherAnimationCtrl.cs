@@ -236,6 +236,8 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         if (IsLeftMouseDown)
         {
             archerState = ArcherState.GETARROW;
+            if(Move_Npc.TargetNav.enabled)
+                Move_Npc.TargetNav.enabled = false;
             ArrowObject.active = true;
 
 
@@ -260,6 +262,8 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                     if (ArcherAnimation[GetArrow].normalizedTime >= 0.80f)
                     {
                         Debug.Log("활당기기준비완료");
+                        if (Move_Npc.TargetNav.enabled)
+                            Move_Npc.TargetNav.enabled = false;
                         archerState = ArcherState.AIM;
                     }
                 }
@@ -268,6 +272,8 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             {
                 Debug.Log("활당기는중");
                 archerState = ArcherState.AIM;
+                if (Move_Npc.TargetNav.enabled)
+                    Move_Npc.TargetNav.enabled = false;
                 if (ArcherAnimation[Aim].normalizedTime >= 0.50f)
                 {
                     Debug.Log("쏘기준비완료");

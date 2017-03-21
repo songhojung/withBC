@@ -64,26 +64,35 @@ public class ArchorAI : MonoBehaviour
                 {
                     if (ArchorAniCtrl.archerState != ArcherAnimationCtrl.ArcherState.AIM)
                     {
-                        //ArchorAniCtrl.IsLeftMouseDown = false;
-                        //ArchorAniCtrl.IsLeftMouseStay = false;
-                        //ArchorAniCtrl.IsLeftMouseUp = false;
-                        if (Npc_Move.NowState != MoveNPC.PlayerState.Detect)
+                        if (Npc_Move.NowState != MoveNPC.PlayerState.Follow &&
+                            Npc_Move.NowState != MoveNPC.PlayerState.Detect)
                         {
                             Npc_Move.NowState = MoveNPC.PlayerState.Detect;
-
                         }
                     }
-                    //if (!ArchorAniCtrl.IsReadyForShoot)
-                    //{
-                    //    ArchorAniCtrl.IsLeftMouseDown = false;
-                    //    ArchorAniCtrl.IsLeftMouseStay = false;
-                    //}
+                    else
+                    {
+                        if(!Npc_Move.isMonster)
+                        {
+                            if (Npc_Move.NowState != MoveNPC.PlayerState.Follow &&
+                            Npc_Move.NowState != MoveNPC.PlayerState.Detect)
+                            {
+                                Npc_Move.NowState = MoveNPC.PlayerState.Detect;
+                            }
+                        }
+                    }
                 }
             }
             else
             {
                 if (Npc_Move.NowState != MoveNPC.PlayerState.Follow)
+                {
                     Npc_Move.NowState = MoveNPC.PlayerState.Follow;
+                    ArchorAniCtrl.IsLeftMouseDown = false;
+                    ArchorAniCtrl.IsLeftMouseStay = false;
+                    ArchorAniCtrl.IsLeftMouseUp = false;
+                    ArchorAniCtrl.archerState = ArcherAnimationCtrl.ArcherState.RUN;
+                }
             }
         }
     }

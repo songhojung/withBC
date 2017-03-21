@@ -42,6 +42,26 @@ public class DetectMonster : MonoBehaviour {
                 FollowMonster = false;
             }
             StartCoroutine(CheckNearest());
+            if (Monster.Count > 0)
+            {
+                for (int i = 0; i < Monster.Count; i++)
+                {
+                    if (Monster[i].GetComponent<MonsterInformation>().isDie)
+                    {
+                        Monster.Remove(Monster[i]);
+                    }
+                }
+            }
+            if(ViewMonster.Count >0)
+            {
+                for(int j=0; j<ViewMonster.Count; j++)
+                {
+                    if (ViewMonster[j].GetComponent<MonsterInformation>().isDie)
+                    {
+                        ViewMonster.Remove(ViewMonster[j]);
+                    }
+                }
+            }
         }
 	}
 

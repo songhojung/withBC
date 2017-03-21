@@ -136,6 +136,14 @@ public class MoveNPC : MonoBehaviour {
                     //rigibody.MovePosition(rigibody.position + direct * moveSpeed * Time.deltaTime);
                     direction = direct;
                 }
+                else
+                {
+                    if (Vector3.Distance(this.transform.position, TargetPoint.transform.position) >= 15.0f)
+                    {
+                        TargetNav.enabled = true;
+                        TargetNav.destination = TargetPoint.transform.position;
+                    }
+                }
             }
         }
     }

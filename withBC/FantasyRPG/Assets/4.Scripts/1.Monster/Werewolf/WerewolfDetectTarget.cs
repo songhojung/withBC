@@ -37,25 +37,50 @@ public class WerewolfDetectTarget : MonoBehaviour {
 
     void Update()
     {
+        if(WolfAnimation.Werewolf["Death"].normalizedTime >= 0.95f)
+        {
+            MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+            CheckPt.isDie = true;
+            Information.isDie = true;
+        }
+
+        isDie = Information.isDie;
+
         if (!isDie)
         {
-            if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+            if (!Information.isHit)
             {
-                if(agent.enabled)
-                    agent.enabled = false;
+                if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+                {
+                    if (agent.enabled)
+                        agent.enabled = false;
+                }
+                else
+                {
+                    if (!agent.enabled)
+                        agent.enabled = true;
+                }
+                RayCast();
+                RandDetect();
             }
-            else
-            {
-                if (!agent.enabled)
-                    agent.enabled = true;
-            }
-            RayCast();
-            RandDetect();
         }
-        Information.isDie = isDie;
+        else
+        {
+            StartCoroutine(YouDie());
+        }
+        if (WolfAnimation.Werewolf["Beaten"].normalizedTime >= 0.9f)
+        {
+            MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+            CheckPt.isHit = false;
+            WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
+        }
     }
     // Update is called once per frame
-   
+    IEnumerator YouDie()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(this.gameObject);
+    }
     private void RandDetect()
     {
         if (target)
@@ -91,6 +116,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
                         }
                     }
                 }
+
             }
             else
             {
@@ -193,30 +219,16 @@ public class WerewolfDetectTarget : MonoBehaviour {
                 }
             }
 
-            
-            //if (Ray.collider != null)
-            //{
-            //    if (!PatrollPt.findPlayer)
-            //    {
-            //        if (Ray.collider.tag == "Player")
-            //        {
-            //            target = null;
-            //            target = Ray.collider.gameObject;
-            //            agent.destination = target.transform.position;
-            //            PatrollPt.ActPatroll = false;
-            //            PatrollPt.findPlayer = true;
-            //            WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RUN;
-            //        }
-            //    }
-            //}
+            if (WolfAnimation.Werewolf["Beaten"].normalizedTime >= 9.5f)
+            {
+                Information.isHit = false;
+                WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RECOVER;
+            }
         }
         else
         {
             findAndMove();
         }
-        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
-        //Move.transform.LookAt(transform.position + transform.forward);
-        //transform.LookAt(transform.position + transform.forward);
 
     }
     private void RayCast()
