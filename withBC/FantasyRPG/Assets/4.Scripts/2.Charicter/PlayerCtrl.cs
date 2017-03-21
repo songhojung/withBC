@@ -9,8 +9,6 @@ public class PlayerCtrl : MonoBehaviour {
     private CharacterInformation.PlayerJob Job;
 
     private Rigidbody rigidbody;
-    private Ray ray;
-    private RaycastHit rayHit;
 
     private float distance = 20.0f;
     private float h = 0.0f;
@@ -51,10 +49,6 @@ public class PlayerCtrl : MonoBehaviour {
 
     void Start ()
     {
-        //if (GameManager.Instance.NowScene == GameManager.SCENE.WaitScene)
-        {
-            ray = new Ray();
-        }
 
         rigidbody = GetComponent<Rigidbody>();
 
@@ -66,24 +60,19 @@ public class PlayerCtrl : MonoBehaviour {
 	void FixedUpdate ()
     {
 
-        //if (GameManager.Instance.NowScene == GameManager.SCENE.WaitScene)
+        if (!GameManager.Instance.isOnUIWindow)
         {
-            ray.origin = transform.position + new Vector3(0, 4.0f, 0);
-            ray.direction = transform.forward /*new Vector3(0,-0.1f,0)*/;
-            Raycast();
+            IsLeftMouseDown = Input.GetMouseButtonDown(0);
+            IsLeftMouseUp = Input.GetMouseButtonUp(0);
+            IsLeftMouseStay = Input.GetMouseButton(0);
+            IsRightMouseDown = Input.GetMouseButtonDown(1);
+            IsJump = Input.GetKeyDown(KeyCode.Space);
+            IsNumKey_1 = Input.GetKeyDown(KeyCode.Alpha1);
+            IsNumKey_2 = Input.GetKeyDown(KeyCode.Alpha2);
+            IsKey_E = Input.GetKeyDown(KeyCode.E);
+            IsKey_Q = Input.GetKeyDown(KeyCode.Q);
+            IsKey_Shift = Input.GetKeyDown(KeyCode.LeftShift);
         }
-
-        IsLeftMouseDown = Input.GetMouseButtonDown(0);
-        IsLeftMouseUp = Input.GetMouseButtonUp(0);
-        IsLeftMouseStay = Input.GetMouseButton(0);
-        IsRightMouseDown = Input.GetMouseButtonDown(1);
-        IsJump = Input.GetKeyDown(KeyCode.Space);
-        IsNumKey_1 = Input.GetKeyDown(KeyCode.Alpha1);
-        IsNumKey_2 = Input.GetKeyDown(KeyCode.Alpha2);
-        IsKey_E = Input.GetKeyDown(KeyCode.E);
-        IsKey_Q = Input.GetKeyDown(KeyCode.Q);
-        IsKey_Shift = Input.GetKeyDown(KeyCode.LeftShift);
-
 
         h = Input.GetAxis("Horizontal");//a,d
         v = Input.GetAxis("Vertical");// w,s
@@ -145,57 +134,5 @@ public class PlayerCtrl : MonoBehaviour {
 
     }
 
-    void Raycast()
-    {
-
-
-        Physics.Raycast(ray, out rayHit, distance);
-
-        if (this.rayHit.collider != null)
-        {
-
-            if (rayHit.collider.gameObject.tag == "Store_NPC")
-            {
-
-            }
-            else if(rayHit.collider.gameObject.tag == "SelectMap")
-            {
-
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-
-                }
-            }
-        }
-     
-    }
-
-    private void OnDrawGizmos()
-    {
-       
-            if (this.rayHit.collider != null)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(this.rayHit.point, 1.0f);
-
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawLine(this.ray.origin,
-                   this.ray.direction * distance);
-
-                Gizmos.color = Color.blue;
-                Gizmos.DrawLine(this.rayHit.point,
-                            this.rayHit.point + this.rayHit.normal);
-
-                //Gizmos.color = Color.cyan;
-                //Gizmos.DrawLine(ray.origin,
-                //    ray.origin + (-ray.direction * distance));
-
-            }
-            else
-            {
-                Gizmos.DrawLine(this.ray.origin,
-                     this.ray.direction * distance);
-            }
-        
-    }
+  
 }

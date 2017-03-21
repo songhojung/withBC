@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemInfo : MonoBehaviour
 {
-    public enum ItemType { NONE,Portion,Weapon };
+    public enum ItemType { NONE,Portion,Sword,Shield,Staff,Dagger };
     public enum AttachedType { NONE, Store, Inventory }; //소속된 곳 인벤에 있냐, 상점에 있냐
 
     public ItemType itemType = ItemType.NONE;
@@ -14,11 +14,13 @@ public class ItemInfo : MonoBehaviour
     public string ItemName = null;
 
     private GameObject InventoryObj;
+    private GameObject StoreObj;
     //private GameObject StoreObj = GameObject.Find("Store");
 
     private void Start()
     {
         InventoryObj = GameObject.Find("Inventory");
+        StoreObj = GameObject.Find("Store");
     }
 
 
@@ -43,9 +45,22 @@ public class ItemInfo : MonoBehaviour
             //InventoryObj.SendMessage("ChangingItem", gameObject, SendMessageOptions.RequireReceiver);
             //StartCoroutine(OnMouseDown());
         }
-
-       
     }
+
+    void showInfoItem()
+    {
+        StoreObj.SendMessage("showInfoItem", gameObject, SendMessageOptions.RequireReceiver);
+    }
+
+    void DontShowInfoItem()
+    {
+        StoreObj.SendMessage("DontShowInfoItem", gameObject, SendMessageOptions.RequireReceiver);
+    }
+
+
+
+
+
 
     IEnumerator OnMouseDown()
     {

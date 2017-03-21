@@ -8,17 +8,7 @@ public class SelectMap : MonoBehaviour
     public GameObject missionLabel;
 	// Use this for initialization
 	
-
-    void OnSelectMapWindow()
-    {
-        gameObject.active = true;
-    }
-
-    void OffSelectMapWindow()
-    {
-        gameObject.active = false;
-    }
-
+ // 미션 내용을 껏다 켯다 하는거임
     void OnOffMissionScript()
     {
        if(missionLabel && !missionLabel.activeSelf)
@@ -31,17 +21,21 @@ public class SelectMap : MonoBehaviour
         }
     }
 
+  
     void CheckConfirmButton()
     {
-        if(missionLabel && missionLabel.activeSelf)
+        // 미션 내용 객체가 있고 미션내용이 활성화 되어있다면 버튼클릭시 씬전환
+        if (missionLabel && missionLabel.activeSelf)
         {
             SceneManager.LoadScene("map_1");
         }
     }
 
+    // 닫기 버튼누를떄 창없어짐
     void CloseButton()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject.transform.root.gameObject);
     }
 
 }

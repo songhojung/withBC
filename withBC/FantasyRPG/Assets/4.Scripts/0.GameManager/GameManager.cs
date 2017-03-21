@@ -27,10 +27,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-   public enum SCENE { TitleScene, SelectScene, WaitScene, InGameScene};
-
-    public  SCENE NowScene = SCENE.TitleScene;
-
     // ===============  선언부 =====================//
+
+    public enum SCENE { TitleScene, SelectScene, WaitScene, InGameScene};
+
+    public SCENE NowScene = SCENE.TitleScene; // 현재 씬이 어디 있는지 알기 위함
+
+    public bool isOnUIWindow = false; // 상점창, 필드선택창 열릴시 캐릭터 카메라 회전을 잠그기 위한 변수
+
+    public int Gold = 5000;
+
+  
 }
