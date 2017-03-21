@@ -29,6 +29,12 @@ public class SpiderAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (Information.hp <= 0)
+        {
+            if (NowState != S_STATE.S_DEATH)
+                NowState = S_STATE.S_DEATH;
+        }
+
         //ChangeState();
         PlayAnimation();
         InformationCheck();
@@ -52,16 +58,38 @@ public class SpiderAnimation : MonoBehaviour {
                     Information.isAttack = true;
                     Information.isOnceAttack = true;
                 }
+
+                if (Information.isHit)
+                {
+                    NowState = S_STATE.S_IDLE;
+                }
             }
-            else if (isHit)
+            else if (NowState == S_STATE.S_IDLE)
             {
-                if (Information.MonsterState != MonsterInformation.STATE.HIT)
-                    Information.MonsterState = MonsterInformation.STATE.HIT;
+                if (Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.HIT)
+                        Information.MonsterState = MonsterInformation.STATE.HIT;
+                }
+                else
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                }
+            }
+            else if (NowState == S_STATE.S_DEATH)
+            {
+
             }
             else
             {
-                if (Information.MonsterState != MonsterInformation.STATE.STAY)
-                    Information.MonsterState = MonsterInformation.STATE.STAY;
+                if (!Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                }
+                else
+                    NowState = S_STATE.S_IDLE;
             }
         }
     }
@@ -100,7 +128,7 @@ public class SpiderAnimation : MonoBehaviour {
                 Spider.CrossFade("Death", 0.3f);
                 break;
             case S_STATE.S_IDLE:
-                Spider.wrapMode = WrapMode.Loop;
+                Spider.wrapMode = WrapMode.Once;
                 Spider.CrossFade("Idle", 0.3f);
                 break;
             case S_STATE.S_RUN:

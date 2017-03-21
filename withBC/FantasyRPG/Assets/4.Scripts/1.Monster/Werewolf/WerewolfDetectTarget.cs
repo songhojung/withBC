@@ -219,11 +219,11 @@ public class WerewolfDetectTarget : MonoBehaviour {
                 }
             }
 
-            if (WolfAnimation.Werewolf["Beaten"].normalizedTime >= 9.5f)
-            {
-                Information.isHit = false;
-                WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RECOVER;
-            }
+            //if (WolfAnimation.Werewolf["Beaten"].normalizedTime >= 9.5f)
+            //{
+            //    Information.isHit = false;
+            //    WolfAnimation.NowState = WerewolfeAnimation.W_STATE.S_RECOVER;
+            //}
         }
         else
         {

@@ -37,25 +37,59 @@ public class Monster3DetectTarget : MonoBehaviour {
 
     void Update()
     {
+        if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Get Hit"))
+        {
+            if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            {
+                MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+                CheckPt.isDie = true;
+                Information.isDie = true;
+            }
+        }
+
+        isDie = Information.isDie;
+
         if (!isDie)
         {
-            if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+            if (!Information.isHit)
             {
-                if (agent.enabled)
-                    agent.enabled = false;
+                if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+                {
+                    if (agent.enabled)
+                        agent.enabled = false;
+                }
+                else
+                {
+                    if (!agent.enabled)
+                        agent.enabled = true;
+                }
+                RayCast();
+                RandDetect();
             }
-            else
-            {
-                if (!agent.enabled)
-                    agent.enabled = true;
-            }
-            RayCast();
-            RandDetect();
         }
-        
-        //Move.Wolf.transform.LookAt(transform.position + transform.forward);
+        else
+        {
+            StartCoroutine(YouDie());
+        }
+        if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Get Hit"))
+        {
+            if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            {
+                MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+                CheckPt.isHit = false;
+                M3Animation.NowState = Monster3Animation.M3_STATE.M3_STAY;
+            }
+        }
+                //Move.Wolf.transform.LookAt(transform.position + transform.forward);
 
     }
+
+    IEnumerator YouDie()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(this.gameObject);
+    }
+
     // Update is called once per frame
     private void RandDetect()
     {
@@ -94,7 +128,8 @@ public class Monster3DetectTarget : MonoBehaviour {
                 if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack"))
                 {
                     //agent.destination = target.transform.position;
-                    M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+                    if(M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                        M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                 }
                 if (M3Animation.NowState != Monster3Animation.M3_STATE.M3_ATTACK)
                 {
