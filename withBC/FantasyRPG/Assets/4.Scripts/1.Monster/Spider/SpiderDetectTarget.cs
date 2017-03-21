@@ -43,7 +43,7 @@ public class SpiderDetectTarget : MonoBehaviour {
 
     void Update()
     {
-        if (SpiderAni.Spider["Death"].normalizedTime >= 0.95f)
+        if (SpiderAni.Spider["Death"].normalizedTime >= 0.9f)
         {
             MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
             CheckPt.isDie = true;
@@ -71,7 +71,7 @@ public class SpiderDetectTarget : MonoBehaviour {
             }
             else
             {
-                if(SpiderAni.Spider["idle"].normalizedTime >= 0.9f)
+                if(SpiderAni.Spider["Idle"].normalizedTime >= 0.5f)
                 {
                     MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
                     CheckPt.isHit = false;

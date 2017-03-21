@@ -50,7 +50,7 @@ public class GoblinAnimation : MonoBehaviour {
     {
         if (Information)
         {
-            Information.hp = _health;
+            _health = Information.hp;
 
             Information.damage = damage;
 
@@ -112,52 +112,55 @@ public class GoblinAnimation : MonoBehaviour {
     }
     private void Animation_Play3()
     {
-        switch (NowState)
+        if (!Information.isDie)
         {
-            case G_STATE.S_IDLE:
-                Goblin.wrapMode = WrapMode.Loop;
-                Goblin.CrossFade("idle", 0.3f);
-                break;
-            case G_STATE.S_ATT1:
-                Goblin.wrapMode = WrapMode.Once;
-                Goblin.CrossFade("attack1", 0.3f);
-                break;
-            case G_STATE.S_ATT2:
-                Goblin.wrapMode = WrapMode.Once;
-                Goblin.CrossFade("attack2", 0.3f);
-                break;
-            case G_STATE.S_ATT3:
-                Goblin.wrapMode = WrapMode.Once;
-                Goblin.CrossFade("attack3", 0.3f);
-                break;
-            case G_STATE.S_BLOCK:
-                Goblin.wrapMode = WrapMode.Once;
-                Goblin.CrossFade("block", 0.3f);
-                break;
-            case G_STATE.S_BLOCK_HIT:
-                Goblin.wrapMode = WrapMode.Once;
-                Goblin.CrossFade("block_hit", 0.3f);
-                break;
-            case G_STATE.S_COMBAT_IDLE:
-                Goblin.wrapMode = WrapMode.Loop;
-                Goblin.CrossFade("combat_idle", 0.3f); ;
-                break;
-            case G_STATE.S_DEATH:
-                Goblin.wrapMode = WrapMode.Once;
-                Goblin.CrossFade("death", 0.3f); ;
-                break;
-            case G_STATE.S_REMOVE_WEAPON:
-                Goblin.wrapMode = WrapMode.Once;
-                Goblin.CrossFade("remove_weapons", 0.3f); ;
-                break;
-            case G_STATE.S_RUN:
-                Goblin.wrapMode = WrapMode.Loop;
-                Goblin.CrossFade("run", 0.3f); ;
-                break;
-            case G_STATE.S_WALK:
-                Goblin.wrapMode = WrapMode.Loop;
-                Goblin.CrossFade("walk", 0.3f); ;
-                break;
+            switch (NowState)
+            {
+                case G_STATE.S_IDLE:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("idle", 0.3f);
+                    break;
+                case G_STATE.S_ATT1:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("attack1", 0.3f);
+                    break;
+                case G_STATE.S_ATT2:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("attack2", 0.3f);
+                    break;
+                case G_STATE.S_ATT3:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("attack3", 0.3f);
+                    break;
+                case G_STATE.S_BLOCK:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("block", 0.3f);
+                    break;
+                case G_STATE.S_BLOCK_HIT:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("block_hit", 0.3f);
+                    break;
+                case G_STATE.S_COMBAT_IDLE:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("combat_idle", 0.3f); ;
+                    break;
+                case G_STATE.S_DEATH:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("death", 0.3f); ;
+                    break;
+                case G_STATE.S_REMOVE_WEAPON:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("remove_weapons", 0.3f); ;
+                    break;
+                case G_STATE.S_RUN:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("run", 0.3f); ;
+                    break;
+                case G_STATE.S_WALK:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("walk", 0.3f); ;
+                    break;
+            }
         }
     }
 

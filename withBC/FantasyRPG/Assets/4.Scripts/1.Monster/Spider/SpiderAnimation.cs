@@ -44,7 +44,7 @@ public class SpiderAnimation : MonoBehaviour {
     {
         if (Information)
         {
-            Information.hp = _health;
+            _health = Information.hp;
 
             Information.damage = damage;
 
@@ -109,36 +109,39 @@ public class SpiderAnimation : MonoBehaviour {
 
     void PlayAnimation()
     {
-        switch(NowState)
+        if (!Information.isDie)
         {
-            case S_STATE.S_ATT:
-                Spider.wrapMode = WrapMode.Once;
-                Spider.CrossFade("Attack", 0.3f);
-                break;
-            case S_STATE.S_ATT_L:
-                Spider.wrapMode = WrapMode.Once;
-                Spider.CrossFade("Attack_Left", 0.3f);
-                break;
-            case S_STATE.S_ATT_R:
-                Spider.wrapMode = WrapMode.Once;
-                Spider.CrossFade("Attack_Right", 0.3f);
-                break;
-            case S_STATE.S_DEATH:
-                Spider.wrapMode = WrapMode.Once;
-                Spider.CrossFade("Death", 0.3f);
-                break;
-            case S_STATE.S_IDLE:
-                Spider.wrapMode = WrapMode.Once;
-                Spider.CrossFade("Idle", 0.3f);
-                break;
-            case S_STATE.S_RUN:
-                Spider.wrapMode = WrapMode.Loop;
-                Spider.CrossFade("Run", 0.3f);
-                break;
-            case S_STATE.S_WALK:
-                Spider.wrapMode = WrapMode.Loop;
-                Spider.CrossFade("Walk", 0.3f);
-                break;
+            switch (NowState)
+            {
+                case S_STATE.S_ATT:
+                    Spider.wrapMode = WrapMode.Once;
+                    Spider.CrossFade("Attack", 0.3f);
+                    break;
+                case S_STATE.S_ATT_L:
+                    Spider.wrapMode = WrapMode.Once;
+                    Spider.CrossFade("Attack_Left", 0.3f);
+                    break;
+                case S_STATE.S_ATT_R:
+                    Spider.wrapMode = WrapMode.Once;
+                    Spider.CrossFade("Attack_Right", 0.3f);
+                    break;
+                case S_STATE.S_DEATH:
+                    Spider.wrapMode = WrapMode.Once;
+                    Spider.CrossFade("Death", 0.3f);
+                    break;
+                case S_STATE.S_IDLE:
+                    Spider.wrapMode = WrapMode.Once;
+                    Spider.CrossFade("Idle", 0.3f);
+                    break;
+                case S_STATE.S_RUN:
+                    Spider.wrapMode = WrapMode.Loop;
+                    Spider.CrossFade("Run", 0.3f);
+                    break;
+                case S_STATE.S_WALK:
+                    Spider.wrapMode = WrapMode.Loop;
+                    Spider.CrossFade("Walk", 0.3f);
+                    break;
+            }
         }
     }
 }

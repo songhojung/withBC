@@ -88,7 +88,7 @@ public class GoblinDetectTarget : MonoBehaviour {
 
     IEnumerator YouDie()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         Destroy(this.gameObject);
     }
     // Update is called once per frame

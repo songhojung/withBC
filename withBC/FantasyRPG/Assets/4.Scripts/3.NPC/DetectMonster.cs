@@ -46,7 +46,7 @@ public class DetectMonster : MonoBehaviour {
             {
                 for (int i = 0; i < Monster.Count; i++)
                 {
-                    if (Monster[i].GetComponent<MonsterInformation>().isDie)
+                    if (Monster[i].GetComponentInParent<MonsterInformation>().isDie)
                     {
                         Monster.Remove(Monster[i]);
                     }
@@ -56,7 +56,7 @@ public class DetectMonster : MonoBehaviour {
             {
                 for(int j=0; j<ViewMonster.Count; j++)
                 {
-                    if (ViewMonster[j].GetComponent<MonsterInformation>().isDie)
+                    if (ViewMonster[j].GetComponentInParent<MonsterInformation>().isDie)
                     {
                         ViewMonster.Remove(ViewMonster[j]);
                     }

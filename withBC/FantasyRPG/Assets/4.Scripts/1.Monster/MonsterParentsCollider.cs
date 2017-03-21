@@ -13,6 +13,10 @@ public class MonsterParentsCollider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//if(_hp<=0)
+        //{
+        //    if (!isDie)
+        //        isDie = true;
+        //}
 	}
 }

@@ -140,8 +140,8 @@ public class MoveNPC : MonoBehaviour {
                 {
                     if (Vector3.Distance(this.transform.position, TargetPoint.transform.position) >= 15.0f)
                     {
-                        TargetNav.enabled = true;
-                        TargetNav.destination = TargetPoint.transform.position;
+                      TargetNav.enabled = true;
+                      TargetNav.destination = TargetPoint.transform.position;
                     }
                 }
             }
@@ -179,6 +179,7 @@ public class MoveNPC : MonoBehaviour {
                         if (!TargetNav.enabled)
                         {
                             TargetNav.enabled = true;
+                            TargetNav.destination = TargetPoint.transform.position;
                         }
                     }
                 }
