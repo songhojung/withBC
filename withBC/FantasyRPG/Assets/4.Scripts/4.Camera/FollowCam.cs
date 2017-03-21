@@ -62,24 +62,27 @@ public class FollowCam : MonoBehaviour
         //    Target.transform.position - (Target.transform.forward * distance) + (Target.transform.up * (height+zoomHeight))
         //   , Time.deltaTime * trace);
 
-        cameraTr.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 10.0f, Space.World);
-        CameraXRot = cameraTr.rotation;
-        cameraTr.Rotate(Vector3.left    * Input.GetAxis("Mouse Y") * 10.0f, Space.Self);
-
-
-        // 위아래 회전 제한
-        if (cameraTr.eulerAngles.x > 0 && cameraTr.eulerAngles.x < 75)
+        if (!GameManager.Instance.isOnUIWindow) // UI창이 열리지 않았다면 카메라 회전한다.
         {
-            if (cameraTr.eulerAngles.x >= 65)
+            cameraTr.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 10.0f, Space.World);
+            CameraXRot = cameraTr.rotation;
+            cameraTr.Rotate(Vector3.left * Input.GetAxis("Mouse Y") * 10.0f, Space.Self);
+
+
+            // 위아래 회전 제한
+            if (cameraTr.eulerAngles.x > 0 && cameraTr.eulerAngles.x < 75)
             {
-                cameraTr.eulerAngles = new Vector3(65.0f, cameraTr.eulerAngles.y, 0);
+                if (cameraTr.eulerAngles.x >= 65)
+                {
+                    cameraTr.eulerAngles = new Vector3(65.0f, cameraTr.eulerAngles.y, 0);
+                }
             }
-        }
-        if (cameraTr.eulerAngles.x < 360 && cameraTr.eulerAngles.x > 290)
-        {
-            if (cameraTr.eulerAngles.x <= 300)
+            if (cameraTr.eulerAngles.x < 360 && cameraTr.eulerAngles.x > 290)
             {
-                cameraTr.eulerAngles = new Vector3(300.0f, cameraTr.eulerAngles.y, 0);
+                if (cameraTr.eulerAngles.x <= 300)
+                {
+                    cameraTr.eulerAngles = new Vector3(300.0f, cameraTr.eulerAngles.y, 0);
+                }
             }
         }
 

@@ -8,6 +8,10 @@ public class DatabaceStore : MonoBehaviour {
 
     private List<GameObject> List_StoreSlots = new List<GameObject>();
 
+    public Transform InfoItemPos;
+
+    private GameObject infoObj; // 동적으로 생성된 info 오브젝트 담고 파괴하기위한 변수
+
     private void Start()
     {
         // 상점창에 있는 슬롯을 리스트에 담기
@@ -34,14 +38,39 @@ public class DatabaceStore : MonoBehaviour {
 
     }
 
-    void SellItem()
-    {
 
-        for(int i = 0; i < list_Item.Count; i ++)
+
+    void showInfoItem(GameObject Item)
+    {
+        ItemInfo.ItemType itemType = Item.GetComponent<ItemInfo>().itemType;
+        switch (itemType)
         {
-            
+            case ItemInfo.ItemType.Portion:
+                infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Hp",typeof(GameObject)), InfoItemPos, false);
+                infoObj.transform.position = InfoItemPos.position;
+                infoObj.gameObject.transform.parent = gameObject.transform;
+                break;
+
+            case ItemInfo.ItemType.Sword:
+                infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Sword", typeof(GameObject)), InfoItemPos, false);
+                infoObj.transform.position = InfoItemPos.position;
+                infoObj.gameObject.transform.parent = gameObject.transform;
+                break;
+
         }
     }
 
-    
+
+    void DontShowInfoItem(GameObject Item)
+    {
+        Destroy(infoObj);
+    }
+
+    void CloseButton()
+    {
+        //gameObject.SetActive(false);
+        Destroy(gameObject.transform.root.gameObject);
+    }
+
+
 }
