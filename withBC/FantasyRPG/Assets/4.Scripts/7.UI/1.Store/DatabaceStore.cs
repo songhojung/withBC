@@ -39,7 +39,7 @@ public class DatabaceStore : MonoBehaviour {
     }
 
 
-
+    // 아이템 정보창 열기
     void showInfoItem(GameObject Item)
     {
         ItemInfo.ItemType itemType = Item.GetComponent<ItemInfo>().itemType;
@@ -60,8 +60,8 @@ public class DatabaceStore : MonoBehaviour {
         }
     }
 
-
-    void DontShowInfoItem(GameObject Item)
+    // 아이템 정보창 닫기 
+    void DontShowInfoItem()
     {
         Destroy(infoObj);
     }

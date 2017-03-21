@@ -47,14 +47,32 @@ public class ItemInfo : MonoBehaviour
         }
     }
 
+    //아이템이 마우스 오버 됫을때 호출
     void showInfoItem()
     {
-        StoreObj.SendMessage("showInfoItem", gameObject, SendMessageOptions.RequireReceiver);
+        if (WhereAttached == AttachedType.Store)
+        {
+            StoreObj.SendMessage("showInfoItem", gameObject, SendMessageOptions.RequireReceiver);
+        }
+        else if (WhereAttached == AttachedType.Inventory)
+        {
+            
+        }
+        
     }
 
+    //아이템이 마우스 아웃 됫을때 호출
     void DontShowInfoItem()
     {
-        StoreObj.SendMessage("DontShowInfoItem", gameObject, SendMessageOptions.RequireReceiver);
+        if (WhereAttached == AttachedType.Store)
+        {
+            StoreObj.SendMessage("DontShowInfoItem", SendMessageOptions.RequireReceiver);
+        }
+        else if (WhereAttached == AttachedType.Inventory)
+        {
+
+        }
+       
     }
 
 

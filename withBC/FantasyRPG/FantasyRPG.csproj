@@ -136,6 +136,7 @@
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceInventory.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceStore.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\ItemInfo.cs" />
+    <Compile Include="Assets\4.Scripts\7.UI\1.Store\ShowCoin.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\2.Title\TitleButtonCtrl.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\3.SelectMap\MissionScriptCtrl.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\3.SelectMap\SelectMap.cs" />

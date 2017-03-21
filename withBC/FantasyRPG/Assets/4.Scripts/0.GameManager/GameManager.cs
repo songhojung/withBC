@@ -37,5 +37,15 @@ public class GameManager : MonoBehaviour
 
     public int Gold = 5000;
 
-  
+    public List<GameObject> list_InvenItem = new List<GameObject>();
+
+    //private void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.F3))
+    //    {
+    //        --Gold;
+    //    }
+    //}
+
+
 }

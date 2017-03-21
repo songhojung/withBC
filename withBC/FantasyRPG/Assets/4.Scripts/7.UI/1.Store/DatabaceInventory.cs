@@ -49,17 +49,16 @@ public class DatabaceInventory : MonoBehaviour
                 }
             }
 
-            if (isNotFull)
+            if (isNotFull) //빈칸에 채우기
             {
                 list_InvenItem[index] = ItemObj;
                 ItemObj.transform.position = List_IvenSlots[index].transform.position; // 아이템을 인벤 슬롯위치에 놓기
                 ItemObj.gameObject.transform.parent = List_IvenSlots[index].transform; // 아이템 을 각 인벤슬롯의    자식으로
             }
-            else
+            else // 다채워져있으면 뒤로 채우기
             {
-
-
                 list_InvenItem.Add(ItemObj);
+                GameManager.Instance.list_InvenItem.Add()
                 ItemObj.transform.position = List_IvenSlots[list_InvenItem.Count - 1].transform.position; // 아이템을 인벤 슬롯위치에 놓기
                 ItemObj.gameObject.transform.parent = List_IvenSlots[list_InvenItem.Count - 1].transform; // 아이템 을 각 인벤슬롯의    자식으로
                 Debug.Log(list_InvenItem.Count);
@@ -86,12 +85,13 @@ public class DatabaceInventory : MonoBehaviour
 
     }
 
-    void ChangingItem(GameObject Item)
+    void CloseButton()
     {
-
+        //gameObject.SetActive(false);
+        Destroy(gameObject.transform.root.gameObject);
     }
 
-   
 
-    
+
+
 }

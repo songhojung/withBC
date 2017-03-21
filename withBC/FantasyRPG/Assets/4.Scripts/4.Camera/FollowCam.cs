@@ -40,9 +40,6 @@ public class FollowCam : MonoBehaviour
         {
             if (pPlayerCtrl.IsLeftMouseStay)
             {
-                //Vector3 vecRotate = new Vector3(0, Target.transform.eulerAngles.y, 0);
-                //Quaternion TurnRotation = Quaternion.Euler(vecRotate);
-                //cameraTr.rotation = TurnRotation;
                 distance = 0.1f;
                 height = 5.0f;
                 zoomHeight = 0.0f;
