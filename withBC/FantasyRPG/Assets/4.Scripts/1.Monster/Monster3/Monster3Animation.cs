@@ -25,13 +25,12 @@ public class Monster3Animation : MonoBehaviour {
     private MonsterInformation Information;
     // Use this for initialization
     void Start () {
-        int a = 0;
         Mt3 = GetComponent<Animator>();
         NowState = M3_STATE.M3_STAY;
         Information = GetComponent<MonsterInformation>();
         //_health = Mt3.GetInteger("Health");
 
-        Mt3.SetInteger("Health", _health);
+        Mt3.SetInteger("Health", Information.hp);
         NowWay = (M3_WAY)Mt3.GetInteger("Way");
         AttackNum = 0;
 	}
@@ -39,6 +38,11 @@ public class Monster3Animation : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //ChangeAnimation();
+        if (Information.hp <= 0)
+        {
+            if (NowState != M3_STATE.M3_HIT)
+                NowState = M3_STATE.M3_HIT;
+        }
         InformationCheck();
         AttackCheck();
         CheckWay();
@@ -48,12 +52,10 @@ public class Monster3Animation : MonoBehaviour {
     {
         if (Mt3.GetInteger("State") != (int)NowState)
             Mt3.SetInteger("State", (int)NowState);
-        if (Mt3.GetInteger("Health") != _health)
-            Mt3.SetInteger("Health", _health);
         if (Information)
         {
-            Information.hp = _health;
-
+            if (Mt3.GetInteger("Health") != Information.hp)
+                Mt3.SetInteger("Health", Information.hp);
             Information.damage = damage;
 
             if (NowState == M3_STATE.M3_ATTACK)
@@ -65,16 +67,32 @@ public class Monster3Animation : MonoBehaviour {
                     Information.isAttack = true;
                     Information.isOnceAttack = true;
                 }
+
+                if (Information.isHit)
+                {
+                    NowState = M3_STATE.M3_HIT;
+                }
             }
             else if (NowState == M3_STATE.M3_HIT)
             {
                 if (Information.MonsterState != MonsterInformation.STATE.HIT)
                     Information.MonsterState = MonsterInformation.STATE.HIT;
+                if (!Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                    NowState = M3_STATE.M3_STAY;
+                }
             }
             else
             {
-                if (Information.MonsterState != MonsterInformation.STATE.STAY)
-                    Information.MonsterState = MonsterInformation.STATE.STAY;
+                if (!Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                }
+                else
+                    NowState = M3_STATE.M3_HIT;
             }
         }
     }
