@@ -44,53 +44,98 @@ public class MonsterCollision : MonoBehaviour {
 
                 Destroy(BloodDecal, 2.5f);
 
-
-
-            }
-            else if (collider.gameObject.CompareTag("ThrowObject"))
-            {
-                ThrowObjectCtrl.ThrowObjectType objectType = collider.gameObject.GetComponent<ThrowObjectCtrl>().throwObjType;
-
-                if (objectType == ThrowObjectCtrl.ThrowObjectType.ARROW) // 아쳐 활 타격시 이펙트
-                {
-                    StartCoroutine(EffectManager.Instance.CreatEffect("BloodSplatEffect",
-                            this.gameObject.transform.position, Quaternion.identity, 0.0f, 0.5f));
-
-                    collider.gameObject.GetComponent<ThrowObjectCtrl>().moveSpeed = 0.0f;
-                    collider.gameObject.transform.parent = this.gameObject.transform;
-                    Destroy(collider.gameObject, 15.0f);
-                }
-                else if (objectType == ThrowObjectCtrl.ThrowObjectType.FIREBALL) // 위자드 파이어볼 타격시 이펙트
-                {
-
-                    StartCoroutine(EffectManager.Instance.CreatEffect("BigExplosionEffect",
-                             collider.gameObject.transform.position, Quaternion.identity, 0.0f, 2.5f));
-
-                    StartCoroutine(EffectManager.Instance.DestroyEffect(collider.gameObject, 0.0f));
-                }
-                else if (objectType == ThrowObjectCtrl.ThrowObjectType.FIRE) // 위자드 그냥 파이어 타격시 이펙트
-                {
-
-                    StartCoroutine(EffectManager.Instance.CreatEffect("Hit_Fire",
-                              collider.gameObject.transform.position, Quaternion.identity, 0.0f, 1.8f));
-
-                    StartCoroutine(EffectManager.Instance.DestroyEffect(collider.gameObject.transform.parent.gameObject, 0.0f));
-
-                }
-                else if (objectType == ThrowObjectCtrl.ThrowObjectType.LIGHTNING) // 위자드 라이트닝 타격시 이펙트
-                {
-                    StartCoroutine(EffectManager.Instance.CreatEffect("Hit_Lightning",
-                             this.gameObject.transform.position, Quaternion.identity, 0.3f, 1.8f));
-                }
-
             MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
 
-            if(MonsterParents)
+            if (MonsterParents)
             {
-                if(!MonsterParents.isDie)
+                if (!MonsterParents.isDie)
                 {
                     MonsterParents.isHit = true;
                     MonsterParents._hp -= 5;
+                }
+            }
+
+        }
+        else if (collider.gameObject.CompareTag("ThrowObject"))
+        {
+            ThrowObjectCtrl.ThrowObjectType objectType = collider.gameObject.GetComponent<ThrowObjectCtrl>().throwObjType;
+            
+            if (objectType == ThrowObjectCtrl.ThrowObjectType.ARROW) // 아쳐 활 타격시 이펙트
+            {
+                if (!collider.gameObject.GetComponent<ThrowObjectCtrl>().isHit)
+                {
+                    StartCoroutine(EffectManager.Instance.CreatEffect("BloodSplatEffect",
+                          this.gameObject.transform.position, Quaternion.identity, 0.0f, 0.5f));
+
+                    collider.gameObject.GetComponent<ThrowObjectCtrl>().moveSpeed = 0.0f;
+                    collider.gameObject.GetComponent<ThrowObjectCtrl>().isHit = true;
+                    collider.gameObject.transform.parent = this.gameObject.transform;
+                    Destroy(collider.gameObject, 15.0f);
+
+                    MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
+
+                    if (MonsterParents)
+                    {
+                        if (!MonsterParents.isDie)
+                        {
+                            MonsterParents.isHit = true;
+                            MonsterParents._hp -= 5;
+                        }
+                    }
+                }
+            }
+            else if (objectType == ThrowObjectCtrl.ThrowObjectType.FIREBALL) // 위자드 파이어볼 타격시 이펙트
+            {
+
+                StartCoroutine(EffectManager.Instance.CreatEffect("BigExplosionEffect",
+                         collider.gameObject.transform.position, Quaternion.identity, 0.0f, 2.5f));
+
+                StartCoroutine(EffectManager.Instance.DestroyEffect(collider.gameObject, 0.0f));
+
+                MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
+
+                if (MonsterParents)
+                {
+                    if (!MonsterParents.isDie)
+                    {
+                        MonsterParents.isHit = true;
+                        MonsterParents._hp -= 5;
+                    }
+                }
+            }
+            else if (objectType == ThrowObjectCtrl.ThrowObjectType.FIRE) // 위자드 그냥 파이어 타격시 이펙트
+            {
+
+                StartCoroutine(EffectManager.Instance.CreatEffect("Hit_Fire",
+                          collider.gameObject.transform.position, Quaternion.identity, 0.0f, 1.8f));
+
+                StartCoroutine(EffectManager.Instance.DestroyEffect(collider.gameObject.transform.parent.gameObject, 0.0f));
+
+                MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
+
+                if (MonsterParents)
+                {
+                    if (!MonsterParents.isDie)
+                    {
+                        MonsterParents.isHit = true;
+                        MonsterParents._hp -= 5;
+                    }
+                }
+            }
+            else if (objectType == ThrowObjectCtrl.ThrowObjectType.LIGHTNING) // 위자드 라이트닝 타격시 이펙트
+            {
+                StartCoroutine(EffectManager.Instance.CreatEffect("Hit_Lightning",
+                         this.gameObject.transform.position, Quaternion.identity, 0.3f, 1.8f));
+
+                MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
+
+                if (MonsterParents)
+                {
+                    if (!MonsterParents.isDie)
+                    {
+                        MonsterParents.isHit = true;
+                        MonsterParents._hp -= 5;
+                    }
                 }
             }
         }

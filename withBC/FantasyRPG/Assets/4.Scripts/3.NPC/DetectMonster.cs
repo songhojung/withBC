@@ -46,7 +46,7 @@ public class DetectMonster : MonoBehaviour {
             {
                 for (int i = 0; i < Monster.Count; i++)
                 {
-                    if (Monster[i].GetComponentInParent<MonsterInformation>().isDie)
+                    if (Monster[i].GetComponent<MonsterInformation>().isDie)
                     {
                         Monster.Remove(Monster[i]);
                     }
@@ -56,7 +56,7 @@ public class DetectMonster : MonoBehaviour {
             {
                 for(int j=0; j<ViewMonster.Count; j++)
                 {
-                    if (ViewMonster[j].GetComponentInParent<MonsterInformation>().isDie)
+                    if (ViewMonster[j].GetComponent<MonsterInformation>().isDie)
                     {
                         ViewMonster.Remove(ViewMonster[j]);
                     }
@@ -183,7 +183,8 @@ public class DetectMonster : MonoBehaviour {
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
             (1 << LayerMask.NameToLayer("NPC")) |
-            (1 << LayerMask.NameToLayer("Default")));          //layerMask = ~layerMask;
+            (1 << LayerMask.NameToLayer("Default")) |
+            (1 << LayerMask.NameToLayer("Map")));          //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
 
