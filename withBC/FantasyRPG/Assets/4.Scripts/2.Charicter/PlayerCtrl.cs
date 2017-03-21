@@ -45,7 +45,6 @@ public class PlayerCtrl : MonoBehaviour {
     public float moveSpeed = 5.0f;
     public float rotateSpeed = 5.0f;
 
-    private Transform BipTr;
 
     void Start ()
     {
@@ -53,7 +52,7 @@ public class PlayerCtrl : MonoBehaviour {
         rigidbody = GetComponent<Rigidbody>();
 
         Job = GetComponent<CharacterInformation>().Job;
-        BipTr = GameObject.Find("Bip01").gameObject.GetComponent<Transform>();
+
     }
 	
 	// Update is called once per frame

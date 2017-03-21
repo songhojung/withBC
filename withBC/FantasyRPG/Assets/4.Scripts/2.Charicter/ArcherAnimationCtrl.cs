@@ -137,7 +137,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         if (IsLeftMouseDown)
         {
             archerState = ArcherState.GETARROW;
-            ArrowObject.active = true;
+            ArrowObject.SetActive(true);
 
 
         }
@@ -147,7 +147,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             {
                 archerState = ArcherState.BOWSHOOT;
                 IsReadyForShoot = false;
-                ArrowObject.active = false;
+                ArrowObject.SetActive(false);
             }
         }
 

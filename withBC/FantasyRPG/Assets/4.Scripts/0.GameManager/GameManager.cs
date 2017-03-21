@@ -64,13 +64,14 @@ public class GameManager : MonoBehaviour
         else
             list_Items.Add(pItem);
     }
-    private void Update()
-    {
-        if (list_Items.Count > 1)
-        {
-            string na = list_Items[0].name;
-        }
-    }
+
+    //private void Update()
+    //{
+    //    if (list_Items.Count > 1)
+    //    {
+    //        string na = list_Items[0].name;
+    //    }
+    //}
 
 
 }
