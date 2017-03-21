@@ -31,13 +31,25 @@ public class CharacterInformation : MonoBehaviour {
 
     public PlayerJob Job = PlayerJob.NONE;
     public MODE _mode;
+
+    private GameObject UIIven;
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+		if(_mode == MODE.PLAYER && Input.GetKeyDown(KeyCode.I))
+        {
+            if (UIIven == null)
+            {
+                UIIven = UIIven = (GameObject)Instantiate(Resources.Load("UI/UI_Inventory", typeof(GameObject)));
+                GameManager.Instance.isOnUIWindow = true;
+            }
+        }
 	}
 }

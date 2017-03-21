@@ -73,12 +73,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\4.Scripts\0.GameManager\GameManager.cs" />
@@ -141,6 +135,7 @@
     <Compile Include="Assets\4.Scripts\6.Object\ThrowObjectCtrl.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceInventory.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceStore.cs" />
+    <Compile Include="Assets\4.Scripts\7.UI\1.Store\Item.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\ItemInfo.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\ShowCoin.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\2.Title\TitleButtonCtrl.cs" />

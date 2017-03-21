@@ -68,7 +68,10 @@ public class CharicterCollision : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.F))
                     {
                         if (UIStore == null) // 단한번 생성하기 위해
+                        {
                             UIStore = (GameObject)Instantiate(Resources.Load("UI/UI_StoreRoot", typeof(GameObject)));
+                            GameManager.Instance.isOnUIStore = true;
+                        }
                         if (UIIven == null)
                             UIIven = (GameObject)Instantiate(Resources.Load("UI/UI_Inventory", typeof(GameObject)));
                         Destroy(UINotice);

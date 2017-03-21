@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class DatabaceStore : MonoBehaviour {
 
+    ItemDatabase itemDatabase = new ItemDatabase();
     public List<GameObject> list_Item = new List<GameObject>();
 
     private List<GameObject> List_StoreSlots = new List<GameObject>();
 
     public Transform InfoItemPos;
 
-    private GameObject infoObj; // 동적으로 생성된 info 오브젝트 담고 파괴하기위한 변수
+  
 
     private void Start()
     {
+        itemDatabase.IistAdd();
         // 상점창에 있는 슬롯을 리스트에 담기
         Transform[] slots =  GetComponentsInChildren<Transform>();
 
@@ -26,9 +28,11 @@ public class DatabaceStore : MonoBehaviour {
         }
 
         // 아이템을 상점창에 등록하기.
-        for(int i = 0; i <list_Item.Count; i++)
+        for (int i = 0; i < itemDatabase.list_DItem.Count; i++)
         {
-            GameObject ItemObj = Instantiate(list_Item[i], List_StoreSlots[i].transform, false);
+            GameObject ItemObj = (GameObject)Instantiate(Resources.Load("UI/"+itemDatabase.list_DItem[i].name, typeof(GameObject)),
+                List_StoreSlots[i].transform, false);
+            ItemObj.GetComponent<ItemInfo>().SetItemInfo(itemDatabase.list_DItem[i]);
             ItemObj.GetComponent<ItemInfo>().ItemName = list_Item[i].name;
             ItemObj.GetComponent<ItemInfo>().WhereAttached = ItemInfo.AttachedType.Store; // 이아이템은 상점에 소속됨
             ItemObj.transform.position = List_StoreSlots[i].transform.position; // 아이템을 상점 슬롯위치에
@@ -38,38 +42,13 @@ public class DatabaceStore : MonoBehaviour {
 
     }
 
-
-    // 아이템 정보창 열기
-    void showInfoItem(GameObject Item)
-    {
-        ItemInfo.ItemType itemType = Item.GetComponent<ItemInfo>().itemType;
-        switch (itemType)
-        {
-            case ItemInfo.ItemType.Portion:
-                infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Hp",typeof(GameObject)), InfoItemPos, false);
-                infoObj.transform.position = InfoItemPos.position;
-                infoObj.gameObject.transform.parent = gameObject.transform;
-                break;
-
-            case ItemInfo.ItemType.Sword:
-                infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Sword", typeof(GameObject)), InfoItemPos, false);
-                infoObj.transform.position = InfoItemPos.position;
-                infoObj.gameObject.transform.parent = gameObject.transform;
-                break;
-
-        }
-    }
-
-    // 아이템 정보창 닫기 
-    void DontShowInfoItem()
-    {
-        Destroy(infoObj);
-    }
+    
 
     void CloseButton()
     {
         //gameObject.SetActive(false);
         Destroy(gameObject.transform.root.gameObject);
+        GameManager.Instance.isOnUIStore = false;
     }
 
 
