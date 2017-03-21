@@ -36,6 +36,11 @@ public class GoblinAnimation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (Information.hp <= 0)
+        {
+            if (NowState != G_STATE.S_DEATH)
+                NowState = G_STATE.S_DEATH;
+        }
         //ChangeMotion();
         Animation_Play3();
         InformationCheck();
@@ -59,16 +64,36 @@ public class GoblinAnimation : MonoBehaviour {
                     Information.isAttack = true;
                     Information.isOnceAttack = true;
                 }
+
+                if (Information.isHit)
+                {
+                    NowState = G_STATE.S_BLOCK_HIT;
+                }
             }
             else if (NowState == G_STATE.S_BLOCK_HIT)
             {
                 if (Information.MonsterState != MonsterInformation.STATE.HIT)
                     Information.MonsterState = MonsterInformation.STATE.HIT;
+                if (!Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                    NowState = G_STATE.S_IDLE;
+                }
+            }
+            else if (NowState == G_STATE.S_DEATH)
+            {
+
             }
             else
             {
-                if (Information.MonsterState != MonsterInformation.STATE.STAY)
-                    Information.MonsterState = MonsterInformation.STATE.STAY;
+                if (!Information.isHit)
+                {
+                    if (Information.MonsterState != MonsterInformation.STATE.STAY)
+                        Information.MonsterState = MonsterInformation.STATE.STAY;
+                }
+                else
+                    NowState = G_STATE.S_BLOCK_HIT;
             }
         }
     }

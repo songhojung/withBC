@@ -43,26 +43,55 @@ public class SpiderDetectTarget : MonoBehaviour {
 
     void Update()
     {
+        if (SpiderAni.Spider["Death"].normalizedTime >= 0.95f)
+        {
+            MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+            CheckPt.isDie = true;
+            Information.isDie = true;
+        }
+
+        isDie = Information.isDie;
+
         if (!isDie)
         {
-            if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+            if (!Information.isHit)
             {
-                if (agent.enabled)
-                    agent.enabled = false;
+                if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+                {
+                    if (agent.enabled)
+                        agent.enabled = false;
+                }
+                else
+                {
+                    if (!agent.enabled)
+                        agent.enabled = true;
+                }
+                RayCast();
+                RandDetect();
             }
             else
             {
-                if (!agent.enabled)
-                    agent.enabled = true;
+                if(SpiderAni.Spider["idle"].normalizedTime >= 0.9f)
+                {
+                    MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+                    CheckPt.isHit = false;
+                    SpiderAni.NowState = SpiderAnimation.S_STATE.S_RUN;
+                }
             }
-            RayCast();
-            RandDetect();
         }
-        Information.isDie = isDie;
+        else
+        {
+            StartCoroutine(YouDie());
+        }
+        
 
     }
     // Update is called once per frame
-
+    IEnumerator YouDie()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(this.gameObject);
+    }
     private void RandDetect()
     {
         if (target)

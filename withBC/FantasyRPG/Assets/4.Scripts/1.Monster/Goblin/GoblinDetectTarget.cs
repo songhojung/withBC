@@ -47,24 +47,49 @@ public class GoblinDetectTarget : MonoBehaviour {
 
     void Update()
     {
+        if (GoblinAni.Goblin["death"].normalizedTime >= 0.95f)
+        {
+            MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+            CheckPt.isDie = true;
+            Information.isDie = true;
+        }
+
+        isDie = Information.isDie;
 
         if (!isDie)
         {
-
-            if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+            if (!Information.isHit)
             {
-                if (agent.enabled)
-                    agent.enabled = false;
+                if (Information.MonsterState == MonsterInformation.STATE.ATTACK)
+                {
+                    if (agent.enabled)
+                        agent.enabled = false;
+                }
+                else
+                {
+                    if (!agent.enabled)
+                        agent.enabled = true;
+                }
+                RayCast();
+                RandDetect();
             }
-            else
-            {
-                if (!agent.enabled)
-                    agent.enabled = true;
-            }
-            RayCast();
-            RandDetect();
         }
-        Information.isDie = isDie;
+        else
+        {
+            StartCoroutine(YouDie());
+        }
+        if (GoblinAni.Goblin["block_hit"].normalizedTime >= 0.9f)
+        {
+            MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+            CheckPt.isHit = false;
+            GoblinAni.NowState = GoblinAnimation.G_STATE.S_RUN;
+        }
+    }
+
+    IEnumerator YouDie()
+    {
+        yield return new WaitForSeconds(1.0f);
+        Destroy(this.gameObject);
     }
     // Update is called once per frame
 
@@ -201,6 +226,12 @@ public class GoblinDetectTarget : MonoBehaviour {
                         target = DetectColl.target;
                     }
                 }
+            }
+
+            if (GoblinAni.Goblin["block_hit"].normalizedTime >= 9.5f)
+            {
+                Information.isHit = false;
+                GoblinAni.NowState = GoblinAnimation.G_STATE.S_BLOCK;
             }
         }
         else
