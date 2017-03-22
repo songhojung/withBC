@@ -51,5 +51,20 @@ public class CharacterInformation : MonoBehaviour {
                 GameManager.Instance.isOnUIWindow = true;
             }
         }
-	}
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            //아이템 바꾸기
+
+            // 단축창 아이콘 바꾸기
+            GameObject.Find("Selectwindow").SendMessage("ClickSelectWindow", KeyCode.Alpha1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            //아이템 바꾸기
+
+            // 단축창 아이콘 바꾸기
+            GameObject.Find("Selectwindow").SendMessage("ClickSelectWindow", KeyCode.Alpha2);
+        }
+
+    }
 }

@@ -135,6 +135,7 @@
     <Compile Include="Assets\4.Scripts\6.Object\ThrowObjectCtrl.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceInventory.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceStore.cs" />
+    <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaseSelectWidow.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\Item.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\ItemInfo.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\ShowCoin.cs" />

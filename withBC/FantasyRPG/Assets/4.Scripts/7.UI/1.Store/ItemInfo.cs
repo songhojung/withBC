@@ -19,11 +19,12 @@ public class ItemInfo : MonoBehaviour
     private GameObject InventoryObj;
     private GameObject StoreObj;
     private GameObject infoObj; // 동적으로 생성된 아이템info 오브젝트 담고 파괴하기위한 변수
-    //private GameObject StoreObj = GameObject.Find("Store");
+                                //private GameObject StoreObj = GameObject.Find("Store");
+
 
     private void Start()
     {
-       
+
         InventoryObj = GameObject.Find("Inventory");
         StoreObj = GameObject.Find("Store");
     }
@@ -34,6 +35,7 @@ public class ItemInfo : MonoBehaviour
         item.itemType = pItem.itemType;
         item.Position = pItem.Position;
         item.Gold = pItem.Gold;
+        item.Perioty = pItem.Perioty;
     }
 
 

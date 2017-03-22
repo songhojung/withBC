@@ -12,7 +12,9 @@ public class TitleButtonCtrl : MonoBehaviour
     {
         SceneManager.LoadScene("InnerMap");
         GameManager.Instance.NowScene = GameManager.SCENE.TitleScene;
-        
+        GameManager.Instance.playerJob = GameManager.PlayerJob.WIZARD;
+
+
     }
 
     void PressInfoButton()
