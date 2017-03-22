@@ -73,6 +73,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\4.Scripts\0.GameManager\GameManager.cs" />
@@ -95,6 +101,7 @@
     <Compile Include="Assets\4.Scripts\1.Monster\MonsterDetectCollider.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\MonsterInformation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\MonsterParentsCollider.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\MonsterSoundManager.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MakePatroll.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MonsterFindPatroll.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MonsterPatrollMove.cs" />

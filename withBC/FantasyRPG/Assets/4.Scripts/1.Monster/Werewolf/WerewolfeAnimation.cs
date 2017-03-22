@@ -27,11 +27,14 @@ public class WerewolfeAnimation : MonoBehaviour {
     private MonsterInformation Information;
 
     public int damage;
+
+    private MonsterSoundManager SoundManager;
     // Use this for initialization
     void Start()
     {
         Werewolf = this.GetComponent<Animation>();
         Information = GetComponent<MonsterInformation>();
+        SoundManager = GetComponent<MonsterSoundManager>();
     }
 
     // Update is called once per frame
@@ -190,6 +193,83 @@ public class WerewolfeAnimation : MonoBehaviour {
                     Werewolf.CrossFade("recover", 0.3f);
                     break;
             }
+        }
+    }
+
+    private void Sound_Play()
+    {
+        switch (NowState)
+        {
+            case W_STATE.S_STAND:
+                if(!SoundManager.MyAudio.isPlaying)
+                {
+                    SoundManager.MyAudio.clip = SoundManager.Stay;
+                    SoundManager.MyAudio.PlayOneShot(SoundManager.Stay,SoundManager.NowVolum);
+                }
+                else
+                {
+                    if(SoundManager.MyAudio.clip != SoundManager.Stay)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Stay;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Stay, SoundManager.NowVolum);
+                    }
+                }
+                break;
+            case W_STATE.S_ATT1:
+                break;
+            case W_STATE.S_ATT2:
+                break;
+            case W_STATE.S_ATT3:
+                break;
+            case W_STATE.S_ATT20:
+                if (!SoundManager.MyAudio.isPlaying)
+                {
+                    SoundManager.MyAudio.clip = SoundManager.Stay;
+                    SoundManager.MyAudio.PlayOneShot(SoundManager.Stay, SoundManager.NowVolum);
+                }
+                else
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Stay)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Stay;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Stay, SoundManager.NowVolum);
+                    }
+                }
+                break;
+            case W_STATE.S_ATT_STAND:
+                break;
+            case W_STATE.S_BEATEN:
+                break;
+            case W_STATE.S_DEATH:
+                break;
+            case W_STATE.S_JUMP:
+                break;
+            case W_STATE.S_RUN:
+                break;
+            case W_STATE.S_WALK:
+                break;
+            case W_STATE.S_ROAR:
+                if (!SoundManager.MyAudio.isPlaying)
+                {
+                    SoundManager.MyAudio.clip = SoundManager.Roar;
+                    SoundManager.MyAudio.PlayOneShot(SoundManager.Roar, SoundManager.NowVolum);
+                }
+                else
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Roar)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Roar;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Roar, SoundManager.NowVolum);
+                    }
+                }
+                break;
+            case W_STATE.S_VICTORY:
+                break;
+            case W_STATE.S_RECOVER:
+                break;
         }
     }
 }
