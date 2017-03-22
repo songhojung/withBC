@@ -29,6 +29,10 @@ public class WerewolfeAnimation : MonoBehaviour {
     public int damage;
 
     private MonsterSoundManager SoundManager;
+
+    private bool OnceHit = false;
+    private bool OnceAttack = false;
+    private bool OnceDie = false;
     // Use this for initialization
     void Start()
     {
@@ -47,6 +51,7 @@ public class WerewolfeAnimation : MonoBehaviour {
         }
         //ChangeMotion();
         Animation_Play3();
+        Sound_Play();
         InformationCheck();
         
     }
@@ -74,10 +79,13 @@ public class WerewolfeAnimation : MonoBehaviour {
                 if(Information.isHit)
                 {
                     NowState = W_STATE.S_BEATEN;
+                    OnceHit = true;
                 }
             }
             else if(NowState == W_STATE.S_BEATEN)
             {
+                if (OnceAttack)
+                    OnceAttack = false;
                 if (Information.MonsterState != MonsterInformation.STATE.HIT)
                     Information.MonsterState = MonsterInformation.STATE.HIT;
                 if (!Information.isHit)
@@ -93,13 +101,18 @@ public class WerewolfeAnimation : MonoBehaviour {
             }
             else
             {
+                if(OnceAttack)
+                    OnceAttack = false;
                 if (!Information.isHit)
                 {
                     if (Information.MonsterState != MonsterInformation.STATE.STAY)
                         Information.MonsterState = MonsterInformation.STATE.STAY;
                 }
                 else
+                {
                     NowState = W_STATE.S_BEATEN;
+                    OnceHit = true;
+                }
             }
         }
     }
@@ -217,36 +230,102 @@ public class WerewolfeAnimation : MonoBehaviour {
                 }
                 break;
             case W_STATE.S_ATT1:
-                break;
-            case W_STATE.S_ATT2:
-                break;
-            case W_STATE.S_ATT3:
-                break;
-            case W_STATE.S_ATT20:
-                if (!SoundManager.MyAudio.isPlaying)
+                if (OnceAttack)
                 {
-                    SoundManager.MyAudio.clip = SoundManager.Stay;
-                    SoundManager.MyAudio.PlayOneShot(SoundManager.Stay, SoundManager.NowVolum);
-                }
-                else
-                {
-                    if (SoundManager.MyAudio.clip != SoundManager.Stay)
+                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
                     {
                         SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Stay;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Stay, SoundManager.NowVolum);
+                        SoundManager.MyAudio.clip = SoundManager.Attack;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        OnceAttack = false;
+                    }
+                }
+                break;
+            case W_STATE.S_ATT2:
+                if (OnceAttack)
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Attack;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        OnceAttack = false;
+                    }
+                }
+                break;
+            case W_STATE.S_ATT3:
+                if (OnceAttack)
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Attack;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        OnceAttack = false;
+                    }
+                }
+                break;
+            case W_STATE.S_ATT20:
+                if(OnceAttack)
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Attack;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        OnceAttack = false;
                     }
                 }
                 break;
             case W_STATE.S_ATT_STAND:
                 break;
             case W_STATE.S_BEATEN:
+                //if (!SoundManager.MyAudio.isPlaying)
+                //{
+                //    SoundManager.MyAudio.clip = SoundManager.Hit;
+                //    SoundManager.MyAudio.PlayOneShot(SoundManager.Hit, SoundManager.NowVolum);
+                //}
+                //else
+                if(OnceHit)
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Hit)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Hit;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Hit, SoundManager.NowVolum);
+                        OnceHit = false;
+                    }
+                }
                 break;
             case W_STATE.S_DEATH:
+                if (!OnceDie)
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Death)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Death;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Death, SoundManager.NowVolum);
+                        OnceDie = true;
+                    }
+                }
                 break;
             case W_STATE.S_JUMP:
                 break;
             case W_STATE.S_RUN:
+                if (!SoundManager.MyAudio.isPlaying)
+                {
+                    SoundManager.MyAudio.clip = SoundManager.Move;
+                    SoundManager.MyAudio.PlayOneShot(SoundManager.Move, SoundManager.NowVolum);
+                }
+                else
+                {
+                    if (SoundManager.MyAudio.clip != SoundManager.Move)
+                    {
+                        SoundManager.MyAudio.Stop();
+                        SoundManager.MyAudio.clip = SoundManager.Move;
+                        SoundManager.MyAudio.PlayOneShot(SoundManager.Move, SoundManager.NowVolum);
+                    }
+                }
                 break;
             case W_STATE.S_WALK:
                 break;
