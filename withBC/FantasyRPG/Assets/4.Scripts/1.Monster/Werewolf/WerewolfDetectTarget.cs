@@ -37,7 +37,7 @@ public class WerewolfDetectTarget : MonoBehaviour {
 
     void Update()
     {
-        if(WolfAnimation.Werewolf["Death"].normalizedTime >= 0.95f)
+        if(WolfAnimation.Werewolf["Death"].normalizedTime >= 0.9f)
         {
             MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
             CheckPt.isDie = true;

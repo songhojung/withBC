@@ -10,6 +10,8 @@ public class ThrowObjectCtrl : MonoBehaviour {
     private Transform tr;
     public float moveSpeed = 20.0f;
 
+    public bool isHit = false;
+
 
     // Use this for initialization
     void Start()
