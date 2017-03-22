@@ -77,7 +77,43 @@ public class ItemInfo : MonoBehaviour
                     break;
 
                 case Item.ItemType.Sword:
-                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Sword", typeof(GameObject)), InfoPos, false);
+                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Sword1", typeof(GameObject)), InfoPos, false);
+                    infoObj.transform.position = InfoPos.position;
+                    infoObj.gameObject.transform.parent = StoreObj.gameObject.transform;
+                    break;
+
+                case Item.ItemType.Sword2:
+                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Sword2", typeof(GameObject)), InfoPos, false);
+                    infoObj.transform.position = InfoPos.position;
+                    infoObj.gameObject.transform.parent = StoreObj.gameObject.transform;
+                    break;
+
+                case Item.ItemType.Sword3:
+                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Sword3", typeof(GameObject)), InfoPos, false);
+                    infoObj.transform.position = InfoPos.position;
+                    infoObj.gameObject.transform.parent = StoreObj.gameObject.transform;
+                    break;
+
+                case Item.ItemType.Dagger:
+                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Dagger", typeof(GameObject)), InfoPos, false);
+                    infoObj.transform.position = InfoPos.position;
+                    infoObj.gameObject.transform.parent = StoreObj.gameObject.transform;
+                    break;
+
+                case Item.ItemType.Axe:
+                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Axe", typeof(GameObject)), InfoPos, false);
+                    infoObj.transform.position = InfoPos.position;
+                    infoObj.gameObject.transform.parent = StoreObj.gameObject.transform;
+                    break;
+
+                case Item.ItemType.Staff:
+                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Staff", typeof(GameObject)), InfoPos, false);
+                    infoObj.transform.position = InfoPos.position;
+                    infoObj.gameObject.transform.parent = StoreObj.gameObject.transform;
+                    break;
+
+                case Item.ItemType.Shield:
+                    infoObj = (GameObject)Instantiate(Resources.Load("UI/Info_Shield", typeof(GameObject)), InfoPos, false);
                     infoObj.transform.position = InfoPos.position;
                     infoObj.gameObject.transform.parent = StoreObj.gameObject.transform;
                     break;

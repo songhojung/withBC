@@ -56,7 +56,7 @@ public class DatabaceInventory : MonoBehaviour
     {
         if (list_InvenItem.Count < 20)
         {
-            string ItemName = Item.GetComponent<ItemInfo>().ItemName;
+            string ItemName = Item.GetComponent<ItemInfo>().item.name;
 
             GameObject ItemObj = (GameObject)Instantiate(Resources.Load("UI/" + ItemName, typeof(GameObject)),
                 List_IvenSlots[0].transform, false);
