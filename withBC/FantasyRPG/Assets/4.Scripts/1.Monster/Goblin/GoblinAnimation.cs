@@ -35,6 +35,7 @@ public class GoblinAnimation : MonoBehaviour {
         Goblin = this.GetComponent<Animation>();
 
         Information = GetComponent<MonsterInformation>();
+        SoundManager = GetComponent<MonsterSoundManager>();
         //Debug.Log("클립갯수:" + ClipNum.ToString());
 
         //pcControll = this.gameObject.GetComponent<CharacterController>();
@@ -59,7 +60,7 @@ public class GoblinAnimation : MonoBehaviour {
         {
             _health = Information.hp;
 
-            Information.damage = damage;
+            damage = Information.damage;
 
             if (NowState == G_STATE.S_ATT1 || NowState == G_STATE.S_ATT2 ||
                 NowState == G_STATE.S_ATT3)
