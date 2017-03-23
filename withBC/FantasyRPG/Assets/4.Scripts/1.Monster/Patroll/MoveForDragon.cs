@@ -37,7 +37,17 @@ public class MoveForDragon : MonoBehaviour {
                 Quaternion rot = Quaternion.Slerp(transform.rotation, drot, timeSpeed);
 
                 transform.rotation = rot;
+                //Debug.Log(this.name);
             }
+        }
+        else
+        {
+            if (target)
+            {
+                target = null;
+                //Debug.Log(this.name);
+            }
+
         }
 	}
 }

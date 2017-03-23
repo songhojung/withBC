@@ -187,4 +187,9 @@ public class DragonAnimation : MonoBehaviour {
                 break;
         }
     }
+
+    private void Sound_Play()
+    {
+
+    }
 }

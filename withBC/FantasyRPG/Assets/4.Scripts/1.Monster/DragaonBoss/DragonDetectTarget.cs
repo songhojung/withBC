@@ -69,6 +69,7 @@ public class DragonDetectTarget : MonoBehaviour {
 
     private void RandDetect()
     {
+        //Debug.Log(this.name);
         if (target)
         {
             if (Ray.collider != null)
@@ -122,7 +123,7 @@ public class DragonDetectTarget : MonoBehaviour {
             if (target.gameObject.CompareTag("PatrollPoint"))
             {
                 float distance = Vector3.Distance(this.transform.position, target.transform.position);
-                if (distance <= 5.0f)
+                if (distance <= 15.0f)
                 {
                     if (target.GetComponent<MakePatroll>().Child)
                     {
@@ -144,8 +145,10 @@ public class DragonDetectTarget : MonoBehaviour {
                 }
                 else
                 {
-                    D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWRAND;
-                    Flyagent.OnOff = false;
+                    if(D_Animation.NowFlyRand != DragonAnimation.D_FLYRAND.NOWRAND)
+                        D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWRAND;
+                    if(!Flyagent.OnOff)
+                        Flyagent.OnOff = false;
                 }
 
             }
