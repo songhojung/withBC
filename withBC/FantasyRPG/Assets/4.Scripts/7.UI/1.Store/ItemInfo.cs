@@ -18,6 +18,7 @@ public class ItemInfo : MonoBehaviour
 
     private GameObject InventoryObj;
     private GameObject StoreObj;
+    private GameObject SelectWindowObj;
     private GameObject infoObj; // 동적으로 생성된 아이템info 오브젝트 담고 파괴하기위한 변수
                                 //private GameObject StoreObj = GameObject.Find("Store");
 
@@ -27,6 +28,7 @@ public class ItemInfo : MonoBehaviour
 
         InventoryObj = GameObject.Find("Inventory");
         StoreObj = GameObject.Find("Store");
+        SelectWindowObj = GameObject.Find("Selectwindow");
     }
 
     public void SetItemInfo(Item pItem)
@@ -41,21 +43,37 @@ public class ItemInfo : MonoBehaviour
 
     void ItemAction()
     {
-        if(WhereAttached == AttachedType.Store)
+       
+        if (Input.GetMouseButtonUp(0))
         {
-            Destroy(infoObj);
-            InventoryObj.SendMessage("AddItem", gameObject , SendMessageOptions.RequireReceiver);
-            GameManager.Instance.SendMessage("addItem", item, SendMessageOptions.RequireReceiver);
-            GameManager.Instance.Gold -= item.Gold;
+            if (WhereAttached == AttachedType.Store)
+            {
+
+                {
+                    Destroy(infoObj);
+                    InventoryObj.SendMessage("AddItem", gameObject, SendMessageOptions.RequireReceiver);
+                    GameManager.Instance.SendMessage("addItem", item, SendMessageOptions.RequireReceiver);
+                    GameManager.Instance.Gold -= item.Gold;
+                }
 
 
+            }
+            else if (WhereAttached == AttachedType.Inventory)
+            {
 
+                InventoryObj.SendMessage("SellItem", gameObject, SendMessageOptions.RequireReceiver);
+                GameManager.Instance.Gold += (item.Gold / 2);
+            }
         }
-        else if(WhereAttached == AttachedType.Inventory)
+        else if (Input.GetMouseButtonUp(1))
         {
-           
-            InventoryObj.SendMessage("SellItem", gameObject ,SendMessageOptions.RequireReceiver);
-            GameManager.Instance.Gold += (item.Gold / 2);
+             if (WhereAttached == AttachedType.Inventory)
+            {
+                InventoryObj.SendMessage("RemoveItem", gameObject, SendMessageOptions.RequireReceiver);
+                SelectWindowObj.SendMessage("AddSelectWindow", gameObject, SendMessageOptions.RequireReceiver);
+                GameManager.Instance.gameObject.SendMessage("addEquipItem", item);
+                GameManager.Instance.PlayerObject.GetComponent<CharacterInformation>().SendMessage("CreatNewWeapon",SendMessageOptions.RequireReceiver);
+            }
         }
     }
 

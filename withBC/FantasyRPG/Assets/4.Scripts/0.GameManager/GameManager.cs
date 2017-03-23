@@ -32,14 +32,15 @@ public class GameManager : MonoBehaviour
     public enum SCENE { TitleScene, SelectScene, WaitScene, InGameScene };
   
 
-    ItemDatabase itemDatabase = new ItemDatabase();
-
+    private ItemDatabase itemDatabase = new ItemDatabase();
+    public GameObject PlayerObject;
 
     public PlayerJob playerJob = PlayerJob.NONE;
     public SCENE NowScene = SCENE.TitleScene; // 현재 씬이 어디 있는지 알기 위함
 
     public bool isOnUIWindow = false; // 상점창, 필드선택창 열릴시 캐릭터 카메라 회전을 잠그기 위한 변수
     public bool isOnUIStore = false; // 상점창이 켜져잇냐 ? -> 아이템팔기 위한 변수
+    public bool OnUIMouseRight = false;
 
     public int Gold = 5000;
 
@@ -47,6 +48,19 @@ public class GameManager : MonoBehaviour
 
     public List<Item> list_Items = new List<Item>();
 
+
+    private void Start()
+    {
+        itemDatabase.IistAddAll();
+
+        //임시 
+        playerJob = PlayerJob.WIZARD;
+        NowScene = SCENE.WaitScene;
+        SettingUISelectWindow();
+
+        PlayerObject = GameObject.FindGameObjectWithTag("Player");
+
+    }
 
     void addItem(Item pItem)
     {
@@ -72,19 +86,19 @@ public class GameManager : MonoBehaviour
 
     void addEquipItem(Item pItem)
     {
+        for (int i = 0; i < list_EquipItem.Count; i++)
+        {
+            if (pItem.Perioty == list_EquipItem[i].Perioty)
+            {
+                list_EquipItem.Remove(list_EquipItem[i]);
+                
+                break;
+            }
+        }
         list_EquipItem.Add(pItem);
     }
 
-    private void Start()
-    {
-        itemDatabase.IistAddAll();
-
-        //임시 
-        playerJob = PlayerJob.WIZARD;
-        NowScene = SCENE.WaitScene;
-        SettingUISelectWindow();
-
-    }
+   
 
     void SettingUISelectWindow()
     {
@@ -114,13 +128,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //private void Update()
-    //{
-    //    if (list_Items.Count > 1)
-    //    {
-    //        string na = list_Items[0].name;
-    //    }
-    //}
+    private void Update()
+    {
+ 
+    }
 
 
 }

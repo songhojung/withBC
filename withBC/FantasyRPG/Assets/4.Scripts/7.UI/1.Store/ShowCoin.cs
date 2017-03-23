@@ -15,6 +15,8 @@ public class ShowCoin : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.Gold < 0)
+            GameManager.Instance.Gold = 0;
         coinLabel.text = GameManager.Instance.Gold.ToString();
     }
 

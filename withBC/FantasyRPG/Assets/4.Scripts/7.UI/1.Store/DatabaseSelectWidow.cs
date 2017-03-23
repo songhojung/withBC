@@ -23,8 +23,12 @@ public class DatabaseSelectWidow : MonoBehaviour
         }
 
         SettingInitEquip();
+
+        // 초기에 선택창 첫번째아이템  아이콘 오버 되게 함.
+        ClickSelectWindow(KeyCode.Alpha1);
     }
 
+    // 선택창 아이템 클릭시 아이콘 오버 되게 함.
     void ClickSelectWindow(KeyCode keycode)
     {
 
@@ -63,62 +67,106 @@ public class DatabaseSelectWidow : MonoBehaviour
       
     }
 
-    void AddSelectWindow(Item pItem)
+    void AddSelectWindow(GameObject pItem)
     {
        
-        //ItemInfo itemInfo = item.GetComponent<ItemInfo>();
+        ItemInfo pitemInfo = pItem.GetComponent<ItemInfo>();
         //itemInfo.item.Perioty
-        GameObject UIEquipItem = (GameObject)Instantiate(Resources.Load("UI/Equip_" + pItem.name, typeof(GameObject)));
-        UIEquipItem.GetComponent<ItemInfo>().item = pItem;
+        GameObject UIEquipItem = (GameObject)Instantiate(Resources.Load("UI/Equip_" + pitemInfo.item.name, 
+            typeof(GameObject)));
+        UIEquipItem.GetComponent<ItemInfo>().item = pitemInfo.item;
 
-        RemoveEquioItem(pItem);
+        RemoveEquipItem(pItem);
 
-        if (pItem.Perioty == Item.PeriotyWeapon.Main)
+        if (pitemInfo.item.Perioty == Item.PeriotyWeapon.Main)
         {
             
             UIEquipItem.transform.position = List_SelectSlots[0].transform.position;
             UIEquipItem.transform.parent = List_SelectSlots[0].transform.parent;
             UIEquipItem.transform.localScale = Vector3.one;
         }
-        else if (pItem.Perioty == Item.PeriotyWeapon.Sub1)
+        else if (pitemInfo.item.Perioty == Item.PeriotyWeapon.Sub1)
         {
             UIEquipItem.transform.position = List_SelectSlots[1].transform.position;
             UIEquipItem.transform.parent = List_SelectSlots[1].transform.parent;
             UIEquipItem.transform.localScale = Vector3.one;
         }
-        else if (pItem.Perioty == Item.PeriotyWeapon.Sub2)
+        else if (pitemInfo.item.Perioty == Item.PeriotyWeapon.Sub2)
         {
             UIEquipItem.transform.position = List_SelectSlots[2].transform.position;
             UIEquipItem.transform.parent = List_SelectSlots[2].transform.parent;
             UIEquipItem.transform.localScale = Vector3.one;
         }
-      
+        
         List_EquipItem.Add(UIEquipItem);
     }
 
-    void RemoveEquioItem(Item pItem)
+    // 선택창에서 인벤으로 빠질떄
+    void RemoveEquipItem(GameObject pItem)
     {
       
         if(List_EquipItem.Count >0)
         {
+            ItemInfo pitemInfo = pItem.GetComponent<ItemInfo>();
+            int index = 99;
+            bool IsthereSame = false;
             for (int i = 0; i < List_EquipItem.Count; i++)
             {
                 ItemInfo EquipItemInfo = List_EquipItem[i].GetComponent<ItemInfo>();
-                if (pItem.Perioty == EquipItemInfo.item.Perioty)
+                
+                if (pitemInfo.item.Perioty == EquipItemInfo.item.Perioty)
                 {
+                    index = i;
+                    IsthereSame = true;
                     Destroy(List_EquipItem[i]);
+                    break;
                 }
+                
+            }
+
+            if (IsthereSame)
+            {
+                GameObject.Find("Inventory").SendMessage("AddItem", List_EquipItem[index], SendMessageOptions.RequireReceiver);
+                GameManager.Instance.gameObject.SendMessage("addItem", List_EquipItem[index].GetComponent<ItemInfo>().item);
+                List_EquipItem.Remove(List_EquipItem[index]);
+                
             }
         }
     }
 
-
+    // 선택창 생성시 플레이어가 가지고있는 무기 아이콘 생성
     void SettingInitEquip()
     {
         List<Item> playerEquip = GameManager.Instance.list_EquipItem;
         for (int i = 0; i < playerEquip.Count; i++)
         {
-            AddSelectWindow(playerEquip[i]);
+           
+            GameObject UIEquipItem = (GameObject)Instantiate(Resources.Load("UI/Equip_" + playerEquip[i].name,
+                typeof(GameObject)));
+            UIEquipItem.GetComponent<ItemInfo>().item = playerEquip[i];
+
+
+            if (playerEquip[i].Perioty == Item.PeriotyWeapon.Main)
+            {
+
+                UIEquipItem.transform.position = List_SelectSlots[0].transform.position;
+                UIEquipItem.transform.parent = List_SelectSlots[0].transform.parent;
+                UIEquipItem.transform.localScale = Vector3.one;
+            }
+            else if (playerEquip[i].Perioty == Item.PeriotyWeapon.Sub1)
+            {
+                UIEquipItem.transform.position = List_SelectSlots[1].transform.position;
+                UIEquipItem.transform.parent = List_SelectSlots[1].transform.parent;
+                UIEquipItem.transform.localScale = Vector3.one;
+            }
+            else if (playerEquip[i].Perioty == Item.PeriotyWeapon.Sub2)
+            {
+                UIEquipItem.transform.position = List_SelectSlots[2].transform.position;
+                UIEquipItem.transform.parent = List_SelectSlots[2].transform.parent;
+                UIEquipItem.transform.localScale = Vector3.one;
+            }
+
+            List_EquipItem.Add(UIEquipItem);
         }
     }
 }

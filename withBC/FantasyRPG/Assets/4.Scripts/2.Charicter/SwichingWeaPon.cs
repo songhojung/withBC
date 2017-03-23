@@ -15,7 +15,7 @@ public class SwichingWeaPon : MonoBehaviour
 
     public static void SwithcingWeapon()
     {
-        new WaitForSeconds(12.0f);
+        //new WaitForSeconds(12.0f);
         
         GameObject Weapon_2 = GameObject.Find("Bip01 R Hand").transform.FindChild("Dagger").gameObject;
         GameObject Weapon_1 = GameObject.Find("Bip01 R Hand").transform.FindChild("Magic Staff").gameObject;

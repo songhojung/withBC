@@ -51,7 +51,7 @@ public class DatabaceInventory : MonoBehaviour
     }
 
 
-    // 상점에서 아이템 살떄
+    // 인벤에 아이템추가 
     void AddItem(GameObject Item)
     {
         if (list_InvenItem.Count < 20)
@@ -82,13 +82,13 @@ public class DatabaceInventory : MonoBehaviour
                 ItemObj.gameObject.transform.parent = List_IvenSlots[index].transform; // 아이템 을 각 인벤슬롯의    자식으로
                 
             }
-            else // 다채워져있으면 뒤로 채우기
+            else // 다채워져있으면 뒤부터 채우기
             {
                 list_InvenItem.Add(ItemObj);
                 ItemObj.transform.position = List_IvenSlots[list_InvenItem.Count - 1].transform.position; // 아이템을 인벤 슬롯위치에 놓기
                 ItemObj.gameObject.transform.parent = List_IvenSlots[list_InvenItem.Count - 1].transform; // 아이템 을 각 인벤슬롯의    자식으로
                 
-                Debug.Log(list_InvenItem.Count);
+              
 
             }
         }
@@ -112,6 +112,22 @@ public class DatabaceInventory : MonoBehaviour
                     GameManager.Instance.list_Items[i] = null;
                     break;
                 }
+            }
+        }
+    }
+
+    //인벤에서 무기 장착시 ...
+    void RemoveItem(GameObject Item)
+    {
+        for (int i = 0; i < list_InvenItem.Count; i++)
+        {
+            if (list_InvenItem[i] == Item)
+            { // 선택된 아이템을 리스트에 널시키기
+                Destroy(list_InvenItem[i]);
+                list_InvenItem[i] = null;
+                //게임매니저에 아이템정보 리스트도 널시킨다.
+                GameManager.Instance.list_Items[i] = null;
+                break;
             }
         }
     }
