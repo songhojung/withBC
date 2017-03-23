@@ -69,6 +69,7 @@ public class DragonDetectTarget : MonoBehaviour {
 
     private void RandDetect()
     {
+        //Debug.Log(this.name);
         if (target)
         {
             if (Ray.collider != null)
@@ -110,10 +111,10 @@ public class DragonDetectTarget : MonoBehaviour {
                 {
                     if (target)
                     {
-                        if (Vector3.Distance(agent.destination, target.transform.position) >= 2.0f)
-                        {
+                        //if (Vector3.Distance(agent.destination, target.transform.position) >= 2.0f)
+                        //{
                             agent.destination = target.transform.position;
-                        }
+                        //}
                     }
                 }
             }
@@ -122,7 +123,7 @@ public class DragonDetectTarget : MonoBehaviour {
             if (target.gameObject.CompareTag("PatrollPoint"))
             {
                 float distance = Vector3.Distance(this.transform.position, target.transform.position);
-                if (distance <= 5.0f)
+                if (distance <= 15.0f)
                 {
                     if (target.GetComponent<MakePatroll>().Child)
                     {
@@ -144,8 +145,10 @@ public class DragonDetectTarget : MonoBehaviour {
                 }
                 else
                 {
-                    D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWRAND;
-                    Flyagent.OnOff = false;
+                    if(D_Animation.NowFlyRand != DragonAnimation.D_FLYRAND.NOWRAND)
+                        D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWRAND;
+                    if(!Flyagent.OnOff)
+                        Flyagent.OnOff = false;
                 }
 
             }
@@ -354,7 +357,8 @@ public class DragonDetectTarget : MonoBehaviour {
         ObjPos.y += 2.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
-             (1 << LayerMask.NameToLayer("Default")));        //layerMask = ~layerMask;
+             (1 << LayerMask.NameToLayer("Default")) |
+             (1 << LayerMask.NameToLayer("Map")));        //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
 

@@ -79,6 +79,7 @@
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonAnimation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonDetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonMove.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\DragonSound.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinAnimation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinDetectTarget.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinMove.cs" />

@@ -25,6 +25,12 @@ public class GoblinAnimation : MonoBehaviour {
 
     public int damage;
     // Use this for initialization
+
+    private MonsterSoundManager SoundManager;
+
+    private bool OnceHit = false;
+    private bool OnceAttack = false;
+    private bool OnceDie = false;
     void Start () {
         Goblin = this.GetComponent<Animation>();
 
@@ -44,6 +50,7 @@ public class GoblinAnimation : MonoBehaviour {
         //ChangeMotion();
         Animation_Play3();
         InformationCheck();
+        Sound_Play();
     }
 
     private void InformationCheck()
@@ -164,5 +171,57 @@ public class GoblinAnimation : MonoBehaviour {
         }
     }
 
-
+    private void Sound_Play()
+    {
+        if (!Information.isDie)
+        {
+            switch (NowState)
+            {
+                case G_STATE.S_IDLE:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("idle", 0.3f);
+                    break;
+                case G_STATE.S_ATT1:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("attack1", 0.3f);
+                    break;
+                case G_STATE.S_ATT2:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("attack2", 0.3f);
+                    break;
+                case G_STATE.S_ATT3:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("attack3", 0.3f);
+                    break;
+                case G_STATE.S_BLOCK:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("block", 0.3f);
+                    break;
+                case G_STATE.S_BLOCK_HIT:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("block_hit", 0.3f);
+                    break;
+                case G_STATE.S_COMBAT_IDLE:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("combat_idle", 0.3f); ;
+                    break;
+                case G_STATE.S_DEATH:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("death", 0.3f); ;
+                    break;
+                case G_STATE.S_REMOVE_WEAPON:
+                    Goblin.wrapMode = WrapMode.Once;
+                    Goblin.CrossFade("remove_weapons", 0.3f); ;
+                    break;
+                case G_STATE.S_RUN:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("run", 0.3f); ;
+                    break;
+                case G_STATE.S_WALK:
+                    Goblin.wrapMode = WrapMode.Loop;
+                    Goblin.CrossFade("walk", 0.3f); ;
+                    break;
+            }
+        }
+    }
 }
