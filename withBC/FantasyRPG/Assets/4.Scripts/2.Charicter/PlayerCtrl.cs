@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour {
     // Use this for initialization
     public enum PlayerJob { NONE,WARRIOR,ARCHER,WIZARD};
     private CharacterInformation.PlayerJob Job;
+    private CharacterInformation charaterInfo;
 
     private Rigidbody rigidbody;
 
@@ -51,7 +52,8 @@ public class PlayerCtrl : MonoBehaviour {
 
         rigidbody = GetComponent<Rigidbody>();
 
-        Job = GetComponent<CharacterInformation>().Job;
+        charaterInfo = GetComponent<CharacterInformation>();
+        Job = charaterInfo.Job;
 
     }
 	

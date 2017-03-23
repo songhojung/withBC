@@ -30,7 +30,7 @@ public class EffectManager : MonoBehaviour
 
 	public IEnumerator hit()
     {
-        Debug.Log("aaaaaaaaaa");
+
         yield return null;
 
     }

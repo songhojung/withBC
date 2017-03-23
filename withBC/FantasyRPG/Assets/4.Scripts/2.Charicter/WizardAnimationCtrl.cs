@@ -43,6 +43,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     public WizardState BeforeState = WizardState.NONE;
 
     private CharacterInformation.MODE Mode;
+    private CharacterInformation CharaterInfo;
 
 
     private bool IsDie = false;
@@ -67,7 +68,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
     void Start()
     {
         Mode = GetComponent<CharacterInformation>()._mode;
-
+        CharaterInfo = GetComponent<CharacterInformation>();
         switch (Mode)
         {
             case CharacterInformation.MODE.PLAYER:
@@ -79,8 +80,9 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 Move_Npc = GetComponent<MoveNPC>();
                 break;
         }
-        StartCoroutine(CheckArcherState());
         StartCoroutine(WizardAction());
+        StartCoroutine(CheckArcherState());
+        
         //무기바꾸기 콜백함수
         switchDel = new SwichingWeaPon.SwitchWeaponEvent(SwichingWeaPon.SwithcingWeapon);
         
@@ -147,6 +149,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 else
                     wizardState = WizardState.STAFFIDLE;
             }
+            CharaterInfo.isOnceAttack = false;
         }
 
         if (IsJump)
@@ -189,6 +192,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
         {
             if (!IsUseAnotherWeaPon)
                 wizardState = WizardState.STAFFATTACK;
+            CharaterInfo.isOnceAttack = true;
         }
         else if (IsKey_Q)
         {
@@ -206,18 +210,17 @@ public class WizardAnimationCtrl : MonoBehaviour {
         {
             if (IsUseAnotherWeaPon)
             {
+                CharaterInfo.isOnceAttack = true;
                 if (ComboCount == 2 && NowComboTime < 1.0f)
                 {
 
                     wizardState = WizardState.DAGGERATTACT_2;
-                    Debug.Log(wizardState);
                     NowComboTime = 0.0f;
                 }
                 else if (ComboCount == 3 && NowComboTime < 1.0f)
                 {
 
                     wizardState = WizardState.DAGGERATTACT_3;
-                    Debug.Log(wizardState);
                     NowComboTime = 0.0f;
                 }
                 else
@@ -225,20 +228,17 @@ public class WizardAnimationCtrl : MonoBehaviour {
                     if (ComboCount == 1)
                     {
                         ComboCount = 2;
-                        Debug.Log("다시 1번");
                         NowComboTime = 0.0f;
                     }
                     else
                     {
                         wizardState = WizardState.DAGGERATTACT_1;
-                        Debug.Log(wizardState);
                         ComboCount = 1;
                         NowComboTime = 0.0f;
                     }
                 }
             }
         }
-
 
 
         NowComboTime += Time.deltaTime;
@@ -349,14 +349,12 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 {
 
                     wizardState = WizardState.DAGGERATTACT_2;
-                    Debug.Log(wizardState);
                     NowComboTime = 0.0f;
                 }
                 else if (ComboCount == 3 && NowComboTime < 1.0f)
                 {
 
                     wizardState = WizardState.DAGGERATTACT_3;
-                    Debug.Log(wizardState);
                     NowComboTime = 0.0f;
                 }
                 else
@@ -364,13 +362,11 @@ public class WizardAnimationCtrl : MonoBehaviour {
                     if (ComboCount == 1)
                     {
                         ComboCount = 2;
-                        Debug.Log("다시 1번");
                         NowComboTime = 0.0f;
                     }
                     else
                     {
                         wizardState = WizardState.DAGGERATTACT_1;
-                        Debug.Log(wizardState);
                         ComboCount = 1;
                         NowComboTime = 0.0f;
                     }

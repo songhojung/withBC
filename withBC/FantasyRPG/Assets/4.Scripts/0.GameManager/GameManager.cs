@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             {
                 CharacterInformation parent = PlayerObject.GetComponentInParent<CharacterInformation>();
                 PlayerObject = parent.gameObject;
-                Debug.Log(PlayerObject.name);
+
             }
 
        }

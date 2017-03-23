@@ -13,6 +13,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     public WarriorComboState warriorComboState = WarriorComboState.NONE;
 
     private CharacterInformation.MODE Mode;
+    private CharacterInformation characterInfo;
 
     private Animator WarriorAnimator;
     public bool isDie = false;
@@ -32,7 +33,9 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     void Start()
     {
         WarriorAnimator = GetComponent<Animator>();
+
         Mode = GetComponent<CharacterInformation>()._mode;
+        characterInfo = GetComponent<CharacterInformation>();
         switch (Mode)
         {
             case CharacterInformation.MODE.PLAYER:
@@ -44,8 +47,8 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 Move_Npc = GetComponent<MoveNPC>();
                 break;
         }
-        StartCoroutine(CheckWarriorState());
         StartCoroutine(WarriorAction());
+        StartCoroutine(CheckWarriorState());
         StartCoroutine(WarriorComboAttack());
         //pPlayerCtrl = GetComponent<PlayerCtrl>();
         
@@ -121,6 +124,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
                 warriorComboState = WarriorComboState.NONE;
+                characterInfo.isOnceAttack = false;
 
             }
         }
@@ -131,17 +135,20 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             {
                 //Debug.Log("어택2공격끝");
                 warriorComboState = WarriorComboState.NONE;
+                characterInfo.isOnceAttack = false;
             }
         }
         else if (isCombo1 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0") ||
             isCombo2 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
         {
             warriorComboState = WarriorComboState.NONE;
+            characterInfo.isOnceAttack = false;
         }
 
         if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Block"))
         {
             warriorComboState = WarriorComboState.NONE;
+            characterInfo.isOnceAttack = false;
         }
         //else if(WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Block"))
         //{
@@ -160,6 +167,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
         if (IsLeftMouseDown)
         {
+            characterInfo.isOnceAttack = true;
             if (!isCombo1 && warriorComboState == WarriorComboState.COMBO1 && NowComboTime < 0.9f)
             {
 
@@ -186,6 +194,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
         }
         else if (IsRightMouseDown)
         {
+            characterInfo.isOnceAttack = true;
             warriorComboState = WarriorComboState.SHIELDBLOCK;
             NowComboTime = 0.0f;
         }
@@ -228,6 +237,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
                 warriorComboState = WarriorComboState.NONE;
+                characterInfo.isOnceAttack = false;
 
             }
         }
@@ -236,19 +246,22 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
             if (!isCombo2 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
             {
-                Debug.Log("어택2공격끝");
+
                 warriorComboState = WarriorComboState.NONE;
+                characterInfo.isOnceAttack = false;
             }
         }
         else if (isCombo1 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0") ||
             isCombo2 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
         {
             warriorComboState = WarriorComboState.NONE;
+            characterInfo.isOnceAttack = false;
         }
 
         if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Block"))
         {
             warriorComboState = WarriorComboState.NONE;
+            characterInfo.isOnceAttack = false;
         }
         //else if(WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Block"))
         //{
@@ -267,6 +280,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
         if (IsLeftMouseDown)
         {
+            characterInfo.isOnceAttack = true;
             if (!isCombo1 && warriorComboState == WarriorComboState.COMBO1 && NowComboTime < 0.9f)
             {
 
@@ -294,6 +308,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
         }
         else if (IsRightMouseDown)
         {
+            characterInfo.isOnceAttack = true;
             warriorComboState = WarriorComboState.SHIELDBLOCK;
             NowComboTime = 0.0f;
         }

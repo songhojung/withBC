@@ -5,6 +5,7 @@ using UnityEngine;
 public class MonsterCollision : MonoBehaviour {
 
     
+    
 	// Use this for initialization
 	void Start ()
     {
@@ -16,11 +17,14 @@ public class MonsterCollision : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collider)
     {
-        //if (this.gameObject.layer == LayerMask.NameToLayer("Default"))
-        //{
+        
             if (collider.gameObject.CompareTag("Weapon"))
             {
-                Debug.Log("고블린 히트됨");
+            CharacterInformation ColliercharaterInfo = collider.gameObject.transform.root.gameObject.GetComponent<CharacterInformation>();
+            if (ColliercharaterInfo.isOnceAttack)
+            {
+                ColliercharaterInfo.isOnceAttack = false;
+
                 // 피 이펙트
 
                 Vector3 EffectPos = new Vector3(collider.transform.position.x, collider.transform.position.y + 1, collider.transform.position.z);
@@ -34,7 +38,7 @@ public class MonsterCollision : MonoBehaviour {
                 Destroy(Bloodeffect, 0.5f);
 
                 // 피 바닥데칼
-                Vector3 decalPos = gameObject.transform.position + (Vector3.up * 0.05f);
+                Vector3 decalPos = gameObject.transform.root.position + (Vector3.up * 0.05f);
                 Quaternion decalRot = Quaternion.Euler(90, 0, Random.Range(0, 360));
 
                 GameObject BloodDecal = EffectManager.Instance.CreatAndGetEffect("Blood04",
@@ -44,17 +48,17 @@ public class MonsterCollision : MonoBehaviour {
 
                 Destroy(BloodDecal, 2.5f);
 
-            MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
+                MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
 
-            if (MonsterParents)
-            {
-                if (!MonsterParents.isDie)
+                if (MonsterParents)
                 {
-                    MonsterParents.isHit = true;
-                    MonsterParents._hp -= 5;
+                    if (!MonsterParents.isDie)
+                    {
+                        MonsterParents.isHit = true;
+                        MonsterParents._hp -= 5;
+                    }
                 }
             }
-
         }
         else if (collider.gameObject.CompareTag("ThrowObject"))
         {
@@ -86,7 +90,6 @@ public class MonsterCollision : MonoBehaviour {
             }
             else if (objectType == ThrowObjectCtrl.ThrowObjectType.FIREBALL) // 위자드 파이어볼 타격시 이펙트
             {
-
                 StartCoroutine(EffectManager.Instance.CreatEffect("BigExplosionEffect",
                          collider.gameObject.transform.position, Quaternion.identity, 0.0f, 2.5f));
 
@@ -138,7 +141,7 @@ public class MonsterCollision : MonoBehaviour {
                     }
                 }
             }
-        }
+        }// endof if(collider.gameObject.CompareTag("ThrowObject"))
         //}
     }
 }

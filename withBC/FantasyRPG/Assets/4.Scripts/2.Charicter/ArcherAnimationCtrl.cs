@@ -31,6 +31,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
     public  bool IsReadyForShoot = false;
 
     private CharacterInformation.MODE Mode;
+    private CharacterInformation characterInfo;
 
     private bool IsDie = false;
     private bool IsJump = false;
@@ -52,6 +53,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
     void Start ()
     {
         Mode = GetComponent<CharacterInformation>()._mode;
+        characterInfo = GetComponent<CharacterInformation>();
 
         switch (Mode)
         {
@@ -65,8 +67,9 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 break;
         }
 
-        StartCoroutine(CheckArcherState());
         StartCoroutine(ArcherAction());
+        StartCoroutine(CheckArcherState());
+
         ArcherAnimation[Jump].speed = 1.4f;
         ArcherAnimation[GetArrow].speed = 2.5f;
         ArrowObject.active = false;
@@ -108,26 +111,50 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
             IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
         }
-
-        if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
-            && !ArcherAnimation.IsPlaying(GetArrow) && !ArcherAnimation.IsPlaying(Aim)
-            && !ArcherAnimation.IsPlaying(Attack1) && !ArcherAnimation.IsPlaying(Attack2))
+        if (archerState == ArcherState.HITFRONT)
         {
+            if(ArcherAnimation[HitFront].normalizedTime >= 0.9f)
+            {
+                if (direction.magnitude >= 0.1f)
+                {
+                    archerState = ArcherState.RUN;
+                }
+                else if (IsCombat)
+                {
+                    archerState = ArcherState.BOWIDLE;
+                }
+                else if (direction.magnitude <= 0.0f)
+                {
+                    archerState = ArcherState.SWORDIDLE;
+                }
+                characterInfo.isOnceAttack = false;
 
-            if (direction.magnitude >= 0.1f)
-            {
-                archerState = ArcherState.RUN;
             }
-            else if (IsCombat)
-            {
-                archerState = ArcherState.BOWIDLE;
-            }
-            else if (direction.magnitude <= 0.0f)
-            {
-                archerState = ArcherState.SWORDIDLE;
-            }
-
         }
+        else
+        {
+            if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
+              && !ArcherAnimation.IsPlaying(GetArrow) && !ArcherAnimation.IsPlaying(Aim)
+              && !ArcherAnimation.IsPlaying(Attack1) && !ArcherAnimation.IsPlaying(Attack2))
+            {
+
+                if (direction.magnitude >= 0.1f)
+                {
+                    archerState = ArcherState.RUN;
+                }
+                else if (IsCombat)
+                {
+                    archerState = ArcherState.BOWIDLE;
+                }
+                else if (direction.magnitude <= 0.0f)
+                {
+                    archerState = ArcherState.SWORDIDLE;
+                }
+                characterInfo.isOnceAttack = false;
+
+            }
+        }
+        
 
         if (IsJump)
         {
@@ -159,18 +186,18 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 {
                     if (ArcherAnimation[GetArrow].normalizedTime >= 0.80f)
                     {
-                        Debug.Log("활당기기준비완료");
+
                         archerState = ArcherState.AIM;
                     }
                 }
             }
             else if (archerState == ArcherState.AIM)
             {
-                Debug.Log("활당기는중");
+
                 archerState = ArcherState.AIM;
                 if (ArcherAnimation.IsPlaying(Aim))
                 {
-                    Debug.Log("쏘기준비완료");
+ 
                     IsReadyForShoot = true;
                     IsCombat = true;
                 }
@@ -180,6 +207,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         //오른쪽 공격
         if (IsRightMouseDown)
         {
+            characterInfo.isOnceAttack = true;
             archerState = ArcherState.ATTACK1;
         }
 
@@ -246,7 +274,6 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         {
             if (IsReadyForShoot)
             {
-                Debug.Log("쏜다");
                 archerState = ArcherState.BOWSHOOT;
                 IsReadyForShoot = false;
                 ArrowObject.active = false;
@@ -261,7 +288,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 {
                     if (ArcherAnimation[GetArrow].normalizedTime >= 0.80f)
                     {
-                        Debug.Log("활당기기준비완료");
+
                         if (Move_Npc.TargetNav.enabled)
                             Move_Npc.TargetNav.enabled = false;
                         archerState = ArcherState.AIM;
@@ -270,13 +297,13 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             }
             else if (archerState == ArcherState.AIM)
             {
-                Debug.Log("활당기는중");
+
                 archerState = ArcherState.AIM;
                 if (Move_Npc.TargetNav.enabled)
                     Move_Npc.TargetNav.enabled = false;
                 if (ArcherAnimation[Aim].normalizedTime >= 0.50f)
                 {
-                    Debug.Log("쏘기준비완료");
+  
                     IsReadyForShoot = true;
                     IsCombat = true;
                 }
@@ -350,6 +377,11 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 case ArcherState.ATTACK2:
                     ArcherAnimation.wrapMode = WrapMode.Loop;
                     ArcherAnimation.CrossFade(Attack2, 0.3f);
+                    break;
+
+                case ArcherState.HITFRONT:
+                    ArcherAnimation.wrapMode = WrapMode.Once;
+                    ArcherAnimation.CrossFade(HitFront, 0.3f);
                     break;
 
                 default:
