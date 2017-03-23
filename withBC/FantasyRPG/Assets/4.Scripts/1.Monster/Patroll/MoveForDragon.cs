@@ -12,11 +12,12 @@ public class MoveForDragon : MonoBehaviour {
     public float StopDistance = 0.0f;
     public bool OnOff = false;
     public GameObject target = null;
+    private DragonAnimation DragonAni;
 	// Use this for initialization
 	void Start ()
     {
         //Nav_collider = GetComponent<Collider>();
-
+        DragonAni = GetComponent<DragonAnimation>();
         
 	}
 	
@@ -26,17 +27,20 @@ public class MoveForDragon : MonoBehaviour {
         {
             if (target)
             {
-                Vector3 direction = target.transform.position - transform.position;
-                /*Vector3 forward = Vector3.Slerp(transform.forward,
-                                direction,
-                                (AngularSpeed * Time.deltaTime) / Vector3.Angle(transform.forward, direction));*/
-                //transform.LookAt(transform.position + forward);
-                
-                Quaternion drot = Quaternion.LookRotation(direction);
-                float timeSpeed = AngularSpeed * Time.deltaTime / Quaternion.Angle(transform.rotation, drot);
-                Quaternion rot = Quaternion.Slerp(transform.rotation, drot, timeSpeed);
+                if (DragonAni.NowState != DragonAnimation.D_STATE.D_FLY_FIRE)
+                {
+                    Vector3 direction = target.transform.position - transform.position;
+                    /*Vector3 forward = Vector3.Slerp(transform.forward,
+                                    direction,
+                                    (AngularSpeed * Time.deltaTime) / Vector3.Angle(transform.forward, direction));*/
+                    //transform.LookAt(transform.position + forward);
 
-                transform.rotation = rot;
+                    Quaternion drot = Quaternion.LookRotation(direction);
+                    float timeSpeed = AngularSpeed * Time.deltaTime / Quaternion.Angle(transform.rotation, drot);
+                    Quaternion rot = Quaternion.Slerp(transform.rotation, drot, timeSpeed);
+
+                    transform.rotation = rot;
+                }
                 //Debug.Log(this.name);
             }
         }

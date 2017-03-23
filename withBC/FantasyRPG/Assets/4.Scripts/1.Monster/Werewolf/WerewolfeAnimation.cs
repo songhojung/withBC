@@ -62,7 +62,7 @@ public class WerewolfeAnimation : MonoBehaviour {
         {
             _health = Information.hp;
 
-            Information.damage = damage;
+            damage = Information.damage;
 
             if(NowState == W_STATE.S_ATT1 || NowState == W_STATE.S_ATT2 ||
                 NowState == W_STATE.S_ATT3 || NowState == W_STATE.S_ATT20 ||
