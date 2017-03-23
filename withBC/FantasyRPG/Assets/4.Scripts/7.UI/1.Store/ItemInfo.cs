@@ -72,7 +72,7 @@ public class ItemInfo : MonoBehaviour
                 InventoryObj.SendMessage("RemoveItem", gameObject, SendMessageOptions.RequireReceiver);
                 SelectWindowObj.SendMessage("AddSelectWindow", gameObject, SendMessageOptions.RequireReceiver);
                 GameManager.Instance.gameObject.SendMessage("addEquipItem", item);
-                GameManager.Instance.PlayerObject.GetComponent<CharacterInformation>().SendMessage("CreatNewWeapon",SendMessageOptions.RequireReceiver);
+                GameManager.Instance.PlayerObject.GetComponent<CharacterInformation>().SendMessage("CreatNewWeapon",gameObject,SendMessageOptions.RequireReceiver);
             }
         }
     }

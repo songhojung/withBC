@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
 
     private ItemDatabase itemDatabase = new ItemDatabase();
     public GameObject PlayerObject;
+    public GameObject Npc1;
+    public GameObject Npc2;
 
     public PlayerJob playerJob = PlayerJob.NONE;
     public SCENE NowScene = SCENE.TitleScene; // 현재 씬이 어디 있는지 알기 위함
@@ -57,8 +59,18 @@ public class GameManager : MonoBehaviour
         playerJob = PlayerJob.WIZARD;
         NowScene = SCENE.WaitScene;
         SettingUISelectWindow();
-
         PlayerObject = GameObject.FindGameObjectWithTag("Player");
+       if (PlayerObject)
+       {
+            if (!PlayerObject.GetComponent<CharacterInformation>())
+            {
+                CharacterInformation parent = PlayerObject.GetComponentInParent<CharacterInformation>();
+                PlayerObject = parent.gameObject;
+                Debug.Log(PlayerObject.name);
+            }
+
+       }
+        
 
     }
 
@@ -130,7 +142,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
- 
+        
     }
 
 

@@ -6,7 +6,7 @@ public class DatabaseSelectWidow : MonoBehaviour
 {
     private List<GameObject> List_SelectSlots = new List<GameObject>();
     private List<GameObject> List_EquipItem = new List<GameObject>();
-    bool isOver = false;
+
     private UIButtonScale FirstEquipItemButton;
     private UIButtonScale SecondEquipItemButton;
 
