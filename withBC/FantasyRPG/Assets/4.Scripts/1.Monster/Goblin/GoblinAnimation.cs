@@ -70,16 +70,19 @@ public class GoblinAnimation : MonoBehaviour {
                 if (!Information.isAttack)
                 {
                     Information.isAttack = true;
-                    Information.isOnceAttack = true;
+                    //Information.isOnceAttack = true;
                 }
 
                 if (Information.isHit)
                 {
                     NowState = G_STATE.S_BLOCK_HIT;
+                    OnceHit = true;
                 }
             }
             else if (NowState == G_STATE.S_BLOCK_HIT)
             {
+                if (OnceAttack)
+                    OnceAttack = false;
                 if (Information.MonsterState != MonsterInformation.STATE.HIT)
                     Information.MonsterState = MonsterInformation.STATE.HIT;
                 if (!Information.isHit)
@@ -95,13 +98,18 @@ public class GoblinAnimation : MonoBehaviour {
             }
             else
             {
+                if (OnceAttack)
+                    OnceAttack = false;
                 if (!Information.isHit)
                 {
                     if (Information.MonsterState != MonsterInformation.STATE.STAY)
                         Information.MonsterState = MonsterInformation.STATE.STAY;
                 }
                 else
+                {
                     NowState = G_STATE.S_BLOCK_HIT;
+                    OnceHit = true;
+                }
             }
         }
     }

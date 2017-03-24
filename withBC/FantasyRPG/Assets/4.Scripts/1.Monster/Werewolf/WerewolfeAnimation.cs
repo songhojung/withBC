@@ -73,7 +73,7 @@ public class WerewolfeAnimation : MonoBehaviour {
                 if(!Information.isAttack)
                 {
                     Information.isAttack = true;
-                    Information.isOnceAttack = true;
+                    //Information.isOnceAttack = true;
                 }
 
                 if(Information.isHit)
@@ -152,6 +152,11 @@ public class WerewolfeAnimation : MonoBehaviour {
                 case W_STATE.S_ATT20:
                     Werewolf.wrapMode = WrapMode.Once;
                     Werewolf.CrossFade("Attack20", 0.3f);
+                    if(Werewolf["Attack20"].normalizedTime > 0.4f &&
+                        Werewolf["Attack20"].normalizedTime > 0.45f)
+                    {
+                        Information.isOnceAttack = true;
+                    }
                     break;
                 case W_STATE.S_ATT_STAND:
                     Werewolf.wrapMode = WrapMode.Once;

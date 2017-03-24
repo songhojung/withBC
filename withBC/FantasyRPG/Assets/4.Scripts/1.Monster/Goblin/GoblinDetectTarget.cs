@@ -228,11 +228,11 @@ public class GoblinDetectTarget : MonoBehaviour {
                 }
             }
 
-            if (GoblinAni.Goblin["block_hit"].normalizedTime >= 9.5f)
-            {
-                Information.isHit = false;
-                GoblinAni.NowState = GoblinAnimation.G_STATE.S_BLOCK;
-            }
+            //if (GoblinAni.Goblin["block_hit"].normalizedTime >= 9.5f)
+            //{
+            //    Information.isHit = false;
+            //    GoblinAni.NowState = GoblinAnimation.G_STATE.S_BLOCK;
+            //}
         }
         else
         {
@@ -247,12 +247,13 @@ public class GoblinDetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 2.0f;
+        ObjPos.y += 3.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
              (1 << LayerMask.NameToLayer("Default")));        //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance, layerMask);
     }
+
 
     private void findAndMove()
     {
@@ -278,7 +279,7 @@ public class GoblinDetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 2.0f;
+        ObjPos.y += 3.0f;
 
         if (this.Ray.collider != null)
         {
