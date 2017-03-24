@@ -56,6 +56,7 @@ public class MonsterCollision : MonoBehaviour {
                     {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 5;
+                        MonsterParents.gameObject.GetComponent<MonsterDetectCollider>().target = ColliercharaterInfo.gameObject;
                     }
                 }
             }

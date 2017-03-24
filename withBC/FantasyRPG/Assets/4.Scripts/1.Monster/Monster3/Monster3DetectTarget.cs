@@ -118,9 +118,16 @@ public class Monster3DetectTarget : MonoBehaviour {
                 }
                 else
                 {
+
                     if (Ray.collider.tag != "Player")
                     {
-                        M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+                        //if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack"))
+                        //{
+                            //agent.destination = target.transform.position;
+                            //if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                                M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
+                        //}
+
                     }
                 }
             }
@@ -129,7 +136,7 @@ public class Monster3DetectTarget : MonoBehaviour {
                 if (M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack"))
                 {
                     //agent.destination = target.transform.position;
-                    if(M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                    if(M3Animation.Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                         M3Animation.NowState = Monster3Animation.M3_STATE.M3_RUN;
                 }
                 if (M3Animation.NowState != Monster3Animation.M3_STATE.M3_ATTACK)
@@ -235,7 +242,7 @@ public class Monster3DetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 2.0f;
+        ObjPos.y += 3.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
              (1 << LayerMask.NameToLayer("Default")));
@@ -268,7 +275,7 @@ public class Monster3DetectTarget : MonoBehaviour {
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 2.0f;
+        ObjPos.y += 3.0f;
 
         if (this.Ray.collider != null)
         {

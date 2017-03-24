@@ -51,7 +51,7 @@ public class WerewolfeAnimation : MonoBehaviour {
         }
         //ChangeMotion();
         Animation_Play3();
-        Sound_Play();
+        //Sound_Play();
         InformationCheck();
         
     }
@@ -153,7 +153,7 @@ public class WerewolfeAnimation : MonoBehaviour {
                     Werewolf.wrapMode = WrapMode.Once;
                     Werewolf.CrossFade("Attack20", 0.3f);
                     if(Werewolf["Attack20"].normalizedTime > 0.4f &&
-                        Werewolf["Attack20"].normalizedTime > 0.45f)
+                        Werewolf["Attack20"].normalizedTime < 0.45f)
                     {
                         Information.isOnceAttack = true;
                     }

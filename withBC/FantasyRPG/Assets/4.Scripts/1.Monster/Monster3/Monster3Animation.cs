@@ -23,6 +23,12 @@ public class Monster3Animation : MonoBehaviour {
 
     public int damage = 10;
     private MonsterInformation Information;
+
+    private MonsterSoundManager SoundManager;
+
+    private bool OnceHit = false;
+    private bool OnceAttack = false;
+    private bool OnceDie = false;
     // Use this for initialization
     void Start () {
         Mt3 = GetComponent<Animator>();
@@ -33,6 +39,7 @@ public class Monster3Animation : MonoBehaviour {
         Mt3.SetInteger("Health", Information.hp);
         NowWay = (M3_WAY)Mt3.GetInteger("Way");
         AttackNum = 0;
+        SoundManager = GetComponent<MonsterSoundManager>();
 	}
 	
 	// Update is called once per frame
@@ -46,6 +53,7 @@ public class Monster3Animation : MonoBehaviour {
         InformationCheck();
         AttackCheck();
         CheckWay();
+        Sound_Play();
         //HitbyChar();
     }
     private void InformationCheck()
@@ -56,7 +64,7 @@ public class Monster3Animation : MonoBehaviour {
         {
             if (Mt3.GetInteger("Health") != Information.hp)
                 Mt3.SetInteger("Health", Information.hp);
-            Information.damage = damage;
+            damage = Information.damage;
 
             if (NowState == M3_STATE.M3_ATTACK)
             {
@@ -65,16 +73,19 @@ public class Monster3Animation : MonoBehaviour {
                 if (!Information.isAttack)
                 {
                     Information.isAttack = true;
-                    Information.isOnceAttack = true;
+                    //Information.isOnceAttack = true;
                 }
 
                 if (Information.isHit)
                 {
                     NowState = M3_STATE.M3_HIT;
+                    OnceHit = true;
                 }
             }
             else if (NowState == M3_STATE.M3_HIT)
             {
+                if (OnceAttack)
+                    OnceAttack = false;
                 if (Information.MonsterState != MonsterInformation.STATE.HIT)
                     Information.MonsterState = MonsterInformation.STATE.HIT;
                 if (!Information.isHit)
@@ -86,13 +97,18 @@ public class Monster3Animation : MonoBehaviour {
             }
             else
             {
+                if (OnceAttack)
+                    OnceAttack = false;
                 if (!Information.isHit)
                 {
                     if (Information.MonsterState != MonsterInformation.STATE.STAY)
                         Information.MonsterState = MonsterInformation.STATE.STAY;
                 }
                 else
+                {
                     NowState = M3_STATE.M3_HIT;
+                    OnceHit = true;
+                }
             }
         }
     }
@@ -135,5 +151,39 @@ public class Monster3Animation : MonoBehaviour {
     {
         _health--;
         Mt3.SetInteger("Health", _health);
+    }
+
+    private void Sound_Play()
+    {
+        if(!Information.isDie)
+        {
+            switch(NowState)
+            {
+                case M3_STATE.M3_STAY:
+                    break;
+                case M3_STATE.M3_RUN:
+                    break;
+                case M3_STATE.M3_HIT:
+                    if(Information.hp <= 0)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                    break;
+                case M3_STATE.M3_ATTACK:
+                    if (Mt3.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack"))
+                    {
+                        if (Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.4f &&
+                            Mt3.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.45f)
+                        {
+                            Information.isOnceAttack = true;
+                        }
+                    }
+                            break;
+            }
+        }
     }
 }

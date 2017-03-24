@@ -139,6 +139,11 @@ public class GoblinAnimation : MonoBehaviour {
                 case G_STATE.S_ATT1:
                     Goblin.wrapMode = WrapMode.Once;
                     Goblin.CrossFade("attack1", 0.3f);
+                    if (Goblin["attack1"].normalizedTime > 0.4f &&
+                        Goblin["attack1"].normalizedTime < 0.45f)
+                    {
+                        Information.isOnceAttack = true;
+                    }
                     break;
                 case G_STATE.S_ATT2:
                     Goblin.wrapMode = WrapMode.Once;
