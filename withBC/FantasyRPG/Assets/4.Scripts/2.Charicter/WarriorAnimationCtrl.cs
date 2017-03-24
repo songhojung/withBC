@@ -150,6 +150,12 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             warriorComboState = WarriorComboState.NONE;
             characterInfo.isOnceAttack = false;
         }
+
+        if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Block"))
+        {
+            warriorComboState = WarriorComboState.NONE;
+            characterInfo.isOnceAttack = false;
+        }
         //else if(WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Block"))
         //{
         //    warriorComboState = WarriorComboState.NONE;

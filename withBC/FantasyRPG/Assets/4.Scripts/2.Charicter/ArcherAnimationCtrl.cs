@@ -111,49 +111,27 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             IsLeftMouseStay = pPlayerCtrl.IsLeftMouseStay;
             IsRightMouseDown = pPlayerCtrl.IsRightMouseDown;
         }
-        if (archerState == ArcherState.HITFRONT)
+
+        if(FinishAnimation(Jump,0.7f) && FinishAnimation(BowShoot, 0.7f)
+            && FinishAnimation(GetArrow, 0.7f) && FinishAnimation(Aim, 0.7f)
+            && FinishAnimation(Attack1, 0.7f) && FinishAnimation(Attack2, 0.7f)
+            && FinishAnimation(HitFront, 0.7f))
         {
-            if(ArcherAnimation[HitFront].normalizedTime >= 0.9f)
+            if (direction.magnitude >= 0.1f)
             {
-                if (direction.magnitude >= 0.1f)
-                {
-                    archerState = ArcherState.RUN;
-                }
-                else if (IsCombat)
-                {
-                    archerState = ArcherState.BOWIDLE;
-                }
-                else if (direction.magnitude <= 0.0f)
-                {
-                    archerState = ArcherState.SWORDIDLE;
-                }
-                characterInfo.isOnceAttack = false;
-
+                archerState = ArcherState.RUN;
             }
-        }
-        else
-        {
-            if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
-              && !ArcherAnimation.IsPlaying(GetArrow) && !ArcherAnimation.IsPlaying(Aim)
-              && !ArcherAnimation.IsPlaying(Attack1) && !ArcherAnimation.IsPlaying(Attack2))
+            else if (IsCombat)
             {
-
-                if (direction.magnitude >= 0.1f)
-                {
-                    archerState = ArcherState.RUN;
-                }
-                else if (IsCombat)
-                {
-                    archerState = ArcherState.BOWIDLE;
-                }
-                else if (direction.magnitude <= 0.0f)
-                {
-                    archerState = ArcherState.SWORDIDLE;
-                }
-                characterInfo.isOnceAttack = false;
-
+                archerState = ArcherState.BOWIDLE;
             }
+            else if (direction.magnitude <= 0.0f)
+            {
+                archerState = ArcherState.SWORDIDLE;
+            }
+            characterInfo.isOnceAttack = false;
         }
+       
         
 
         if (IsJump)
@@ -236,11 +214,11 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             //IsRightMouseDown = Move_Npc.IsRightMouseDown;
         }
 
-        if (!ArcherAnimation.IsPlaying(Jump) && !ArcherAnimation.IsPlaying(BowShoot)
-            && !ArcherAnimation.IsPlaying(GetArrow) && !ArcherAnimation.IsPlaying(Aim)
-            && !ArcherAnimation.IsPlaying(Attack1) && !ArcherAnimation.IsPlaying(Attack2))
+        if (FinishAnimation(Jump, 0.7f) && FinishAnimation(BowShoot, 0.7f)
+            && FinishAnimation(GetArrow, 0.7f) && FinishAnimation(Aim, 0.7f)
+            && FinishAnimation(Attack1, 0.7f) && FinishAnimation(Attack2, 0.7f)
+            && FinishAnimation(HitFront, 0.7f))
         {
-
             if (direction.magnitude >= 0.1f)
             {
                 archerState = ArcherState.RUN;
@@ -253,7 +231,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             {
                 archerState = ArcherState.SWORDIDLE;
             }
-
+            characterInfo.isOnceAttack = false;
         }
 
         if (IsJump)
@@ -313,6 +291,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         //오른쪽 공격
         if (IsRightMouseDown)
         {
+            characterInfo.isOnceAttack = true;
             archerState = ArcherState.ATTACK1;
         }
 
@@ -392,6 +371,25 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         }
     }
 
-   
+
+    bool FinishAnimation(string aniName, float NormalizedTime)
+    {
+        // 해당이름의 애니메이션이 정해진 노말타임이상이면 애니메이션 완료햇으므로 트루리턴
+        bool isFinish = false;
+
+        if (ArcherAnimation[aniName].normalizedTime >= NormalizedTime)
+        {
+            //Debug.Log("완료");
+            return isFinish = true;
+        }
+        else if (!ArcherAnimation.IsPlaying(aniName))
+        {
+            //Debug.Log("플레이중 아님");
+            return isFinish = true;
+        }
+
+        return isFinish;
+    }
+
 
 }
