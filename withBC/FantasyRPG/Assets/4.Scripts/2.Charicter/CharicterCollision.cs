@@ -75,7 +75,7 @@ public class CharicterCollision : MonoBehaviour
                 Bloodeffect.transform.LookAt(this.gameObject.transform);
                 Bloodeffect.transform.eulerAngles = new Vector3(Bloodeffect.transform.eulerAngles.x, Bloodeffect.transform.eulerAngles.y,
                     collider.gameObject.transform.eulerAngles.z);
-
+                GetComponent<CharacterInformation>().isHit = true;
                 Destroy(Bloodeffect, 0.5f);
             }
         }

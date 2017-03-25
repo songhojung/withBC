@@ -35,7 +35,7 @@ public class CharacterInformation : MonoBehaviour {
     private GameObject UIIven;
     private PlayerCtrl pPlayerCtrl;
     private GameObject WeaponSpot; // 각캐릭터마다 무기 장착하는 곳(오브젝트)
-
+    
     // Use this for initialization
     void Start ()
     {
@@ -75,20 +75,20 @@ public class CharacterInformation : MonoBehaviour {
         }
         else if (_mode == MODE.NPC)
         {
-            if (pPlayerCtrl.IsNumKey_1)
-            {
-                //아이템 바꾸기
-
-
-               
-            }
-            else if (pPlayerCtrl.IsNumKey_2)
-            {
-                //아이템 바꾸기
-
-
-                
-            }
+            //if (pPlayerCtrl.IsNumKey_1)
+            //{
+            //    //아이템 바꾸기
+            //
+            //
+            //   
+            //}
+            //else if (pPlayerCtrl.IsNumKey_2)
+            //{
+            //    //아이템 바꾸기
+            //
+            //
+            //    
+            //}
         }
 
     }

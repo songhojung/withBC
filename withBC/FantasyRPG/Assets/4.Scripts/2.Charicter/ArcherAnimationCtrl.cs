@@ -232,6 +232,8 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 archerState = ArcherState.SWORDIDLE;
             }
             characterInfo.isOnceAttack = false;
+            if (characterInfo.isHit)
+                characterInfo.isHit = false;
         }
 
         if (IsJump)

@@ -9,13 +9,14 @@ public class ArchorAI : MonoBehaviour
     public float RayDistance = 5.0f;
     private RaycastHit my_ray;
     private MoveNPC Npc_Move;
-
+    private CharacterInformation Information;
 
     // Use this for initialization
     void Start ()
     {
         ArchorAniCtrl = GetComponent<ArcherAnimationCtrl>();
         Npc_Move = GetComponent<MoveNPC>();
+        Information = GetComponent<CharacterInformation>();
 
     }
 	
@@ -26,58 +27,61 @@ public class ArchorAI : MonoBehaviour
         {
             if (Npc_Move.isMonster)
             {
-                Raycast();
-                if (my_ray.collider != null)
+                if (!Information.isHit)
                 {
-
-                    if (Npc_Move.NowState != MoveNPC.PlayerState.Attack)
-                        Npc_Move.NowState = MoveNPC.PlayerState.Attack;
-                    else
+                    Raycast();
+                    if (my_ray.collider != null)
                     {
-                        if (ArchorAniCtrl.archerState == ArcherAnimationCtrl.ArcherState.AIM)
+
+                        if (Npc_Move.NowState != MoveNPC.PlayerState.Attack)
+                            Npc_Move.NowState = MoveNPC.PlayerState.Attack;
+                        else
                         {
-                            if (!ArchorAniCtrl.IsReadyForShoot)
+                            if (ArchorAniCtrl.archerState == ArcherAnimationCtrl.ArcherState.AIM)
                             {
-                                //Debug.Log("들어옴");
-                                ArchorAniCtrl.IsLeftMouseDown = false;
-                                //ArchorAniCtrl.IsLeftMouseStay = false;
+                                if (!ArchorAniCtrl.IsReadyForShoot)
+                                {
+                                    //Debug.Log("들어옴");
+                                    ArchorAniCtrl.IsLeftMouseDown = false;
+                                    //ArchorAniCtrl.IsLeftMouseStay = false;
+                                }
+                                else
+                                {
+                                    ArchorAniCtrl.IsLeftMouseUp = true;
+                                    ArchorAniCtrl.IsLeftMouseStay = false;
+                                }
                             }
                             else
                             {
-                                ArchorAniCtrl.IsLeftMouseUp = true;
-                                ArchorAniCtrl.IsLeftMouseStay = false;
+                                if (ArchorAniCtrl.archerState != ArcherAnimationCtrl.ArcherState.BOWSHOOT)
+                                {
+                                    ArchorAniCtrl.IsLeftMouseDown = true;
+                                    ArchorAniCtrl.IsLeftMouseStay = true;
+                                    ArchorAniCtrl.IsLeftMouseUp = false;
+                                }
+                                //Debug.Log("여기먼저");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ArchorAniCtrl.archerState != ArcherAnimationCtrl.ArcherState.AIM)
+                        {
+                            if (Npc_Move.NowState != MoveNPC.PlayerState.Follow &&
+                                Npc_Move.NowState != MoveNPC.PlayerState.Detect)
+                            {
+                                Npc_Move.NowState = MoveNPC.PlayerState.Detect;
                             }
                         }
                         else
                         {
-                            if (ArchorAniCtrl.archerState != ArcherAnimationCtrl.ArcherState.BOWSHOOT)
+                            if (!Npc_Move.isMonster)
                             {
-                                ArchorAniCtrl.IsLeftMouseDown = true;
-                                ArchorAniCtrl.IsLeftMouseStay = true;
-                                ArchorAniCtrl.IsLeftMouseUp = false;
-                            }
-                            //Debug.Log("여기먼저");
-                        }
-                    }
-                }
-                else
-                {
-                    if (ArchorAniCtrl.archerState != ArcherAnimationCtrl.ArcherState.AIM)
-                    {
-                        if (Npc_Move.NowState != MoveNPC.PlayerState.Follow &&
-                            Npc_Move.NowState != MoveNPC.PlayerState.Detect)
-                        {
-                            Npc_Move.NowState = MoveNPC.PlayerState.Detect;
-                        }
-                    }
-                    else
-                    {
-                        if(!Npc_Move.isMonster)
-                        {
-                            if (Npc_Move.NowState != MoveNPC.PlayerState.Follow &&
-                            Npc_Move.NowState != MoveNPC.PlayerState.Detect)
-                            {
-                                Npc_Move.NowState = MoveNPC.PlayerState.Detect;
+                                if (Npc_Move.NowState != MoveNPC.PlayerState.Follow &&
+                                Npc_Move.NowState != MoveNPC.PlayerState.Detect)
+                                {
+                                    Npc_Move.NowState = MoveNPC.PlayerState.Detect;
+                                }
                             }
                         }
                     }
@@ -101,7 +105,7 @@ public class ArchorAI : MonoBehaviour
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 2.0f;
+        ObjPos.y += 3.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
             (1 << LayerMask.NameToLayer("NPC")) |
@@ -112,7 +116,7 @@ public class ArchorAI : MonoBehaviour
     {
         Vector3 ObjPos = transform.position;
         Vector3 ObjForward = transform.forward;
-        ObjPos.y += 2.0f;
+        ObjPos.y += 3.0f;
 
         if (this.my_ray.collider != null)
         {
