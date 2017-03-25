@@ -346,6 +346,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     isRun = false;
                     WarriorAnimator.SetBool("IsJump", false);
                     WarriorAnimator.SetBool("IsRun", false);
+                    WarriorAnimator.SetBool("IsHit", false);
                     WarriorAnimator.SetFloat("RunSpeed", Direction.sqrMagnitude);
                     break;
 
@@ -353,6 +354,15 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     isRun = false;
                     WarriorAnimator.SetBool("IsJump", true);
                     WarriorAnimator.SetBool("IsRun", false);
+                    WarriorAnimator.SetBool("IsHit", false);
+                    WarriorAnimator.SetFloat("RunSpeed", Direction.sqrMagnitude);
+                    break;
+
+                case WarriorState.HIT:
+                    isRun = false;
+                    WarriorAnimator.SetBool("IsJump", false);
+                    WarriorAnimator.SetBool("IsRun", false);
+                    WarriorAnimator.SetBool("IsHit", true);
                     WarriorAnimator.SetFloat("RunSpeed", Direction.sqrMagnitude);
                     break;
             }
