@@ -6,13 +6,25 @@ public class DragonSound : MonoBehaviour {
 
     public AudioSource MyAudio;
 
+    [HideInInspector]
     public AudioClip Hit;
+
+    [HideInInspector]
     public AudioClip Death;
-    public AudioClip Stay;
-    public AudioClip Move;
+
+    [HideInInspector]
+    public AudioClip Walk;
+
+    [HideInInspector]
     public AudioClip Fly;
+
+    [HideInInspector]
     public AudioClip Attack;
+
+    [HideInInspector]
     public AudioClip Fire;
+
+    [HideInInspector]
     public AudioClip Roar;
 
 
@@ -21,6 +33,12 @@ public class DragonSound : MonoBehaviour {
     // Use this for initialization
     void Start () {
         MyAudio = GetComponent<AudioSource>();
+        Hit = SoundManager.Instance.DragonHit;
+        Walk = SoundManager.Instance.DragonWalk;
+        Fly = SoundManager.Instance.DragonFly;
+        Attack = SoundManager.Instance.DragonBite;
+        Fire = SoundManager.Instance.DragonFire;
+        Roar = SoundManager.Instance.DragonRoar;
     }
 	
 	// Update is called once per frame
@@ -30,5 +48,6 @@ public class DragonSound : MonoBehaviour {
         {
             MyAudio.volume = NowVolum;
         }
+        
     }
 }

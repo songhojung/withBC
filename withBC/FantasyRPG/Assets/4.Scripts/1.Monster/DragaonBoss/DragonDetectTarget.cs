@@ -70,6 +70,7 @@ public class DragonDetectTarget : MonoBehaviour {
                             agent.enabled = false;
                         if (!Flyagent.OnOff)
                             Flyagent.OnOff = true;
+                        //FlyDetect();
                         FlyAttackEvent();
                         break;
                 }
@@ -188,6 +189,7 @@ public class DragonDetectTarget : MonoBehaviour {
                 }
                 if (target.GetComponent<MakePatroll>().Rand_Fly == 1)
                 {
+                    D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FAST;
                     D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWFLY;
                     Flyagent.OnOff = true;
                     Flyagent.target = target;
@@ -404,6 +406,10 @@ public class DragonDetectTarget : MonoBehaviour {
                             D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FIRE;
                             D_Animation.OnceAttack = true;
                         }
+                        else if (target.GetComponent<MakePatroll>().Rand_Fly == 1)
+                        {
+                            D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FAST;
+                        }
                         target = target.GetComponent<MakePatroll>().Child.gameObject;
                         Flyagent.target = null;
                         Flyagent.target = target;
@@ -417,6 +423,10 @@ public class DragonDetectTarget : MonoBehaviour {
                             {
                                 D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FIRE;
                                 D_Animation.OnceAttack = true;
+                            }
+                            else if(target.GetComponent<MakePatroll>().Rand_Fly == 1)
+                            {
+                                D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FAST;
                             }
                             target = target.GetComponent<MakePatroll>().Parent.gameObject;
                             Flyagent.target = null;
