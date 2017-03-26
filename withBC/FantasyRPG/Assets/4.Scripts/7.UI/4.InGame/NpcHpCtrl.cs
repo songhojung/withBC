@@ -9,6 +9,7 @@ public class NpcHpCtrl : MonoBehaviour
 
     private UISlider UIHp;
     private CharacterInformation NpcCharacterInfo;
+    private float MaxHp;
 
 
     void Start()
@@ -27,13 +28,19 @@ public class NpcHpCtrl : MonoBehaviour
         if(NpcCharacterInfo ==null && GameManager.Instance.Npc1 != null && GameManager.Instance.Npc2 != null)
         {
             if (hpTargetNpc == HpTargetNpc.Warrior)
+            {
                 NpcCharacterInfo = GameManager.Instance.Npc1.gameObject.GetComponent<CharacterInformation>();
+                MaxHp = NpcCharacterInfo.hp;
+            }
             else if (hpTargetNpc == HpTargetNpc.Archor)
+            {
                 NpcCharacterInfo = GameManager.Instance.Npc2.gameObject.GetComponent<CharacterInformation>();
+                MaxHp = NpcCharacterInfo.hp;
+            }
         }
 
         if(NpcCharacterInfo != null)
-        UIHp.sliderValue = NpcCharacterInfo.hp * 0.01f;
+        UIHp.sliderValue = NpcCharacterInfo.hp / MaxHp ;
 
     }
 }
