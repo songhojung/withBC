@@ -162,7 +162,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             {
                 if (ArcherAnimation.IsPlaying(GetArrow))
                 {
-                    if (ArcherAnimation[GetArrow].normalizedTime >= 0.80f)
+                    if (ArcherAnimation[GetArrow].normalizedTime >= 0.50f)
                     {
 
                         archerState = ArcherState.AIM;
@@ -199,6 +199,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 IsCombat = false;
             }
         }
+        
     }
 
     private void AIMode()
