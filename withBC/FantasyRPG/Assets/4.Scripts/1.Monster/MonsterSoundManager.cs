@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class MonsterSoundManager : MonoBehaviour {
 
+    [HideInInspector]
     public AudioSource MyAudio;
 
+    [HideInInspector]
     public AudioClip Hit;
+
+    [HideInInspector]
     public AudioClip Death;
+
+    [HideInInspector]
     public AudioClip Stay;
+
+    [HideInInspector]
     public AudioClip Move;
+
+    [HideInInspector]
     public AudioClip Attack;
+
+    [HideInInspector]
     public AudioClip Roar;
 
 
