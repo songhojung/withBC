@@ -49,6 +49,7 @@ public class MonsterCollision : MonoBehaviour {
                 Destroy(BloodDecal, 2.5f);
 
                 MonsterParentsCollider MonsterParents = GetComponentInParent<MonsterParentsCollider>();
+                
 
                 if (MonsterParents)
                 {

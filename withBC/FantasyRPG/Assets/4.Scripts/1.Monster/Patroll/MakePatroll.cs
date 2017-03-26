@@ -44,6 +44,7 @@ public class MakePatroll : MonoBehaviour {
     {
         if(other.gameObject.CompareTag("Monster"))
         {
+            enabled = true;
             MonsterFindPatroll PatrollPt = other.gameObject.GetComponentInParent<MonsterFindPatroll>();
             if (PatrollPt)
             {
