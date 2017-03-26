@@ -279,12 +279,11 @@ public class ArcherAnimationCtrl : MonoBehaviour {
             else if (archerState == ArcherState.AIM)
             {
 
-                archerState = ArcherState.AIM;
+                //archerState = ArcherState.AIM;
                 if (Move_Npc.TargetNav.enabled)
                     Move_Npc.TargetNav.enabled = false;
                 if (ArcherAnimation[Aim].normalizedTime >= 0.50f)
                 {
-  
                     IsReadyForShoot = true;
                     IsCombat = true;
                 }
@@ -344,6 +343,11 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 case ArcherState.BOWSHOOT:
                     ArcherAnimation.wrapMode = WrapMode.Once;
                     ArcherAnimation.CrossFade(BowShoot, 0.0f);
+                    if(ArcherAnimation[BowShoot].normalizedTime >= 0.8f)
+                    {
+                        IsLeftMouseUp = false;
+                        
+                    }
                     break;
 
                 case ArcherState.JUMP:
