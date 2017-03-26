@@ -57,6 +57,14 @@ public class MonsterCollision : MonoBehaviour {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 5;
                         MonsterParents.gameObject.GetComponent<MonsterDetectCollider>().target = ColliercharaterInfo.gameObject;
+                        if(ColliercharaterInfo.Job != CharacterInformation.PlayerJob.WIZARD)
+                        {
+                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByStick);
+                        }
+                        else
+                        {
+                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitBySword);
+                        }
                     }
                 }
             }
@@ -85,6 +93,7 @@ public class MonsterCollision : MonoBehaviour {
                         {
                             MonsterParents.isHit = true;
                             MonsterParents._hp -= 5;
+                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitArrow);
                         }
                     }
                 }
@@ -104,6 +113,7 @@ public class MonsterCollision : MonoBehaviour {
                     {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 5;
+                        MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFireball);
                     }
                 }
             }
@@ -123,6 +133,7 @@ public class MonsterCollision : MonoBehaviour {
                     {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 5;
+                        MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFire);
                     }
                 }
             }
@@ -139,6 +150,7 @@ public class MonsterCollision : MonoBehaviour {
                     {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 5;
+                        MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByElectric);
                     }
                 }
             }

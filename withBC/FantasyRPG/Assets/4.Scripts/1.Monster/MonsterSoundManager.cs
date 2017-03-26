@@ -8,28 +8,46 @@ public class MonsterSoundManager : MonoBehaviour {
     public AudioSource MyAudio;
 
     [HideInInspector]
-    public AudioClip Hit;
+    public AudioClip GoblinHit;
+    [HideInInspector]
+    public AudioClip WolfHit;
+
 
     [HideInInspector]
-    public AudioClip Death;
+    public AudioClip WolfDeath;
+    [HideInInspector]
+    public AudioClip GoblinDeath;
 
     [HideInInspector]
-    public AudioClip Stay;
+    public AudioClip SpiderStay;
 
     [HideInInspector]
-    public AudioClip Move;
+    public AudioClip GoblinAttack;
+    [HideInInspector]
+    public AudioClip WolfAttack;
 
     [HideInInspector]
-    public AudioClip Attack;
-
-    [HideInInspector]
-    public AudioClip Roar;
+    public AudioClip WolfSpawn;
 
 
     public float NowVolum = 1.0f;
     // Use this for initialization
     void Start () {
         MyAudio = GetComponent<AudioSource>();
+        GoblinHit = SoundManager.Instance.GoblinHit;
+        GoblinAttack = SoundManager.Instance.GoblinAttack;
+        GoblinDeath = SoundManager.Instance.GoblinDie;
+
+        WolfAttack = SoundManager.Instance.WolfAttack;
+        GoblinAttack = SoundManager.Instance.GoblinAttack;
+
+        SpiderStay = SoundManager.Instance.SpiderBasic;
+
+        GoblinDeath = SoundManager.Instance.GoblinDie;
+        WolfDeath = SoundManager.Instance.WolfDie;
+
+        WolfSpawn = SoundManager.Instance.WolfRoar;
+
 	}
 	
 	// Update is called once per frame

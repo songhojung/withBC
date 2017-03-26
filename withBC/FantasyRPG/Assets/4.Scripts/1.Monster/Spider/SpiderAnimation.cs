@@ -16,7 +16,7 @@ public class SpiderAnimation : MonoBehaviour {
     public int _health = 10;
 
     private MonsterInformation Information;
-    private MonsterSoundManager SoundManager;
+    private MonsterSoundManager Sound_M;
     public bool isHit = false;
 
     public int damage;
@@ -29,7 +29,7 @@ public class SpiderAnimation : MonoBehaviour {
         Spider = GetComponent<Animation>();
 
         Information = GetComponent<MonsterInformation>();
-        SoundManager = GetComponent<MonsterSoundManager>();
+        Sound_M = GetComponent<MonsterSoundManager>();
     }
 	
 	// Update is called once per frame
@@ -168,41 +168,10 @@ public class SpiderAnimation : MonoBehaviour {
     {
         if (!Information.isDie)
         {
-            switch (NowState)
+            if(!Sound_M.MyAudio.isPlaying)
             {
-                case S_STATE.S_ATT:
-                    Spider.wrapMode = WrapMode.Once;
-                    Spider.CrossFade("Attack", 0.3f);
-                    if (Spider["Attack"].normalizedTime > 0.4f &&
-                        Spider["Attack"].normalizedTime > 0.5f)
-                    {
-                        Information.isOnceAttack = true;
-                    }
-                    break;
-                case S_STATE.S_ATT_L:
-                    Spider.wrapMode = WrapMode.Once;
-                    Spider.CrossFade("Attack_Left", 0.3f);
-                    break;
-                case S_STATE.S_ATT_R:
-                    Spider.wrapMode = WrapMode.Once;
-                    Spider.CrossFade("Attack_Right", 0.3f);
-                    break;
-                case S_STATE.S_DEATH:
-                    Spider.wrapMode = WrapMode.Once;
-                    Spider.CrossFade("Death", 0.3f);
-                    break;
-                case S_STATE.S_IDLE:
-                    Spider.wrapMode = WrapMode.Once;
-                    Spider.CrossFade("Idle", 0.3f);
-                    break;
-                case S_STATE.S_RUN:
-                    Spider.wrapMode = WrapMode.Loop;
-                    Spider.CrossFade("Run", 0.3f);
-                    break;
-                case S_STATE.S_WALK:
-                    Spider.wrapMode = WrapMode.Loop;
-                    Spider.CrossFade("Walk", 0.3f);
-                    break;
+                Sound_M.MyAudio.PlayOneShot(Sound_M.SpiderStay, Sound_M.NowVolum);
+                Sound_M.MyAudio.loop = true;
             }
         }
     }

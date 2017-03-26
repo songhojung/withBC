@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour {
     public AudioClip HitBySpider;
     public AudioClip SwordManHit;
     public AudioClip HitByAxe;
-    public AudioClip GoblinHit;
+    public AudioClip HitBySword;
     public AudioClip ArchorHit;
     public AudioClip WolfRoar;
     public AudioClip ElectricMagic;
@@ -46,6 +46,23 @@ public class SoundManager : MonoBehaviour {
     public AudioClip FieldSceen;
     public AudioClip WaitRoom;
     public AudioClip EffectFire;
+
+    public AudioClip SpiderBasic;
+    public AudioClip WolfAttack;
+    public AudioClip WolfDie;
+    public AudioClip WolfHit;
+    public AudioClip GoblinAttack;
+    public AudioClip GoblinHit;
+    public AudioClip GoblinDie;
+
+    public AudioClip DragonDie;
+
+    public AudioClip SwingStaff;
+    public AudioClip SwingSword;
+    public AudioClip Shoot;
+    public AudioClip HitArrow;
+    public AudioClip HitByFireball;
+    public AudioClip HitByFire;
 
     private void Awake()
     {
