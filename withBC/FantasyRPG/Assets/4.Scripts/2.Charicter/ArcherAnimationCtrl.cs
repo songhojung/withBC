@@ -32,7 +32,9 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
     private CharacterInformation.MODE Mode;
     private CharacterInformation characterInfo;
+    private CharacterSoundManager CharacterSoundM;
 
+    private bool isPlaySound = false;
     private bool IsDie = false;
     private bool IsJump = false;
     public bool IsLeftMouseDown = false;
@@ -54,6 +56,8 @@ public class ArcherAnimationCtrl : MonoBehaviour {
     {
         Mode = GetComponent<CharacterInformation>()._mode;
         characterInfo = GetComponent<CharacterInformation>();
+        CharacterSoundM = GetComponent<CharacterSoundManager>();
+
 
         switch (Mode)
         {
@@ -69,7 +73,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
         StartCoroutine(ArcherAction());
         StartCoroutine(CheckArcherState());
-        StartCoroutine(PlaySound());
+       // StartCoroutine(PlaySound());
 
         ArcherAnimation[Jump].speed = 1.4f;
         ArcherAnimation[GetArrow].speed = 2.5f;
@@ -151,6 +155,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         {
             if (IsReadyForShoot)
             {
+                isPlaySound = true;
                 archerState = ArcherState.BOWSHOOT;
                 IsReadyForShoot = false;
                 ArrowObject.SetActive(false);
@@ -186,6 +191,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         //오른쪽 공격
         if (IsRightMouseDown)
         {
+            isPlaySound = true;
             characterInfo.isOnceAttack = true;
             archerState = ArcherState.ATTACK1;
         }
@@ -256,6 +262,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         {
             if (IsReadyForShoot)
             {
+                isPlaySound = true;
                 archerState = ArcherState.BOWSHOOT;
                 IsReadyForShoot = false;
                 ArrowObject.active = false;
@@ -294,6 +301,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         //오른쪽 공격
         if (IsRightMouseDown)
         {
+            isPlaySound = true;
             characterInfo.isOnceAttack = true;
             archerState = ArcherState.ATTACK1;
         }
@@ -387,43 +395,36 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
             switch (archerState)
             {
-                case ArcherState.SWORDIDLE:
-                
-                    break;
-
-                case ArcherState.RUN:
-                   
-                    break;
-
-                case ArcherState.BOWIDLE:
-                    
-                    break;
-
-                case ArcherState.GETARROW:
-                    
-                    break;
-                case ArcherState.AIM:
-                   
-                    break;
-
+               
                 case ArcherState.BOWSHOOT:
-                    
-                    break;
-
-                case ArcherState.JUMP:
-                    
+                    if (isPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.Shoot;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.Shoot, CharacterSoundM.NowVolum);
+                        isPlaySound = false;
+                    }
                     break;
 
                 case ArcherState.ATTACK1:
-                   
+                    if (isPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
+                        isPlaySound = false;
+                    }
                     break;
 
-                case ArcherState.ATTACK2:
-                   
-                    break;
 
                 case ArcherState.HITFRONT:
-                    
+                    if (isPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.ArchorHit;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.ArchorHit, CharacterSoundM.NowVolum);
+                        isPlaySound = false;
+                    }
                     break;
 
                 default:

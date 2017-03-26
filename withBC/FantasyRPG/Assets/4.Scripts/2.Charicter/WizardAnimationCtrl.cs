@@ -43,9 +43,11 @@ public class WizardAnimationCtrl : MonoBehaviour {
     public WizardState BeforeState = WizardState.NONE;
 
     private CharacterInformation.MODE Mode;
-    private CharacterInformation CharaterInfo;
+    private CharacterInformation charaterInfo;
+    
+    private CharacterSoundManager CharacterSoundM;
 
-
+    private bool IsPlaySound = false;
     private bool IsDie = false;
     private bool IsJump = false;
     private bool IsLeftMouseDown = false;
@@ -68,7 +70,8 @@ public class WizardAnimationCtrl : MonoBehaviour {
     void Start()
     {
         Mode = GetComponent<CharacterInformation>()._mode;
-        CharaterInfo = GetComponent<CharacterInformation>();
+        charaterInfo = GetComponent<CharacterInformation>();
+        CharacterSoundM = GetComponent<CharacterSoundManager>();
         switch (Mode)
         {
             case CharacterInformation.MODE.PLAYER:
@@ -81,6 +84,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 break;
         }
         StartCoroutine(WizardAction());
+        StartCoroutine(SoundPlay());
         StartCoroutine(CheckArcherState());
         
         //무기바꾸기 콜백함수
@@ -149,7 +153,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 else
                     wizardState = WizardState.STAFFIDLE;
             }
-            CharaterInfo.isOnceAttack = false;
+            charaterInfo.isOnceAttack = false;
         }
 
         if (IsJump)
@@ -165,7 +169,10 @@ public class WizardAnimationCtrl : MonoBehaviour {
         if (IsLeftMouseDown)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFSPELL_1;
+                IsPlaySound = true;
+            }
         }
         else if (IsLeftMouseUp)
         {
@@ -176,6 +183,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
             // Debug.Log("1키");
             wizardState = WizardState.DRAWDAGGER;
             if (IsUseAnotherWeaPon)
+
                 StartCoroutine(SwitchWeaponCoroutine(0.4f)); // 무기도 바꾸기
             IsUseAnotherWeaPon = false;
 
@@ -186,23 +194,33 @@ public class WizardAnimationCtrl : MonoBehaviour {
             wizardState = WizardState.DRAWSTAFF;
             if (!IsUseAnotherWeaPon)
                 StartCoroutine(SwitchWeaponCoroutine(0.4f));
-            IsUseAnotherWeaPon = true;
+                IsUseAnotherWeaPon = true;
+            
         }
         else if (IsKey_E)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFATTACK;
-            CharaterInfo.isOnceAttack = true;
+                charaterInfo.isOnceAttack = true;
+                IsPlaySound = true;
+            }
         }
         else if (IsKey_Q)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFSPELL_2;
+                IsPlaySound = true;
+            }
         }
         else if (IsKey_Shift)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFSPELL_3;
+                IsPlaySound = true;
+            }
         }
 
         //오른쪽 공격
@@ -213,13 +231,13 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
                 if (ComboCount == 2 && NowComboTime < 1.0f)
                 {
-
+                    IsPlaySound = true;
                     wizardState = WizardState.DAGGERATTACT_2;
                     NowComboTime = 0.0f;
                 }
                 else if (ComboCount == 3 && NowComboTime < 1.0f)
                 {
-
+                    IsPlaySound = true;
                     wizardState = WizardState.DAGGERATTACT_3;
                     NowComboTime = 0.0f;
                 }
@@ -232,7 +250,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
                     }
                     else
                     {
-                        
+                        IsPlaySound = true;
                         wizardState = WizardState.DAGGERATTACT_1;
                         ComboCount = 1;
                         NowComboTime = 0.0f;
@@ -249,6 +267,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
             NowComboTime = 0.0f;
             ComboCount = 0;
         }
+        Debug.Log(wizardState);
     }
 
     private void NpcMode()
@@ -303,7 +322,10 @@ public class WizardAnimationCtrl : MonoBehaviour {
         if (IsLeftMouseDown)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFSPELL_1;
+                IsPlaySound = true;
+            }
         }
         else if (IsLeftMouseUp)
         {
@@ -329,17 +351,26 @@ public class WizardAnimationCtrl : MonoBehaviour {
         else if (IsKey_E)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFATTACK;
+                IsPlaySound = true;
+            }
         }
         else if (IsKey_Q)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFSPELL_2;
+                IsPlaySound = true;
+            }
         }
         else if (IsKey_Shift)
         {
             if (!IsUseAnotherWeaPon)
+            {
                 wizardState = WizardState.STAFFSPELL_3;
+                IsPlaySound = true;
+            }
         }
 
         //오른쪽 공격
@@ -349,13 +380,13 @@ public class WizardAnimationCtrl : MonoBehaviour {
             {
                 if (ComboCount == 2 && NowComboTime < 1.0f)
                 {
-
+                    IsPlaySound = true;
                     wizardState = WizardState.DAGGERATTACT_2;
                     NowComboTime = 0.0f;
                 }
                 else if (ComboCount == 3 && NowComboTime < 1.0f)
                 {
-
+                    IsPlaySound = true;
                     wizardState = WizardState.DAGGERATTACT_3;
                     NowComboTime = 0.0f;
                 }
@@ -368,6 +399,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
                     }
                     else
                     {
+                        IsPlaySound = true;
                         wizardState = WizardState.DAGGERATTACT_1;
                         ComboCount = 1;
                         NowComboTime = 0.0f;
@@ -384,6 +416,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
             NowComboTime = 0.0f;
             ComboCount = 0;
         }
+      
     }
 
     IEnumerator WizardAction()
@@ -391,7 +424,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
         while (!IsDie)
         {
-
+            
             switch (wizardState)
             {
                 case WizardState.RUN:
@@ -527,7 +560,130 @@ public class WizardAnimationCtrl : MonoBehaviour {
             ComboCount = 0;
         }
     }
-    
+
+
+    IEnumerator SoundPlay()
+    {
+
+        while (!IsDie)
+        {
+
+            switch (wizardState)
+            {
+                case WizardState.RUN:
+                    break;
+
+                case WizardState.STAFFIDLE:
+                    break;
+
+                case WizardState.DAGGERIDLE:
+                    break;
+
+                case WizardState.JUMP:
+                    break;
+
+                case WizardState.LAND:
+                    break;
+
+                case WizardState.DRAWSTAFF:
+                    break;
+
+                case WizardState.DRAWDAGGER:
+                    break;
+
+                case WizardState.STAFFATTACK:
+
+                    if (IsPlaySound)
+                    {
+                       CharacterSoundM.MyAudio.Stop();
+                       CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingStaff;
+                       CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingStaff, CharacterSoundM.NowVolum);
+                       IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.STAFFSPELL_1:
+                    if (IsPlaySound)
+                    {
+                       CharacterSoundM.MyAudio.Stop();
+                       CharacterSoundM.MyAudio.clip = CharacterSoundM.ShootFIre;
+                       CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.ShootFIre, CharacterSoundM.NowVolum);
+                       IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.STAFFSPELL_2:
+                    if (IsPlaySound)
+                    {
+                       
+                       CharacterSoundM.MyAudio.Stop();
+                       CharacterSoundM.MyAudio.clip = CharacterSoundM.ShootFIre;
+                       CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.ShootFIre, CharacterSoundM.NowVolum);
+                       IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.STAFFSPELL_3:
+                    if (IsPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.Lightning;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.Lightning, CharacterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.DAGGERATTACT_1:
+                    if (IsPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.DAGGERATTACT_2:
+                    if (IsPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.DAGGERATTACT_3:
+                    if (IsPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.HIT_1:
+                    if (IsPlaySound)
+                    {
+                        CharacterSoundM.MyAudio.Stop();
+                        CharacterSoundM.MyAudio.clip = CharacterSoundM.WizardHit;
+                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.WizardHit, CharacterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WizardState.DIE:
+                
+                    break;
+
+                default:
+                    break;
+
+            }
+            yield return null;
+        }
+    }
 
 
 }
