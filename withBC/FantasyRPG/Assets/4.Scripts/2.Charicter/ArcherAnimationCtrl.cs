@@ -69,6 +69,7 @@ public class ArcherAnimationCtrl : MonoBehaviour {
 
         StartCoroutine(ArcherAction());
         StartCoroutine(CheckArcherState());
+        StartCoroutine(PlaySound());
 
         ArcherAnimation[Jump].speed = 1.4f;
         ArcherAnimation[GetArrow].speed = 2.5f;
@@ -378,6 +379,60 @@ public class ArcherAnimationCtrl : MonoBehaviour {
         }
     }
 
+    IEnumerator PlaySound()
+    {
+
+        while (!IsDie)
+        {
+
+            switch (archerState)
+            {
+                case ArcherState.SWORDIDLE:
+                
+                    break;
+
+                case ArcherState.RUN:
+                   
+                    break;
+
+                case ArcherState.BOWIDLE:
+                    
+                    break;
+
+                case ArcherState.GETARROW:
+                    
+                    break;
+                case ArcherState.AIM:
+                   
+                    break;
+
+                case ArcherState.BOWSHOOT:
+                    
+                    break;
+
+                case ArcherState.JUMP:
+                    
+                    break;
+
+                case ArcherState.ATTACK1:
+                   
+                    break;
+
+                case ArcherState.ATTACK2:
+                   
+                    break;
+
+                case ArcherState.HITFRONT:
+                    
+                    break;
+
+                default:
+                    break;
+
+            }
+            yield return null;
+        }
+    }
 
     bool FinishAnimation(string aniName, float NormalizedTime)
     {

@@ -103,6 +103,7 @@
     <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MonsterFindPatroll.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MonsterPatrollMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MonsterSpawn.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MonsterSpawnCollision.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Patroll\MoveForDragon.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Spider\SpiderAnimation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Spider\SpiderDetectTarget.cs" />
