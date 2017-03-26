@@ -24,21 +24,25 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         sInstance = this;
-        DontDestroyOnLoad(gameObject);
+
+        //임시 
+        playerJob = PlayerJob.WIZARD;
+
     }
 
     // ===============  선언부 =====================//
     public enum PlayerJob { NONE, WARRIOR, ARCHER, WIZARD };
-    public enum SCENE { TitleScene, SelectScene, WaitScene, InGameScene };
+    public enum SCENE { NONE,TitleScene, SelectScene, WaitScene, InGameScene };
     //[HideInInspector]
 
     private ItemDatabase itemDatabase = new ItemDatabase();
     public GameObject PlayerObject;
+    public GameObject CameraObject;
     public GameObject Npc1;
     public GameObject Npc2;
 
     public PlayerJob playerJob = PlayerJob.NONE;
-    public SCENE NowScene = SCENE.TitleScene; // 현재 씬이 어디 있는지 알기 위함
+    public SCENE NowScene = SCENE.NONE; // 현재 씬이 어디 있는지 알기 위함
     
     public bool isOnUIWindow = false; // 상점창, 필드선택창 열릴시 캐릭터 카메라 회전을 잠그기 위한 변수
     public bool isOnUIStore = false; // 상점창이 켜져잇냐 ? -> 아이템팔기 위한 변수
@@ -54,11 +58,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
+
         itemDatabase.IistAddAll();
 
-        //임시 
-        playerJob = PlayerJob.WIZARD;
-        NowScene = SCENE.TitleScene;
+
         //SettingUISelectWindow();
 
        // PlayerObject = GameObject.FindGameObjectWithTag("Player");
@@ -81,6 +85,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("로드완료");
         SettingUISelectWindow();
+        StartSettingObjects();
     }
 
     void addItem(Item pItem)
@@ -163,11 +168,24 @@ public class GameManager : MonoBehaviour
     {
         if (NowScene == SCENE.WaitScene)
         {
+            CameraObject = (GameObject)Instantiate(Resources.Load("Camera/LookAt", typeof(GameObject)));
+            DontDestroyOnLoad(CameraObject);
             if (playerJob == PlayerJob.WIZARD)
             {
-                Vector3 characterPos = new Vector3(19.35f, -3.01f, -6.43f);
+                Vector3 characterPos = new Vector3(2.27f, -3.14f, -12.95f);
                 PlayerObject = (GameObject)Instantiate(Resources.Load("Character/Wizard Girl",typeof(GameObject))
                     , characterPos, Quaternion.identity);
+                DontDestroyOnLoad(PlayerObject);
+            }
+        }
+        else if (NowScene == SCENE.InGameScene)
+        {
+            //Instantiate(CameraObject);
+            if (playerJob == PlayerJob.WIZARD)
+            {
+                Vector3 characterPos = new Vector3(930.77f, 66.38f, 416.42f);
+                //Instantiate(PlayerObject, characterPos, Quaternion.identity);
+                PlayerObject.gameObject.transform.position = characterPos;
             }
         }
     }

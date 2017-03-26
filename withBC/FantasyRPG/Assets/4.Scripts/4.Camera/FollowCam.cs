@@ -24,6 +24,7 @@ public class FollowCam : MonoBehaviour
     void Start ()
     {
         cameraTr = GetComponent<Transform>();
+        Target = GameObject.Find(GameManager.Instance.PlayerObject.gameObject.name);
         Job = Target.GetComponent<CharacterInformation>().Job;
         //Debug.Log(Job);
         //rotate = new Vector3(cameraAngle, 0.0f, 0);

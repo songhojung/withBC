@@ -55,6 +55,8 @@ public class PlayerCtrl : MonoBehaviour {
         charaterInfo = GetComponent<CharacterInformation>();
         Job = charaterInfo.Job;
 
+        cameraLookAt = GameManager.Instance.CameraObject;
+
     }
 	
 	// Update is called once per frame

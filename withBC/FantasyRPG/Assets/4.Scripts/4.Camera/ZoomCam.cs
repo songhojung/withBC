@@ -20,6 +20,9 @@ public class ZoomCam : MonoBehaviour {
         ray = new Ray();
         tr = GetComponent<Transform>();
 
+        SavePos = GameManager.Instance.CameraObject.transform;
+        CameraTr = SavePos.FindChild("Main Camera"); 
+
         origDistance = SavePos.GetComponent<FollowCam>().distance;
         origHeight = SavePos.GetComponent<FollowCam>().height;
         

@@ -27,8 +27,10 @@ public class SelectMap : MonoBehaviour
         // 미션 내용 객체가 있고 미션내용이 활성화 되어있다면 버튼클릭시 씬전환
         if (missionLabel && missionLabel.activeSelf)
         {
-            SceneManager.LoadScene("map_1");
             GameManager.Instance.NowScene = GameManager.SCENE.InGameScene;
+            SceneManager.LoadScene("map_1");
+            GameManager.Instance.isOnUIWindow = false;
+
         }
     }
 
@@ -37,6 +39,7 @@ public class SelectMap : MonoBehaviour
     {
         //gameObject.SetActive(false);
         Destroy(gameObject.transform.root.gameObject);
+        GameManager.Instance.isOnUIWindow = false;
     }
 
 }

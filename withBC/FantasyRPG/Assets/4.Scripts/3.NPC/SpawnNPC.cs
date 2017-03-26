@@ -16,23 +16,27 @@ public class SpawnNPC : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (nowNpcCount <= 0)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (GameManager.Instance.NowScene == GameManager.SCENE.InGameScene)
         {
-            CreatDelayTime += Time.deltaTime;
-            if(NpcCount >0)
+            if (nowNpcCount <= 0)
             {
-                if(CreatDelayTime > CreatTime)
+                CreatDelayTime += Time.deltaTime;
+                if (NpcCount > 0)
                 {
-                    CreatDelayTime = 0.0f;
-                    NpcCount--;
-                    nowNpcCount++;
-                    Vector3 position = this.transform.position;
-                    Instantiate(NPC, position, Quaternion.identity);
+                    if (CreatDelayTime > CreatTime)
+                    {
+                        CreatDelayTime = 0.0f;
+                        NpcCount--;
+                        nowNpcCount++;
+                        Vector3 position = this.transform.position;
+                        Instantiate(NPC, position, Quaternion.identity);
+                    }
                 }
             }
         }
-	}
+    }
 }

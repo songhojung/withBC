@@ -73,12 +73,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\4.Scripts\0.GameManager\GameManager.cs" />
@@ -141,7 +135,9 @@
     <Compile Include="Assets\4.Scripts\5.Effect\EffectManager.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\ChangeWeapon.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\CharacterInformation.cs" />
+    <Compile Include="Assets\4.Scripts\6.Object\MapPaperCollison.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\StartSetting.cs" />
+    <Compile Include="Assets\4.Scripts\6.Object\StoreNpcCollision.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\ThrowFire.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\ThrowObjectCtrl.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceInventory.cs" />
