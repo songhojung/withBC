@@ -51,6 +51,8 @@ public class CharicterCollision : MonoBehaviour
                     collider.gameObject.transform.eulerAngles.z);
                 GetComponent<CharacterInformation>().isHit = true;
                 Destroy(Bloodeffect, 0.5f);
+                charaterInfo.hp -= 100;
+                Debug.Log(charaterInfo.hp+gameObject.name);
             }
         }
     }

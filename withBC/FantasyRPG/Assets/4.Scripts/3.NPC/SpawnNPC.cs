@@ -33,7 +33,15 @@ public class SpawnNPC : MonoBehaviour {
                         NpcCount--;
                         nowNpcCount++;
                         Vector3 position = this.transform.position;
-                        Instantiate(NPC, position, Quaternion.identity);
+                        GameObject NpcObject = (GameObject)Instantiate(NPC, position, Quaternion.identity);
+                        if(GameManager.Instance.Npc1 == null)
+                        {
+                            GameManager.Instance.Npc1 = NpcObject;
+                        }
+                        else if(GameManager.Instance.Npc2 == null)
+                        {
+                            GameManager.Instance.Npc2 = NpcObject;
+                        }
                     }
                 }
             }

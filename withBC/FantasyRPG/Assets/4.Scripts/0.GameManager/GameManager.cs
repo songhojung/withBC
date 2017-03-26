@@ -32,14 +32,14 @@ public class GameManager : MonoBehaviour
 
     // ===============  선언부 =====================//
     public enum PlayerJob { NONE, WARRIOR, ARCHER, WIZARD };
-    public enum SCENE { NONE,TitleScene, SelectScene, WaitScene, InGameScene };
+    public enum SCENE { NONE,TitleScene, SelectScene, WaitScene, InGameScene, BossScene };
     //[HideInInspector]
 
     private ItemDatabase itemDatabase = new ItemDatabase();
     public GameObject PlayerObject;
     public GameObject CameraObject;
-    public GameObject Npc1;
-    public GameObject Npc2;
+    public GameObject Npc1= null;
+    public GameObject Npc2= null;
 
     public PlayerJob playerJob = PlayerJob.NONE;
     public SCENE NowScene = SCENE.NONE; // 현재 씬이 어디 있는지 알기 위함
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    // 씬전환시 발생되는 이벤트
+    // 씬전환이 완료되면 발생되는 이벤트
     void OnLevelWasLoaded(int level)
     {
         Debug.Log("로드완료");
@@ -156,6 +156,11 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+        }
+        else if(NowScene == SCENE.InGameScene)
+        {
+            GameObject UISelectWindow = (GameObject)Instantiate(Resources.Load("UI/UI_SelectWindow"));
+            GameObject UIHp= (GameObject)Instantiate(Resources.Load("UI/UI_Hp"));
         }
     }
     

@@ -17,8 +17,7 @@ public class PlayerHpCtrl : MonoBehaviour
 	
 	void Update ()
     {
-        //UIHp.sliderValue = playerCharacterInfo.hp * 0.01f;
-        hp--;
-        UIHp.sliderValue = hp*0.001f;
+        UIHp.sliderValue = playerCharacterInfo.hp * 0.01f;
+      
     }
 }

@@ -112,7 +112,7 @@ public class MonsterCollision : MonoBehaviour {
                     if (!MonsterParents.isDie)
                     {
                         MonsterParents.isHit = true;
-                        MonsterParents._hp -= 5;
+                        MonsterParents._hp -= 100;
                         MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFireball);
                     }
                 }
@@ -132,7 +132,7 @@ public class MonsterCollision : MonoBehaviour {
                     if (!MonsterParents.isDie)
                     {
                         MonsterParents.isHit = true;
-                        MonsterParents._hp -= 5;
+                        MonsterParents._hp -= 10;
                         MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFire);
                     }
                 }
@@ -149,7 +149,7 @@ public class MonsterCollision : MonoBehaviour {
                     if (!MonsterParents.isDie)
                     {
                         MonsterParents.isHit = true;
-                        MonsterParents._hp -= 5;
+                        MonsterParents._hp -= 150;
                         MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByElectric);
                     }
                 }
