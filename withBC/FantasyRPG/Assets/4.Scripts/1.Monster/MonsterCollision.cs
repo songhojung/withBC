@@ -58,7 +58,7 @@ public class MonsterCollision : MonoBehaviour {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 5;
                         MonsterParents.gameObject.GetComponent<MonsterDetectCollider>().target = ColliercharaterInfo.gameObject;
-                        if(ColliercharaterInfo.Job != CharacterInformation.PlayerJob.WIZARD)
+                        if(ColliercharaterInfo.Job == CharacterInformation.PlayerJob.WIZARD)
                         {
                             MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByStick);
                         }
