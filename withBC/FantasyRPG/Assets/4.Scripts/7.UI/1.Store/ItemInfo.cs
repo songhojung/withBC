@@ -66,12 +66,16 @@ public class ItemInfo : MonoBehaviour
             }
         }
         else if (Input.GetMouseButtonUp(1))
-        {
+        { // 아이템 장착한다
              if (WhereAttached == AttachedType.Inventory)
             {
+                // 인벤에 아이템 삭제
                 InventoryObj.SendMessage("RemoveItem", gameObject, SendMessageOptions.RequireReceiver);
+                // 선택창에 기존 아이템아이콘 삭제하고 낄아이템아이콘 추가
                 SelectWindowObj.SendMessage("AddSelectWindow", gameObject, SendMessageOptions.RequireReceiver);
+                // 매니져에 장착아이템 리스트 추가
                 GameManager.Instance.gameObject.SendMessage("addEquipItem", item);
+                // 캐릭터 정보 에있는 무기생성 함수 호출
                 GameManager.Instance.PlayerObject.GetComponent<CharacterInformation>().SendMessage("CreatNewWeapon",gameObject,SendMessageOptions.RequireReceiver);
             }
         }

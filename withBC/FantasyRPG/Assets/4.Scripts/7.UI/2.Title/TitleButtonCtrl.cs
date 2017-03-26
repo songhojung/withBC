@@ -10,9 +10,12 @@ public class TitleButtonCtrl : MonoBehaviour
 
     void PressStartButton()
     {
+        
         SceneManager.LoadScene("InnerMap");
-        GameManager.Instance.NowScene = GameManager.SCENE.TitleScene;
+        
+        GameManager.Instance.NowScene = GameManager.SCENE.WaitScene;
         GameManager.Instance.playerJob = GameManager.PlayerJob.WIZARD;
+        //StartCoroutine( SendMassageforWait());
 
 
     }
@@ -26,4 +29,18 @@ public class TitleButtonCtrl : MonoBehaviour
     {
 
     }
+   
+    IEnumerator SendMassageforWait()
+    {
+        AsyncOperation async = Application.LoadLevelAsync("InnerMap");
+        yield return async;
+
+        if(async.isDone)
+        {
+            GameManager.Instance.SendMessage("SettingUISelectWindow", SendMessageOptions.RequireReceiver);
+        }
+
+       
+    }
+
 }

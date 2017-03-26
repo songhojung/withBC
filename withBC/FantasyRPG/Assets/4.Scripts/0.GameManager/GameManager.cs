@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     // ===============  선언부 =====================//
     public enum PlayerJob { NONE, WARRIOR, ARCHER, WIZARD };
     public enum SCENE { TitleScene, SelectScene, WaitScene, InGameScene };
-  
+    //[HideInInspector]
 
     private ItemDatabase itemDatabase = new ItemDatabase();
     public GameObject PlayerObject;
@@ -39,11 +39,12 @@ public class GameManager : MonoBehaviour
 
     public PlayerJob playerJob = PlayerJob.NONE;
     public SCENE NowScene = SCENE.TitleScene; // 현재 씬이 어디 있는지 알기 위함
-
+    
     public bool isOnUIWindow = false; // 상점창, 필드선택창 열릴시 캐릭터 카메라 회전을 잠그기 위한 변수
     public bool isOnUIStore = false; // 상점창이 켜져잇냐 ? -> 아이템팔기 위한 변수
     public bool OnUIMouseRight = false;
 
+    
     public int Gold = 5000;
 
     public List<Item> list_EquipItem = new List<Item>();
@@ -57,21 +58,29 @@ public class GameManager : MonoBehaviour
 
         //임시 
         playerJob = PlayerJob.WIZARD;
-        NowScene = SCENE.WaitScene;
-        SettingUISelectWindow();
-        PlayerObject = GameObject.FindGameObjectWithTag("Player");
-       if (PlayerObject)
-       {
-            if (!PlayerObject.GetComponent<CharacterInformation>())
-            {
-                CharacterInformation parent = PlayerObject.GetComponentInParent<CharacterInformation>();
-                PlayerObject = parent.gameObject;
+        NowScene = SCENE.TitleScene;
+        //SettingUISelectWindow();
 
-            }
+       // PlayerObject = GameObject.FindGameObjectWithTag("Player");
+       //if (PlayerObject)
+       //{
+       //     if (!PlayerObject.GetComponent<CharacterInformation>())
+       //     {
+       //         CharacterInformation parent = PlayerObject.GetComponentInParent<CharacterInformation>();
+       //         PlayerObject = parent.gameObject;
 
-       }
+       //     }
+
+       //}
         
 
+    }
+
+    // 씬전환시 발생되는 이벤트
+    void OnLevelWasLoaded(int level)
+    {
+        Debug.Log("로드완료");
+        SettingUISelectWindow();
     }
 
     void addItem(Item pItem)
@@ -111,25 +120,35 @@ public class GameManager : MonoBehaviour
     }
 
    
+    void CreatPlayer()
+    {
+        if (NowScene == SCENE.WaitScene)
+        {
+
+        }
+    }
 
     void SettingUISelectWindow()
     {
-        if(playerJob == PlayerJob.WIZARD)
+        if (NowScene == SCENE.WaitScene)
         {
+            if (playerJob == PlayerJob.WIZARD)
+            {
                 GameObject UISelectWindow = (GameObject)Instantiate(Resources.Load("UI/UI_SelectWindow"));
                 // UISelectWindow.gameObject.name = "UI_SelectWindow";
 
-            for (int i = 0; i < itemDatabase.list_WholeItem.Count; i++)
-            {
-                if (itemDatabase.list_WholeItem[i].itemType == Item.ItemType.Staff2)
+                for (int i = 0; i < itemDatabase.list_WholeItem.Count; i++)
                 {
-                    list_EquipItem.Add(itemDatabase.list_WholeItem[i]);
- 
-                }
-                else if (itemDatabase.list_WholeItem[i].itemType == Item.ItemType.Dagger2)
-                {
-                    list_EquipItem.Add(itemDatabase.list_WholeItem[i]);
-  
+                    if (itemDatabase.list_WholeItem[i].itemType == Item.ItemType.Staff2)
+                    {
+                        list_EquipItem.Add(itemDatabase.list_WholeItem[i]);
+
+                    }
+                    else if (itemDatabase.list_WholeItem[i].itemType == Item.ItemType.Dagger2)
+                    {
+                        list_EquipItem.Add(itemDatabase.list_WholeItem[i]);
+
+                    }
                 }
             }
         }
@@ -138,6 +157,19 @@ public class GameManager : MonoBehaviour
     void SettingWhenMainMap()
     {
 
+    }
+
+    void StartSettingObjects()
+    {
+        if (NowScene == SCENE.WaitScene)
+        {
+            if (playerJob == PlayerJob.WIZARD)
+            {
+                Vector3 characterPos = new Vector3(19.35f, -3.01f, -6.43f);
+                PlayerObject = (GameObject)Instantiate(Resources.Load("Character/Wizard Girl",typeof(GameObject))
+                    , characterPos, Quaternion.identity);
+            }
+        }
     }
 
     private void Update()

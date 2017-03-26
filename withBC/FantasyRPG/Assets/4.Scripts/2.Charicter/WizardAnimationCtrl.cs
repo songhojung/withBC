@@ -210,7 +210,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
         {
             if (IsUseAnotherWeaPon)
             {
-                CharaterInfo.isOnceAttack = true;
+
                 if (ComboCount == 2 && NowComboTime < 1.0f)
                 {
 
@@ -232,6 +232,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
                     }
                     else
                     {
+                        
                         wizardState = WizardState.DAGGERATTACT_1;
                         ComboCount = 1;
                         NowComboTime = 0.0f;
@@ -240,6 +241,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
             }
         }
 
+       
 
         NowComboTime += Time.deltaTime;
         if (NowComboTime > 1.2f)

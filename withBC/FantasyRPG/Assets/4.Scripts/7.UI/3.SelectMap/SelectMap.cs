@@ -28,6 +28,7 @@ public class SelectMap : MonoBehaviour
         if (missionLabel && missionLabel.activeSelf)
         {
             SceneManager.LoadScene("map_1");
+            GameManager.Instance.NowScene = GameManager.SCENE.InGameScene;
         }
     }
 

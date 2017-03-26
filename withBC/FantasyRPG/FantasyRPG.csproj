@@ -134,6 +134,7 @@
     <Compile Include="Assets\4.Scripts\5.Effect\EffectManager.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\ChangeWeapon.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\CharacterInformation.cs" />
+    <Compile Include="Assets\4.Scripts\6.Object\StartSetting.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\ThrowFire.cs" />
     <Compile Include="Assets\4.Scripts\6.Object\ThrowObjectCtrl.cs" />
     <Compile Include="Assets\4.Scripts\7.UI\1.Store\DatabaceInventory.cs" />
