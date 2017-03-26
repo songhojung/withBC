@@ -243,7 +243,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             if (!isCombo1 && WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
                 warriorComboState = WarriorComboState.NONE;
-                characterInfo.isOnceAttack = false;
+                //characterInfo.isOnceAttack = false;
 
             }
         }
@@ -254,20 +254,20 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             {
 
                 warriorComboState = WarriorComboState.NONE;
-                characterInfo.isOnceAttack = false;
+                //characterInfo.isOnceAttack = false;
             }
         }
         else if (isCombo1 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0") ||
             isCombo2 && !WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
         {
             warriorComboState = WarriorComboState.NONE;
-            characterInfo.isOnceAttack = false;
+            //characterInfo.isOnceAttack = false;
         }
 
         if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Block"))
         {
             warriorComboState = WarriorComboState.NONE;
-            characterInfo.isOnceAttack = false;
+            //characterInfo.isOnceAttack = false;
         }
         //else if(WarriorAnimator.GetCurrentAnimatorStateInfo(1).IsName("UpperBody Layer.Block"))
         //{
@@ -286,7 +286,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
         if (IsLeftMouseDown)
         {
-            characterInfo.isOnceAttack = true;
             if (!isCombo1 && warriorComboState == WarriorComboState.COMBO1 && NowComboTime < 0.9f)
             {
 
@@ -338,6 +337,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetBool("IsRun", true);
                     WarriorAnimator.SetBool("IsJump", false);
                     WarriorAnimator.SetFloat("RunSpeed", Direction.sqrMagnitude);
+                    //characterInfo.isOnceAttack = false;
                     //WarriorAnimator.SetBool("IsAttack_1 0", false);
                     //WarriorAnimator.SetBool("IsAttack_2 0", false);
                     break;
@@ -348,6 +348,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetBool("IsRun", false);
                     WarriorAnimator.SetBool("IsHit", false);
                     WarriorAnimator.SetFloat("RunSpeed", Direction.sqrMagnitude);
+                    //characterInfo.isOnceAttack = false;
                     break;
 
                 case WarriorState.JUMP:
@@ -360,6 +361,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
                 case WarriorState.HIT:
                     isRun = false;
+                    characterInfo.isOnceAttack = false;
                     WarriorAnimator.SetBool("IsJump", false);
                     WarriorAnimator.SetBool("IsRun", false);
                     WarriorAnimator.SetBool("IsHit", true);
@@ -383,6 +385,15 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetBool("IsAttack_3", false);
                     WarriorAnimator.SetBool("IsAttack_2", false);
                     WarriorAnimator.SetBool("IsAttack_1", true);
+                    if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack1 0"))
+                    {
+                        if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.3f &&
+                            WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.4f)
+                        {
+                            characterInfo.isOnceAttack = true;
+                        }
+                    }
+                            
                     //WarriorAnimator.SetTrigger("IsAttack_1");
                     break;
 
@@ -390,12 +401,30 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetBool("IsAttack_1", false);
                     WarriorAnimator.SetBool("IsAttack_2", true);
                     isCombo1 = true;
+
+                    if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack2"))
+                    {
+                        if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.2f &&
+                            WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
+                        {
+                            characterInfo.isOnceAttack = true;
+                        }
+                    }
                     break;
 
                 case WarriorComboState.COMBO3:
                     WarriorAnimator.SetBool("IsAttack_2", false);
                     WarriorAnimator.SetBool("IsAttack_3", true);
                     isCombo2 = true;
+
+                    if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Attack3"))
+                    {
+                        if (WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.1f &&
+                            WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.2f)
+                        {
+                            characterInfo.isOnceAttack = true;
+                        }
+                    }
                     break;
 
                 case WarriorComboState.SHIELDBLOCK:
@@ -407,6 +436,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetBool("IsAttack_2", false);
                     WarriorAnimator.SetBool("IsAttack_3", false);
                     WarriorAnimator.SetBool("IsBlock", false);
+                    characterInfo.isOnceAttack = false;
                     break;
 
                 default:
