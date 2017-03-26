@@ -51,7 +51,7 @@ public class WerewolfeAnimation : MonoBehaviour {
         }
         //ChangeMotion();
         Animation_Play3();
-        //Sound_Play();
+        Sound_Play();
         InformationCheck();
         
     }
