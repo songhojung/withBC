@@ -24,6 +24,8 @@ public class CharacterSoundManager : MonoBehaviour {
     public AudioClip Shoot;
     [HideInInspector]
     public AudioClip ShootFIre;
+    [HideInInspector]
+    public AudioClip Lightning;
 
     public float NowVolum = 1.0f;
 	// Use this for initialization
@@ -37,6 +39,7 @@ public class CharacterSoundManager : MonoBehaviour {
         Shoot = SoundManager.Instance.Shoot;
         ShootFIre = SoundManager.Instance.Fireball;
         SwingStaff = SoundManager.Instance.SwingStaff;
+        Lightning = SoundManager.Instance.ElectricMagic;
 
     }
 	

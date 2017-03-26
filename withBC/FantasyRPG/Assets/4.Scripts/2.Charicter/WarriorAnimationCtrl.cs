@@ -14,7 +14,9 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
     private CharacterInformation.MODE Mode;
     private CharacterInformation characterInfo;
+    private CharacterSoundManager characterSoundM;
 
+    private bool IsPlaySound = false;
     private Animator WarriorAnimator;
     public bool isDie = false;
     public bool isRun = false;
@@ -36,6 +38,8 @@ public class WarriorAnimationCtrl : MonoBehaviour {
 
         Mode = GetComponent<CharacterInformation>()._mode;
         characterInfo = GetComponent<CharacterInformation>();
+        characterSoundM = GetComponent<CharacterSoundManager>();
+
         switch (Mode)
         {
             case CharacterInformation.MODE.PLAYER:
@@ -50,6 +54,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
         StartCoroutine(WarriorAction());
         StartCoroutine(CheckWarriorState());
         StartCoroutine(WarriorComboAttack());
+        StartCoroutine(PlaySound());
         //pPlayerCtrl = GetComponent<PlayerCtrl>();
         
         
@@ -180,6 +185,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 warriorComboState = WarriorComboState.COMBO2;
                 //Debug.Log("투콤시간" + NowComboTime);
                 NowComboTime = 0.0f;
+                IsPlaySound = true;
 
             }
             else if (!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
@@ -187,6 +193,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 warriorComboState = WarriorComboState.COMBO3;
                 //Debug.Log("삼콤보시간" + NowComboTime);
                 NowComboTime = 0.0f;
+                IsPlaySound = true;
             }
             else
             {
@@ -195,12 +202,14 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 isCombo1 = false;
                 isCombo2 = false;
                 NowComboTime = 0.0f;
+                IsPlaySound = true;
             }
 
         }
         else if (IsRightMouseDown)
         {
             characterInfo.isOnceAttack = true;
+            IsPlaySound = true;
             warriorComboState = WarriorComboState.SHIELDBLOCK;
             NowComboTime = 0.0f;
         }
@@ -292,6 +301,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 warriorComboState = WarriorComboState.COMBO2;
                 //Debug.Log("투콤시간" + NowComboTime);
                 NowComboTime = 0.0f;
+                IsPlaySound = true;
 
             }
             else if (!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
@@ -299,6 +309,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 warriorComboState = WarriorComboState.COMBO3;
                 //Debug.Log("삼콤보시간" + NowComboTime);
                 NowComboTime = 0.0f;
+                IsPlaySound = true;
             }
             else
             {
@@ -308,6 +319,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 isCombo2 = false;
                // Debug.Log(NowComboTime);
                 NowComboTime = 0.0f;
+                IsPlaySound = true;
             }
 
         }
@@ -316,6 +328,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
             characterInfo.isOnceAttack = true;
             warriorComboState = WarriorComboState.SHIELDBLOCK;
             NowComboTime = 0.0f;
+            IsPlaySound = true;
         }
 
 
@@ -366,6 +379,13 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetBool("IsRun", false);
                     WarriorAnimator.SetBool("IsHit", true);
                     WarriorAnimator.SetFloat("RunSpeed", Direction.sqrMagnitude);
+                    if (IsPlaySound)
+                    {
+                        characterSoundM.MyAudio.Stop();
+                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
+                        characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
                     break;
             }
            
@@ -449,4 +469,56 @@ public class WarriorAnimationCtrl : MonoBehaviour {
         }
     }
 
+
+    IEnumerator PlaySound()
+    {
+        while (!isDie)
+        {
+
+
+            switch (warriorComboState)
+            {
+                case WarriorComboState.COMBO1:
+                    if (IsPlaySound)
+                    {
+                        characterSoundM.MyAudio.Stop();
+                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
+                        characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WarriorComboState.COMBO2:
+                    if (IsPlaySound)
+                    {
+                        characterSoundM.MyAudio.Stop();
+                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
+                        characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WarriorComboState.COMBO3:
+                    if (IsPlaySound)
+                    {
+                        characterSoundM.MyAudio.Stop();
+                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
+                        characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
+                        IsPlaySound = false;
+                    }
+                    break;
+
+                case WarriorComboState.SHIELDBLOCK:
+               
+                    break;
+
+                default:
+                    break;
+
+
+
+            }
+            yield return null;
+        }
+    }
 }
