@@ -28,7 +28,7 @@ public class WerewolfeAnimation : MonoBehaviour {
 
     public int damage;
 
-    private MonsterSoundManager SoundManager;
+    private MonsterSoundManager Sound_M;
 
     private bool OnceHit = false;
     private bool OnceAttack = false;
@@ -38,7 +38,7 @@ public class WerewolfeAnimation : MonoBehaviour {
     {
         Werewolf = this.GetComponent<Animation>();
         Information = GetComponent<MonsterInformation>();
-        SoundManager = GetComponent<MonsterSoundManager>();
+        Sound_M = GetComponent<MonsterSoundManager>();
     }
 
     // Update is called once per frame
@@ -219,29 +219,22 @@ public class WerewolfeAnimation : MonoBehaviour {
         switch (NowState)
         {
             case W_STATE.S_STAND:
-                if(!SoundManager.MyAudio.isPlaying)
+                if(!Sound_M.MyAudio.isPlaying)
                 {
-                    SoundManager.MyAudio.clip = SoundManager.Stay;
-                    SoundManager.MyAudio.PlayOneShot(SoundManager.Stay,SoundManager.NowVolum);
-                }
-                else
-                {
-                    if(SoundManager.MyAudio.clip != SoundManager.Stay)
+                    if (Sound_M.MyAudio.clip != Sound_M.WolfSpawn)
                     {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Stay;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Stay, SoundManager.NowVolum);
+                        Sound_M.MyAudio.Stop();
                     }
                 }
                 break;
             case W_STATE.S_ATT1:
                 if (OnceAttack)
                 {
-                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
+                    if (Sound_M.MyAudio.clip != Sound_M.WolfAttack)
                     {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Attack;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        Sound_M.MyAudio.Stop();
+                        Sound_M.MyAudio.clip = Sound_M.WolfAttack;
+                        Sound_M.MyAudio.PlayOneShot(Sound_M.WolfAttack, Sound_M.NowVolum);
                         OnceAttack = false;
                     }
                 }
@@ -249,11 +242,11 @@ public class WerewolfeAnimation : MonoBehaviour {
             case W_STATE.S_ATT2:
                 if (OnceAttack)
                 {
-                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
+                    if (Sound_M.MyAudio.clip != Sound_M.WolfAttack)
                     {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Attack;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        Sound_M.MyAudio.Stop();
+                        Sound_M.MyAudio.clip = Sound_M.WolfAttack;
+                        Sound_M.MyAudio.PlayOneShot(Sound_M.WolfAttack, Sound_M.NowVolum);
                         OnceAttack = false;
                     }
                 }
@@ -261,23 +254,23 @@ public class WerewolfeAnimation : MonoBehaviour {
             case W_STATE.S_ATT3:
                 if (OnceAttack)
                 {
-                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
+                    if (Sound_M.MyAudio.clip != Sound_M.WolfAttack)
                     {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Attack;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        Sound_M.MyAudio.Stop();
+                        Sound_M.MyAudio.clip = Sound_M.WolfAttack;
+                        Sound_M.MyAudio.PlayOneShot(Sound_M.WolfAttack, Sound_M.NowVolum);
                         OnceAttack = false;
                     }
                 }
                 break;
             case W_STATE.S_ATT20:
-                if(OnceAttack)
+                if (OnceAttack)
                 {
-                    if (SoundManager.MyAudio.clip != SoundManager.Attack)
+                    if (Sound_M.MyAudio.clip != Sound_M.WolfAttack)
                     {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Attack;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Attack, SoundManager.NowVolum);
+                        Sound_M.MyAudio.Stop();
+                        Sound_M.MyAudio.clip = Sound_M.WolfAttack;
+                        Sound_M.MyAudio.PlayOneShot(Sound_M.WolfAttack, Sound_M.NowVolum);
                         OnceAttack = false;
                     }
                 }
@@ -285,19 +278,13 @@ public class WerewolfeAnimation : MonoBehaviour {
             case W_STATE.S_ATT_STAND:
                 break;
             case W_STATE.S_BEATEN:
-                //if (!SoundManager.MyAudio.isPlaying)
-                //{
-                //    SoundManager.MyAudio.clip = SoundManager.Hit;
-                //    SoundManager.MyAudio.PlayOneShot(SoundManager.Hit, SoundManager.NowVolum);
-                //}
-                //else
                 if(OnceHit)
                 {
-                    if (SoundManager.MyAudio.clip != SoundManager.Hit)
+                    if (Sound_M.MyAudio.clip != Sound_M.WolfHit)
                     {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Hit;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Hit, SoundManager.NowVolum);
+                        Sound_M.MyAudio.Stop();
+                        Sound_M.MyAudio.clip = Sound_M.WolfHit;
+                        Sound_M.MyAudio.PlayOneShot(Sound_M.WolfHit, Sound_M.NowVolum);
                         OnceHit = false;
                     }
                 }
@@ -305,11 +292,11 @@ public class WerewolfeAnimation : MonoBehaviour {
             case W_STATE.S_DEATH:
                 if (!OnceDie)
                 {
-                    if (SoundManager.MyAudio.clip != SoundManager.Death)
+                    if (Sound_M.MyAudio.clip != Sound_M.WolfDeath)
                     {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Death;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Death, SoundManager.NowVolum);
+                        Sound_M.MyAudio.Stop();
+                        Sound_M.MyAudio.clip = Sound_M.WolfDeath;
+                        Sound_M.MyAudio.PlayOneShot(Sound_M.WolfDeath, Sound_M.NowVolum);
                         OnceDie = true;
                     }
                 }
@@ -317,37 +304,24 @@ public class WerewolfeAnimation : MonoBehaviour {
             case W_STATE.S_JUMP:
                 break;
             case W_STATE.S_RUN:
-                if (!SoundManager.MyAudio.isPlaying)
+                if (!Sound_M.MyAudio.isPlaying)
                 {
-                    SoundManager.MyAudio.clip = SoundManager.Move;
-                    SoundManager.MyAudio.PlayOneShot(SoundManager.Move, SoundManager.NowVolum);
-                }
-                else
-                {
-                    if (SoundManager.MyAudio.clip != SoundManager.Move)
-                    {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Move;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Move, SoundManager.NowVolum);
-                    }
+                    if (!Sound_M.MyAudio.clip != Sound_M.WolfSpawn)
+                        Sound_M.MyAudio.Stop();
                 }
                 break;
             case W_STATE.S_WALK:
+                if (!Sound_M.MyAudio.isPlaying)
+                {
+                    if (!Sound_M.MyAudio.clip != Sound_M.WolfSpawn)
+                        Sound_M.MyAudio.Stop();
+                }
                 break;
             case W_STATE.S_ROAR:
-                if (!SoundManager.MyAudio.isPlaying)
+                if (!Sound_M.MyAudio.isPlaying)
                 {
-                    SoundManager.MyAudio.clip = SoundManager.Roar;
-                    SoundManager.MyAudio.PlayOneShot(SoundManager.Roar, SoundManager.NowVolum);
-                }
-                else
-                {
-                    if (SoundManager.MyAudio.clip != SoundManager.Roar)
-                    {
-                        SoundManager.MyAudio.Stop();
-                        SoundManager.MyAudio.clip = SoundManager.Roar;
-                        SoundManager.MyAudio.PlayOneShot(SoundManager.Roar, SoundManager.NowVolum);
-                    }
+                    if (!Sound_M.MyAudio.clip != Sound_M.WolfSpawn)
+                        Sound_M.MyAudio.Stop();
                 }
                 break;
             case W_STATE.S_VICTORY:

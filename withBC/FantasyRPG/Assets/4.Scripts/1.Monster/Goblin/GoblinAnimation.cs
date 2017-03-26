@@ -26,7 +26,7 @@ public class GoblinAnimation : MonoBehaviour {
     public int damage;
     // Use this for initialization
 
-    private MonsterSoundManager SoundManager;
+    private MonsterSoundManager Sound_M;
 
     private bool OnceHit = false;
     private bool OnceAttack = false;
@@ -35,7 +35,7 @@ public class GoblinAnimation : MonoBehaviour {
         Goblin = this.GetComponent<Animation>();
 
         Information = GetComponent<MonsterInformation>();
-        SoundManager = GetComponent<MonsterSoundManager>();
+        Sound_M = GetComponent<MonsterSoundManager>();
         //Debug.Log("클립갯수:" + ClipNum.ToString());
 
         //pcControll = this.gameObject.GetComponent<CharacterController>();
@@ -192,48 +192,86 @@ public class GoblinAnimation : MonoBehaviour {
             switch (NowState)
             {
                 case G_STATE.S_IDLE:
-                    Goblin.wrapMode = WrapMode.Loop;
-                    Goblin.CrossFade("idle", 0.3f);
+                    if (Sound_M.MyAudio.isPlaying)
+                        Sound_M.MyAudio.Pause();
                     break;
                 case G_STATE.S_ATT1:
-                    Goblin.wrapMode = WrapMode.Once;
-                    Goblin.CrossFade("attack1", 0.3f);
+                    if (OnceAttack)
+                    {
+                        if (Sound_M.MyAudio.clip != Sound_M.WolfAttack)
+                        {
+                            Sound_M.MyAudio.Stop();
+                            Sound_M.MyAudio.clip = Sound_M.WolfAttack;
+                            Sound_M.MyAudio.PlayOneShot(Sound_M.WolfAttack, Sound_M.NowVolum);
+                            OnceAttack = false;
+                        }
+                    }
                     break;
                 case G_STATE.S_ATT2:
-                    Goblin.wrapMode = WrapMode.Once;
-                    Goblin.CrossFade("attack2", 0.3f);
+                    if (OnceAttack)
+                    {
+                        if (Sound_M.MyAudio.clip != Sound_M.WolfAttack)
+                        {
+                            Sound_M.MyAudio.Stop();
+                            Sound_M.MyAudio.clip = Sound_M.WolfAttack;
+                            Sound_M.MyAudio.PlayOneShot(Sound_M.WolfAttack, Sound_M.NowVolum);
+                            OnceAttack = false;
+                        }
+                    }
                     break;
                 case G_STATE.S_ATT3:
-                    Goblin.wrapMode = WrapMode.Once;
-                    Goblin.CrossFade("attack3", 0.3f);
+                    if (OnceAttack)
+                    {
+                        if (Sound_M.MyAudio.clip != Sound_M.WolfAttack)
+                        {
+                            Sound_M.MyAudio.Stop();
+                            Sound_M.MyAudio.clip = Sound_M.WolfAttack;
+                            Sound_M.MyAudio.PlayOneShot(Sound_M.WolfAttack, Sound_M.NowVolum);
+                            OnceAttack = false;
+                        }
+                    }
                     break;
                 case G_STATE.S_BLOCK:
-                    Goblin.wrapMode = WrapMode.Once;
-                    Goblin.CrossFade("block", 0.3f);
+                    if (Sound_M.MyAudio.isPlaying)
+                        Sound_M.MyAudio.Pause();
                     break;
                 case G_STATE.S_BLOCK_HIT:
-                    Goblin.wrapMode = WrapMode.Once;
-                    Goblin.CrossFade("block_hit", 0.3f);
-                    break;
-                case G_STATE.S_COMBAT_IDLE:
-                    Goblin.wrapMode = WrapMode.Loop;
-                    Goblin.CrossFade("combat_idle", 0.3f); ;
+                    if (OnceHit)
+                    {
+                        if (Sound_M.MyAudio.clip != Sound_M.GoblinHit)
+                        {
+                            Sound_M.MyAudio.Stop();
+                            Sound_M.MyAudio.clip = Sound_M.GoblinHit;
+                            Sound_M.MyAudio.PlayOneShot(Sound_M.GoblinHit, Sound_M.NowVolum);
+                            OnceHit = false;
+                        }
+                    }
                     break;
                 case G_STATE.S_DEATH:
-                    Goblin.wrapMode = WrapMode.Once;
-                    Goblin.CrossFade("death", 0.3f); ;
-                    break;
-                case G_STATE.S_REMOVE_WEAPON:
-                    Goblin.wrapMode = WrapMode.Once;
-                    Goblin.CrossFade("remove_weapons", 0.3f); ;
+                    if (!OnceDie)
+                    {
+                        if (Sound_M.MyAudio.clip != Sound_M.GoblinDeath)
+                        {
+                            Sound_M.MyAudio.Stop();
+                            Sound_M.MyAudio.clip = Sound_M.GoblinDeath;
+                            Sound_M.MyAudio.PlayOneShot(Sound_M.GoblinDeath, Sound_M.NowVolum);
+                            OnceDie = true;
+                        }
+                    }
                     break;
                 case G_STATE.S_RUN:
-                    Goblin.wrapMode = WrapMode.Loop;
-                    Goblin.CrossFade("run", 0.3f); ;
+                    if (!Sound_M.MyAudio.isPlaying)
+                    {
+                        if (!Sound_M.MyAudio.clip != Sound_M.WolfSpawn)
+                            Sound_M.MyAudio.Stop();
+                    }
                     break;
                 case G_STATE.S_WALK:
-                    Goblin.wrapMode = WrapMode.Loop;
-                    Goblin.CrossFade("walk", 0.3f); ;
+                    if (!Sound_M.MyAudio.isPlaying)
+                    {
+                        if (!Sound_M.MyAudio.clip != Sound_M.WolfSpawn)
+                            Sound_M.MyAudio.Stop();
+                    }
                     break;
             }
         }
