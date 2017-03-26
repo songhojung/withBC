@@ -403,6 +403,7 @@ public class DragonDetectTarget : MonoBehaviour {
                     {
                         if (target.GetComponent<MakePatroll>().Rand_Fly == 3)
                         {
+                            //if(target.GetComponent<>)
                             D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FIRE;
                             D_Animation.OnceAttack = true;
                         }
