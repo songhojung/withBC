@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\4.Scripts\0.GameManager\GameManager.cs" />
+    <Compile Include="Assets\4.Scripts\0.GameManager\NowSceneChanage.cs" />
     <Compile Include="Assets\4.Scripts\0.GameManager\SoundControll.cs" />
     <Compile Include="Assets\4.Scripts\0.GameManager\SoundManager.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonAnimation.cs" />
