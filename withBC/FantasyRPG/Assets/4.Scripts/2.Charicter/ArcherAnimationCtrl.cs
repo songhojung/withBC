@@ -399,8 +399,6 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 case ArcherState.BOWSHOOT:
                     if (isPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.Shoot;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.Shoot, CharacterSoundM.NowVolum);
                         isPlaySound = false;
                     }
@@ -409,8 +407,6 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 case ArcherState.ATTACK1:
                     if (isPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
                         isPlaySound = false;
                     }
@@ -420,8 +416,6 @@ public class ArcherAnimationCtrl : MonoBehaviour {
                 case ArcherState.HITFRONT:
                     if (isPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.ArchorHit;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.ArchorHit, CharacterSoundM.NowVolum);
                         isPlaySound = false;
                     }

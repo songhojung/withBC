@@ -595,8 +595,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
                     if (IsPlaySound)
                     {
-                       CharacterSoundM.MyAudio.Stop();
-                       CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingStaff;
                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingStaff, CharacterSoundM.NowVolum);
                        IsPlaySound = false;
                     }
@@ -605,8 +603,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 case WizardState.STAFFSPELL_1:
                     if (IsPlaySound)
                     {
-                       CharacterSoundM.MyAudio.Stop();
-                       CharacterSoundM.MyAudio.clip = CharacterSoundM.ShootFIre;
                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.ShootFIre, CharacterSoundM.NowVolum);
                        IsPlaySound = false;
                     }
@@ -615,9 +611,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 case WizardState.STAFFSPELL_2:
                     if (IsPlaySound)
                     {
-                       
-                       CharacterSoundM.MyAudio.Stop();
-                       CharacterSoundM.MyAudio.clip = CharacterSoundM.ShootFIre;
                        CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.ShootFIre, CharacterSoundM.NowVolum);
                        IsPlaySound = false;
                     }
@@ -626,8 +619,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 case WizardState.STAFFSPELL_3:
                     if (IsPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.Lightning;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.Lightning, CharacterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
@@ -636,8 +627,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 case WizardState.DAGGERATTACT_1:
                     if (IsPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
@@ -646,8 +635,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 case WizardState.DAGGERATTACT_2:
                     if (IsPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
@@ -656,8 +643,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 case WizardState.DAGGERATTACT_3:
                     if (IsPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.SwingSword;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.SwingSword, CharacterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
@@ -666,8 +651,6 @@ public class WizardAnimationCtrl : MonoBehaviour {
                 case WizardState.HIT_1:
                     if (IsPlaySound)
                     {
-                        CharacterSoundM.MyAudio.Stop();
-                        CharacterSoundM.MyAudio.clip = CharacterSoundM.WizardHit;
                         CharacterSoundM.MyAudio.PlayOneShot(CharacterSoundM.WizardHit, CharacterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
