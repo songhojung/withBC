@@ -46,6 +46,7 @@ public class DragonAnimation : MonoBehaviour {
 
     private bool OnceHit = false;
     public bool OnceAttack = false;
+    public bool OnceAttackCheck = false;
     private bool OnceDie = false;
     // Use this for initialization
     void Start () {

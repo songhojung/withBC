@@ -26,6 +26,8 @@ public class DragonDetectTarget : MonoBehaviour {
     private MonsterInformation Information;
 
     private float CheckFireTime = 0.0f;
+
+    public GameObject DragonFlame;
     // Use this for initialization
     void Start () {
         agent = GetComponent<NavMeshAgent>();
@@ -49,7 +51,7 @@ public class DragonDetectTarget : MonoBehaviour {
             Information.isDie = true;
         }
 
-        //isDie = Information.isDie;
+        isDie = Information.isDie;
 
         if (!Information.isDie)
         {
@@ -110,11 +112,13 @@ public class DragonDetectTarget : MonoBehaviour {
                 {
                     
                     CheckFireTime += Time.deltaTime;
-                    if (CheckFireTime >= 3.0f)
+                    if (CheckFireTime >= 5.0f)
                     {
                         if (D_Animation.NowAttack != DragonAnimation.D_ATTACKSTATE.ATTACK)
                         {
                             D_Animation.NowState = DragonAnimation.D_STATE.D_FIRE;
+                            D_Animation.OnceAttackCheck = true;
+                            D_Animation.OnceAttack = true;
                             CheckFireTime = 0.0f;
                         }
                     }
@@ -123,6 +127,8 @@ public class DragonDetectTarget : MonoBehaviour {
                         if (D_Animation.NowAttack != DragonAnimation.D_ATTACKSTATE.ATTACK)
                         {
                             D_Animation.NowState = DragonAnimation.D_STATE.D_ATT1;
+                            D_Animation.OnceAttackCheck = true;
+                            D_Animation.OnceAttack = true;
                         }
                     }
                 }
@@ -133,6 +139,8 @@ public class DragonDetectTarget : MonoBehaviour {
                         D_Animation.Dragon["Attack2"].normalizedTime >= 0.95f))
                     {
                         D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
+                        D_Animation.OnceAttackCheck = false;
+                        D_Animation.OnceAttack = false;
                         CheckFireTime = 0.0f;
                     }
                 }
@@ -143,6 +151,8 @@ public class DragonDetectTarget : MonoBehaviour {
                 if (D_Animation.Dragon["breath fire"].normalizedTime >= 0.95f)
                 {
                     D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
+                    D_Animation.OnceAttackCheck = false;
+                    D_Animation.OnceAttack = false;
                 }
                 if (D_Animation.NowState != DragonAnimation.D_STATE.D_ATT1 &&
                     D_Animation.NowState != DragonAnimation.D_STATE.D_FIRE)
@@ -150,6 +160,8 @@ public class DragonDetectTarget : MonoBehaviour {
                     if (D_Animation.NowState != DragonAnimation.D_STATE.D_RUN)
                     {
                         D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
+                        D_Animation.OnceAttackCheck = false;
+                        D_Animation.OnceAttack = false;
                     }
                 }
             }
@@ -384,8 +396,18 @@ public class DragonDetectTarget : MonoBehaviour {
         {
             if (D_Animation.Dragon["fly breath fire"].normalizedTime >= 0.95f)
             {
-                D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FAST;
-                D_Animation.NowAttack = DragonAnimation.D_ATTACKSTATE.NONATTACK;
+                if(target.gameObject.CompareTag("Player"))
+                {
+                    D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWRAND;
+                    Flyagent.OnOff = false;
+                    D_Animation.OnceAttack = false;
+                    D_Animation.OnceAttackCheck = false;
+                }
+                else
+                {
+                    D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FAST;
+                    D_Animation.NowAttack = DragonAnimation.D_ATTACKSTATE.NONATTACK;
+                }
             }
 
             if (D_Animation.NowState == DragonAnimation.D_STATE.D_FLY_FAST)
@@ -403,8 +425,11 @@ public class DragonDetectTarget : MonoBehaviour {
                     {
                         if (target.GetComponent<MakePatroll>().Rand_Fly == 3)
                         {
+                            //if(target.GetComponent<>)
                             D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FIRE;
+                            D_Animation.OnceAttackCheck = true;
                             D_Animation.OnceAttack = true;
+                            //D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FAST;
                         }
                         else if (target.GetComponent<MakePatroll>().Rand_Fly == 1)
                         {
@@ -422,7 +447,9 @@ public class DragonDetectTarget : MonoBehaviour {
                             if (target.GetComponent<MakePatroll>().Rand_Fly == 3)
                             {
                                 D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FIRE;
+                                D_Animation.OnceAttackCheck = true;
                                 D_Animation.OnceAttack = true;
+                                //D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FAST;
                             }
                             else if(target.GetComponent<MakePatroll>().Rand_Fly == 1)
                             {
@@ -439,9 +466,9 @@ public class DragonDetectTarget : MonoBehaviour {
                 if (target.GetComponent<MakePatroll>().Rand_Fly == 1 ||
                     target.GetComponent<MakePatroll>().Rand_Fly == 3)
                 {
-                    D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWFLY;
-                    Flyagent.OnOff = true;
-                    Flyagent.target = target;
+                   D_Animation.NowFlyRand = DragonAnimation.D_FLYRAND.NOWFLY;
+                   Flyagent.OnOff = true;
+                   Flyagent.target = target;
                 }
                 else
                 {
@@ -449,6 +476,15 @@ public class DragonDetectTarget : MonoBehaviour {
                     Flyagent.OnOff = false;
                 }
 
+            }
+            else
+            {
+                if(target.gameObject.CompareTag("Player"))
+                {
+                    D_Animation.NowState = DragonAnimation.D_STATE.D_FLY_FIRE;
+                    D_Animation.OnceAttackCheck = true;
+                    D_Animation.OnceAttack = true;
+                }
             }
         }
         else

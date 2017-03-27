@@ -20,6 +20,7 @@ public class CameraBGM : MonoBehaviour {
 
     public float NowVolume = 1.0f;
     public float Fade = 1.0f;
+    public float MaxFade = 1.0f;
 	// Use this for initialization
 	void Start () {
         Title = SoundManager.Instance.TitleSceen;
@@ -44,6 +45,11 @@ public class CameraBGM : MonoBehaviour {
                 MyAudio.clip = Select;
                 MyAudio.Play();
                 break;
+            case GameManager.SCENE.BossScene:
+                MyAudio.Stop();
+                MyAudio.clip = Field;
+                MyAudio.Play();
+                break;
         }
     }
 
@@ -64,7 +70,7 @@ public class CameraBGM : MonoBehaviour {
                 }
                 else
                 {
-                    if (Fade < 1.0f)
+                    if (Fade < MaxFade)
                     {
                         Fade += Time.deltaTime / 3.0f ;
                         NowVolume = Fade;
@@ -85,7 +91,7 @@ public class CameraBGM : MonoBehaviour {
                 }
                 else
                 {
-                    if (Fade < 1.0f)
+                    if (Fade < MaxFade)
                     {
                         Fade += Time.deltaTime / 3.0f ;
                         NowVolume = Fade;
@@ -102,14 +108,14 @@ public class CameraBGM : MonoBehaviour {
                 }
                 else
                 {
-                    if (Fade < 1.0f)
+                    if (Fade < MaxFade)
                     {
                         Fade += Time.deltaTime / 3.0f;
                         NowVolume = Fade;
                     }
                 }
                 break;
-            case GameManager.SCENE.NONE:
+            case GameManager.SCENE.BossScene:
                 if (MyAudio.clip != Boss)
                 {
                     Fade -= Time.deltaTime / 3.0f ;
@@ -123,7 +129,7 @@ public class CameraBGM : MonoBehaviour {
                 }
                 else
                 {
-                    if (Fade < 1.0f)
+                    if (Fade < MaxFade)
                     {
                         Fade += Time.deltaTime / 3.0f ;
                         NowVolume = Fade;

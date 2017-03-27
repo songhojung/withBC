@@ -73,13 +73,21 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\4.Scripts\0.GameManager\GameManager.cs" />
+    <Compile Include="Assets\4.Scripts\0.GameManager\NowSceneChanage.cs" />
     <Compile Include="Assets\4.Scripts\0.GameManager\SoundControll.cs" />
     <Compile Include="Assets\4.Scripts\0.GameManager\SoundManager.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonAnimation.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonDetectTarget.cs" />
+    <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonFire.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\DragaonBoss\DragonMove.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\DragonSound.cs" />
     <Compile Include="Assets\4.Scripts\1.Monster\Goblin\GoblinAnimation.cs" />

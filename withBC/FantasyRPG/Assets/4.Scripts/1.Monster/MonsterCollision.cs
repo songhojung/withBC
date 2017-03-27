@@ -60,11 +60,21 @@ public class MonsterCollision : MonoBehaviour {
                         MonsterParents.gameObject.GetComponent<MonsterDetectCollider>().target = ColliercharaterInfo.gameObject;
                         if(ColliercharaterInfo.Job == CharacterInformation.PlayerJob.WIZARD)
                         {
-                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByStick);
+                            if (MonsterParents.GetComponent<MonsterSoundManager>())
+                                MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByStick);
+                            else
+                            {
+                                MonsterParents.gameObject.GetComponent<DragonSound>().MyAudio.PlayOneShot(SoundManager.Instance.HitByStick);
+                            }
                         }
                         else
                         {
-                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitBySword);
+                            if (MonsterParents.GetComponent<MonsterSoundManager>())
+                                MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitBySword);
+                            else
+                            {
+                                MonsterParents.gameObject.GetComponent<DragonSound>().MyAudio.PlayOneShot(SoundManager.Instance.HitBySword);
+                            }
                         }
                     }
                 }
@@ -94,7 +104,12 @@ public class MonsterCollision : MonoBehaviour {
                         {
                             MonsterParents.isHit = true;
                             MonsterParents._hp -= 5;
-                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitArrow);
+                            if (MonsterParents.GetComponent<MonsterSoundManager>())
+                                MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitArrow);
+                            else
+                            {
+                                MonsterParents.gameObject.GetComponent<DragonSound>().MyAudio.PlayOneShot(SoundManager.Instance.HitArrow);
+                            }
                         }
                     }
                 }
@@ -112,9 +127,15 @@ public class MonsterCollision : MonoBehaviour {
                 {
                     if (!MonsterParents.isDie)
                     {
+                        
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 100;
-                        MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFireball);
+                        if (MonsterParents.GetComponent<MonsterSoundManager>())
+                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFireball);
+                        else
+                        {
+                            MonsterParents.gameObject.GetComponent<DragonSound>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFireball);
+                        }
                     }
                 }
             }
@@ -134,7 +155,12 @@ public class MonsterCollision : MonoBehaviour {
                     {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 10;
-                        MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFire);
+                        if(MonsterParents.GetComponent<MonsterSoundManager>())
+                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFire);
+                        else
+                        {
+                            MonsterParents.gameObject.GetComponent<DragonSound>().MyAudio.PlayOneShot(SoundManager.Instance.HitByFire);
+                        }
                     }
                 }
             }
@@ -151,7 +177,12 @@ public class MonsterCollision : MonoBehaviour {
                     {
                         MonsterParents.isHit = true;
                         MonsterParents._hp -= 150;
-                        MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByElectric);
+                        if (MonsterParents.GetComponent<MonsterSoundManager>())
+                            MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitByElectric);
+                        else
+                        {
+                            MonsterParents.gameObject.GetComponent<DragonSound>().MyAudio.PlayOneShot(SoundManager.Instance.HitByElectric);
+                        }
                     }
                 }
             }

@@ -51,7 +51,7 @@ public class DragonMove : MonoBehaviour {
                 if (!(DetectColl.FindPlayer &&
                     Vector3.Distance(DetectTarget.target.transform.position, this.transform.position) <= 5.0f))
                 {
-                    Vector3 VecGoblin2 = (Dragon_body.transform.forward * DragonwalkSpeed * 1.5f * Time.deltaTime) + Dragon_body.transform.position;
+                    Vector3 VecGoblin2 = (Dragon_body.transform.forward * DragonwalkSpeed * Time.deltaTime) + Dragon_body.transform.position;
                     Dragon_body.MovePosition(VecGoblin2);
 
                 }
@@ -62,7 +62,7 @@ public class DragonMove : MonoBehaviour {
                 if (!(DetectColl.FindPlayer &&
                     Vector3.Distance(DetectTarget.target.transform.position, this.transform.position) <= 5.0f))
                 {
-                    Vector3 VecGoblin2 = (Dragon_body.transform.forward * DragonwalkSpeed * 1.5f * Time.deltaTime) + Dragon_body.transform.position;
+                    Vector3 VecGoblin2 = (Dragon_body.transform.forward * DragonwalkSpeed * Time.deltaTime) + Dragon_body.transform.position;
                     Dragon_body.MovePosition(VecGoblin2);
                 
                 }
