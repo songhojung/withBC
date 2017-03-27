@@ -245,7 +245,8 @@ public class SpiderDetectTarget : MonoBehaviour {
         ObjPos.y += 1.0f;
         int layerMask= (-1) - ((1 << LayerMask.NameToLayer("Monster")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
-             (1 << LayerMask.NameToLayer("Default")));       //layerMask = ~layerMask;
+             (1 << LayerMask.NameToLayer("Default")) |
+             (1 << LayerMask.NameToLayer("Map")));       //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out Ray, RayDistance,layerMask);
 
     }

@@ -82,8 +82,8 @@ public class DragonDetectTarget : MonoBehaviour {
         {
             StartCoroutine(YouDie());
         }
-        if((D_Animation.Dragon["hit1"].normalizedTime >=0.9f)||
-            (D_Animation.Dragon["hit2"].normalizedTime >= 0.9f))
+        if((D_Animation.Dragon["hit1"].normalizedTime >=0.8f)||
+            (D_Animation.Dragon["hit2"].normalizedTime >= 0.8f))
         {
             MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
             CheckPt.isHit = false;
