@@ -109,11 +109,14 @@ public class MonsterDetectCollider : MonoBehaviour {
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                if (!other.GetComponentInParent<CharacterInformation>().isDie)
-                {//MonsterFindPatroll PatrollPt = other.gameObject.GetComponentInParent<MonsterFindPatroll>();
-                    target = other.gameObject;
-                    FindPlayer = true;
-                    FindPatrollNow = false;
+                if (other.GetComponentInParent<CharacterInformation>())
+                {
+                    if (!other.GetComponentInParent<CharacterInformation>().isDie)
+                    {//MonsterFindPatroll PatrollPt = other.gameObject.GetComponentInParent<MonsterFindPatroll>();
+                        target = other.gameObject;
+                        FindPlayer = true;
+                        FindPatrollNow = false;
+                    }
                 }
             }
         }
@@ -121,15 +124,18 @@ public class MonsterDetectCollider : MonoBehaviour {
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                if (!other.GetComponentInParent<CharacterInformation>().isDie)
+                if (other.GetComponentInParent<CharacterInformation>())
                 {
-                    if (target != other.gameObject)
+                    if (!other.GetComponentInParent<CharacterInformation>().isDie)
                     {
-                        float Now = Vector3.Distance(target.transform.position, this.transform.position);
-                        float You = Vector3.Distance(other.transform.position, this.transform.position);
-                        if (You <= Now)
+                        if (target != other.gameObject)
                         {
-                            target = other.gameObject;
+                            float Now = Vector3.Distance(target.transform.position, this.transform.position);
+                            float You = Vector3.Distance(other.transform.position, this.transform.position);
+                            if (You <= Now)
+                            {
+                                target = other.gameObject;
+                            }
                         }
                     }
                 }

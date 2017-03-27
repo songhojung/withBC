@@ -39,12 +39,14 @@ public class WarriorAI : MonoBehaviour
                 else if(Npc_Move.NowState != MoveNPC.PlayerState.Attack)
                 {
                     Npc_Move.NowState = MoveNPC.PlayerState.Detect;
+                    warriorAniCtrl.IsLeftMouseDown = false;
                 }
             }
             else
             {
                 if (Npc_Move.NowState != MoveNPC.PlayerState.Follow)
                     Npc_Move.NowState = MoveNPC.PlayerState.Follow;
+                warriorAniCtrl.IsLeftMouseDown = false;
             }
         }
     }
@@ -56,9 +58,9 @@ public class WarriorAI : MonoBehaviour
         ObjPos.y += 2.0f;
         int layerMask = (-1) - ((1 << LayerMask.NameToLayer("Player")) |
             (1 << LayerMask.NameToLayer("PatrollPoint")) |
-            (1 << LayerMask.NameToLayer("NPC"))|
-            (1 << LayerMask.NameToLayer("Default"))|
-             (1 << LayerMask.NameToLayer("Map")));        //layerMask = ~layerMask;
+            (1 << LayerMask.NameToLayer("NPC")) |
+            (1 << LayerMask.NameToLayer("Default")) |
+            (1 << LayerMask.NameToLayer("Map")));          //layerMask = ~layerMask;
         Physics.Raycast(ObjPos, ObjForward, out my_ray, RayDistance, layerMask);
     }
     private void OnDrawGizmos()

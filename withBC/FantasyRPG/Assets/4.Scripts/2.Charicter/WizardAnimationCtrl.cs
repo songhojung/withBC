@@ -267,7 +267,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
             NowComboTime = 0.0f;
             ComboCount = 0;
         }
-        Debug.Log(wizardState);
+        //Debug.Log(wizardState);
     }
 
     private void NpcMode()
