@@ -22,7 +22,7 @@ public class DragonFire : MonoBehaviour {
                 if(D_Animation.OnceAttackCheck)
                 {
                     StartCoroutine(EffectManager.Instance.CreatEffect("DragonFire",
-                          this.gameObject.transform.position, this.GetComponentInParent<DragonMove>().gameObject.transform.rotation, 0.0f, 3.5f));
+                          this.gameObject.transform.position, this.gameObject.transform.rotation, 0.0f, 3.5f));
 
                     //Instantiate(DragonFlame);
                     D_Animation.OnceAttackCheck = false;
@@ -32,7 +32,7 @@ public class DragonFire : MonoBehaviour {
                 if (D_Animation.OnceAttackCheck)
                 {
                     StartCoroutine(EffectManager.Instance.CreatEffect("DragonFire",
-                          this.gameObject.transform.position, this.GetComponentInParent<DragonMove>().gameObject.transform.rotation, 0.0f, 3.5f));
+                          this.gameObject.transform.position, this.gameObject.transform.rotation, 0.0f, 3.5f));
 
                     //Instantiate(DragonFlame);
                     D_Animation.OnceAttackCheck = false;
