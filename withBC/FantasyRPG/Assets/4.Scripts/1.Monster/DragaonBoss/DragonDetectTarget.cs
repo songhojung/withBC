@@ -114,34 +114,40 @@ public class DragonDetectTarget : MonoBehaviour {
                     CheckFireTime += Time.deltaTime;
                     if (CheckFireTime >= 5.0f)
                     {
-                        if (D_Animation.NowAttack != DragonAnimation.D_ATTACKSTATE.ATTACK)
+                        //if (D_Animation.NowAttack != DragonAnimation.D_ATTACKSTATE.ATTACK)
+                        //{
+                        if (D_Animation.NowState != DragonAnimation.D_STATE.D_FIRE)
                         {
                             D_Animation.NowState = DragonAnimation.D_STATE.D_FIRE;
                             D_Animation.OnceAttackCheck = true;
                             D_Animation.OnceAttack = true;
                             CheckFireTime = 0.0f;
                         }
+                        //}
                     }
-                    else
+                    else if(CheckFireTime >= 2.0f)
                     {
                         if (D_Animation.NowAttack != DragonAnimation.D_ATTACKSTATE.ATTACK)
                         {
-                            D_Animation.NowState = DragonAnimation.D_STATE.D_ATT1;
-                            D_Animation.OnceAttackCheck = true;
-                            D_Animation.OnceAttack = true;
+                            if (D_Animation.NowState != DragonAnimation.D_STATE.D_ATT1)
+                            {
+                                D_Animation.NowState = DragonAnimation.D_STATE.D_ATT1;
+                                D_Animation.OnceAttackCheck = true;
+                                D_Animation.OnceAttack = true;
+                            }
                         }
                     }
                 }
                 else
                 {
                     if (agent.velocity.magnitude > 0.0f && (D_Animation.Dragon["breath fire"].normalizedTime >= 0.95f||
-                        D_Animation.Dragon["Attack1"].normalizedTime >= 0.95f ||
-                        D_Animation.Dragon["Attack2"].normalizedTime >= 0.95f))
+                        D_Animation.Dragon["attack1"].normalizedTime >= 0.95f ||
+                        D_Animation.Dragon["attack2"].normalizedTime >= 0.95f))
                     {
                         D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
                         D_Animation.OnceAttackCheck = false;
                         D_Animation.OnceAttack = false;
-                        CheckFireTime = 0.0f;
+                        
                     }
                 }
             }
@@ -153,6 +159,15 @@ public class DragonDetectTarget : MonoBehaviour {
                     D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
                     D_Animation.OnceAttackCheck = false;
                     D_Animation.OnceAttack = false;
+                    CheckFireTime = 0.0f;
+                }
+
+                if (D_Animation.Dragon["attack1"].normalizedTime >= 0.95f)
+                {
+                    D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
+                    D_Animation.OnceAttackCheck = false;
+                    D_Animation.OnceAttack = false;
+                    //CheckFireTime = 0.0f;
                 }
                 if (D_Animation.NowState != DragonAnimation.D_STATE.D_ATT1 &&
                     D_Animation.NowState != DragonAnimation.D_STATE.D_FIRE)
@@ -224,13 +239,14 @@ public class DragonDetectTarget : MonoBehaviour {
                     if (Vector3.Distance(target.transform.position, this.transform.position) <= 30.0f)
                     {
                         if (PatrollPt.findPlayer &&
-                          D_Animation.NowState != DragonAnimation.D_STATE.D_ATT1)
+                          (D_Animation.NowState == DragonAnimation.D_STATE.D_ATT1 ||
+                          D_Animation.NowState == DragonAnimation.D_STATE.D_FIRE))
                         {
                             PrefMove = target;
                             target = null;
                             target = DetectColl.target;
                             agent.enabled = false;
-                            D_Animation.NowState = DragonAnimation.D_STATE.D_ATT1;
+                            //D_Animation.NowState = DragonAnimation.D_STATE.D_ATT1;
                         }
 
                     }

@@ -182,7 +182,7 @@ public class DragonAnimation : MonoBehaviour {
                     break;
                 case D_STATE.D_ATT1:
                     Dragon.wrapMode = WrapMode.Once;
-                    Dragon.CrossFade("breath fire", 0.3f);
+                    Dragon.CrossFade("attack1", 0.3f);
                     break;
                 case D_STATE.D_ATT2:
                     Dragon.wrapMode = WrapMode.Once;

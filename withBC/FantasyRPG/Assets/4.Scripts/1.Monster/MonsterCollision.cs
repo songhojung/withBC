@@ -56,7 +56,7 @@ public class MonsterCollision : MonoBehaviour {
                     if (!MonsterParents.isDie)
                     {
                         MonsterParents.isHit = true;
-                        MonsterParents._hp -= 5;
+                        MonsterParents._hp -= 20;
                         MonsterParents.gameObject.GetComponent<MonsterDetectCollider>().target = ColliercharaterInfo.gameObject;
                         if(ColliercharaterInfo.Job == CharacterInformation.PlayerJob.WIZARD)
                         {
@@ -103,7 +103,7 @@ public class MonsterCollision : MonoBehaviour {
                         if (!MonsterParents.isDie)
                         {
                             MonsterParents.isHit = true;
-                            MonsterParents._hp -= 5;
+                            MonsterParents._hp -= 15;
                             if (MonsterParents.GetComponent<MonsterSoundManager>())
                                 MonsterParents.gameObject.GetComponent<MonsterSoundManager>().MyAudio.PlayOneShot(SoundManager.Instance.HitArrow);
                             else
