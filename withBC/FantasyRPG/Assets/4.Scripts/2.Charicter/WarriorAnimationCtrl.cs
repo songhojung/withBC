@@ -381,8 +381,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetFloat("RunSpeed", Direction.sqrMagnitude);
                     if (IsPlaySound)
                     {
-                        characterSoundM.MyAudio.Stop();
-                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
                         characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
@@ -481,8 +479,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 case WarriorComboState.COMBO1:
                     if (IsPlaySound)
                     {
-                        characterSoundM.MyAudio.Stop();
-                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
                         characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
@@ -491,8 +487,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 case WarriorComboState.COMBO2:
                     if (IsPlaySound)
                     {
-                        characterSoundM.MyAudio.Stop();
-                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
                         characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
@@ -501,8 +495,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 case WarriorComboState.COMBO3:
                     if (IsPlaySound)
                     {
-                        characterSoundM.MyAudio.Stop();
-                        characterSoundM.MyAudio.clip = characterSoundM.SwingSword;
                         characterSoundM.MyAudio.PlayOneShot(characterSoundM.SwingSword, characterSoundM.NowVolum);
                         IsPlaySound = false;
                     }
