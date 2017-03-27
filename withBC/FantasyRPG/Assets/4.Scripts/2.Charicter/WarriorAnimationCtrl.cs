@@ -28,7 +28,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     public bool IsJump = false;
     private float NowComboTime = 0.0f;
     private float[] AttackClipLength;
-
+                
     private PlayerCtrl pPlayerCtrl;
     private MoveNPC Move_Npc;
     // Use this for initialization
@@ -301,7 +301,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 warriorComboState = WarriorComboState.COMBO2;
                 //Debug.Log("투콤시간" + NowComboTime);
                 NowComboTime = 0.0f;
-                IsPlaySound = true;
+                //IsPlaySound = true;
 
             }
             else if (!isCombo2 && warriorComboState == WarriorComboState.COMBO2 && NowComboTime < 1.5f)
@@ -309,7 +309,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 warriorComboState = WarriorComboState.COMBO3;
                 //Debug.Log("삼콤보시간" + NowComboTime);
                 NowComboTime = 0.0f;
-                IsPlaySound = true;
+                //IsPlaySound = true;
             }
             else
             {
@@ -319,7 +319,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                 isCombo2 = false;
                // Debug.Log(NowComboTime);
                 NowComboTime = 0.0f;
-                IsPlaySound = true;
+                //IsPlaySound = true;
             }
 
         }
@@ -409,6 +409,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                             WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.4f)
                         {
                             characterInfo.isOnceAttack = true;
+                            IsPlaySound = true;
                         }
                     }
                             
@@ -426,6 +427,7 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                             WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.3f)
                         {
                             characterInfo.isOnceAttack = true;
+                            IsPlaySound = true;
                         }
                     }
                     break;
@@ -441,12 +443,15 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                             WarriorAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.2f)
                         {
                             characterInfo.isOnceAttack = true;
+                            IsPlaySound = true;
                         }
                     }
                     break;
 
                 case WarriorComboState.SHIELDBLOCK:
                     WarriorAnimator.SetBool("IsBlock", true);
+                    if (IsPlaySound)
+                        IsPlaySound = false;
                     break;
 
                 case WarriorComboState.NONE:
@@ -455,9 +460,13 @@ public class WarriorAnimationCtrl : MonoBehaviour {
                     WarriorAnimator.SetBool("IsAttack_3", false);
                     WarriorAnimator.SetBool("IsBlock", false);
                     characterInfo.isOnceAttack = false;
+                    if (IsPlaySound)
+                        IsPlaySound = false;
                     break;
 
                 default:
+                    if (IsPlaySound)
+                        IsPlaySound = false;
                     break;
 
 
@@ -472,8 +481,6 @@ public class WarriorAnimationCtrl : MonoBehaviour {
     {
         while (!isDie)
         {
-
-
             switch (warriorComboState)
             {
                 case WarriorComboState.COMBO1:
