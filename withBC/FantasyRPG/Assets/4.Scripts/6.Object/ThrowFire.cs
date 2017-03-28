@@ -35,7 +35,7 @@ public class ThrowFire : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update ()
+	void Update () 
     {
 
         switch (Information._mode)
