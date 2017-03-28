@@ -25,7 +25,7 @@ public class DragonDetectTarget : MonoBehaviour {
 
     private MonsterInformation Information;
 
-    private float CheckFireTime = 0.0f;
+    public float CheckFireTime = 0.0f;
 
     public GameObject DragonFlame;
     // Use this for initialization
@@ -52,15 +52,29 @@ public class DragonDetectTarget : MonoBehaviour {
         }
 
         isDie = Information.isDie;
-        if (Information.isHit &&
-            ((D_Animation.Dragon["hit1"].normalizedTime >= 0.8f) ||
-            (D_Animation.Dragon["hit2"].normalizedTime >= 0.8f))
-            )
+        if (Information.isHit)
         {
-            MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
-            CheckPt.isHit = false;
-            Information.isHit = false;
-            D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
+            if (((D_Animation.Dragon["hit1"].normalizedTime >= 0.8f) ||
+            (D_Animation.Dragon["hit2"].normalizedTime >= 0.8f)))
+            {
+                MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+                CheckPt.isHit = false;
+                Information.isHit = false;
+                D_Animation.NowState = DragonAnimation.D_STATE.D_RUN;
+            }
+            else 
+            {
+                if (D_Animation.NowState == DragonAnimation.D_STATE.D_FIRE)
+                {
+                    MonsterParentsCollider CheckPt = GetComponent<MonsterParentsCollider>();
+                    CheckPt.isHit = false;
+                    Information.isHit = false;
+                }
+                else if(D_Animation.NowState == DragonAnimation.D_STATE.D_RUN)
+                {
+                    D_Animation.NowState = DragonAnimation.D_STATE.D_HIT1;
+                }
+            }
         }
         if (!Information.isDie)
         {
@@ -246,6 +260,20 @@ public class DragonDetectTarget : MonoBehaviour {
 
             if (DetectColl.FindPlayer)
             {
+                if (CheckFireTime >= 4.0f)
+                {
+                    //if (D_Animation.NowAttack != DragonAnimation.D_ATTACKSTATE.ATTACK)
+                    //{
+                    if (D_Animation.NowState != DragonAnimation.D_STATE.D_FIRE)
+                    {
+                        D_Animation.NowState = DragonAnimation.D_STATE.D_FIRE;
+                        D_Animation.NowAttack = DragonAnimation.D_ATTACKSTATE.ATTACK;
+                        D_Animation.OnceAttackCheck = true;
+                        D_Animation.OnceAttack = true;
+                        CheckFireTime = 0.0f;
+                    }
+                    //}
+                }
                 if ((DetectColl.DetectZone() <= 30) ||
                     (DetectColl.DetectZone() >= 330))
                 {
@@ -296,6 +324,7 @@ public class DragonDetectTarget : MonoBehaviour {
                         target = null;
                         target = DetectColl.target;
                     }
+                   
                 }
                 else if (Vector3.Distance(DetectColl.target.transform.position, transform.position) <= 10.0f)
                 {

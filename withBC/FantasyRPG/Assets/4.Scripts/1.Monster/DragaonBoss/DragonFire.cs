@@ -25,7 +25,7 @@ public class DragonFire : MonoBehaviour {
                     //if (D_Animation.Dragon["breath fire"].normalizedTime >= 0.3f)
                     {
                          fireEffect = (GameObject)EffectManager.Instance.CreatAndGetEffect("DragonFire",
-                            this.gameObject.transform.position, this.gameObject.transform.rotation, 0.0f);
+                            this.gameObject.transform.position, this.gameObject.transform.rotation, 0.2f);
                         Destroy(fireEffect, 2.0f);
 
                         //Instantiate(DragonFlame);
