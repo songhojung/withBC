@@ -231,12 +231,14 @@ public class WizardAnimationCtrl : MonoBehaviour {
 
                 if (ComboCount == 2 && NowComboTime < 1.0f)
                 {
+                    charaterInfo.isOnceAttack = true;
                     IsPlaySound = true;
                     wizardState = WizardState.DAGGERATTACT_2;
                     NowComboTime = 0.0f;
                 }
                 else if (ComboCount == 3 && NowComboTime < 1.0f)
                 {
+                    charaterInfo.isOnceAttack = true;
                     IsPlaySound = true;
                     wizardState = WizardState.DAGGERATTACT_3;
                     NowComboTime = 0.0f;
@@ -250,6 +252,7 @@ public class WizardAnimationCtrl : MonoBehaviour {
                     }
                     else
                     {
+                        charaterInfo.isOnceAttack = true;
                         IsPlaySound = true;
                         wizardState = WizardState.DAGGERATTACT_1;
                         ComboCount = 1;

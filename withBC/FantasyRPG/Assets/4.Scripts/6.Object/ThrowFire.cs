@@ -53,8 +53,8 @@ public class ThrowFire : MonoBehaviour {
                 {
                     if (IsLeftMouseUp)
                     {
-                        Instantiate(ThrownObj, FirePos.position, playerTr.rotation);
-
+                        GameObject arrow =(GameObject)Instantiate(ThrownObj, FirePos.position, playerTr.rotation);
+                        Destroy(arrow, 15.0f);
                     }
                 }
                 else if (Information.Job == CharacterInformation.PlayerJob.WIZARD)

@@ -14,9 +14,6 @@ public class StartSetting : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if(GameManager.Instance.NowScene == GameManager.SCENE.TitleScene)
-        {
-            GameManager.Instance.SendMessage("SettingUISelectWindow");
-        }
+	
 	}
 }
