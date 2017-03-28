@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public bool OnUIMouseRight = false;
 
     
-    public int Gold = 5000;
+    public int Gold = 50000;
 
     public List<Item> list_EquipItem = new List<Item>();
 
