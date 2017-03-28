@@ -30,7 +30,8 @@ public class DragonMove : MonoBehaviour {
                     Dragon_body.isKinematic = false;
                 if(!Dragon_body.useGravity)
                     Dragon_body.useGravity = true;
-                RandMove();
+                if(!GetComponent<MonsterInformation>().isHit)
+                    RandMove();
                 break;
             case DragonAnimation.D_FLYRAND.NOWFLY:
                 if (!Dragon_body.isKinematic)

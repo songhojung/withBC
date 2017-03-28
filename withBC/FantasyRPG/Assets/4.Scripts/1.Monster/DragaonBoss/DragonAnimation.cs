@@ -95,15 +95,18 @@ public class DragonAnimation : MonoBehaviour {
                     NowAttack = D_ATTACKSTATE.ATTACK;
                 if(Information.isHit)
                 {
-                    int a = Random.Range(0, 1);
-                    switch(a)
+                    if (!(Dragon["breath fire"].normalizedTime < 0.95f))
                     {
-                        case 0:
-                            NowState = D_STATE.D_HIT1;
-                            break;
-                        case 1:
-                            NowState = D_STATE.D_HIT2;
-                            break;
+                        int a = Random.Range(0, 1);
+                        switch (a)
+                        {
+                            case 0:
+                                NowState = D_STATE.D_HIT1;
+                                break;
+                            case 1:
+                                NowState = D_STATE.D_HIT2;
+                                break;
+                        }
                     }
                     
                 }
