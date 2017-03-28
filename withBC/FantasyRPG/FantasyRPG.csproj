@@ -256,27 +256,6 @@
     <Compile Include="Assets\NGUI\Scripts\Tweening\TweenTransform.cs" />
     <Compile Include="Assets\NGUI\Scripts\Tweening\TweenVolume.cs" />
     <Compile Include="Assets\NGUI\Scripts\Tweening\UITweener.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIAnchor.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIAtlas.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UICamera.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIFilledSprite.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIFont.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIInput.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIInputSaved.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UILabel.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UILocalize.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIOrthoCamera.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIPanel.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIRoot.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UISlicedSprite.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UISprite.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UISpriteAnimation.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIStretch.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UITextList.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UITiledSprite.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
-    <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
     <Compile Include="Assets\TankPatrolState.cs" />
   </ItemGroup>
   <ItemGroup>
